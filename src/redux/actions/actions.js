@@ -1,5 +1,5 @@
-export const ADD_TO_FAVOURITES = 'ADD_TO_FAVOURITES';
-export const FETCH_DATA = 'FETCH_DATA';
+export const ADD_TO_FAVOURITES = 'ADD_TO_FAVOURITES'
+export const FETCH_DATA = 'FETCH_DATA'
 
 export function addToFavourites(id) {
   return {
@@ -14,11 +14,11 @@ export function fetchData() {
   }
 }
 
-export async function fetchDataAsync (api) {
+export async function fetchDataAsync(api) {
   try {
-    const response = await fetch(api);
+    const response = await fetch(api)
     return response.json()
-} catch (error) {
-    return error;
+  } catch (error) {
+    return error
   }
 }

@@ -12,6 +12,27 @@
       "pre-commit": "yarn precise-commits"
     }
   },
+  "xcodeSchemes": {
+    "Debug": [
+      "Debug"
+    ],
+    "projectDirectory": "ios"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "babel": {
+    "presets": ["react-native"]
+  },
+  "eslintConfig": {
+    "extends": ["plugin:prettier/recommended"],
+    "rules": {
+      "semi": ["error", "never"]
+    }
+  },
+  "eslintIgnore": ["/build/", "/config/", "/dist/", "/test/unit/coverage/"],
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.4"

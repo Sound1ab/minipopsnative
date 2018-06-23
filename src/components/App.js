@@ -24,6 +24,7 @@ const StyledButton = styled.Button`
   height: 100;
 `;
 
+
 type Props = {};
 class App extends Component<Props> {
   render() {
