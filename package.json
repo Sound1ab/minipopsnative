@@ -25,6 +25,28 @@
   "babel": {
     "presets": [
       "react-native"
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "root": [
+            "./src"
+          ],
+          "alias": {
+            "components": "./src/components",
+            "atoms": "./src/components/atoms",
+            "molecules": "./src/components/molecules",
+            "organisms": "./src/components/organisms",
+            "pages": "./src/components/pages",
+            "navigation": "./src/navigation",
+            "reduxConfig": "./src/redux",
+            "actions": "./src/redux/actions",
+            "reducers": "./src/redux/reducers",
+            "sagas": "./src/redux/sagas"
+          }
+        }
+      ]
     ]
   },
   "eslintConfig": {
@@ -50,6 +72,7 @@
   },
   "devDependencies": {
     "babel-jest": "23.0.1",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-preset-react-native": "4.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.1",
@@ -59,6 +82,7 @@
     "prettier": "^1.13.5",
     "pretty-quick": "^1.6.0",
     "react-native-navigation": "^1.1.471",
+    "react-native-vector-icons": "^4.6.0",
     "react-redux": "^5.0.7",
     "react-test-renderer": "16.3.1",
     "redux": "^4.0.0",

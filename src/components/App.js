@@ -1,10 +1,11 @@
 // @flow
-
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import { addToFavourites } from '../redux/actions/actions'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { leftButtons } from 'navigation'
+import { Icon } from 'atoms'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,6 +22,11 @@ const StyledButton = styled.Button`
 
 type Props = {}
 class App extends Component<Props> {
+  constructor(props) {
+    super(props)
+    // Set menu navigation button
+    this.props.navigator.setButtons(leftButtons(this.props.navigator))
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -32,6 +38,7 @@ class App extends Component<Props> {
           onPress={this.props.addToFavourites.bind(null, 'test')}
           title={'add'}
         />
+        <Icon />
       </View>
     )
   }

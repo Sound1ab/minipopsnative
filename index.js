@@ -1,21 +1,24 @@
 import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
-import App from './src/components/App'
-import store from './src/redux'
+import store from 'reduxConfig'
+import { tabs as tabsConfig, drawer as drawerConfig } from 'navigation'
 
-Navigation.registerComponent(
-  'example.FirstTabScreen',
-  () => App,
-  store,
-  Provider,
-)
+import App from 'components/App'
+import { Drawer } from 'pages'
+
+import { MenuIcon } from 'molecules'
+
+const register = new Map([
+  ['FirstTab', App],
+  ['Drawer', Drawer],
+  ['MenuIcon', MenuIcon],
+])
+
+register.forEach((value, key) => {
+  Navigation.registerComponent(key, () => value, store, Provider)
+})
 
 Navigation.startTabBasedApp({
-  tabs: [
-    {
-      label: 'One',
-      screen: 'example.FirstTabScreen',
-      title: 'Screen One',
-    },
-  ],
+  tabs: tabsConfig,
+  drawer: drawerConfig,
 })
