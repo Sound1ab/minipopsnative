@@ -1,31 +1,25 @@
 // @flow
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import {addToFavourites} from '../redux/actions/actions'
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { Platform, StyleSheet, Text, View } from 'react-native'
+import { addToFavourites } from '../redux/actions/actions'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
+  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  android:
+    'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
-});
+})
 
 const StyledButton = styled.Button`
   background-color: pink;
   width: 200;
   height: 100;
-`;
+`
 
-
-type Props = {};
+type Props = {}
 class App extends Component<Props> {
   render() {
     return (
@@ -34,7 +28,7 @@ class App extends Component<Props> {
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         <StyledButton
-          id='button'
+          id="button"
           onPress={this.props.addToFavourites.bind(null, 'test')}
           title={'add'}
         />
@@ -67,10 +61,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  addToFavourites: addToFavourites
+  addToFavourites: addToFavourites,
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(App);
+  mapDispatchToProps,
+)(App)

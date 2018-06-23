@@ -4,12 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "precise-commits": "precise-commits"
+    "test": "jest"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn precise-commits"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "xcodeSchemes": {
@@ -24,15 +23,27 @@
     "trailingComma": "all"
   },
   "babel": {
-    "presets": ["react-native"]
+    "presets": [
+      "react-native"
+    ]
   },
   "eslintConfig": {
-    "extends": ["plugin:prettier/recommended"],
+    "extends": [
+      "plugin:prettier/recommended"
+    ],
     "rules": {
-      "semi": ["error", "never"]
+      "semi": [
+        "error",
+        "never"
+      ]
     }
   },
-  "eslintIgnore": ["/build/", "/config/", "/dist/", "/test/unit/coverage/"],
+  "eslintIgnore": [
+    "/build/",
+    "/config/",
+    "/dist/",
+    "/test/unit/coverage/"
+  ],
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.4"
@@ -46,6 +57,7 @@
     "jest": "23.1.0",
     "precise-commits": "^1.0.2",
     "prettier": "^1.13.5",
+    "pretty-quick": "^1.6.0",
     "react-native-navigation": "^1.1.471",
     "react-redux": "^5.0.7",
     "react-test-renderer": "16.3.1",
