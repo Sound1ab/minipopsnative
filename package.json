@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "precommit": "precise-commits"
+    "precise-commits": "precise-commits",
+    "precommit": "npm run precise-commits"
   },
   "dependencies": {
     "react": "16.3.1",
