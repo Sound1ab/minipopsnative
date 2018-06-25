@@ -39,6 +39,7 @@
             "molecules": "./src/components/molecules",
             "organisms": "./src/components/organisms",
             "pages": "./src/components/pages",
+            "utility": "./src/components/utility",
             "navigation": "./src/navigation",
             "reduxConfig": "./src/redux",
             "actions": "./src/redux/actions",
