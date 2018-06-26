@@ -11,7 +11,6 @@ export class Drawer extends Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props)
   }
-  state = {}
 
   render() {
     return (
