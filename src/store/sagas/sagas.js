@@ -1,6 +1,6 @@
 import { delay } from 'redux-saga'
 import { put, takeEvery, all, call } from 'redux-saga/effects'
-import { addToFavourites, FETCH_DATA, fetchDataAsync } from '../actions/actions'
+import { addToFavourites, FETCH_DATA, fetchDataAsync } from 'actions'
 
 export const API = 'https://swapi.co/api/people/'
 
@@ -17,6 +17,6 @@ function* watchIncrementAsync() {
   yield takeEvery(FETCH_DATA, incrementAsync)
 }
 
-export default function* rootSaga() {
+export function* rootSaga() {
   yield all([watchIncrementAsync()])
 }

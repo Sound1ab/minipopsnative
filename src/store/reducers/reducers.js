@@ -1,4 +1,4 @@
-import { ADD_TO_FAVOURITES } from '../actions/actions'
+import { ADD_TO_FAVOURITES } from 'actions'
 
 export const initialState = {
   favourites: [],
