@@ -41,10 +41,10 @@
             "pages": "./src/components/pages",
             "utility": "./src/components/utility",
             "navigation": "./src/navigation",
-            "reduxConfig": "./src/redux",
-            "actions": "./src/redux/actions",
-            "reducers": "./src/redux/reducers",
-            "sagas": "./src/redux/sagas"
+            "store": "./src/store",
+            "actions": "./src/store/actions",
+            "reducers": "./src/store/reducers",
+            "sagas": "./src/store/sagas"
           }
         }
       ]
