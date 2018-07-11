@@ -1,18 +1,14 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-
-import { rootSaga } from 'sagas'
-import { favourites } from './reducers/reducers'
-
-const sagaMiddleware = createSagaMiddleware()
+import { RXState } from '../store/middleware/rxstate'
+import { search } from '../components/container/SearchField/reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-export default createStore(
+const store = createStore(
   combineReducers({
-    favourites,
+    search,
   }),
-  composeEnhancers(applyMiddleware(sagaMiddleware)),
+  composeEnhancers(applyMiddleware(RXState.createMiddleware())),
 )
 
-sagaMiddleware.run(rootSaga)
+export default store

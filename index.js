@@ -4,15 +4,10 @@ import { Provider } from 'react-redux'
 import store from 'store'
 import { tabs as tabsConfig, drawer as drawerConfig } from 'navigation'
 
-import { Drawer, Ebay } from 'pages'
-import { MenuIcon } from 'molecules'
+import { Search } from 'pages'
 import { withNavigationButton } from 'utility'
 
-const register = new Map([
-  ['FirstTab', Ebay],
-  ['Drawer', Drawer],
-  ['MenuIcon', MenuIcon],
-])
+const register = new Map([['FirstTab', Search]])
 
 register.forEach((Component, key) => {
   Navigation.registerComponent(key, () => Component, store, Provider)
@@ -20,5 +15,4 @@ register.forEach((Component, key) => {
 
 Navigation.startTabBasedApp({
   tabs: tabsConfig,
-  drawer: drawerConfig,
 })

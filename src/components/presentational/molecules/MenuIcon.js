@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { TouchableOpacity } from 'react-native'
-import { Icon } from 'atoms'
+import { Icon } from '../atoms/index'
 
 export class MenuIcon extends Component {
   handlePress = () => {

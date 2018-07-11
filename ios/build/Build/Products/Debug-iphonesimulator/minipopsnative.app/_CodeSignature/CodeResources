@@ -71,7 +71,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		SHRmJ5D0LPBAAkaLMsn71BtUGII=
+		0n5sqqbDZndPmsESDI45BomlToM=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -103,15 +103,15 @@
 		</data>
 		<key>PlugIns/minipopsnativeTests.xctest/Info.plist</key>
 		<data>
-		Xhs6bdq7lpcBUMoPWofvSbPIsqQ=
+		/7lSzf43QY74qfFgY0u7N/YzzN4=
 		</data>
 		<key>PlugIns/minipopsnativeTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
-		Pka+50OdaVkNVnaP4IA1YT8bBcw=
+		LymGmyr+RhjkaWfS0Tk6jaa/dI4=
 		</data>
 		<key>PlugIns/minipopsnativeTests.xctest/minipopsnativeTests</key>
 		<data>
-		QYkksC6EU4dufc/s1s+yUyXEO1U=
+		Jgtrx7yKfD37kGGaDDAsfRpdrl8=
 		</data>
 		<key>SimpleLineIcons.ttf</key>
 		<data>
@@ -361,33 +361,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Xhs6bdq7lpcBUMoPWofvSbPIsqQ=
+			/7lSzf43QY74qfFgY0u7N/YzzN4=
 			</data>
 			<key>hash2</key>
 			<data>
-			NmS4hmIrVcg5agYfwXoTfJO7gegMpQirV5si/hvQhLk=
+			rIpWPjMe8zxKcYMtuL97dw6G5GDvNTdIpnI1rpwaxz0=
 			</data>
 		</dict>
 		<key>PlugIns/minipopsnativeTests.xctest/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Pka+50OdaVkNVnaP4IA1YT8bBcw=
+			LymGmyr+RhjkaWfS0Tk6jaa/dI4=
 			</data>
 			<key>hash2</key>
 			<data>
-			6cLBbGfMkS1B7aXN6OuuKRaX5l8VzR8yQWCbS/jJ5Gg=
+			q2qfF00ta8PzOLBZo5RE5IxBxIzrHWpDfpztnQhs5MU=
 			</data>
 		</dict>
 		<key>PlugIns/minipopsnativeTests.xctest/minipopsnativeTests</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QYkksC6EU4dufc/s1s+yUyXEO1U=
+			Jgtrx7yKfD37kGGaDDAsfRpdrl8=
 			</data>
 			<key>hash2</key>
 			<data>
-			NZCqt3cg1SA84TpooEWRviuv13WM6DTv2D9ySC19qZI=
+			RalcnS7KwaXilSWZFabtc+QSS0VX7QJvvSSIF7b0HuQ=
 			</data>
 		</dict>
 		<key>SimpleLineIcons.ttf</key>

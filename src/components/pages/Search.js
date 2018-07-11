@@ -1,24 +1,23 @@
 // @flow
 import React, { Component } from 'react'
 import { View, Text, FlatList } from 'react-native'
-import { leftButtons } from 'navigation'
+import SearchField from '../container/SearchField'
 
 type PropTypes = {}
 
 type StateTypes = {}
 
-export class Ebay extends Component<PropTypes, StateTypes> {
+export class Search extends Component<PropTypes, StateTypes> {
   static defaultProps = {}
   constructor(props: PropTypes) {
     super(props)
-    const { navigator } = this.props
-    navigator.setButtons(leftButtons(navigator))
   }
   state = {}
 
   render() {
     return (
       <View>
+        <SearchField />
         <Text>hello there</Text>
       </View>
     )
