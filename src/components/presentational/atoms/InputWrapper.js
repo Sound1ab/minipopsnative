@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
+import { iOSColors } from 'react-native-typography'
 
 type Props = {
   placeholder: string,
@@ -9,10 +10,12 @@ type Props = {
 }
 
 const Input = styled.TextInput`
-  color: white;
-  background: grey;
+  color: ${iOSColors.gray};
   height: 50px;
   padding: 0 16px;
+  border: 2px solid ${iOSColors.gray};
+  border-radius: 25px;
+  margin: 16px;
 `
 
 export const InputWrapper = (props: Props) => (

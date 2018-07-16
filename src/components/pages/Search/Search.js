@@ -2,7 +2,12 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { SearchField } from '../../presentational/molecules'
-import { FlatListWrapper, GrowContainer } from '../../presentational/atoms'
+import {
+  FlatListWrapper,
+  GrowContainer,
+  FlatListItem,
+  ImageWrapper,
+} from '../../presentational/atoms'
 import { connect } from 'react-redux'
 import { SEARCH_MACHINE } from './actions'
 
@@ -24,20 +29,22 @@ export class Search extends Component<PropTypes, StateTypes> {
   }
 
   render() {
+    const { searchValue, results } = this.props
     return (
       <GrowContainer>
-        <SearchField
-          handleChange={this.handleChange}
-          value={this.props.searchValue}
-        />
         <FlatListWrapper
-          data={[{ prop: 'hello', key: '1' }, { prop: 'hello', key: '2' }]}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{item.prop}</Text>
-            </View>
+          ListHeaderComponent={() => (
+            <SearchField
+              handleChange={this.handleChange}
+              value={searchValue}
+              placeholder="The Cure"
+            />
           )}
+          data={results}
+          keyExtractor={(item, index) => `${item.title}-${index}`}
+          renderItem={FlatListItem}
         />
+        {/*<ImageWrapper />*/}
       </GrowContainer>
     )
   }
@@ -45,6 +52,7 @@ export class Search extends Component<PropTypes, StateTypes> {
 
 const mapStateToProps = state => ({
   searchValue: state.search.value,
+  results: state.search.results,
 })
 
 const mapDispatchToProps = dispatch => ({

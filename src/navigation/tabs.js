@@ -1,7 +1,11 @@
 export const tabs = [
   {
-    label: 'eBay',
+    label: 'Search',
     screen: 'FirstTab',
-    title: 'eBay',
+    title: 'Search',
+    navigatorStyle: {
+      navBarTextColor: '#ffffff',
+      navBarBackgroundColor: '#e24347',
+    },
   },
 ]
