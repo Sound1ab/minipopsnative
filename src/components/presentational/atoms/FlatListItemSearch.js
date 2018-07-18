@@ -50,15 +50,15 @@ const styles = StyleSheet.create({
   },
 })
 
-export const FlatListItem = (props: Props) => (
+export const FlatListItemSearch = (props: Props) => (
   <Wrapper index={props.index} height={300}>
     <RelativeWrapper>
       <ImageWrapper source={{ uri: `${props.item.imageUrl}` }} />
       <LinearGradient
         colors={[
-          'rgba(156, 68, 249,0)',
-          'rgba(114, 110, 248,0.3)',
           'rgba(79,50,74,0.8)',
+          'rgba(114, 110, 248,0.3)',
+          'rgba(156, 68, 249,0)',
         ]}
         style={styles.linearGradient}
       />
@@ -75,6 +75,6 @@ export const FlatListItem = (props: Props) => (
   </Wrapper>
 )
 
-FlatListItem.defaultProps = {
+FlatListItemSearch.defaultProps = {
   height: 300,
 }

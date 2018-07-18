@@ -7,15 +7,17 @@ type Props = {
   placeholder: string,
   value: string,
   handleChange: Function,
+  search: string,
+  placeholderTextColor: string,
 }
 
 const Input = styled.TextInput`
-  color: ${iOSColors.gray};
-  height: 50px;
-  padding: 0 16px;
-  border: 2px solid ${iOSColors.gray};
+  color: ${iOSColors.black};
+  height: 32px;
+  padding: ${({ search }) => (search ? '0 16px 0 40px' : '0 16px')};
+  border: 2px solid #e24347;
   border-radius: 25px;
-  margin: 16px;
+  background-color: white;
 `
 
 export const InputWrapper = (props: Props) => (
@@ -25,13 +27,16 @@ export const InputWrapper = (props: Props) => (
     keyboardAppearance="dark"
     clearButtonMode="always"
     placeholder={props.placeholder}
-    value={props.value}
     onChangeText={props.handleChange}
+    search={props.search}
+    placeholderTextColor={props.placeholderTextColor}
   />
 )
 
 InputWrapper.defaultProps = {
   placeholder: 'test',
-  value: 'hey',
+  value: '',
   handleChange: () => {},
+  search: true,
+  placeholderTextColor: iOSColors.lightGray,
 }

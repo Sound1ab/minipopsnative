@@ -19,7 +19,8 @@ const styles = (font, color) => {
   const style = StyleSheet.create({
     xl: {
       ...iOSUIKit.largeTitleEmphasizedObject,
-      ...sanFranciscoWeights.semibold,
+      ...sanFranciscoWeights.bold,
+      marginBottom: 8,
       color,
     },
     l: {

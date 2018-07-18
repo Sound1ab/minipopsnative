@@ -1,9 +1,14 @@
-import { UPDATE_SEARCH_VALUE, UPDATE_RESULTS } from './actions'
+import {
+  UPDATE_SEARCH_VALUE,
+  UPDATE_SEARCH_RESULTS,
+  UPDATE_DISCOVERY_RESULTS,
+} from './actions'
 
 export const initialState = {
   state: 'searching',
   value: '',
-  results: [],
+  searchResults: [],
+  discoveryResults: [],
 }
 
 export function search(state = initialState, action) {
@@ -18,10 +23,15 @@ export function search(state = initialState, action) {
         ...state,
         value: action.payload,
       }
-    case UPDATE_RESULTS:
+    case UPDATE_SEARCH_RESULTS:
       return {
         ...state,
-        results: action.payload,
+        searchResults: action.payload,
+      }
+    case UPDATE_DISCOVERY_RESULTS:
+      return {
+        ...state,
+        discoveryResults: action.payload,
       }
     default:
       return state

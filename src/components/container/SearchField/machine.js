@@ -11,16 +11,18 @@ export const searchMachine = Machine({
       initial: 'searchReady',
       states: {
         searchReady: {
+          onEntry: ['CANCEL_TIMER'],
           on: {
             TEXT_INPUT: 'typing',
           },
         },
         typing: {
-          onEntry: ['START_TIMER', 'UPDATE_SEARCH', 'CANCEL_OUTGOING_REQUEST'],
+          onEntry: ['START_TIMER', 'CANCEL_OUTGOING_REQUEST'],
           on: {
             TEXT_INPUT_EMPTY: 'searchReady',
             TEXT_INPUT: 'typing',
           },
+          onExit: ['UPDATE_SEARCH'],
         },
       },
       on: {

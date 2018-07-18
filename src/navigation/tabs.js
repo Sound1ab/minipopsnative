@@ -1,11 +1,12 @@
 export const tabs = [
   {
     label: 'Search',
-    screen: 'FirstTab',
+    screen: 'Search',
     title: 'Search',
-    navigatorStyle: {
-      navBarTextColor: '#ffffff',
-      navBarBackgroundColor: '#e24347',
-    },
+  },
+  {
+    label: 'Discovery',
+    screen: 'Discovery',
+    title: 'Discovery',
   },
 ]

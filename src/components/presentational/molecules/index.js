@@ -1,2 +1,2 @@
 export * from './MenuIcon'
-export * from './SearchField'
+export * from '../../container/SearchField/SearchField'

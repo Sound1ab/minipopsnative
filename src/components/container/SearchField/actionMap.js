@@ -1,4 +1,9 @@
-import { SEARCH_MACHINE, updateSearchValue, updateResults } from './actions'
+import {
+  SEARCH_MACHINE,
+  updateSearchValue,
+  updateSearchResults,
+  updateDiscoveryResults,
+} from './actions'
 import { Request } from '../../../services/index'
 import { API } from '../../../services/index'
 
@@ -11,15 +16,22 @@ export const actionMap = {
       dispatch(SEARCH_MACHINE.TIMER_COUNTDOWN_PASSED(payload))
     }, 500)
   },
+  CANCEL_TIMER() {
+    clearTimeout(timeout)
+  },
   UPDATE_SEARCH({ dispatch, payload }) {
-    dispatch(updateSearchValue(payload))
+    dispatch(updateSearchValue(payload.value))
   },
   async DISPATCHING_SEARCH({ dispatch, payload }) {
     try {
-      const items = await Request.get(API('current-items'), {
-        keywords: payload,
+      const actions = {
+        'current-items': updateSearchResults,
+        'related-artists': updateDiscoveryResults,
+      }
+      const items = await Request.get(API(payload.api), {
+        keywords: payload.value,
       })
-      dispatch(updateResults(items.data))
+      dispatch(actions[payload.api](items.data))
     } catch (error) {
       throw new Error(error)
     }
