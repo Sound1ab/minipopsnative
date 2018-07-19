@@ -33,7 +33,6 @@ export class SearchField extends Component<PropTypes> {
   }
 
   render() {
-    const { searchValue } = this.props
     return (
       <Wrapper>
         <RelativeWrapper>
@@ -45,6 +44,7 @@ export class SearchField extends Component<PropTypes> {
             color="#e24347"
           />
           <InputWrapper
+            search
             handleChange={this.handleChange}
             placeholder="The Cure"
           />

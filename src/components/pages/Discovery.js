@@ -16,6 +16,9 @@ type PropTypes = {
 }
 
 export class Discovery extends Component<PropTypes> {
+  handleClick = () => {
+    // Open modal
+  }
   render() {
     const { discoveryResults } = this.props
     return (
@@ -29,7 +32,9 @@ export class Discovery extends Component<PropTypes> {
         <FlatListWrapper
           data={discoveryResults}
           keyExtractor={(item, index) => `${item.title}-${index}`}
-          renderItem={FlatListItemDiscovery}
+          renderItem={props => (
+            <FlatListItemDiscovery handleClick={this.handleClick} {...props} />
+          )}
         />
       </GrowContainer>
     )

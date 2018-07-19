@@ -6,7 +6,7 @@ type Props = {}
 
 const View = styled.View`
   flex: 0 0 auto;
-  padding: 32px 16px 24px 16px;
+  padding: 40px 16px 24px 16px;
   justify-content: flex-start;
   align-items: flex-start;
   background-color: white;

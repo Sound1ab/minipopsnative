@@ -10,6 +10,7 @@ type Props = {
   item: Object,
   separators: Object,
   height: number,
+  handleClick: Function,
 }
 
 const Wrapper = styled.View`
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
 })
 
 export const FlatListItemDiscovery = (props: Props) => (
-  <Wrapper index={props.index} height={300}>
+  <Wrapper index={props.index} height={300} onClick={props.handleClick}>
     <RelativeWrapper>
       <ImageWrapper source={{ uri: `${props.item.imageUrl}` }} />
       <LinearGradient
@@ -71,4 +72,5 @@ export const FlatListItemDiscovery = (props: Props) => (
 
 FlatListItemDiscovery.defaultProps = {
   height: 300,
+  handleClick: () => {},
 }
