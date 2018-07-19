@@ -4,30 +4,32 @@ const id = 'signUp'
 
 export const signUpMachine = Machine({
   id,
-  initial: 'idle',
+  initial: 'idle.waitingForSignup',
   strict: true,
   states: {
     idle: {
+      states: {
+        waitingForSignup: {},
+        waitingForConfirmation: {},
+      },
       on: {
         SIGN_UP: 'signingUp',
+        CONFIRM_USER: 'confirmingUser',
       },
-      onExit: ['SIGN_UP'],
     },
     signingUp: {
+      onEntry: ['SIGN_UP'],
       on: {
-        SIGN_UP_SUCCESS: {
-          confirmingUser: {
-            actions: ['CONFIRM_USER'],
-          },
-        },
+        SIGN_UP_SUCCESS: 'idle.waitingForConfirmation',
         SIGN_UP_FAILURE: {
-          idle: {
+          ['idle.waitingForSignup']: {
             actions: ['SHOW_ERROR_MESSAGE'],
           },
         },
       },
     },
     confirmingUser: {
+      onEntry: ['CONFIRM_USER'],
       on: {
         CONFIRMATION_SUCCESS: {
           idle: {
@@ -35,7 +37,7 @@ export const signUpMachine = Machine({
           },
         },
         CONFIRMATION_FAILURE: {
-          confirmingUser: {
+          ['idle.waitingForConfirmation']: {
             actions: ['SHOW_ERROR_MESSAGE'],
           },
         },

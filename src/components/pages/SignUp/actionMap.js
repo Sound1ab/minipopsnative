@@ -4,17 +4,33 @@ import { Auth } from 'aws-amplify'
 export const actionMap = {
   async SIGN_UP({ dispatch, payload }) {
     try {
-      // await Auth.signUp(payload)
+      console.log('signup', payload)
+      const data = await Auth.signUp({
+        username: payload.username,
+        password: payload.password,
+        attributes: {
+          phone_number: payload.phone_number,
+          email: payload.email,
+        },
+      })
+      console.log(data)
       dispatch(SIGN_UP_MACHINE_ACTIONS.SIGN_UP_SUCCESS(payload))
     } catch (error) {
-      dispatch(SIGN_UP_MACHINE_ACTIONS.SIGN_UP_FAILURE(payload))
+      dispatch(SIGN_UP_MACHINE_ACTIONS.SIGN_UP_FAILURE(error))
     }
   },
-  CONFIRM_USER() {
-    console.log('CONFIRM_USER')
+  async CONFIRM_USER({ dispatch, payload }) {
+    console.log('CONFIRM_USER', payload)
+    try {
+      const data = await Auth.confirmSignUp(payload.username, payload.code)
+      console.log(data)
+      dispatch(SIGN_UP_MACHINE_ACTIONS.CONFIRMATION_SUCCESS(payload))
+    } catch (error) {
+      dispatch(SIGN_UP_MACHINE_ACTIONS.CONFIRMATION_FAILURE(error))
+    }
   },
   SHOW_ERROR_MESSAGE({ dispatch, payload }) {
-    console.log('SHOW_ERROR_MESSAGE')
+    console.warn('SHOW_ERROR_MESSAGE', payload)
   },
   REDIRECT_TO_LOGIN({ dispatch, payload }) {
     console.log('REDIRECT_TO_LOGIN')
