@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { RXState } from '../store/middleware/rxstate'
 import { search } from '../components/container/SearchField/reducers'
-import { signUp } from '../components/pages/SignUp/reducers'
+import { signUp } from '../components/container/SignUp/reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
