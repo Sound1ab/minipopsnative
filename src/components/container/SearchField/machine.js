@@ -35,10 +35,12 @@ export const searchMachine = Machine({
       },
     },
     dispatchingSearch: {
-      onEntry: ['DISPATCHING_SEARCH'],
+      onEntry: ['DISPATCHING_SEARCH', 'SHOW_LOADING'],
       on: {
-        SEARCH_DISPATCHED: 'searching',
+        SEARCH_SUCCESS: 'searching.searchReady',
+        SEARCH_FAILURE: 'searching.searchReady',
       },
+      onExit: ['HIDE_LOADING'],
     },
   },
 })

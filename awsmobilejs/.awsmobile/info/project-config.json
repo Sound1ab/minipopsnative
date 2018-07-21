@@ -1,6 +1,6 @@
 {
   "SourceDir": "/",
-  "DistributionDir": "/build",
+  "DistributionDir": "build",
   "BuildCommand": "yarn build",
-  "StartCommand": "yarn start"
+  "StartCommand": "yarn strt"
 }

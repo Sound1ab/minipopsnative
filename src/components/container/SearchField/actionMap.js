@@ -3,6 +3,7 @@ import {
   updateSearchValue,
   updateSearchResults,
   updateDiscoveryResults,
+  updateLoading,
 } from './actions'
 import { Request } from '../../../services/index'
 import { API } from '../../../services/index'
@@ -32,9 +33,15 @@ export const actionMap = {
         keywords: payload.value,
       })
       dispatch(actions[payload.api](items.data))
+      dispatch(SEARCH_MACHINE.SEARCH_SUCCESS())
     } catch (error) {
-      throw new Error(error)
+      dispatch(SEARCH_MACHINE.SEARCH_FAILURE())
     }
-    dispatch(SEARCH_MACHINE.SEARCH_DISPATCHED())
+  },
+  SHOW_LOADING({ dispatch }) {
+    dispatch(updateLoading(true))
+  },
+  HIDE_LOADING({ dispatch }) {
+    dispatch(updateLoading(false))
   },
 }

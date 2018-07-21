@@ -5,6 +5,10 @@ import { SIGN_UP_MACHINE_ACTIONS } from './actions'
 import { FormValidation } from '../../../helpers/formValidation'
 import { SignUpForm, SignUpConfirmation } from '../../presentational/organisms'
 
+type PropTypes = {
+  navigator: Object,
+}
+
 type StateTypes = {
   username: string,
   password: string,
@@ -13,7 +17,7 @@ type StateTypes = {
   validationErrors: Array<string>,
 }
 
-export class SignUp extends Component<undefined, StateTypes> {
+export class SignUp extends Component<PropTypes, StateTypes> {
   static defaultProps = {}
   state = {
     form: {
@@ -63,23 +67,18 @@ export class SignUp extends Component<undefined, StateTypes> {
     this.props.confirmUser({
       username: this.state.form.username,
       code: this.state.confirmation.code,
+      navigator: this.props.navigator,
     })
   }
 
   render() {
-    const {
-      username,
-      password,
-      phone_number,
-      email,
-      validationErrors,
-    } = this.state.form
+    const { username, password, phone_number, email } = this.state.form
     const { code } = this.state.confirmation
     return this.props.signUpState.idle &&
       this.props.signUpState.idle === 'waitingForConfirmation' ? (
       <SignUpConfirmation
         code={code}
-        validationErrors={validationErrors}
+        validationErrors={this.state.validationErrors}
         handleChangeText={this.handleCodeText}
         handleSubmit={this.handleConfirmation}
       />
@@ -89,7 +88,7 @@ export class SignUp extends Component<undefined, StateTypes> {
         password={password}
         phone_number={phone_number}
         email={email}
-        validationErrors={validationErrors}
+        validationErrors={this.state.validationErrors}
         handleChangeText={this.handleChangeText}
         handleSubmit={this.handleSignUp}
       />

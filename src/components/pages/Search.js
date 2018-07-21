@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import { View, Text, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import SearchField from '../container/SearchField/SearchField'
 import {
@@ -9,6 +8,7 @@ import {
   FlatListItemSearch,
   Heading,
   NavBar,
+  Spinner,
 } from '../presentational/atoms'
 
 type PropTypes = {
@@ -20,6 +20,7 @@ export class Search extends Component<PropTypes> {
     const { searchResults } = this.props
     return (
       <GrowContainer>
+        <Spinner isVisible={this.props.loading} />
         <NavBar>
           <Heading color="black" font="xl">
             Search
@@ -37,6 +38,7 @@ export class Search extends Component<PropTypes> {
 }
 
 const mapStateToProps = state => ({
+  loading: state.search.loading,
   searchResults: state.search.searchResults,
 })
 

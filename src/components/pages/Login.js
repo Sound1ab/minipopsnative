@@ -1,10 +1,12 @@
 // @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import styled from 'styled-components'
-import SignUp from '../container/SignUp/SignUp'
+import SignUp from '../container/SignUp'
+import SignIn from '../container/SignIn'
 
-type PropTypes = {}
+type PropTypes = {
+  navigator: Object,
+}
 
 type StateTypes = {}
 
@@ -15,13 +17,9 @@ export class Login extends Component<PropTypes, StateTypes> {
   }
   state = {}
 
-  signUp = () => <SignUp />
+  signUp = () => <SignUp navigator={this.props.navigator} />
 
-  signIn = () => (
-    <View>
-      <Text>sign in page</Text>
-    </View>
-  )
+  signIn = () => <SignIn navigator={this.props.navigator} />
 
   render() {
     return this[this.props.form]()

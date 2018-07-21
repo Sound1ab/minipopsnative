@@ -6,6 +6,7 @@ import { RXState } from '../../../store/middleware/rxstate'
 export const UPDATE_SEARCH_VALUE = 'UPDATE_SEARCH_VALUE'
 export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS'
 export const UPDATE_DISCOVERY_RESULTS = 'UPDATE_DISCOVERY_RESULTS'
+export const UPDATE_LOADING = 'UPDATE_LOADING'
 
 const rXState = new RXState(searchMachine, actionMap)
 export const SEARCH_MACHINE = rXState.getActionCreators()
@@ -22,5 +23,10 @@ export const updateSearchResults = (payload: Array<Object>) => ({
 
 export const updateDiscoveryResults = (payload: Array<Object>) => ({
   type: UPDATE_DISCOVERY_RESULTS,
+  payload,
+})
+
+export const updateLoading = (payload: Boolean) => ({
+  type: UPDATE_LOADING,
   payload,
 })
