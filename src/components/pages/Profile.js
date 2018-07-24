@@ -28,26 +28,28 @@ class Profile extends Component<PropTypes, StateTypes> {
 
   render() {
     return (
-      <GrowContainer justifyContent={'center'} alignItems={'center'}>
+      <GrowContainer>
         <Spinner isVisible={this.props.loading} />
         <NavBar>
           <Heading color="black" font="xl">
             Profile
           </Heading>
         </NavBar>
-        <TouchableOpacity onPress={this.handlePress}>
-          <Text>Text</Text>
-        </TouchableOpacity>
+        <GrowContainer justifyContent={'center'} alignItems={'center'}>
+          <TouchableOpacity onPress={this.handlePress}>
+            <Text>Text</Text>
+          </TouchableOpacity>
+        </GrowContainer>
       </GrowContainer>
     )
   }
 }
 
-mapStateToProps = state => ({
+const mapStateToProps = state => ({
   loading: state.app.loading,
 })
 
-mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   signOut: () => {
     dispatch(SIGN_IN_MACHINE_ACTIONS.SIGN_OUT())
   },
