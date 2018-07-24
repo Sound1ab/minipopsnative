@@ -1,1 +1,4 @@
-export * from './Drawer'
+export { default as Discovery } from './Discovery'
+export { default as Login } from './Login'
+export { default as Profile } from './Profile'
+export { default as Search } from './Search'

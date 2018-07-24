@@ -1,19 +1,11 @@
 // @flow
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
-import {
-  systemWeights,
-  human,
-  iOSUIKit,
-  sanFranciscoWeights,
-} from 'react-native-typography'
+import { iOSUIKit, sanFranciscoWeights } from 'react-native-typography'
 
 type Props = {
   font: string,
 }
-
-console.log(sanFranciscoWeights)
-console.log(iOSUIKit)
 
 const styles = (font, color) => {
   const style = StyleSheet.create({

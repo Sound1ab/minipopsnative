@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { SIGN_UP_MACHINE_ACTIONS } from './actions'
-import { FormValidation } from '../../../helpers/formValidation'
+import { SIGN_UP_MACHINE_ACTIONS } from '../SignUp'
+import { FormValidation } from '../../../helpers'
 import { SignUpForm, SignUpConfirmation } from '../../presentational/organisms'
 
 type PropTypes = {

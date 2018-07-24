@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { SIGN_IN_MACHINE_ACTIONS } from './actions'
-import { FormValidation } from '../../../helpers/formValidation'
+import { FormValidation } from '../../../helpers'
 import { SignInForm, SignInConfirmation } from '../../presentational/organisms'
 
 type PropTypes = {

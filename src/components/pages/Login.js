@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import SignUp from '../container/SignUp'
+import { SignUp } from '../container/SignUp'
 import SignIn from '../container/SignIn'
 import { GrowContainer, Spinner } from '../presentational/atoms'
 
