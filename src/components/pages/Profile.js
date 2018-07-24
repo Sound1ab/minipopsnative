@@ -1,49 +1,33 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { TouchableOpacity, Text } from 'react-native'
 import {
   GrowContainer,
   Spinner,
   NavBar,
   Heading,
+  Button,
 } from '../presentational/atoms'
 import { SIGN_IN_MACHINE_ACTIONS } from '../container/SignIn/actions'
-import styled from 'styled-components'
 
-type PropTypes = {}
-
-type StateTypes = {}
-
-class Profile extends Component<PropTypes, StateTypes> {
-  static defaultProps = {}
-  constructor(props: PropTypes) {
-    super(props)
-  }
-  state = {}
-
-  handlePress = () => {
-    this.props.signOut()
-  }
-
-  render() {
-    return (
-      <GrowContainer>
-        <Spinner isVisible={this.props.loading} />
-        <NavBar>
-          <Heading color="black" font="xl">
-            Profile
-          </Heading>
-        </NavBar>
-        <GrowContainer justifyContent={'center'} alignItems={'center'}>
-          <TouchableOpacity onPress={this.handlePress}>
-            <Text>Text</Text>
-          </TouchableOpacity>
-        </GrowContainer>
-      </GrowContainer>
-    )
-  }
+type PropTypes = {
+  loading: Boolean,
+  signOut: Function,
 }
+
+const Profile = (props: PropTypes) => (
+  <GrowContainer>
+    <Spinner isVisible={props.loading} />
+    <NavBar>
+      <Heading color="black" font="xl">
+        Profile
+      </Heading>
+    </NavBar>
+    <GrowContainer justifyContent={'center'} alignItems={'center'}>
+      <Button handlePress={props.signOut} />
+    </GrowContainer>
+  </GrowContainer>
+)
 
 const mapStateToProps = state => ({
   loading: state.app.loading,

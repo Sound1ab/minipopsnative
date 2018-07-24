@@ -1,6 +1,5 @@
 // @flow
-import React, { Component } from 'react'
-import { View, Text, FlatList } from 'react-native'
+import React from 'react'
 import { connect } from 'react-redux'
 import SearchField from '../container/SearchField/SearchField'
 import {
@@ -12,34 +11,24 @@ import {
 } from '../presentational/atoms'
 
 type PropTypes = {
-  textInput: Function,
+  discoveryResults: Array<Object>,
 }
 
-export class Discovery extends Component<PropTypes> {
-  handleClick = () => {
-    // Open modal
-  }
-  render() {
-    const { discoveryResults } = this.props
-    return (
-      <GrowContainer>
-        <NavBar>
-          <Heading color="black" font="xl">
-            Discovery
-          </Heading>
-          <SearchField api="related-artists" />
-        </NavBar>
-        <FlatListWrapper
-          data={discoveryResults}
-          keyExtractor={(item, index) => `${item.title}-${index}`}
-          renderItem={props => (
-            <FlatListItemDiscovery handleClick={this.handleClick} {...props} />
-          )}
-        />
-      </GrowContainer>
-    )
-  }
-}
+const Discovery = (props: PropTypes) => (
+  <GrowContainer>
+    <NavBar>
+      <Heading color="black" font="xl">
+        Discovery
+      </Heading>
+      <SearchField api="related-artists" />
+    </NavBar>
+    <FlatListWrapper
+      data={props.discoveryResults}
+      keyExtractor={(item, index) => `${item.title}-${index}`}
+      renderItem={props => <FlatListItemDiscovery {...props} />}
+    />
+  </GrowContainer>
+)
 
 const mapStateToProps = state => ({
   discoveryResults: state.search.discoveryResults,

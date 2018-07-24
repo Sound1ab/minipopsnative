@@ -1,37 +1,27 @@
 // @flow
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import React from 'react'
 import { connect } from 'react-redux'
 import SignUp from '../container/SignUp'
 import SignIn from '../container/SignIn'
 import { GrowContainer, Spinner } from '../presentational/atoms'
 
 type PropTypes = {
+  loading: Boolean,
   navigator: Object,
+  form: String,
 }
 
-type StateTypes = {}
-
-class Login extends Component<PropTypes, StateTypes> {
-  static defaultProps = {}
-  constructor(props: PropTypes) {
-    super(props)
-  }
-  state = {}
-
-  signUp = () => <SignUp navigator={this.props.navigator} />
-
-  signIn = () => <SignIn navigator={this.props.navigator} />
-
-  render() {
-    return (
-      <GrowContainer>
-        <Spinner isVisible={this.props.loading} />
-        {this[this.props.form]()}
-      </GrowContainer>
-    )
-  }
+const forms = {
+  signUp: navigator => <SignUp navigator={navigator} />,
+  signIn: navigator => <SignIn navigator={navigator} />,
 }
+
+const Login = (props: PropTypes) => (
+  <GrowContainer>
+    <Spinner isVisible={props.loading} />
+    {forms[props.form](props.navigator)}
+  </GrowContainer>
+)
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
