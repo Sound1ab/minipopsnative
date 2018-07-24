@@ -34,9 +34,6 @@ export class SignIn extends Component<PropTypes, StateTypes> {
     },
     validationErrors: [],
   }
-  componentWillMount() {
-    this.props.checkSession()
-  }
   validationErrors = data => {
     const formValidation = new FormValidation()
     const validationErrors = formValidation.validate(data)
@@ -104,9 +101,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  checkSession: () => {
-    dispatch(SIGN_IN_MACHINE_ACTIONS.CHECK_SESSION())
-  },
   signIn: form => {
     dispatch(SIGN_IN_MACHINE_ACTIONS.SIGN_IN(form))
   },

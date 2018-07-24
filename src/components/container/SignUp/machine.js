@@ -18,7 +18,7 @@ export const signUpMachine = Machine({
       },
     },
     signingUp: {
-      onEntry: ['SIGN_UP'],
+      onEntry: ['SIGN_UP', 'SHOW_LOADING'],
       on: {
         SIGN_UP_SUCCESS: 'idle.waitingForConfirmation',
         SIGN_UP_FAILURE: {
@@ -27,9 +27,10 @@ export const signUpMachine = Machine({
           },
         },
       },
+      onExit: ['HIDE_LOADING'],
     },
     confirmingUser: {
-      onEntry: ['CONFIRM_USER'],
+      onEntry: ['CONFIRM_USER', 'SHOW_LOADING'],
       on: {
         CONFIRMATION_SUCCESS: {
           idle: {
@@ -42,6 +43,7 @@ export const signUpMachine = Machine({
           },
         },
       },
+      onExit: ['HIDE_LOADING'],
     },
   },
 })

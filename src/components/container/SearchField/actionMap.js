@@ -3,14 +3,15 @@ import {
   updateSearchValue,
   updateSearchResults,
   updateDiscoveryResults,
-  updateLoading,
 } from './actions'
 import { Request } from '../../../services/index'
 import { API } from '../../../services/index'
+import { uiActionMap } from '../App/genericActionMap'
 
 let timeout
 
 export const actionMap = {
+  ...uiActionMap,
   START_TIMER({ dispatch, payload }) {
     clearTimeout(timeout)
     timeout = setTimeout(() => {
@@ -37,11 +38,5 @@ export const actionMap = {
     } catch (error) {
       dispatch(SEARCH_MACHINE.SEARCH_FAILURE())
     }
-  },
-  SHOW_LOADING({ dispatch }) {
-    dispatch(updateLoading(true))
-  },
-  HIDE_LOADING({ dispatch }) {
-    dispatch(updateLoading(false))
   },
 }

@@ -24,44 +24,49 @@ export class RXState {
         payload: nextState.value,
       })
 
+      console.log('actionMap', actionMap)
+
       nextState.actions
         .filter(nextAction => actionMap[nextAction])
         .filter(Boolean)
-        .forEach(nextAction =>
+        .forEach(nextAction => {
           actionMap[nextAction]({
             payload: action.payload,
             type: action.type,
             dispatch,
             state,
+            actions: action.actions,
             history: nextState.history,
-          }),
-        )
+          })
+        })
     }
     next(action)
   }
   findActions = states => {
-    return Object.keys(states)
+    const actions = Object.keys(states)
       .map(key => {
         const state = states[key]
         const actions = Object.keys(state.on || {})
-
         return this.findActions(state.states || {}).concat(actions)
       })
       .reduce((a, b) => a.concat(b), [])
       .filter((key, pos, arr) => arr.indexOf(key) === pos)
+    return actions
   }
   createActionCreators = actions => {
-    return actions.reduce((actionObject, action) => {
+    const actionCreators = actions.reduce((actionObject, action) => {
       if (!actionObject[action]) {
         actionObject[action] = payload => ({
           type: action,
           payload,
           machine: this.machine,
+          actions: actionObject,
           actionMap: this.actionMap,
         })
       }
       return actionObject
     }, {})
+    return actionCreators
   }
   getActionCreators = () => {
     return Functional.pipe(

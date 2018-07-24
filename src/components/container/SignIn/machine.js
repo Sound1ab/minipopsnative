@@ -15,23 +15,12 @@ export const signInMachine = Machine({
       },
       on: {
         SIGN_IN: 'signingIn',
+        SIGN_OUT: 'signingOut',
         CONFIRM_USER: 'confirmingUser',
-        CHECK_SESSION: 'checkingAuthenticatedUser',
-      },
-    },
-    checkingAuthenticatedUser: {
-      onEntry: ['CHECK_AUTHENTICATED_USER'],
-      on: {
-        AUTHENTICATED_SUCCESS: {
-          'idle.waitingForSignOut': {
-            actions: ['SAVE_COGNITO_USER_OBJECT', 'REDIRECT_TO_APP'],
-          },
-        },
-        AUTHENTICATED_FAILURE: 'idle.waitingForSignIn',
       },
     },
     signingIn: {
-      onEntry: ['SIGN_IN'],
+      onEntry: ['SIGN_IN', 'SHOW_LOADING'],
       on: {
         SIGN_IN_SUCCESS: {
           'idle.waitingForSignOut': {
@@ -44,6 +33,23 @@ export const signInMachine = Machine({
           },
         },
       },
+      onExit: ['HIDE_LOADING'],
+    },
+    signingOut: {
+      onEntry: ['SIGN_OUT', 'SHOW_LOADING'],
+      on: {
+        SIGN_OUT_SUCCESS: {
+          'idle.waitingForSignIn': {
+            actions: ['REMOVE_COGNITO_USER_OBJECT', 'REDIRECT_TO_LOGIN'],
+          },
+        },
+        SIGN_OUT_FAILURE: {
+          ['idle.waitingForSignOut']: {
+            actions: ['SHOW_ERROR_MESSAGE'],
+          },
+        },
+      },
+      onExit: ['HIDE_LOADING'],
     },
     confirmingUser: {
       onEntry: ['CONFIRM_USER'],

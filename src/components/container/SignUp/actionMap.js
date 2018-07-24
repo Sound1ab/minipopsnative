@@ -1,7 +1,9 @@
 import { SIGN_UP_MACHINE_ACTIONS } from './actions'
 import { Auth } from 'aws-amplify'
+import { uiActionMap } from '../App/genericActionMap'
 
 export const actionMap = {
+  ...uiActionMap,
   async SIGN_UP({ dispatch, payload }) {
     try {
       await Auth.signUp({

@@ -1,45 +1,51 @@
-import { SIGN_IN_MACHINE_ACTIONS, saveCognitoUserObject } from './actions'
+import { saveCognitoUserObject, removeCognitoUserObject } from './actions'
 import { Auth } from 'aws-amplify'
-import App from '../../App'
+import { startApp, startLogin } from '../../../navigation'
+import { uiActionMap } from '../App/genericActionMap'
+
+console.log('uiActionMap', uiActionMap)
 
 export const actionMap = {
-  async CHECK_AUTHENTICATED_USER({ dispatch }) {
-    let cognitoUser
-    try {
-      cognitoUser = await Auth.currentAuthenticatedUser()
-    } catch (error) {
-      cognitoUser = {}
-    }
-    if (Object.keys(cognitoUser).length > 0) {
-      dispatch(SIGN_IN_MACHINE_ACTIONS.AUTHENTICATED_SUCCESS(cognitoUser))
-    } else {
-      dispatch(SIGN_IN_MACHINE_ACTIONS.AUTHENTICATED_FAILURE())
-    }
-  },
-  async SIGN_IN({ dispatch, payload }) {
+  ...uiActionMap,
+  async SIGN_IN({ dispatch, payload, actions }) {
     try {
       const cognitoUser = await Auth.signIn(payload.username, payload.password)
-      dispatch(SIGN_IN_MACHINE_ACTIONS.SIGN_IN_SUCCESS(cognitoUser))
+      dispatch(actions.SIGN_IN_SUCCESS(cognitoUser))
     } catch (error) {
-      dispatch(SIGN_IN_MACHINE_ACTIONS.SIGN_IN_FAILURE(error))
+      dispatch(actions.SIGN_IN_FAILURE(error))
+    }
+  },
+  async SIGN_OUT({ dispatch, payload, actions }) {
+    try {
+      const currentUser = await Auth.currentAuthenticatedUser()
+      await currentUser.signOut()
+      dispatch(actions.SIGN_OUT_SUCCESS(currentUser))
+    } catch (error) {
+      console.log(error)
+      dispatch(actions.SIGN_OUT_FAILURE(error))
     }
   },
   SAVE_COGNITO_USER_OBJECT({ dispatch, payload }) {
     dispatch(saveCognitoUserObject(payload))
   },
-  REDIRECT_TO_APP() {
-    const app = new App()
-    app.startApp()
+  REMOVE_COGNITO_USER_OBJECT({ dispatch }) {
+    dispatch(removeCognitoUserObject())
   },
-  async CONFIRM_USER({ dispatch, payload }) {
+  REDIRECT_TO_APP() {
+    startApp()
+  },
+  REDIRECT_TO_LOGIN() {
+    startLogin()
+  },
+  async CONFIRM_USER({ dispatch, payload, actions }) {
     try {
       await Auth.confirmSignIn(payload.cognitoUser, payload.code)
-      dispatch(SIGN_IN_MACHINE_ACTIONS.SIGN_IN_SUCCESS(payload))
+      dispatch(actions.SIGN_IN_SUCCESS(payload))
     } catch (error) {
-      dispatch(SIGN_IN_MACHINE_ACTIONS.SIGN_IN_FAILURE(error))
+      dispatch(actions.SIGN_IN_FAILURE(error))
     }
   },
-  SHOW_ERROR_MESSAGE({ dispatch, payload }) {
+  SHOW_ERROR_MESSAGE({ dispatch, payload, actions }) {
     console.warn('SHOW_ERROR_MESSAGE', payload)
   },
 }

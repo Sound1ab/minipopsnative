@@ -2,7 +2,6 @@ import {
   UPDATE_SEARCH_VALUE,
   UPDATE_SEARCH_RESULTS,
   UPDATE_DISCOVERY_RESULTS,
-  UPDATE_LOADING,
 } from './actions'
 
 export const initialState = {
@@ -10,7 +9,6 @@ export const initialState = {
   value: '',
   searchResults: [],
   discoveryResults: [],
-  loading: false,
 }
 
 export function search(state = initialState, action) {
@@ -34,11 +32,6 @@ export function search(state = initialState, action) {
       return {
         ...state,
         discoveryResults: action.payload,
-      }
-    case UPDATE_LOADING:
-      return {
-        ...state,
-        loading: action.payload,
       }
     default:
       return state

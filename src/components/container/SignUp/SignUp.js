@@ -74,8 +74,9 @@ export class SignUp extends Component<PropTypes, StateTypes> {
   render() {
     const { username, password, phone_number, email } = this.state.form
     const { code } = this.state.confirmation
-    return this.props.signUpState.idle &&
-      this.props.signUpState.idle === 'waitingForConfirmation' ? (
+    return this.props.signUpState === 'confirmingUser' ||
+      (this.props.signUpState.idle &&
+        this.props.signUpState.idle === 'waitingForConfirmation') ? (
       <SignUpConfirmation
         code={code}
         validationErrors={this.state.validationErrors}

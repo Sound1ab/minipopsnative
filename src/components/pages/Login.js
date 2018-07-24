@@ -1,8 +1,10 @@
 // @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
 import SignUp from '../container/SignUp'
 import SignIn from '../container/SignIn'
+import { GrowContainer, Spinner } from '../presentational/atoms'
 
 type PropTypes = {
   navigator: Object,
@@ -10,7 +12,7 @@ type PropTypes = {
 
 type StateTypes = {}
 
-export class Login extends Component<PropTypes, StateTypes> {
+class Login extends Component<PropTypes, StateTypes> {
   static defaultProps = {}
   constructor(props: PropTypes) {
     super(props)
@@ -22,6 +24,17 @@ export class Login extends Component<PropTypes, StateTypes> {
   signIn = () => <SignIn navigator={this.props.navigator} />
 
   render() {
-    return this[this.props.form]()
+    return (
+      <GrowContainer>
+        <Spinner isVisible={this.props.loading} />
+        {this[this.props.form]()}
+      </GrowContainer>
+    )
   }
 }
+
+const mapStateToProps = state => ({
+  loading: state.app.loading,
+})
+
+export default connect(mapStateToProps)(Login)

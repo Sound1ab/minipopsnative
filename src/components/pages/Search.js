@@ -38,7 +38,7 @@ export class Search extends Component<PropTypes> {
 }
 
 const mapStateToProps = state => ({
-  loading: state.search.loading,
+  loading: state.app.loading,
   searchResults: state.search.searchResults,
 })
 

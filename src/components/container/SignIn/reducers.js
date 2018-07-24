@@ -1,4 +1,4 @@
-import { SAVE_COGNITO_USER_OBJECT } from './actions'
+import { SAVE_COGNITO_USER_OBJECT, REMOVE_COGNITO_USER_OBJECT } from './actions'
 import { signInMachine } from './machine'
 
 export const initialState = {
@@ -19,6 +19,12 @@ export function signIn(state = initialState, action) {
         ...state,
         cognitoUser: action.payload,
         isSignedIn: true,
+      }
+    case REMOVE_COGNITO_USER_OBJECT:
+      return {
+        ...state,
+        cognitoUser: {},
+        isSignedIn: false,
       }
     default:
       return state
