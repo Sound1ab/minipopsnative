@@ -10,10 +10,10 @@ type Props = {
   item: Object,
   separators: Object,
   height: number,
-  handleClick: Function,
+  handlePress: Function,
 }
 
-const Wrapper = styled.View`
+const Wrapper = styled.TouchableOpacity`
   padding: ${({ index }) =>
     index > 0 ? '0 16px 16px 16px' : '16px 16px 16px 16px'};
   height: ${({ height }) => height};
@@ -52,7 +52,11 @@ const styles = StyleSheet.create({
 })
 
 export const FlatListItemDiscovery = (props: Props) => (
-  <Wrapper index={props.index} height={300} onClick={props.handleClick}>
+  <Wrapper
+    index={props.index}
+    height={300}
+    onPress={props.handlePress.bind(null, props.item.spotifyId)}
+  >
     <RelativeWrapper>
       <ImageWrapper source={{ uri: `${props.item.imageUrl}` }} />
       <LinearGradient
@@ -72,5 +76,5 @@ export const FlatListItemDiscovery = (props: Props) => (
 
 FlatListItemDiscovery.defaultProps = {
   height: 300,
-  handleClick: () => {},
+  handlePress: () => {},
 }

@@ -6,6 +6,7 @@ import { Login } from '../components/pages'
 import { Search } from '../components/pages'
 import { Discovery } from '../components/pages'
 import { Profile } from '../components/pages'
+import { RelatedArtist } from '../components/pages'
 
 export const registerComponents = () => {
   const register = new Map([
@@ -13,6 +14,7 @@ export const registerComponents = () => {
     ['Search', Search],
     ['Discovery', Discovery],
     ['Profile', Profile],
+    ['RelatedArtist', RelatedArtist],
   ])
   register.forEach((Component, key) => {
     Navigation.registerComponent(key, () => Component, store, Provider)

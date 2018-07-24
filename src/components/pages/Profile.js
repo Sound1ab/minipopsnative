@@ -24,7 +24,7 @@ const Profile = (props: PropTypes) => (
       </Heading>
     </NavBar>
     <GrowContainer justifyContent={'center'} alignItems={'center'}>
-      <Button handlePress={props.signOut} />
+      <Button title="Sign Out" handlePress={props.signOut} />
     </GrowContainer>
   </GrowContainer>
 )

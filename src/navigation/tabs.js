@@ -4,6 +4,11 @@ export const startApp = () => {
   Navigation.startTabBasedApp({
     tabs: [
       {
+        label: 'Discovery',
+        screen: 'Discovery',
+        title: 'Discovery',
+      },
+      {
         label: 'Profile',
         screen: 'Profile',
         title: 'Profile',
@@ -12,11 +17,6 @@ export const startApp = () => {
         label: 'Search',
         screen: 'Search',
         title: 'Search',
-      },
-      {
-        label: 'Discovery',
-        screen: 'Discovery',
-        title: 'Discovery',
       },
     ],
     tabsStyle: {
