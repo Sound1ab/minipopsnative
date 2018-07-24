@@ -1,5 +1,4 @@
 import {
-  SEARCH_MACHINE,
   updateSearchValue,
   updateSearchResults,
   updateDiscoveryResults,
@@ -12,10 +11,10 @@ let timeout
 
 export const actionMap = {
   ...uiActionMap,
-  START_TIMER({ dispatch, payload }) {
+  START_TIMER({ payload, actions }) {
     clearTimeout(timeout)
     timeout = setTimeout(() => {
-      dispatch(SEARCH_MACHINE.TIMER_COUNTDOWN_PASSED(payload))
+      actions.TIMER_COUNTDOWN_PASSED(payload)
     }, 500)
   },
   CANCEL_TIMER() {
@@ -24,7 +23,7 @@ export const actionMap = {
   UPDATE_SEARCH({ dispatch, payload }) {
     dispatch(updateSearchValue(payload.value))
   },
-  async DISPATCHING_SEARCH({ dispatch, payload }) {
+  async DISPATCHING_SEARCH({ dispatch, payload, actions }) {
     try {
       const actions = {
         'current-items': updateSearchResults,
@@ -34,9 +33,9 @@ export const actionMap = {
         keywords: payload.value,
       })
       dispatch(actions[payload.api](items.data))
-      dispatch(SEARCH_MACHINE.SEARCH_SUCCESS())
+      actions.SEARCH_SUCCESS()
     } catch (error) {
-      dispatch(SEARCH_MACHINE.SEARCH_FAILURE())
+      actions.SEARCH_FAILURE()
     }
   },
 }

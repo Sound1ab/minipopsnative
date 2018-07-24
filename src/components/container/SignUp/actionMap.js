@@ -1,10 +1,9 @@
-import { SIGN_UP_MACHINE_ACTIONS } from './actions'
 import { Auth } from 'aws-amplify'
 import { uiActionMap } from '../App/genericActionMap'
 
 export const actionMap = {
   ...uiActionMap,
-  async SIGN_UP({ dispatch, payload }) {
+  async SIGN_UP({ payload, actions }) {
     try {
       await Auth.signUp({
         username: payload.username,
@@ -14,17 +13,17 @@ export const actionMap = {
           email: payload.email,
         },
       })
-      dispatch(SIGN_UP_MACHINE_ACTIONS.SIGN_UP_SUCCESS(payload))
+      actions.SIGN_UP_SUCCESS(payload)
     } catch (error) {
-      dispatch(SIGN_UP_MACHINE_ACTIONS.SIGN_UP_FAILURE(error))
+      actions.SIGN_UP_FAILURE(error)
     }
   },
-  async CONFIRM_USER({ dispatch, payload }) {
+  async CONFIRM_USER({ payload, actions }) {
     try {
       await Auth.confirmSignUp(payload.username, payload.code)
-      dispatch(SIGN_UP_MACHINE_ACTIONS.CONFIRMATION_SUCCESS(payload))
+      actions.CONFIRMATION_SUCCESS(payload)
     } catch (error) {
-      dispatch(SIGN_UP_MACHINE_ACTIONS.CONFIRMATION_FAILURE(error))
+      actions.CONFIRMATION_FAILURE(error)
     }
   },
   SHOW_ERROR_MESSAGE({ dispatch, payload }) {

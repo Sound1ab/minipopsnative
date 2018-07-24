@@ -7,22 +7,22 @@ console.log('uiActionMap', uiActionMap)
 
 export const actionMap = {
   ...uiActionMap,
-  async SIGN_IN({ dispatch, payload, actions }) {
+  async SIGN_IN({ payload, actions }) {
     try {
       const cognitoUser = await Auth.signIn(payload.username, payload.password)
-      dispatch(actions.SIGN_IN_SUCCESS(cognitoUser))
+      actions.SIGN_IN_SUCCESS(cognitoUser)
     } catch (error) {
-      dispatch(actions.SIGN_IN_FAILURE(error))
+      actions.SIGN_IN_FAILURE(error)
     }
   },
-  async SIGN_OUT({ dispatch, payload, actions }) {
+  async SIGN_OUT({ payload, actions }) {
     try {
       const currentUser = await Auth.currentAuthenticatedUser()
       await currentUser.signOut()
-      dispatch(actions.SIGN_OUT_SUCCESS(currentUser))
+      actions.SIGN_OUT_SUCCESS(currentUser)
     } catch (error) {
       console.log(error)
-      dispatch(actions.SIGN_OUT_FAILURE(error))
+      actions.SIGN_OUT_FAILURE(error)
     }
   },
   SAVE_COGNITO_USER_OBJECT({ dispatch, payload }) {
@@ -37,12 +37,12 @@ export const actionMap = {
   REDIRECT_TO_LOGIN() {
     startLogin()
   },
-  async CONFIRM_USER({ dispatch, payload, actions }) {
+  async CONFIRM_USER({ payload, actions }) {
     try {
       await Auth.confirmSignIn(payload.cognitoUser, payload.code)
-      dispatch(actions.SIGN_IN_SUCCESS(payload))
+      actions.SIGN_IN_SUCCESS(payload)
     } catch (error) {
-      dispatch(actions.SIGN_IN_FAILURE(error))
+      actions.SIGN_IN_FAILURE(error)
     }
   },
   SHOW_ERROR_MESSAGE({ dispatch, payload, actions }) {

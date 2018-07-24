@@ -6,4 +6,5 @@ export class Functional {
     }
     return result
   }
+  static compose = (a, b) => c => a(b(c))
 }

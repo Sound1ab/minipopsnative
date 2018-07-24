@@ -24,7 +24,12 @@ export class RXState {
         payload: nextState.value,
       })
 
-      console.log('actionMap', actionMap)
+      const composedActions = RXState.composeActionsWithDispatch(
+        dispatch,
+        action.actions,
+      )
+
+      console.log('composedActions', composedActions)
 
       nextState.actions
         .filter(nextAction => actionMap[nextAction])
@@ -35,15 +40,27 @@ export class RXState {
             type: action.type,
             dispatch,
             state,
-            actions: action.actions,
+            actions: composedActions,
             history: nextState.history,
           })
         })
     }
     next(action)
   }
+  static composeActionsWithDispatch = (dispatch, actions) => {
+    return Object.entries(actions).reduce((composedActions, v) => {
+      const [actionKey, actionFunction] = v
+      if (!composedActions[actionKey]) {
+        composedActions[actionKey] = Functional.compose(
+          dispatch,
+          actionFunction,
+        )
+      }
+      return composedActions
+    }, {})
+  }
   findActions = states => {
-    const actions = Object.keys(states)
+    return Object.keys(states)
       .map(key => {
         const state = states[key]
         const actions = Object.keys(state.on || {})
@@ -51,10 +68,9 @@ export class RXState {
       })
       .reduce((a, b) => a.concat(b), [])
       .filter((key, pos, arr) => arr.indexOf(key) === pos)
-    return actions
   }
   createActionCreators = actions => {
-    const actionCreators = actions.reduce((actionObject, action) => {
+    return actions.reduce((actionObject, action) => {
       if (!actionObject[action]) {
         actionObject[action] = payload => ({
           type: action,
@@ -66,7 +82,6 @@ export class RXState {
       }
       return actionObject
     }, {})
-    return actionCreators
   }
   getActionCreators = () => {
     return Functional.pipe(

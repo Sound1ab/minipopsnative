@@ -4,11 +4,11 @@ import { uiActionMap } from './genericActionMap'
 
 export const actionMap = {
   ...uiActionMap,
-  REGISTER_COMPONENTS({ dispatch, actions }) {
+  REGISTER_COMPONENTS({ actions }) {
     registerComponents()
-    dispatch(actions.REGISTER_COMPONENTS_SUCCESS())
+    actions.REGISTER_COMPONENTS_SUCCESS()
   },
-  async CHECK_AUTHENTICATED_USER({ dispatch, actions }) {
+  async CHECK_AUTHENTICATED_USER({ actions }) {
     let cognitoUser
     try {
       cognitoUser = await Auth.currentAuthenticatedUser()
@@ -16,9 +16,9 @@ export const actionMap = {
       cognitoUser = {}
     }
     if (Object.keys(cognitoUser).length > 0) {
-      dispatch(actions.AUTHENTICATED_SUCCESS(cognitoUser))
+      actions.AUTHENTICATED_SUCCESS(cognitoUser)
     } else {
-      dispatch(actions.AUTHENTICATED_FAILURE())
+      actions.AUTHENTICATED_FAILURE()
     }
   },
   REDIRECT_TO_APP() {
