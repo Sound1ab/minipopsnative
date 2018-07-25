@@ -1,5 +1,9 @@
 import { Auth } from 'aws-amplify'
-import { startApp, startLogin, registerComponents } from '../../../navigation'
+import {
+  startApp,
+  startLogin,
+  registerComponents,
+} from '../../navigation/index'
 import { uiActionMap } from './genericActionMap'
 
 export const actionMap = {

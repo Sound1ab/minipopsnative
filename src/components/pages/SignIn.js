@@ -1,30 +1,36 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { SIGN_UP_MACHINE_ACTIONS } from '../SignUp'
-import { FormValidation } from '../../../helpers'
-import { SignUpForm, SignUpConfirmation } from '../../presentational/organisms'
+import { LOGIN_MACHINE_ACTIONS } from '../../machines/Login/actions'
+import { FormValidation } from '../../helpers/index'
+import {
+  SignInForm,
+  SignInConfirmation,
+} from '../presentational/organisms/index'
 
 type PropTypes = {
   navigator: Object,
 }
 
 type StateTypes = {
-  username: string,
-  password: string,
-  phone_number: string,
-  email: string,
+  form: {
+    username: string,
+    password: string,
+    phone_number: string,
+    email: string,
+  },
+  confirmation: {
+    code: string,
+  },
   validationErrors: Array<string>,
 }
 
-export class SignUp extends Component<PropTypes, StateTypes> {
+export class SignIn extends Component<PropTypes, StateTypes> {
   static defaultProps = {}
   state = {
     form: {
       username: '',
       password: '',
-      phone_number: '',
-      email: '',
     },
     confirmation: {
       code: '',
@@ -54,63 +60,59 @@ export class SignUp extends Component<PropTypes, StateTypes> {
       },
     })
   }
-  handleSignUp = () => {
+  handleSignIn = () => {
     if (this.validationErrors(this.state.form)) {
       return
     }
-    this.props.signUp(this.state.form)
+    this.props.signIn(this.state.form)
   }
   handleConfirmation = () => {
     if (this.validationErrors(this.state.confirmation)) {
       return
     }
     this.props.confirmUser({
-      username: this.state.form.username,
+      cognitoUser: this.props.cognitoUser,
       code: this.state.confirmation.code,
       navigator: this.props.navigator,
     })
   }
-
   render() {
-    const { username, password, phone_number, email } = this.state.form
-    const { code } = this.state.confirmation
-    return this.props.signUpState === 'confirmingUser' ||
-      (this.props.signUpState.idle &&
-        this.props.signUpState.idle === 'waitingForConfirmation') ? (
-      <SignUpConfirmation
-        code={code}
+    const { username, password } = this.state.form
+    return this.props.signInState.idle &&
+      this.props.signInState.idle === 'waitingForConfirmation' ? (
+      <SignInConfirmation
+        code={this.state.confirmation.code}
         validationErrors={this.state.validationErrors}
         handleChangeText={this.handleCodeText}
         handleSubmit={this.handleConfirmation}
       />
     ) : (
-      <SignUpForm
+      <SignInForm
         username={username}
         password={password}
-        phone_number={phone_number}
-        email={email}
         validationErrors={this.state.validationErrors}
         handleChangeText={this.handleChangeText}
-        handleSubmit={this.handleSignUp}
+        handleSubmit={this.handleSignIn}
       />
     )
   }
 }
 
 const mapStateToProps = state => ({
-  signUpState: state.signUp.state,
+  signInState: state.signIn.state,
+  cognitoUser: state.signIn.cognitoUser,
 })
 
 const mapDispatchToProps = dispatch => ({
-  signUp: form => {
-    dispatch(SIGN_UP_MACHINE_ACTIONS.SIGN_UP(form))
+  signIn: form => {
+    dispatch(LOGIN_MACHINE_ACTIONS.SIGN_IN(form))
   },
   confirmUser: form => {
-    dispatch(SIGN_UP_MACHINE_ACTIONS.CONFIRM_USER(form))
+    dispatch(LOGIN_MACHINE_ACTIONS.CONFIRM_USER(form))
   },
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SignUp)
+)(SignIn)

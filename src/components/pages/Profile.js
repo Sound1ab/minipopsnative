@@ -8,7 +8,7 @@ import {
   Heading,
   Button,
 } from '../presentational/atoms'
-import { SIGN_IN_MACHINE_ACTIONS } from '../container/SignIn/actions'
+import { LOGIN_MACHINE_ACTIONS } from '../../machines/Login/actions'
 
 type PropTypes = {
   loading: Boolean,
@@ -35,7 +35,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   signOut: () => {
-    dispatch(SIGN_IN_MACHINE_ACTIONS.SIGN_OUT())
+    dispatch(LOGIN_MACHINE_ACTIONS.SIGN_OUT())
   },
 })
 

@@ -35,14 +35,14 @@ export const startLogin = () => {
   Navigation.startTabBasedApp({
     tabs: [
       {
-        screen: 'Login',
-        label: 'login',
+        screen: 'SignIn',
+        label: 'SignIn',
         passProps: {
           form: 'signIn',
         },
       },
       {
-        screen: 'Login',
+        screen: 'SignUp',
         label: 'SignUp',
         passProps: {
           form: 'signUp',

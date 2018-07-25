@@ -1,6 +1,6 @@
 import { saveCognitoUserObject, removeCognitoUserObject } from './actions'
 import { Auth } from 'aws-amplify'
-import { startApp, startLogin } from '../../../navigation'
+import { startApp, startLogin } from '../../navigation/index'
 import { uiActionMap } from '../App/genericActionMap'
 
 console.log('uiActionMap', uiActionMap)

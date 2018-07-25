@@ -3,7 +3,7 @@ import Amplify from 'aws-amplify'
 import config from './aws-exports'
 import { Auth } from 'aws-amplify'
 import store from './src/store'
-import { APP_MACHINE_ACTIONS } from './src/components/container/App/actions'
+import { APP_MACHINE_ACTIONS } from './src/machines/App/actions'
 Amplify.configure(config)
 
 const signOut = async () => {
