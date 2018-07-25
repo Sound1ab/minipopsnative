@@ -18,6 +18,7 @@ const styles = (font, color) => {
     l: {
       ...iOSUIKit.title3Object,
       ...sanFranciscoWeights.thin,
+      marginBottom: 8,
       color,
     },
     m: {
@@ -39,6 +40,7 @@ const styles = (font, color) => {
       ...iOSUIKit.caption2Object,
       ...sanFranciscoWeights.thin,
       color,
+      marginBottom: 4,
     },
   })
   return style[font]

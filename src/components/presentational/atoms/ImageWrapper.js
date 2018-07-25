@@ -33,6 +33,6 @@ ImageWrapper.defaultProps = {
     uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
   },
   height: 300,
-  borderRadius: 5,
+  borderRadius: 0,
   resizeMode: 'cover',
 }

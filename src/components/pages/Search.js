@@ -19,7 +19,7 @@ type PropTypes = {
 const MOCK_ITEM = {
   imageUrl:
     'https://www.catster.com/wp-content/uploads/2017/12/A-gray-kitten-meowing.jpg',
-  title: 'Test title',
+  title: 'Test realu kldajsnm asdj flkasjd flkasjd fklasjd flkasdj fks',
   endTime: 'slkdmlsmf',
   price: '£5.67',
   postage: '£5.76',
@@ -32,14 +32,12 @@ const Search = (props: PropTypes) => (
       <Heading color="black" font="xl">
         Search
       </Heading>
-      <SearchField api="current-items" />
     </NavBar>
-    <FlatListItemSearch item={MOCK_ITEM} />
-    {/*<FlatListWrapper*/}
-    {/*data={props.searchResults}*/}
-    {/*keyExtractor={(item, index) => `${item.title}-${index}`}*/}
-    {/*renderItem={FlatListItemSearch}*/}
-    {/*/>*/}
+    <FlatListWrapper
+      data={props.searchResults}
+      keyExtractor={(item, index) => `${item.title}-${index}`}
+      renderItem={FlatListItemSearch}
+    />
   </GrowContainer>
 )
 
