@@ -14,16 +14,8 @@ type Props = {
 }
 
 const Wrapper = styled.TouchableOpacity`
-  padding: ${({ index }) =>
-    index > 0 ? '0 16px 16px 16px' : '16px 16px 16px 16px'};
   height: ${({ height }) => height};
   width: 100%;
-  border-radius: 5px;
-  background-color: transparent;
-  shadow-opacity: 0.2;
-  shadow-radius: 5px;
-  shadow-color: black;
-  shadow-offset: 0px 0px;
 `
 
 const TextWrapper = styled.View`
@@ -47,7 +39,6 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 0,
-    borderRadius: 5,
   },
 })
 
@@ -60,11 +51,7 @@ export const FlatListItemDiscovery = (props: Props) => (
     <RelativeWrapper>
       <ImageWrapper source={{ uri: `${props.item.imageUrl}` }} />
       <LinearGradient
-        colors={[
-          'rgba(79,50,74,0.8)',
-          'rgba(114, 110, 248,0.3)',
-          'rgba(156, 68, 249,0)',
-        ]}
+        colors={['rgba(0,0,0,0.5)', 'rgba(0, 0, 0,0)']}
         style={styles.linearGradient}
       />
       <TextWrapper position={{ top: 0 }}>

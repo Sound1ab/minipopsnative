@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SearchField from '../../components/container/SearchField'
-import { showModal } from '../../navigation'
+import { pushScreen } from '../../navigation'
 import {
   FlatListWrapper,
   GrowContainer,
@@ -15,6 +15,12 @@ type PropTypes = {
   discoveryResults: Array<Object>,
 }
 
+const MOCK_ITEM = {
+  imageUrl:
+    'https://www.catster.com/wp-content/uploads/2017/12/A-gray-kitten-meowing.jpg',
+  title: 'Test realu kldajsnm asdj flkasjd flkasjd fklasjd flkasdj fks',
+}
+
 const Discovery = (props: PropTypes) => (
   <GrowContainer>
     <NavBar>
@@ -23,17 +29,24 @@ const Discovery = (props: PropTypes) => (
       </Heading>
       <SearchField api="related-artists" />
     </NavBar>
+    {/*<FlatListItemDiscovery*/}
+    {/*{...props}*/}
+    {/*item={MOCK_ITEM}*/}
+    {/*/>*/}
+    {/*<FlatListItemDiscovery*/}
+    {/*{...props}*/}
+    {/*item={MOCK_ITEM}*/}
+    {/*/>*/}
     <FlatListWrapper
       data={props.discoveryResults}
       keyExtractor={(item, index) => `${item.title}-${index}`}
-      renderItem={props => (
+      renderItem={renderProps => (
         <FlatListItemDiscovery
-          {...props}
+          {...renderProps}
           handlePress={spotifyId => {
-            showModal({
+            pushScreen({
+              navigator: props.navigator,
               screen: 'RelatedArtist',
-              title: 'Related Artist',
-              animationType: 'slide-up',
               passProps: {
                 spotifyId,
               },

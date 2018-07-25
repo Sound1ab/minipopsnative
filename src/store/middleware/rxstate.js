@@ -29,8 +29,6 @@ export class RXState {
         action.actions,
       )
 
-      console.log('composedActions', composedActions)
-
       nextState.actions
         .filter(nextAction => actionMap[nextAction])
         .filter(Boolean)

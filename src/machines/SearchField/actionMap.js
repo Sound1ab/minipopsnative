@@ -32,7 +32,7 @@ export const actionMap = {
       const items = await Request.get(API(payload.api), {
         keywords: payload.value,
       })
-      dispatch(actions[payload.api](items.data))
+      dispatch(updateDiscoveryResults(items.data))
       actions.SEARCH_SUCCESS()
     } catch (error) {
       actions.SEARCH_FAILURE()

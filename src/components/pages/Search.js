@@ -32,6 +32,7 @@ const Search = (props: PropTypes) => (
       <Heading color="black" font="xl">
         Search
       </Heading>
+      <SearchField api="current-items" />
     </NavBar>
     <FlatListWrapper
       data={props.searchResults}
