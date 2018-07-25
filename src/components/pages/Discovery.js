@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import SearchField from '../container/SearchField/SearchField'
+import SearchField from '../../components/container/SearchField'
 import { showModal } from '../../navigation'
 import {
   FlatListWrapper,

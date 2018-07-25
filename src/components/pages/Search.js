@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import SearchField from '../container/SearchField/SearchField'
+import SearchField from '../../components/container/SearchField'
 import {
   FlatListWrapper,
   GrowContainer,
@@ -16,6 +16,15 @@ type PropTypes = {
   searchResults: Array<Object>,
 }
 
+const MOCK_ITEM = {
+  imageUrl:
+    'https://www.catster.com/wp-content/uploads/2017/12/A-gray-kitten-meowing.jpg',
+  title: 'Test title',
+  endTime: 'slkdmlsmf',
+  price: '£5.67',
+  postage: '£5.76',
+}
+
 const Search = (props: PropTypes) => (
   <GrowContainer>
     <Spinner isVisible={props.loading} />
@@ -25,11 +34,12 @@ const Search = (props: PropTypes) => (
       </Heading>
       <SearchField api="current-items" />
     </NavBar>
-    <FlatListWrapper
-      data={props.searchResults}
-      keyExtractor={(item, index) => `${item.title}-${index}`}
-      renderItem={FlatListItemSearch}
-    />
+    <FlatListItemSearch item={MOCK_ITEM} />
+    {/*<FlatListWrapper*/}
+    {/*data={props.searchResults}*/}
+    {/*keyExtractor={(item, index) => `${item.title}-${index}`}*/}
+    {/*renderItem={FlatListItemSearch}*/}
+    {/*/>*/}
   </GrowContainer>
 )
 

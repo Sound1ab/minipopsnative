@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react'
-import { InputWrapper, Icon } from '../../presentational/atoms'
+import { InputWrapper, Icon } from '../presentational/atoms/index'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { SEARCH_MACHINE } from './actions'
+import { SEARCH_MACHINE } from '../../machines/SearchField/actions'
 
 const Wrapper = styled.View`
   width: 100%;

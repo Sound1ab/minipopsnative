@@ -69,7 +69,6 @@ export const FlatListItemSearch = (props: Props) => (
         <Heading font="s">Price: £{props.item.price}</Heading>
         <Heading font="xxs">Ending: {props.item.endTime}</Heading>
         <Heading font="xxs">Postage: £{props.item.postage}</Heading>
-        <Heading font="xxs">Bids: {props.item.endTime}</Heading>
       </TextWrapper>
     </RelativeWrapper>
   </Wrapper>

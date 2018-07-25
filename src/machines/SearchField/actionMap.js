@@ -3,9 +3,9 @@ import {
   updateSearchResults,
   updateDiscoveryResults,
 } from './actions'
-import { Request } from '../../../services/index'
-import { API } from '../../../services/index'
-import { uiActionMap } from '../../../machines/App/genericActionMap'
+import { Request } from '../../services/index'
+import { API } from '../../services/index'
+import { uiActionMap } from '../App/genericActionMap'
 
 let timeout
 

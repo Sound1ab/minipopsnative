@@ -23,8 +23,8 @@ export const appMachine = Machine({
       onEntry: ['CHECK_AUTHENTICATED_USER'],
       on: {
         AUTHENTICATED_SUCCESS: 'loadingApp',
-        AUTHENTICATED_FAILURE: 'loadingLogin',
-        // AUTHENTICATED_FAILURE: 'loadingApp',
+        // AUTHENTICATED_FAILURE: 'loadingLogin',
+        AUTHENTICATED_FAILURE: 'loadingApp',
       },
     },
     loadingApp: {

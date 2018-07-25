@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { RXState } from '../store/middleware/rxstate'
-import { search } from '../components/container/SearchField/reducers'
+import { search } from '../machines/SearchField/reducers'
 import { signUp } from '../machines/SignUp/reducers'
 import { signIn } from '../machines/Login/reducers'
 import { app } from '../machines/App/reducers'

@@ -1,7 +1,7 @@
 // @flow
 import { searchMachine } from './machine'
 import { actionMap } from './actionMap'
-import { RXState } from '../../../store/middleware/rxstate'
+import { RXState } from '../../store/middleware/rxstate'
 
 export const UPDATE_SEARCH_VALUE = 'UPDATE_SEARCH_VALUE'
 export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS'
