@@ -1,6 +1,8 @@
 // @flow
 import React from 'react'
-import { ImageWrapper, Heading } from '../atoms'
+import { Heading, Button } from '../atoms'
+import { ImageSlider } from '../molecules'
+import { View } from 'react-native'
 import styled from 'styled-components'
 
 type Props = {
@@ -10,36 +12,52 @@ type Props = {
   height: number,
 }
 
-const Wrapper = styled.View`
+const ImageWrapper = styled.View`
   height: ${({ height }) => height};
   width: 100%;
 `
 
-const TextWrapper = styled.View`
+const ContentWrapper = styled.View`
   padding: 8px;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 `
 
-const View = styled.View``
+const RelativeWrapper = styled.View`
+  width: 100%;
+`
+
+const AbsoluteWrapper = styled.View`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`
 
 export const FlatListItemSearch = (props: Props) => (
   <View>
-    <Wrapper index={props.index} height={300}>
-      <ImageWrapper source={{ uri: `${props.item.imageUrl}` }} />
-    </Wrapper>
-    <TextWrapper>
-      <Heading font="l" color="black">
-        {props.item.title}
-      </Heading>
-      <Heading font="xxs" color="black">
-        Price: £{props.item.price}
-      </Heading>
-      <Heading font="xxs" color="black">
-        Ending: {props.item.endTime}
-      </Heading>
-      <Heading font="xxs" color="black">
-        Postage: £{props.item.postage}
-      </Heading>
-    </TextWrapper>
+    <ImageWrapper index={props.index} height={300}>
+      <ImageSlider images={props.item.imageUrl} />
+    </ImageWrapper>
+    <ContentWrapper>
+      <RelativeWrapper>
+        <Heading font="m" color="black" marginBottom>
+          {props.item.title}
+        </Heading>
+        <Heading font="xxs" color="black">
+          Price: £{props.item.price}
+        </Heading>
+        <Heading font="xxs" color="black">
+          Ending: {props.item.endTime}
+        </Heading>
+        <Heading font="xxs" color="black">
+          Postage: £{props.item.postage}
+        </Heading>
+        <AbsoluteWrapper>
+          <Button title="View" />
+        </AbsoluteWrapper>
+      </RelativeWrapper>
+    </ContentWrapper>
   </View>
 )
 
