@@ -26,7 +26,7 @@ export const searchMachine = Machine({
         },
       },
       on: {
-        TIMER_COUNTDOWN_PASSED: 'dispatchingSearch',
+        TIMER_COUNTDOWN_PASSED: 'fetchingSearch',
         UPDATE_SEARCH: {
           searching: {
             actions: ['UPDATE_SEARCH'],
@@ -34,11 +34,13 @@ export const searchMachine = Machine({
         },
       },
     },
-    dispatchingSearch: {
-      onEntry: ['DISPATCHING_SEARCH', 'SHOW_LOADING'],
+    fetchingSearch: {
+      onEntry: ['FETCH_SEARCH', 'SHOW_LOADING'],
       on: {
-        SEARCH_SUCCESS: 'searching.searchReady',
-        SEARCH_FAILURE: 'searching.searchReady',
+        FETCH_SUCCESS: 'searching.searchReady',
+        FETCH_FAILURE: {
+          'searching.searchReady': { actions: ['SHOW_ERROR_MESSAGE'] },
+        },
       },
       onExit: ['HIDE_LOADING'],
     },

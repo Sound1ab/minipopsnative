@@ -1,6 +1,6 @@
 export { default as Discovery } from './Discovery'
 export { default as Profile } from './Profile'
 export { default as Search } from './Search'
-export { default as RelatedArtist } from './RelatedArtist'
+export { default as ArtistReleases } from './ArtistReleases'
 export { default as SignUp } from './SignUp'
 export { default as SignIn } from './SignIn'

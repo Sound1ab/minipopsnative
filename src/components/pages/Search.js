@@ -31,7 +31,7 @@ const Search = (props: PropTypes) => (
   <GrowContainer>
     <Spinner isVisible={props.loading} />
     <NavBar>
-      <Heading color="black" font="xl">
+      <Heading color="black" font="xl" marginBottom>
         Search
       </Heading>
       <SearchField api="current-items" />

@@ -7,7 +7,7 @@ export const initialState = {
   isSignedIn: false,
 }
 
-export function signIn(state = initialState, action) {
+export function login(state = initialState, action) {
   switch (action.type) {
     case '@@signIn/UPDATE_STATE':
       return {

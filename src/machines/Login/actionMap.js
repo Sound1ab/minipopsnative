@@ -45,7 +45,4 @@ export const actionMap = {
       actions.SIGN_IN_FAILURE(error)
     }
   },
-  SHOW_ERROR_MESSAGE({ dispatch, payload, actions }) {
-    console.warn('SHOW_ERROR_MESSAGE', payload)
-  },
 }

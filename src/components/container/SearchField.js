@@ -45,6 +45,7 @@ export class SearchField extends Component<PropTypes> {
           />
           <InputWrapper
             search
+            autoFocus
             handleChange={this.handleChange}
             placeholder="The Cure"
           />

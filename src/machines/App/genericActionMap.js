@@ -7,4 +7,7 @@ export const uiActionMap = {
   HIDE_LOADING({ dispatch }) {
     dispatch(updateLoading(false))
   },
+  SHOW_ERROR_MESSAGE({ payload }) {
+    console.error('SHOW_ERROR_MESSAGE', payload)
+  },
 }

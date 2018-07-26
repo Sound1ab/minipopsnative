@@ -1,25 +1,35 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+const ImageContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+  ${({ height }) =>
+    height &&
+    css`
+      height: ${height};
+    `} ${({ width }) =>
+    width &&
+    css`
+      width: ${width};
+    `};
+`
 
 const Image = styled.Image`
   flex: 1;
 `
 
-const ImageContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
-`
-
 type Props = {
+  width: ?number,
+  height: ?number,
   source: Object,
-  height: number,
   borderRadius: number,
   resizeMode: string,
 }
 
 export const ImageWrapper = (props: Props) => (
-  <ImageContainer>
+  <ImageContainer width={props.width} height={props.height}>
     <Image
       source={props.source}
       resizeMode={props.resizeMode}
@@ -32,7 +42,8 @@ ImageWrapper.defaultProps = {
   source: {
     uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
   },
-  height: 300,
+  width: null,
+  height: null,
   borderRadius: 0,
   resizeMode: 'cover',
 }

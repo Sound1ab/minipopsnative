@@ -9,6 +9,7 @@ import {
   FlatListItemDiscovery,
   Heading,
   NavBar,
+  Spinner,
 } from '../presentational/atoms'
 
 type PropTypes = {
@@ -23,8 +24,9 @@ const MOCK_ITEM = {
 
 const Discovery = (props: PropTypes) => (
   <GrowContainer>
+    <Spinner isVisible={props.loading} />
     <NavBar>
-      <Heading color="black" font="xl">
+      <Heading color="black" font="xl" marginBottom>
         Discovery
       </Heading>
       <SearchField api="related-artists" />
@@ -46,7 +48,7 @@ const Discovery = (props: PropTypes) => (
           handlePress={spotifyId => {
             pushScreen({
               navigator: props.navigator,
-              screen: 'RelatedArtist',
+              screen: 'ArtistReleases',
               passProps: {
                 spotifyId,
               },
@@ -59,6 +61,7 @@ const Discovery = (props: PropTypes) => (
 )
 
 const mapStateToProps = state => ({
+  loading: state.app.loading,
   discoveryResults: state.search.discoveryResults,
 })
 
