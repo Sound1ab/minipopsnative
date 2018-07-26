@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { popScreen } from '../../navigation'
+import { popScreen, pushScreen } from '../../navigation'
 import { ScrollView } from 'react-native'
 import {
   GrowContainer,
@@ -32,7 +32,18 @@ export class ArtistReleases extends Component<PropTypes> {
           </Heading>
         </NavBar>
         <ScrollView>
-          <ImageGrid items={this.props.artistReleases[this.props.spotifyId]} />
+          <ImageGrid
+            handlePress={spotifyId => {
+              pushScreen({
+                navigator: this.props.navigator,
+                screen: 'ArtistRelease',
+                passProps: {
+                  spotifyId,
+                },
+              })
+            }}
+            items={this.props.artistReleases[this.props.spotifyId]}
+          />
         </ScrollView>
       </GrowContainer>
     )
