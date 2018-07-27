@@ -23,7 +23,7 @@ const Input = styled.TextInput`
   height: 32px;
   padding: ${({ search }) => (search ? '0 16px 0 40px' : '0 16px')};
   border: ${({ error }) => (error ? '2px' : '1px')} solid
-    ${({ error }) => (error ? colors.error : colors.primary)};
+    ${({ error }) => (error ? colors.error : colors.secondary)};
   border-radius: 25px;
   background-color: white;
   margin-bottom: ${({ marginBottom }) => (marginBottom ? '16px' : '0')};

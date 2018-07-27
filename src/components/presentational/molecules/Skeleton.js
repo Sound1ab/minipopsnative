@@ -21,6 +21,12 @@ export const Skeleton = (props: PropTypes) => (
     {Object.entries(props.layout).map(item => {
       const [key, prop] = item
       const Component = key === 'rect' ? Rect : Circle
+      if (prop.hasOwnProperty('borderRadius')) {
+        const borderRadius = prop.borderRadius
+        delete prop.borderRadius
+        prop.rx = borderRadius
+        prop.ry = borderRadius
+      }
       return <Component {...prop} />
     })}
   </SkeletonSvgGradient>
@@ -29,6 +35,6 @@ export const Skeleton = (props: PropTypes) => (
 Skeleton.defaultProps = {
   primaryColor: colors.primary,
   secondaryColor: colors.secondary,
-  height: 100,
+  height: 50,
   layout: {},
 }

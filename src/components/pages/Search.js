@@ -2,7 +2,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SearchField from '../../components/container/SearchField'
-import { Skeleton } from '../presentational/molecules'
 
 import {
   FlatListWrapper,
@@ -27,18 +26,6 @@ const Search = (props: PropTypes) => (
       </Heading>
       <SearchField api="current-items" />
     </NavBar>
-    <Skeleton
-      layout={{
-        rect: {
-          x: 0,
-          y: 0,
-          rx: 3,
-          ry: 3,
-          width: 70,
-          height: 10,
-        },
-      }}
-    />
     <FlatListWrapper
       data={props.searchResults}
       keyExtractor={(item, index) => `${item.title}-${index}`}
