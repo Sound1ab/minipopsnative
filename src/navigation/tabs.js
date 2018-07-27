@@ -4,11 +4,11 @@ import { MOCK_ARTIST_RELEASE } from '../store/mockData'
 export const startApp = () => {
   Navigation.startTabBasedApp({
     tabs: [
-      // {
-      //   label: 'ArtistRelease',
-      //   screen: 'ArtistRelease',
-      //   title: 'ArtistRelease',
-      // },
+      {
+        label: 'Favourites',
+        screen: 'Favourites',
+        title: 'Favourites',
+      },
       {
         label: 'Discovery',
         screen: 'Discovery',

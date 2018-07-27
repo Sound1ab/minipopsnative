@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const ImageContainer = styled.View`
-  flex: 1;
+  flex: ${({ fixedWidth }) => (fixedWidth ? 0 : 1)};
   flex-direction: row;
   ${({ height }) =>
     height &&
@@ -12,7 +12,7 @@ const ImageContainer = styled.View`
     `} ${({ width }) =>
     width &&
     css`
-      width: ${width};
+      flex-basis: ${width};
     `};
 `
 
@@ -26,10 +26,15 @@ type Props = {
   source: Object,
   borderRadius: number,
   resizeMode: string,
+  fixedWidth: Boolean,
 }
 
 export const ImageWrapper = (props: Props) => (
-  <ImageContainer width={props.width} height={props.height}>
+  <ImageContainer
+    width={props.width}
+    height={props.height}
+    fixedWidth={props.fixedWidth}
+  >
     <Image
       source={{
         uri: props.source
@@ -48,4 +53,5 @@ ImageWrapper.defaultProps = {
   height: null,
   borderRadius: 0,
   resizeMode: 'cover',
+  fixedWidth: false,
 }
