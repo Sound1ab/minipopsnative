@@ -25,10 +25,10 @@ const Section = styled.View`
 export const SignInForm = (props: PropTypes) => (
   <Wrapper>
     <Section>
-      <Heading font="xl" color={colors.black}>
+      <Heading size="xl" color={colors.black}>
         Welcome
       </Heading>
-      <Heading font="l" color={colors.gray}>
+      <Heading size="l" color={colors.gray}>
         Sign in to continue
       </Heading>
     </Section>
@@ -52,7 +52,7 @@ export const SignInForm = (props: PropTypes) => (
       />
     </Section>
     <TouchableOpacity onPress={props.handleSubmit}>
-      <Heading font="l" color={colors.primary}>
+      <Heading size="l" color={colors.primary}>
         Sign In
       </Heading>
     </TouchableOpacity>

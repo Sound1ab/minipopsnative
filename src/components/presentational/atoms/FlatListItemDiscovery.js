@@ -10,7 +10,7 @@ type Props = {
   item: Object,
   separators: Object,
   height: number,
-  handlePress: Function,
+  handlePushArtistReleases: Function,
 }
 
 const Wrapper = styled.TouchableOpacity`
@@ -46,16 +46,16 @@ export const FlatListItemDiscovery = (props: Props) => (
   <Wrapper
     index={props.index}
     height={300}
-    onPress={props.handlePress.bind(null, props.item.spotifyId)}
+    onPress={props.handlePushArtistReleases.bind(null, props.item)}
   >
     <RelativeWrapper>
-      <ImageWrapper source={{ uri: `${props.item.imageUrl}` }} />
+      <ImageWrapper source={props.item.imageUrl} />
       <LinearGradient
         colors={['rgba(0,0,0,0.5)', 'rgba(0, 0, 0,0)']}
         style={styles.linearGradient}
       />
       <TextWrapper position={{ top: 0 }}>
-        <Heading font="m">{props.item.title}</Heading>
+        <Heading size="m">{props.item.title}</Heading>
       </TextWrapper>
     </RelativeWrapper>
   </Wrapper>
@@ -63,5 +63,5 @@ export const FlatListItemDiscovery = (props: Props) => (
 
 FlatListItemDiscovery.defaultProps = {
   height: 300,
-  handlePress: () => {},
+  handlePushArtistReleases: () => {},
 }

@@ -31,7 +31,11 @@ type Props = {
 export const ImageWrapper = (props: Props) => (
   <ImageContainer width={props.width} height={props.height}>
     <Image
-      source={props.source}
+      source={{
+        uri: props.source
+          ? props.source
+          : 'https://facebook.github.io/react-native/docs/assets/favicon.png',
+      }}
       resizeMode={props.resizeMode}
       borderRadius={props.borderRadius}
     />
@@ -39,9 +43,7 @@ export const ImageWrapper = (props: Props) => (
 )
 
 ImageWrapper.defaultProps = {
-  source: {
-    uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
-  },
+  source: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
   width: null,
   height: null,
   borderRadius: 0,

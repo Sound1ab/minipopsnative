@@ -8,7 +8,7 @@ export const pushScreen = ({ navigator, screen, passProps }) => {
 }
 
 export const popScreen = navigator => {
-  navigator.popToRoot({
+  navigator.pop({
     animated: true,
     animationType: 'slide-horizontal',
   })

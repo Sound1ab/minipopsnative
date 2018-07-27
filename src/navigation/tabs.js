@@ -1,17 +1,23 @@
 import { Navigation } from 'react-native-navigation'
+import { MOCK_ARTIST_RELEASE } from '../store/mockData'
 
 export const startApp = () => {
   Navigation.startTabBasedApp({
     tabs: [
-      {
-        label: 'Search',
-        screen: 'Search',
-        title: 'Search',
-      },
+      // {
+      //   label: 'ArtistRelease',
+      //   screen: 'ArtistRelease',
+      //   title: 'ArtistRelease',
+      // },
       {
         label: 'Discovery',
         screen: 'Discovery',
         title: 'Discovery',
+      },
+      {
+        label: 'Search',
+        screen: 'Search',
+        title: 'Search',
       },
       {
         label: 'Profile',
@@ -28,6 +34,7 @@ export const startApp = () => {
     appStyle: {
       navBarHidden: true,
     },
+    // passProps: MOCK_ARTIST_RELEASE,
   })
 }
 

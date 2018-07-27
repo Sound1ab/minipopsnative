@@ -1,10 +1,10 @@
 import { Machine } from 'xstate'
 
-const id = 'signIn'
+const id = 'login'
 
-export const signInMachine = Machine({
+export const machine = Machine({
   id,
-  initial: 'idle',
+  initial: 'idle.waitingForSignIn',
   strict: true,
   states: {
     idle: {

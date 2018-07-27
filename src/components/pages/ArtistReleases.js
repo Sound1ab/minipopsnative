@@ -1,66 +1,56 @@
 // @flow
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React from 'react'
 import { connect } from 'react-redux'
 import { popScreen, pushScreen } from '../../navigation'
 import { ScrollView } from 'react-native'
 import {
   GrowContainer,
-  NavBar,
   Heading,
+  NavBar,
   Spinner,
 } from '../presentational/atoms'
 import { ImageGrid } from '../presentational/molecules'
-import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Favourites/actions'
 
-type PropTypes = {}
+type PropTypes = {
+  title: String,
+  navigator: Object,
+  artistSpotifyId: String,
+  loading: Boolean,
+  artistReleases: Array<Object>,
+  handlePushArtistAlbum: Function,
+}
 
-export class ArtistReleases extends Component<PropTypes> {
-  static defaultProps = {}
+export function ArtistReleases(props: PropTypes) {
+  return (
+    <GrowContainer>
+      <Spinner isVisible={props.loading} />
+      <NavBar handleBack={popScreen.bind(null, props.navigator)}>
+        <Heading color="black" size="l">
+          {props.title}
+        </Heading>
+      </NavBar>
+      <ScrollView>
+        <ImageGrid
+          handlePress={props.handlePushArtistAlbum}
+          items={props.artistReleases}
+        />
+      </ScrollView>
+    </GrowContainer>
+  )
+}
 
-  componentDidMount() {
-    this.props.fetchArtistReleases(this.props.spotifyId)
-  }
-
-  render() {
-    return (
-      <GrowContainer>
-        <Spinner isVisible={this.props.loading} />
-        <NavBar handleBack={popScreen.bind(null, this.props.navigator)}>
-          <Heading color="black" font="l">
-            Artist Releases
-          </Heading>
-        </NavBar>
-        <ScrollView>
-          <ImageGrid
-            handlePress={spotifyId => {
-              pushScreen({
-                navigator: this.props.navigator,
-                screen: 'ArtistRelease',
-                passProps: {
-                  spotifyId,
-                },
-              })
-            }}
-            items={this.props.artistReleases[this.props.spotifyId]}
-          />
-        </ScrollView>
-      </GrowContainer>
-    )
-  }
+ArtistReleases.defaultProps = {
+  title: '',
+  navigator: {},
+  artistSpotifyId: '',
+  loading: false,
+  artistReleases: [],
+  handlePushArtistAlbum: () => {},
 }
 
 const mapStateToProps = state => ({
+  artistReleases: state.discovery.artistReleases,
   loading: state.app.loading,
-  artistReleases: state.favourites.artistReleases,
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchArtistReleases: spotifyId => {
-    dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_RELEASES(spotifyId))
-  },
-})
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ArtistReleases)
+export default connect(mapStateToProps)(ArtistReleases)

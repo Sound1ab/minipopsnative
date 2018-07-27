@@ -41,16 +41,16 @@ export const FlatListItemSearch = (props: Props) => (
     </ImageWrapper>
     <ContentWrapper>
       <RelativeWrapper>
-        <Heading font="m" color="black" marginBottom>
+        <Heading size="m" color="black" marginBottom>
           {props.item.title}
         </Heading>
-        <Heading font="xxs" color="black">
+        <Heading size="xxs" color="black">
           Price: £{props.item.price}
         </Heading>
-        <Heading font="xxs" color="black">
+        <Heading size="xxs" color="black">
           Ending: {props.item.endTime}
         </Heading>
-        <Heading font="xxs" color="black">
+        <Heading size="xxs" color="black">
           Postage: £{props.item.postage}
         </Heading>
         <AbsoluteWrapper>

@@ -14,14 +14,16 @@ export class Request {
       return e
     }
   }
-  static async post(url: string, data: {} = {}, headers: {} = {}) {
+  static async post(url: string, data: {} = {}) {
     try {
-      return await Axios.post(url, {
-        data: {
-          ...data,
-        },
-        ...headers,
-      })
+      return await Axios.post(url, data)
+    } catch (e) {
+      return e
+    }
+  }
+  static async delete(url: string, data: {} = {}) {
+    try {
+      return await Axios.delete(url, { data })
     } catch (e) {
       return e
     }

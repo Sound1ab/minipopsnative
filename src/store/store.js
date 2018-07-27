@@ -3,7 +3,7 @@ import { RXState } from '../store/middleware/rxstate'
 import { search } from '../machines/SearchField/reducers'
 import { signUp } from '../machines/SignUp/reducers'
 import { login } from '../machines/Login/reducers'
-import { favourites } from '../machines/Favourites/reducers'
+import { discovery } from '../machines/Discovery/reducers'
 import { app } from '../machines/App/reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -14,7 +14,7 @@ const store = createStore(
     search,
     signUp,
     login,
-    favourites,
+    discovery,
   }),
   composeEnhancers(applyMiddleware(RXState.createMiddleware())),
 )

@@ -16,29 +16,15 @@ type PropTypes = {
   searchResults: Array<Object>,
 }
 
-const MOCK_ITEM = {
-  imageUrls: [
-    'https://www.catster.com/wp-content/uploads/2017/12/A-gray-kitten-meowing.jpg',
-    'https://www.catster.com/wp-content/uploads/2017/12/A-gray-kitten-meowing.jpg',
-  ],
-  title: 'Test realu kldajsnm asdj flkasjd flkasjd fklasjd flkasdj fks',
-  endTime: 'slkdmlsmf',
-  price: '£5.67',
-  postage: '£5.76',
-}
-
 const Search = (props: PropTypes) => (
   <GrowContainer>
     <Spinner isVisible={props.loading} />
     <NavBar>
-      <Heading color="black" font="xl" marginBottom>
+      <Heading color="black" size="xl" marginBottom>
         Search
       </Heading>
       <SearchField api="current-items" />
     </NavBar>
-    {/*<FlatListItemSearch*/}
-    {/*item={MOCK_ITEM}*/}
-    {/*/>*/}
     <FlatListWrapper
       data={props.searchResults}
       keyExtractor={(item, index) => `${item.title}-${index}`}

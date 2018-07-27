@@ -1,6 +1,6 @@
 import { Machine } from 'xstate'
 
-const id = 'favourites'
+const id = 'discovery'
 
 export const machine = Machine({
   id,
@@ -10,8 +10,8 @@ export const machine = Machine({
     idle: {
       on: {
         FETCH_RELEASES: 'fetchingReleases',
-        FETCH_RELEASE: 'fetchingRelease',
-        FAVOURITE: 'addingFavourite',
+        FETCH_ALBUM: 'fetchingAlbum',
+        ADD_FAVOURITE: 'addingFavourite',
         REMOVE_FAVOURITE: 'removingFavourite',
       },
     },
@@ -23,8 +23,8 @@ export const machine = Machine({
       },
       onExit: ['HIDE_LOADING'],
     },
-    fetchingRelease: {
-      onEntry: ['FETCH_RELEASE', 'SHOW_LOADING'],
+    fetchingAlbum: {
+      onEntry: ['FETCH_ALBUM', 'SHOW_LOADING'],
       on: {
         FETCH_SUCCESS: 'idle',
         FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },

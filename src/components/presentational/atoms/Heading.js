@@ -7,7 +7,7 @@ type Props = {
   font: string,
 }
 
-const styles = (font, color, marginBottom) => {
+const styles = (size, color, marginBottom) => {
   const style = StyleSheet.create({
     xl: {
       ...iOSUIKit.largeTitleEmphasizedObject,
@@ -44,16 +44,16 @@ const styles = (font, color, marginBottom) => {
       marginBottom: marginBottom ? 4 : 0,
     },
   })
-  return style[font]
+  return style[size]
 }
 export const Heading = (props: Props) => (
-  <Text style={styles(props.font, props.color, props.marginBottom)}>
+  <Text style={styles(props.size, props.color, props.marginBottom)}>
     {props.children}
   </Text>
 )
 
 Heading.defaultProps = {
-  font: 'body',
+  size: 's',
   color: 'white',
   marginBottom: false,
 }

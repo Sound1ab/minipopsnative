@@ -1,5 +1,6 @@
 // @flow
-import React from 'react'
+import React, { Component } from 'react'
+import { Functional } from '../../helpers/functional'
 import { connect } from 'react-redux'
 import SearchField from '../../components/container/SearchField'
 import { pushScreen } from '../../navigation'
@@ -11,58 +12,97 @@ import {
   NavBar,
   Spinner,
 } from '../presentational/atoms'
+import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 
 type PropTypes = {
   discoveryResults: Array<Object>,
 }
 
-const MOCK_ITEM = {
-  imageUrl:
-    'https://www.catster.com/wp-content/uploads/2017/12/A-gray-kitten-meowing.jpg',
-  title: 'Test realu kldajsnm asdj flkasjd flkasjd fklasjd flkasdj fks',
-}
-
-const Discovery = (props: PropTypes) => (
-  <GrowContainer>
-    <Spinner isVisible={props.loading} />
-    <NavBar>
-      <Heading color="black" font="xl" marginBottom>
-        Discovery
-      </Heading>
-      <SearchField api="related-artists" />
-    </NavBar>
-    {/*<FlatListItemDiscovery*/}
-    {/*{...props}*/}
-    {/*item={MOCK_ITEM}*/}
-    {/*/>*/}
-    {/*<FlatListItemDiscovery*/}
-    {/*{...props}*/}
-    {/*item={MOCK_ITEM}*/}
-    {/*/>*/}
-    <FlatListWrapper
-      data={props.discoveryResults}
-      keyExtractor={(item, index) => `${item.title}-${index}`}
-      renderItem={renderProps => (
-        <FlatListItemDiscovery
-          {...renderProps}
-          handlePress={spotifyId => {
-            pushScreen({
-              navigator: props.navigator,
-              screen: 'ArtistReleases',
-              passProps: {
-                spotifyId,
-              },
-            })
-          }}
+class Discovery extends Component<PropTypes> {
+  fetchArtistAlbum = item => {
+    this.props.fetchArtistAlbum({ spotifyId: item.spotifyId })
+    return item
+  }
+  handlePushArtistAlbum = ({ spotifyId, title }) => {
+    pushScreen({
+      navigator: this.props.navigator,
+      screen: 'ArtistAlbum',
+      passProps: {
+        albumSpotifyId: spotifyId,
+        title,
+        addToFavourites: this.props.addToFavourites,
+        removeFromFavourites: this.props.removeFromFavourites,
+      },
+    })
+  }
+  fetchArtistReleases = item => {
+    this.props.fetchArtistReleases({ spotifyId: item.spotifyId })
+    return item
+  }
+  handlePushArtistReleases = ({ spotifyId, title }) => {
+    pushScreen({
+      navigator: this.props.navigator,
+      screen: 'ArtistReleases',
+      passProps: {
+        artistSpotifyId: spotifyId,
+        title,
+        handlePushArtistAlbum: Functional.compose(
+          this.handlePushArtistAlbum,
+          this.fetchArtistAlbum,
+        ),
+      },
+    })
+  }
+  render() {
+    return (
+      <GrowContainer>
+        <Spinner isVisible={this.props.loading} />
+        <NavBar>
+          <Heading color="black" size="xl" marginBottom>
+            Discovery
+          </Heading>
+          <SearchField api="related-artists" />
+        </NavBar>
+        <FlatListWrapper
+          data={this.props.discoveryResults}
+          keyExtractor={(item, index) => `${item.title}-${index}`}
+          renderItem={renderProps => (
+            <FlatListItemDiscovery
+              {...renderProps}
+              handlePushArtistReleases={Functional.compose(
+                this.handlePushArtistReleases,
+                this.fetchArtistReleases,
+              )}
+            />
+          )}
         />
-      )}
-    />
-  </GrowContainer>
-)
+      </GrowContainer>
+    )
+  }
+}
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
   discoveryResults: state.search.discoveryResults,
+  artistReleases: state.discovery.artistReleases,
 })
 
-export default connect(mapStateToProps)(Discovery)
+const mapDispatchToProps = dispatch => ({
+  fetchArtistReleases: spotifyId => {
+    dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_RELEASES(spotifyId))
+  },
+  fetchArtistAlbum: payload => {
+    dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_ALBUM(payload))
+  },
+  addToFavourites: payload => {
+    dispatch(FAVOURITES_MACHINE_ACTIONS.ADD_FAVOURITE(payload))
+  },
+  removeFromFavourites: payload => {
+    dispatch(FAVOURITES_MACHINE_ACTIONS.REMOVE_FAVOURITE(payload))
+  },
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Discovery)

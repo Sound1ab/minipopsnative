@@ -1,15 +1,15 @@
 import { SAVE_COGNITO_USER_OBJECT, REMOVE_COGNITO_USER_OBJECT } from './actions'
-import { signInMachine } from './machine'
+import { machine } from './machine'
 
 export const initialState = {
-  state: signInMachine.initial,
+  state: machine.initial,
   cognitoUser: {},
   isSignedIn: false,
 }
 
 export function login(state = initialState, action) {
   switch (action.type) {
-    case '@@signIn/UPDATE_STATE':
+    case `@@${machine.id}/UPDATE_STATE`:
       return {
         ...state,
         state: action.payload,

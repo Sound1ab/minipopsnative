@@ -19,7 +19,7 @@ const Profile = (props: PropTypes) => (
   <GrowContainer>
     <Spinner isVisible={props.loading} />
     <NavBar>
-      <Heading color="black" font="xl">
+      <Heading color="black" size="xl">
         Profile
       </Heading>
     </NavBar>

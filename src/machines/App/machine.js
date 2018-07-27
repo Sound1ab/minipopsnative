@@ -23,20 +23,27 @@ export const appMachine = Machine({
       onEntry: ['CHECK_AUTHENTICATED_USER'],
       on: {
         AUTHENTICATED_SUCCESS: 'loadingApp',
-        // AUTHENTICATED_FAILURE: 'loadingLogin',
-        AUTHENTICATED_FAILURE: 'loadingApp',
+        AUTHENTICATED_FAILURE: 'loadingLogin',
+        // AUTHENTICATED_FAILURE: 'loadingApp',
       },
     },
     loadingApp: {
-      onEntry: ['REDIRECT_TO_APP'],
+      onEntry: ['REDIRECT_TO_APP', 'SAVE_COGNITO_USER_OBJECT'],
       on: {
-        LOAD_SUCCESSFUL: 'idle',
+        LOAD_SUCCESS: 'fetchingFavourites',
+      },
+    },
+    fetchingFavourites: {
+      onEntry: ['FETCHING_FAVOURITES'],
+      on: {
+        FETCH_SUCCESS: 'idle',
+        FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
       },
     },
     loadingLogin: {
       onEntry: ['REDIRECT_TO_LOGIN'],
       on: {
-        LOAD_SUCCESSFUL: 'idle',
+        LOAD_SUCCESS: 'idle',
       },
     },
   },

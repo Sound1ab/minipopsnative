@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from '../atoms'
+import { colors } from '../../../Theme'
 
 type Props = {
   handleBack: Function,
@@ -11,7 +12,7 @@ type Props = {
 const View = styled.View`
   flex: 0 0 auto;
   flex-direction: ${({ handleBack }) => (handleBack ? 'row' : 'column')};
-  padding: 40px 16px 24px 16px;
+  padding: 48px 16px 16px 16px;
   justify-content: flex-start;
   align-items: flex-start;
   background-color: white;
@@ -30,7 +31,7 @@ export const NavBar = (props: Props) => (
     {props.handleBack && (
       <TouchableOpacity onPress={props.handleBack}>
         <IconWrapper>
-          <Icon name="chevron-left" />
+          <Icon name="chevron-left" color={colors.primary} />
         </IconWrapper>
       </TouchableOpacity>
     )}

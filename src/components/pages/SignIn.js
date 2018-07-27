@@ -99,8 +99,8 @@ export class SignIn extends Component<PropTypes, StateTypes> {
 }
 
 const mapStateToProps = state => ({
-  signInState: state.signIn.state,
-  cognitoUser: state.signIn.cognitoUser,
+  signInState: state.login.state,
+  cognitoUser: state.login.cognitoUser,
 })
 
 const mapDispatchToProps = dispatch => ({

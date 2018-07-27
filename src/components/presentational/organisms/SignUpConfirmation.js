@@ -27,10 +27,10 @@ const Section = styled.View`
 export const SignUpConfirmation = (props: PropTypes) => (
   <Wrapper>
     <Section>
-      <Heading font="xl" color={colors.black}>
+      <Heading size="xl" color={colors.black}>
         Confirmation
       </Heading>
-      <Heading font="l" color={colors.gray}>
+      <Heading size="l" color={colors.gray}>
         Confirm using the code sent via sms
       </Heading>
     </Section>
@@ -45,7 +45,7 @@ export const SignUpConfirmation = (props: PropTypes) => (
       />
     </Section>
     <TouchableOpacity onPress={props.handleSubmit}>
-      <Heading font="l" color={colors.primary}>
+      <Heading size="l" color={colors.primary}>
         Confirm code
       </Heading>
     </TouchableOpacity>

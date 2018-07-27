@@ -7,14 +7,20 @@ const rXState = new RXState(machine, actionMap)
 export const FAVOURITES_MACHINE_ACTIONS = rXState.getActionCreators()
 
 export const SAVE_ARTIST_RELEASES = 'SAVE_ARTIST_RELEASES'
-export const SAVE_ARTIST_RELEASE = 'SAVE_ARTIST_RELEASES'
+export const SAVE_ARTIST_ALBUM = 'SAVE_ARTIST_ALBUM'
+export const SAVE_FAVOURITES = 'SAVE_FAVOURITES'
 
 export const saveArtistReleases = payload => ({
   type: SAVE_ARTIST_RELEASES,
   payload,
 })
 
-export const saveArtistRelease = payload => ({
-  type: SAVE_ARTIST_RELEASE,
+export const saveArtistAlbum = payload => ({
+  type: SAVE_ARTIST_ALBUM,
+  payload,
+})
+
+export const saveFavourites = payload => ({
+  type: SAVE_FAVOURITES,
   payload,
 })

@@ -10,7 +10,8 @@ export const actionMap = {
   async SIGN_IN({ payload, actions }) {
     try {
       const cognitoUser = await Auth.signIn(payload.username, payload.password)
-      actions.SIGN_IN_SUCCESS(cognitoUser)
+      const { id } = await Auth.currentUserInfo()
+      actions.SIGN_IN_SUCCESS({ id, ...cognitoUser })
     } catch (error) {
       actions.SIGN_IN_FAILURE(error)
     }

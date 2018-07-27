@@ -1,9 +1,9 @@
 // @flow
-import { signInMachine } from './machine'
+import { machine } from './machine'
 import { actionMap } from './actionMap'
 import { RXState } from '../../store/middleware/rxstate'
 
-const rXState = new RXState(signInMachine, actionMap)
+const rXState = new RXState(machine, actionMap)
 export const LOGIN_MACHINE_ACTIONS = rXState.getActionCreators()
 
 export const SAVE_COGNITO_USER_OBJECT = 'SAVE_COGNITO_USER_OBJECT'

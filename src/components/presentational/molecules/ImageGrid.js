@@ -32,10 +32,10 @@ export const ImageGrid = (props: PropTypes) => (
         {row.map(item => (
           <TouchableOpacity
             key={item.spotifyId}
-            onPress={props.handlePress.bind(null, item.spotifyId)}
+            onPress={props.handlePress.bind(null, item)}
           >
             <ImageWrapper
-              source={{ uri: item.imageUrl }}
+              source={item.imageUrl}
               height={Dimensions.get('window').width / 3}
               width={'33%'}
               handlePress={props.handlePress}
@@ -49,5 +49,5 @@ export const ImageGrid = (props: PropTypes) => (
 
 ImageGrid.defaultProps = {
   items: [],
-  handlePress: null,
+  handlePress: () => {},
 }

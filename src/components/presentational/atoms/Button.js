@@ -16,7 +16,7 @@ type PropTypes = {
 
 export const Button = (props: PropTypes) => (
   <TouchableOpacity onPress={props.handlePress}>
-    <Heading font="l" color="black" marginBottom={false}>
+    <Heading size="l" color="black" marginBottom={false}>
       {props.title}
     </Heading>
   </TouchableOpacity>

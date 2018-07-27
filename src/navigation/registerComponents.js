@@ -6,7 +6,7 @@ import { Search } from '../components/pages'
 import { Discovery } from '../components/pages'
 import { Profile } from '../components/pages'
 import { ArtistReleases } from '../components/pages'
-import { ArtistRelease } from '../components/pages'
+import { ArtistAlbum } from '../components/pages'
 import { SignIn } from '../components/pages'
 import { SignUp } from '../components/pages'
 
@@ -16,7 +16,7 @@ export const registerComponents = () => {
     ['Discovery', Discovery],
     ['Profile', Profile],
     ['ArtistReleases', ArtistReleases],
-    ['ArtistRelease', ArtistRelease],
+    ['ArtistAlbum', ArtistAlbum],
     ['SignIn', SignIn],
     ['SignUp', SignUp],
   ])
