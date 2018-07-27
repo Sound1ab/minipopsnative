@@ -1,15 +1,15 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { ScrollView } from 'react-native'
+import { SwipeListView } from 'react-native-swipe-list-view'
 import {
   GrowContainer,
   Heading,
-  FavouritesRow,
   Spinner,
   NavBar,
 } from '../presentational/atoms'
+import { FavouritesRow, FavouritesRowHidden } from '../presentational/molecules'
+import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 
 type PropTypes = {}
 
@@ -21,16 +21,31 @@ export const Favourites = (props: PropTypes) => (
         Favourites
       </Heading>
     </NavBar>
-    <ScrollView>
-      {props.favourites.map(favourite => (
+    <SwipeListView
+      useFlatList
+      disableRightSwipe
+      closeOnScroll
+      preview={false}
+      keyExtractor={item => item.spotifyId}
+      data={props.favourites}
+      renderItem={({ item, index }) => (
         <FavouritesRow
-          key={`${favourite.artist}-${favourite.album}`}
-          imageSource={favourite.imageUrl}
-          artist={favourite.artist}
-          album={favourite.album}
+          index={index}
+          key={`${item.artist}-${item.album}`}
+          {...item}
         />
-      ))}
-    </ScrollView>
+      )}
+      renderHiddenItem={({ item, index }, rowMap) => (
+        <FavouritesRowHidden
+          index={index}
+          rowMap={rowMap}
+          handlePress={props.removeFromFavourite}
+          id={props.id}
+          artistAlbum={item}
+        />
+      )}
+      rightOpenValue={-100}
+    />
   </GrowContainer>
 )
 
@@ -39,12 +54,16 @@ Favourites.defaultProps = {}
 const mapStateToProps = state => ({
   loading: state.app.loading,
   favourites: state.discovery.favourites,
+  id: state.login.cognitoUser.id,
 })
 
-// const mapDispatchToProps = dispatch => ({
-//   fetchArtistReleases: spotifyId => {
-//     dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_RELEASES(spotifyId))
-//   },
-// })
+const mapDispatchToProps = dispatch => ({
+  removeFromFavourite: payload => {
+    dispatch(FAVOURITES_MACHINE_ACTIONS.REMOVE_FAVOURITE(payload))
+  },
+})
 
-export default connect(mapStateToProps)(Favourites)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Favourites)

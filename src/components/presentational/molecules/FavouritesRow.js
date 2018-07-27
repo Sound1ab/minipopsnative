@@ -1,16 +1,14 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, ImageWrapper } from '../atoms'
-import { colors } from '../../../Theme'
+import { Heading, ImageWrapper } from '../atoms/index'
+import { colors } from '../../../Theme/index'
 
 const Wrapper = styled.View`
   flex-direction: row;
-  margin: 8px;
-  shadow-opacity: 0.2;
-  shadow-radius: 5px;
-  shadow-color: black;
-  shadow-offset: 0px 0px;
+  margin: ${({ index }) =>
+    parseInt(index) === parseInt(0) ? '8px' : '0 8px 8px 8px'};
+  background-color: white;
 `
 
 const TextWrapper = styled.View`
@@ -20,19 +18,15 @@ const TextWrapper = styled.View`
 `
 
 type PropTypes = {
-  imageSource: string,
+  imageUrl: string,
   artist: string,
   album: string,
+  index: number,
 }
 
 export const FavouritesRow = (props: PropTypes) => (
-  <Wrapper>
-    <ImageWrapper
-      height={100}
-      width={100}
-      source={props.imageSource}
-      fixedWidth
-    />
+  <Wrapper index={props.index}>
+    <ImageWrapper height={100} width={100} source={props.imageUrl} fixedWidth />
     <TextWrapper>
       <Heading color="black" size="l">
         {props.artist}
@@ -45,9 +39,10 @@ export const FavouritesRow = (props: PropTypes) => (
 )
 
 FavouritesRow.defaultProps = {
-  imageSource: '',
+  imageUrl: '',
   artist: '',
   album: '',
+  index: 0,
 }
 
 export default FavouritesRow
