@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 import { Heading, Icon } from '../atoms/index'
-import { colors } from '../../../Theme/index'
+import { colors, shadow } from '../../../Theme/index'
 import { Functional } from '../../../helpers/index'
 
 const Wrapper = styled.View`
@@ -11,11 +11,12 @@ const Wrapper = styled.View`
     parseInt(index) === parseInt(0) ? '8px' : '0 8px 8px 8px'};
   align-items: flex-end;
   height: 100;
-  background-color: white;
-  shadow-opacity: 0.2;
-  shadow-radius: 5px;
-  shadow-color: black;
-  shadow-offset: 0px 0px;
+  ${shadow.map(
+    ({ property, value }) =>
+      css`
+        ${property}: ${value};
+      `,
+  )};
   background-color: ${colors.primary};
 `
 

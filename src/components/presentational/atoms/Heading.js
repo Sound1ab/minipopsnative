@@ -4,6 +4,7 @@ import { Text, StyleSheet } from 'react-native'
 import { iOSUIKit, sanFranciscoWeights } from 'react-native-typography'
 
 type Props = {
+  numberOfLines: ?number,
   font: string,
 }
 
@@ -47,12 +48,16 @@ const styles = (size, color, marginBottom) => {
   return style[size]
 }
 export const Heading = (props: Props) => (
-  <Text style={styles(props.size, props.color, props.marginBottom)}>
+  <Text
+    numberOfLines={props.numberOfLines}
+    style={styles(props.size, props.color, props.marginBottom)}
+  >
     {props.children}
   </Text>
 )
 
 Heading.defaultProps = {
+  numberOfLines: 1,
   size: 's',
   color: 'white',
   marginBottom: false,

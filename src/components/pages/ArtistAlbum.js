@@ -56,7 +56,7 @@ export const ArtistAlbum = (props: PropTypes) => {
           )}
         />
         {props.artistAlbum.tracks.map((track, index) => (
-          <TrackRow key={track}>
+          <TrackRow key={track} index={index}>
             {`${index + 1}. `}
             {track}
           </TrackRow>

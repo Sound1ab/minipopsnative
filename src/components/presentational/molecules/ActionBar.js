@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from '../atoms'
-import { colors } from '../../../Theme'
+import { colors, shadow } from '../../../Theme'
 
 type PropTypes = {
   handleAddToFavourites: Function,
@@ -15,8 +15,13 @@ const Wrapper = styled.View`
   flex: 1;
   justify-content: flex-start;
   padding: 16px;
-  border-bottom-color: ${colors.gray};
-  border-bottom-width: 1px;
+  ${shadow.map(
+    ({ property, value }) =>
+      css`
+        ${property}: ${value};
+      `,
+  )};
+  background-color: white;
 `
 
 export const ActionBar = (props: PropTypes) => (

@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from '../atoms'
-import { colors } from '../../../Theme'
+import { colors, shadow } from '../../../Theme'
 
 type Props = {
   handleBack: Function,
@@ -16,10 +16,12 @@ const View = styled.View`
   justify-content: flex-start;
   align-items: flex-start;
   background-color: white;
-  shadow-opacity: 0.2;
-  shadow-radius: 5px;
-  shadow-color: black;
-  shadow-offset: 0px 0px;
+  ${shadow.map(
+    ({ property, value }) =>
+      css`
+        ${property}: ${value};
+      `,
+  )};
 `
 
 const IconWrapper = styled.View`

@@ -1,25 +1,36 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Heading } from '../atoms'
-import { colors } from '../../../Theme'
+import { colors, shadow } from '../../../Theme'
 
-type PropTypes = {}
+type PropTypes = {
+  index: number,
+}
 
 const Wrapper = styled.View`
   flex: 1;
   justify-content: flex-start;
-  border-bottom-color: ${colors.gray};
-  border-bottom-width: 1px;
-  padding: 8px 16px;
+  margin: ${({ index }) =>
+    parseInt(index) === parseInt(0) ? '8px 8px 4px 8px' : '0 8px 4px 8px'};
+  padding: 16px;
+  background-color: white;
+  ${shadow.map(
+    ({ property, value }) =>
+      css`
+        ${property}: ${value};
+      `,
+  )};
 `
 
 export const TrackRow = (props: PropTypes) => (
-  <Wrapper>
+  <Wrapper index={props.index}>
     <Heading size="s" color="black">
       {props.children}
     </Heading>
   </Wrapper>
 )
 
-TrackRow.defaultProps = {}
+TrackRow.defaultProps = {
+  index: 0,
+}
