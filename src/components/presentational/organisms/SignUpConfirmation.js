@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 import { InputWrapper, Heading } from '../../presentational/atoms'
-import { colors } from '../../../Theme'
+import { colors } from '../../../theme'
 
 type PropTypes = {
   code: string,

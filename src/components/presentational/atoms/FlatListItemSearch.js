@@ -18,7 +18,7 @@ const ImageWrapper = styled.View`
 `
 
 const ContentWrapper = styled.View`
-  padding: 8px;
+  padding: 16px;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;

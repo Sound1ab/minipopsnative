@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from '../atoms'
-import { colors, shadow } from '../../../Theme'
+import { colors, shadow } from '../../../theme'
 
 type PropTypes = {
   handleAddToFavourites: Function,

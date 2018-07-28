@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { iOSColors } from 'react-native-typography'
-import { colors } from '../../../Theme'
+import { colors } from '../../../theme'
 
 type Props = {
   placeholder: string,

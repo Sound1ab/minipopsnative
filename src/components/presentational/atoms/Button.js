@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Heading } from '../atoms'
-import { colors } from '../../../Theme'
+import { colors } from '../../../theme'
 
 const TouchableOpacity = styled.TouchableOpacity`
   border: 1px solid ${colors.black}

@@ -2,7 +2,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Heading } from '../atoms'
-import { colors, shadow } from '../../../Theme'
+import { colors, shadow } from '../../../theme'
 
 type PropTypes = {
   index: number,

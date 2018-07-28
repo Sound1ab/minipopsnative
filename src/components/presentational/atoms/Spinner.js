@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import SpinKit from 'react-native-spinkit'
-import { colors } from '../../../Theme'
+import { colors } from '../../../theme'
 
 type PropTypes = {
   isVisible: Boolean,

@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 import { Heading, Icon } from '../atoms/index'
-import { colors, shadow } from '../../../Theme/index'
+import { colors, shadow } from '../../../theme/index'
 import { Functional } from '../../../helpers/index'
 
 const Wrapper = styled.View`

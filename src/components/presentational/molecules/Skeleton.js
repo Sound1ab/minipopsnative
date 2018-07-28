@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { SkeletonSvgGradient } from '../molecules'
 import { Circle, Rect } from 'react-native-svg'
-import { colors } from '../../../Theme/colors'
+import { colors } from '../../../theme/colors'
 
 type PropTypes = {
   primaryColor: String,

@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Heading, ImageWrapper } from '../atoms/index'
-import { colors } from '../../../Theme/index'
+import { colors } from '../../../theme/index'
 
 const Wrapper = styled.View`
   flex-direction: row;
