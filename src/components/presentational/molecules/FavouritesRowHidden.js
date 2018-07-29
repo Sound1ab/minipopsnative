@@ -48,7 +48,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
   >
     <Wrapper index={props.index}>
       <TextWrapper>
-        <Icon name="trash" color="white" />
+        <Icon name="ios-trash" color="white" />
       </TextWrapper>
     </Wrapper>
   </TouchableOpacity>

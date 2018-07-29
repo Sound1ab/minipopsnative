@@ -37,6 +37,7 @@ export class SearchField extends Component<PropTypes> {
       <Wrapper>
         <RelativeWrapper>
           <Icon
+            name="ios-search"
             position="absolute"
             top="5px"
             left="16px"

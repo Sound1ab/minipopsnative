@@ -34,9 +34,9 @@ export const ActionBar = (props: PropTypes) => (
       }
     >
       {props.isFavourite ? (
-        <Icon name="heart" color={colors.primary} />
+        <Icon name="ios-heart" color={colors.primary} />
       ) : (
-        <Icon name="heart-o" color={colors.primary} />
+        <Icon name="ios-heart-outline" color={colors.primary} />
       )}
     </TouchableOpacity>
   </Wrapper>

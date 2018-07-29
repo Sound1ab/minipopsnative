@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import VectorIcon from 'react-native-vector-icons/FontAwesome'
+import VectorIcon from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components'
 
 type Props = {
@@ -36,7 +36,7 @@ export const Icon = (props: Props) => (
 )
 
 Icon.defaultProps = {
-  name: 'search',
+  name: '',
   size: 30,
   color: 'black',
   position: 'relative',
