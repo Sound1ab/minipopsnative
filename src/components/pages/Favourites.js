@@ -25,6 +25,7 @@ export const Favourites = (props: PropTypes) => (
       useFlatList
       disableRightSwipe
       closeOnScroll
+      recalculateHiddenLayout
       preview={false}
       keyExtractor={item => item.spotifyId}
       data={props.favourites}
@@ -37,6 +38,7 @@ export const Favourites = (props: PropTypes) => (
       )}
       renderHiddenItem={({ item, index }, rowMap) => (
         <FavouritesRowHidden
+          key={`${item.artist}-${item.album}`}
           index={index}
           rowMap={rowMap}
           handlePress={props.removeFromFavourite}
