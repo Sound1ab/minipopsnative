@@ -4982,8 +4982,8 @@ react-native-linear-gradient@^2.4.0:
     prop-types "^15.5.10"
 
 react-native-navigation@^1.1.471:
-  version "1.1.473"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.473.tgz#f0f8c6d9d2c88b120bab1d20b73860f3a0c3c92f"
+  version "1.1.478"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.478.tgz#70430c60cafb36f306f8a9558092bdd854cc6d17"
   dependencies:
     lodash "4.x.x"
 
