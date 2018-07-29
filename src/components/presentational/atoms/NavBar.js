@@ -33,7 +33,7 @@ export const NavBar = (props: Props) => (
     {props.handleBack && (
       <TouchableOpacity onPress={props.handleBack}>
         <IconWrapper>
-          <Icon name="chevron-left" color={colors.primary} />
+          <Icon name="ios-arrow-back" top="-2" color={colors.primary} />
         </IconWrapper>
       </TouchableOpacity>
     )}

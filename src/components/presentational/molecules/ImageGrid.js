@@ -31,6 +31,7 @@ export const ImageGrid = (props: PropTypes) => (
       <RowWrapper key={index}>
         {row.map(item => (
           <TouchableOpacity
+            activeOpacity={1}
             key={item.spotifyId}
             onPress={props.handlePress.bind(null, item)}
           >

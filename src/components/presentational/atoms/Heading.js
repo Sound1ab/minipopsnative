@@ -2,6 +2,7 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 import { iOSUIKit, sanFranciscoWeights } from 'react-native-typography'
+import { colors } from '../../../theme'
 
 type Props = {
   numberOfLines: ?number,
@@ -14,7 +15,7 @@ const styles = (size, color, marginBottom) => {
       ...iOSUIKit.largeTitleEmphasizedObject,
       ...sanFranciscoWeights.thin,
       marginBottom: marginBottom ? 8 : 0,
-      color,
+      color: colors.primary,
     },
     l: {
       ...iOSUIKit.title3Object,

@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
 
 export const FlatListItemDiscovery = (props: Props) => (
   <Wrapper
+    activeOpacity={1}
     index={props.index}
     height={300}
     onPress={props.handlePushArtistReleases.bind(null, props.item)}
