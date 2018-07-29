@@ -13,7 +13,7 @@ const Wrapper = styled.View`
 `
 
 const ContentWrapper = styled.View`
-  height: 70;
+  height: 60;
   width: ${Dimensions.get('window').width};
   padding: 16px;
 `
@@ -54,8 +54,8 @@ export const ArtistAlbumSkeleton = (props: PropTypes) => (
             type: 'rect',
             x: 0,
             y: 0,
-            height: 40,
-            width: 40,
+            height: 30,
+            width: 30,
           },
         }}
       />

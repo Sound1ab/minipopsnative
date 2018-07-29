@@ -14,13 +14,7 @@ type PropTypes = {
 const Wrapper = styled.View`
   flex: 1;
   justify-content: flex-start;
-  padding: 16px;
-  ${shadow.map(
-    ({ property, value }) =>
-      css`
-        ${property}: ${value};
-      `,
-  )};
+  padding: 16px 16px 0 16px;
   background-color: white;
 `
 

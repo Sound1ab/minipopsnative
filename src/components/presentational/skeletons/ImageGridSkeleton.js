@@ -33,7 +33,7 @@ type PropTypes = {
 
 export const ImageGridSkeleton = (props: PropTypes) => (
   <GrowContainer>
-    {Array(3)
+    {Array(7)
       .fill(1, 0)
       .map((v, i) => (
         <Wrapper key={`${v}-${i}`} index={i}>
