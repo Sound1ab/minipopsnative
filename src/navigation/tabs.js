@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation'
-import { MOCK_ARTIST_RELEASE } from '../store/mockData'
+import { MOCK_ARTIST_ALBUM } from '../store/mockData'
 import { prepareIcons } from '../helpers'
 
 export const startApp = async () => {
@@ -7,6 +7,10 @@ export const startApp = async () => {
 
   Navigation.startTabBasedApp({
     tabs: [
+      // {
+      //   screen: 'ArtistAlbum',
+      //   title: 'ArtistAlbum',
+      // },
       {
         screen: 'Favourites',
         title: 'Favourites',
@@ -56,13 +60,15 @@ export const startApp = async () => {
     tabsStyle: {
       tabBarButtonColor: '#ff6f72',
       tabBarSelectedButtonColor: '#e24347',
-      initialTabIndex: 2,
+      initialTabIndex: 0,
       tabBarTranslucent: true,
     },
     appStyle: {
       navBarHidden: true,
     },
-    // passProps: MOCK_ARTIST_RELEASE,
+    // passProps: {
+    //   artistAlbum: MOCK_ARTIST_ALBUM
+    // },
   })
 }
 
@@ -88,7 +94,7 @@ export const startLogin = () => {
       tabBarButtonColor: '#ff6f72',
       tabBarSelectedButtonColor: '#e24347',
       tabBarBackgroundColor: '#ffffff',
-      initialTabIndex: 0,
+      initialTabIndex: 2,
     },
     appStyle: {
       navBarHidden: true,

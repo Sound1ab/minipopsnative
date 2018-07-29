@@ -9,32 +9,35 @@ type PropTypes = {
   primaryColor: String,
   secondaryColor: String,
   height: Number,
+  width: Number,
   layout: Object,
 }
 
 export const Skeleton = (props: PropTypes) => (
   <SkeletonSvgGradient
     primaryColor={props.primaryColor}
-    secondaryColor={props.secondaryColor}
     height={props.height}
+    width={props.width}
   >
-    {Object.entries(props.layout).map(item => {
-      const [key, prop] = item
-      const Component = key === 'rect' ? Rect : Circle
-      if (prop.hasOwnProperty('borderRadius')) {
-        const borderRadius = prop.borderRadius
-        delete prop.borderRadius
-        prop.rx = borderRadius
-        prop.ry = borderRadius
+    {Object.values(props.layout).map((value, index) => {
+      const { type, ...props } = value
+      const Component =
+        (type === 'rect' && Rect) || (type === 'circle' && Circle)
+      if (props.hasOwnProperty('borderRadius')) {
+        const borderRadius = props.borderRadius
+        delete props.borderRadius
+        props.rx = borderRadius
+        props.ry = borderRadius
       }
-      return <Component {...prop} />
+      return <Component key={`${type}-${index}`} {...props} />
     })}
   </SkeletonSvgGradient>
 )
 
 Skeleton.defaultProps = {
-  primaryColor: colors.primary,
+  primaryColor: colors.gray,
   secondaryColor: colors.secondary,
   height: 50,
+  width: 50,
   layout: {},
 }

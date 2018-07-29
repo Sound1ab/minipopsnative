@@ -4,7 +4,7 @@ export const colors = {
   primary: '#e24347',
   secondary: '#e2aead',
   black: iOSColors.black,
-  gray: iOSColors.gray,
-  lightGray: '#f9f9f9',
+  gray: '#cccccc',
+  lightGray: '#f5f5f5',
   error: '#ff0006',
 }

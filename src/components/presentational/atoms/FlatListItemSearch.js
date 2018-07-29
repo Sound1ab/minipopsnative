@@ -2,7 +2,7 @@
 import React from 'react'
 import { Heading, Button } from '../atoms'
 import { ImageSlider } from '../molecules'
-import { View } from 'react-native'
+import { View, Dimensions } from 'react-native'
 import styled from 'styled-components'
 
 type Props = {
@@ -36,7 +36,7 @@ const AbsoluteWrapper = styled.View`
 
 export const FlatListItemSearch = (props: Props) => (
   <View>
-    <ImageWrapper index={props.index} height={300}>
+    <ImageWrapper index={props.index} height={Dimensions.get('window').width}>
       <ImageSlider images={props.item.imageUrl} />
     </ImageWrapper>
     <ContentWrapper>
@@ -44,10 +44,10 @@ export const FlatListItemSearch = (props: Props) => (
         <Heading size="m" color="black" marginBottom>
           {props.item.title}
         </Heading>
-        <Heading size="xxs" color="black">
+        <Heading size="xxs" color="black" marginBottom>
           Price: £{props.item.price}
         </Heading>
-        <Heading size="xxs" color="black">
+        <Heading size="xxs" color="black" marginBottom>
           Ending: {props.item.endTime}
         </Heading>
         <Heading size="xxs" color="black">

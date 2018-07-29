@@ -26,7 +26,7 @@ const styles = (size, color, marginBottom) => {
     m: {
       ...iOSUIKit.bodyObject,
       ...sanFranciscoWeights.thin,
-      marginBottom: marginBottom ? 4 : 0,
+      marginBottom: marginBottom ? 8 : 0,
       color,
     },
     s: {

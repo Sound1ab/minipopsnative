@@ -21,6 +21,7 @@ export class SkeletonSvgGradient extends Component {
       offsets: ['0', '0', '0'],
       frequence: props.duration / 2,
     }
+    this._mounted = false
     this._animate = new Animated.Value(0)
     this.loopAnimation = this.loopAnimation.bind(this)
   }
@@ -34,7 +35,12 @@ export class SkeletonSvgGradient extends Component {
     return x
   }
   componentDidMount(props) {
+    this._mounted = true
     this.loopAnimation()
+  }
+
+  componentWillUnmount() {
+    this._mounted = false
   }
 
   loopAnimation() {
@@ -57,7 +63,7 @@ export class SkeletonSvgGradient extends Component {
       offsetValues[0] = this.offsetValueBound(newState.offsetValues[0])
       offsetValues[1] = this.offsetValueBound(newState.offsetValues[1])
       offsetValues[2] = this.offsetValueBound(newState.offsetValues[2])
-      this.setState({ offsets: offsetValues })
+      this._mounted && this.setState({ offsets: offsetValues })
       if (t < 1) {
         requestAnimationFrame(this._animation)
       }

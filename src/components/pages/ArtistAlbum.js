@@ -11,6 +11,10 @@ import {
 import { ActionBar, TrackRow } from '../presentational/molecules'
 import { popScreen } from '../../navigation'
 import { Dimensions, ScrollView } from 'react-native'
+import {
+  ArtistAlbumSkeleton,
+  HeadingSkeleton,
+} from '../presentational/skeletons'
 
 type PropTypes = {
   artistAlbum: {
@@ -33,35 +37,43 @@ export const ArtistAlbum = (props: PropTypes) => {
     <GrowContainer>
       <Spinner isVisible={props.loading} />
       <NavBar handleBack={popScreen.bind(null, props.navigator)}>
-        <Heading color="black" size="l">
-          {props.artistAlbum.album}
-        </Heading>
+        {props.loading && props.state === 'fetchingAlbum' ? (
+          <HeadingSkeleton />
+        ) : (
+          <Heading color="black" size="l">
+            {props.artistAlbum.album}
+          </Heading>
+        )}
       </NavBar>
-      <ScrollView>
-        <ImageWrapper
-          source={props.artistAlbum.imageUrl}
-          height={Dimensions.get('window').width}
-        />
-        <ActionBar
-          handleAddToFavourites={props.addToFavourites.bind(null, {
-            id: props.id,
-            item: props.artistAlbum,
-          })}
-          handleRemoveFromFavourites={props.removeFromFavourites.bind(null, {
-            id: props.id,
-            item: props.artistAlbum,
-          })}
-          isFavourite={props.favourites.find(
-            favourite => favourite.spotifyId === props.albumSpotifyId,
-          )}
-        />
-        {props.artistAlbum.tracks.map((track, index) => (
-          <TrackRow key={track} index={index}>
-            {`${index + 1}. `}
-            {track}
-          </TrackRow>
-        ))}
-      </ScrollView>
+      {props.loading && props.state === 'fetchingAlbum' ? (
+        <ArtistAlbumSkeleton />
+      ) : (
+        <ScrollView>
+          <ImageWrapper
+            source={props.artistAlbum.imageUrl}
+            height={Dimensions.get('window').width}
+          />
+          <ActionBar
+            handleAddToFavourites={props.addToFavourites.bind(null, {
+              id: props.id,
+              item: props.artistAlbum,
+            })}
+            handleRemoveFromFavourites={props.removeFromFavourites.bind(null, {
+              id: props.id,
+              item: props.artistAlbum,
+            })}
+            isFavourite={props.favourites.find(
+              favourite => favourite.spotifyId === props.albumSpotifyId,
+            )}
+          />
+          {props.artistAlbum.tracks.map((track, index) => (
+            <TrackRow key={track} index={index}>
+              {`${index + 1}. `}
+              {track}
+            </TrackRow>
+          ))}
+        </ScrollView>
+      )}
     </GrowContainer>
   )
 }
@@ -87,6 +99,7 @@ const mapStateToProps = state => ({
   favourites: state.discovery.favourites,
   id: state.login.cognitoUser.id,
   loading: state.app.loading,
+  state: state.discovery.state,
 })
 
 export default connect(mapStateToProps)(ArtistAlbum)

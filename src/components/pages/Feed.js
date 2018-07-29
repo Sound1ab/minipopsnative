@@ -9,6 +9,7 @@ import {
   FlatListWrapper,
   FlatListItemSearch,
 } from '../presentational/atoms'
+import { FeedListSkeleton } from '../presentational/skeletons'
 
 import { FEED_MACHINE_ACTIONS } from '../../machines/Feed/actions'
 
@@ -33,11 +34,15 @@ export class Feed extends Component<PropTypes> {
             Feed
           </Heading>
         </NavBar>
-        <FlatListWrapper
-          data={this.props.feed}
-          keyExtractor={(item, index) => `${item.title}-${index}`}
-          renderItem={FlatListItemSearch}
-        />
+        {this.props.loading && this.props.state === 'fetchingFeed' ? (
+          <FeedListSkeleton />
+        ) : (
+          <FlatListWrapper
+            data={this.props.feed}
+            keyExtractor={(item, index) => `${item.title}-${index}`}
+            renderItem={FlatListItemSearch}
+          />
+        )}
       </GrowContainer>
     )
   }
@@ -47,6 +52,7 @@ const mapStateToProps = state => ({
   loading: state.app.loading,
   id: state.login.cognitoUser.id,
   feed: state.feed.feed,
+  state: state.feed.state,
 })
 
 const mapDispatchToProps = dispatch => ({

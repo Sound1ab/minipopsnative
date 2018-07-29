@@ -10,6 +10,7 @@ import {
   Spinner,
 } from '../presentational/atoms'
 import { ImageGrid } from '../presentational/molecules'
+import { ImageGridSkeleton } from '../presentational/skeletons'
 
 type PropTypes = {
   title: String,
@@ -30,10 +31,14 @@ export function ArtistReleases(props: PropTypes) {
         </Heading>
       </NavBar>
       <ScrollView>
-        <ImageGrid
-          handlePress={props.handlePushArtistAlbum}
-          items={props.artistReleases}
-        />
+        {props.loading && props.state === 'fetchingReleases' ? (
+          <ImageGridSkeleton />
+        ) : (
+          <ImageGrid
+            handlePress={props.handlePushArtistAlbum}
+            items={props.artistReleases}
+          />
+        )}
       </ScrollView>
     </GrowContainer>
   )
@@ -51,6 +56,7 @@ ArtistReleases.defaultProps = {
 const mapStateToProps = state => ({
   artistReleases: state.discovery.artistReleases,
   loading: state.app.loading,
+  state: state.discovery.state,
 })
 
 export default connect(mapStateToProps)(ArtistReleases)

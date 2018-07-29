@@ -9,6 +9,7 @@ import {
   NavBar,
 } from '../presentational/atoms'
 import { FavouritesRow, FavouritesRowHidden } from '../presentational/molecules'
+import { FavouritesListSkeleton } from '../presentational/skeletons'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 
 type PropTypes = {}
@@ -21,33 +22,37 @@ export const Favourites = (props: PropTypes) => (
         Favourites
       </Heading>
     </NavBar>
-    <SwipeListView
-      useFlatList
-      disableRightSwipe
-      closeOnScroll
-      recalculateHiddenLayout
-      preview={false}
-      keyExtractor={item => item.spotifyId}
-      data={props.favourites}
-      renderItem={({ item, index }) => (
-        <FavouritesRow
-          index={index}
-          key={`${item.artist}-${item.album}`}
-          {...item}
-        />
-      )}
-      renderHiddenItem={({ item, index }, rowMap) => (
-        <FavouritesRowHidden
-          key={`${item.artist}-${item.album}`}
-          index={index}
-          rowMap={rowMap}
-          handlePress={props.removeFromFavourite}
-          id={props.id}
-          artistAlbum={item}
-        />
-      )}
-      rightOpenValue={-100}
-    />
+    {props.loading && props.state === 'fetchingFavourites' ? (
+      <FavouritesListSkeleton />
+    ) : (
+      <SwipeListView
+        useFlatList
+        disableRightSwipe
+        closeOnScroll
+        recalculateHiddenLayout
+        preview={false}
+        keyExtractor={item => item.spotifyId}
+        data={props.favourites}
+        renderItem={({ item, index }) => (
+          <FavouritesRow
+            index={index}
+            key={`${item.artist}-${item.album}`}
+            {...item}
+          />
+        )}
+        renderHiddenItem={({ item, index }, rowMap) => (
+          <FavouritesRowHidden
+            key={`${item.artist}-${item.album}`}
+            index={index}
+            rowMap={rowMap}
+            handlePress={props.removeFromFavourite}
+            id={props.id}
+            artistAlbum={item}
+          />
+        )}
+        rightOpenValue={-100}
+      />
+    )}
   </GrowContainer>
 )
 
@@ -57,6 +62,7 @@ const mapStateToProps = state => ({
   loading: state.app.loading,
   favourites: state.discovery.favourites,
   id: state.login.cognitoUser.id,
+  state: state.app.state,
 })
 
 const mapDispatchToProps = dispatch => ({
