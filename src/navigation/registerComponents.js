@@ -10,6 +10,7 @@ import { ArtistAlbum } from '../components/pages'
 import { SignIn } from '../components/pages'
 import { SignUp } from '../components/pages'
 import { Favourites } from '../components/pages'
+import { Feed } from '../components/pages'
 
 export const registerComponents = () => {
   const register = new Map([
@@ -21,6 +22,7 @@ export const registerComponents = () => {
     ['SignIn', SignIn],
     ['SignUp', SignUp],
     ['Favourites', Favourites],
+    ['Feed', Feed],
   ])
   register.forEach((Component, key) => {
     Navigation.registerComponent(key, () => Component, store, Provider)

@@ -2,6 +2,7 @@ import { Request } from '../../services'
 import { API } from '../../services'
 import { saveArtistReleases, saveArtistAlbum, saveFavourites } from './actions'
 import { uiActionMap } from '../App/genericActionMap'
+import { saveFeed } from '../Feed/actions'
 
 export const actionMap = {
   ...uiActionMap,
@@ -34,7 +35,7 @@ export const actionMap = {
         item: payload.item,
       })
       dispatch(saveFavourites(favourites.data))
-      actions.FAVOURITE_SUCCESS()
+      actions.FAVOURITE_SUCCESS({ id: payload.id })
     } catch (error) {
       actions.FAVOURITE_FAILURE(error)
     }
@@ -46,9 +47,20 @@ export const actionMap = {
         item: payload.item,
       })
       dispatch(saveFavourites(favourites.data))
-      actions.REMOVE_FAVOURITE_SUCCESS()
+      actions.REMOVE_FAVOURITE_SUCCESS({ id: payload.id })
     } catch (error) {
       actions.REMOVE_FAVOURITE_FAILURE(error)
+    }
+  },
+  async UPDATE_FEED({ dispatch, payload, actions }) {
+    try {
+      const items = await Request.get(API('ebay-items-using-wantlist'), {
+        id: payload.id,
+      })
+      dispatch(saveFeed({ items: items.data }))
+      actions.FETCH_SUCCESS()
+    } catch (error) {
+      actions.FETCH_FAILURE()
     }
   },
 }
