@@ -49,7 +49,7 @@ ArtistReleases.defaultProps = {
   navigator: {},
   artistSpotifyId: '',
   loading: false,
-  artistReleases: [],
+  artistReleases: {},
   handlePushArtistAlbum: () => {},
 }
 

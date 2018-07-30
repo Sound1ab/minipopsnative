@@ -10,7 +10,7 @@ export async function prepareIcons() {
     Icon.getImageSource('ios-heart', size(30)),
     Icon.getImageSource('ios-globe', size(30)),
     Icon.getImageSource('ios-search', size(30)),
-    Icon.getImageSource('ios-person', size(30)),
+    Icon.getImageSource('ios-contact', size(30)),
   ])
   const [feed, favourites, discovery, search, profile] = icons
   return { feed, favourites, discovery, search, profile }

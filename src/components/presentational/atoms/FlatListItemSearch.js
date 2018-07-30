@@ -50,8 +50,11 @@ export const FlatListItemSearch = (props: Props) => (
         <Heading size="xxs" color="black" marginBottom>
           Ending: {props.item.endTime}
         </Heading>
-        <Heading size="xxs" color="black">
+        <Heading size="xxs" color="black" marginBottom>
           Postage: £{props.item.postage}
+        </Heading>
+        <Heading size="xxs" color="black">
+          Bids: {props.item.bids}
         </Heading>
         <AbsoluteWrapper>
           <Button title="View" />
