@@ -14,8 +14,14 @@ type PropTypes = {
 const Wrapper = styled.View`
   flex: 1;
   justify-content: flex-start;
-  padding: 16px 16px 0 16px;
+  padding: 16px;
   background-color: white;
+  ${shadow.map(
+    ({ property, value }) =>
+      css`
+        ${property}: ${value};
+      `,
+  )};
 `
 
 export const ActionBar = (props: PropTypes) => (

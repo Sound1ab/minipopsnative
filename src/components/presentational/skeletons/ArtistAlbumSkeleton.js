@@ -23,7 +23,6 @@ const TrackWrapper = styled.View`
   padding: 16px;
   width: 100%;
   margin: 0 0 8px 0;
-  background-color: ${colors.lightGray};
 `
 
 type PropTypes = {
