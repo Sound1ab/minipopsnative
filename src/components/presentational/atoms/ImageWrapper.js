@@ -58,11 +58,12 @@ export class ImageWrapper extends Component<Props> {
   }
 
   startAnimation = () => {
-    Animated.timing(this.opacity, {
-      toValue: 0,
-      easing: Easing.back(),
-      duration: 500,
-    }).start()
+    this.props.source &&
+      Animated.timing(this.opacity, {
+        toValue: 0,
+        easing: Easing.back(),
+        duration: 500,
+      }).start()
   }
 
   render() {

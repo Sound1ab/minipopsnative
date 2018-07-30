@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native'
+import { ImageWrapper } from '../atoms'
 
 type Slide = {
   index: number,
@@ -185,7 +186,12 @@ export class ImageSlider extends Component<PropsType, StateType> {
     const imageObject = typeof image === 'string' ? { uri: image } : image
 
     const imageComponent = (
-      <Image key={index} source={imageObject} style={[imageStyle]} />
+      <ImageWrapper
+        key={index}
+        source={imageObject.uri}
+        width={Dimensions.get('window').width}
+        height={Dimensions.get('window').width}
+      />
     )
 
     if (onPress) {
