@@ -50,7 +50,7 @@ export const ArtistAlbum = (props: PropTypes) => {
       ) : (
         <ScrollView>
           <ImageWrapper
-            source={props.artistAlbum.imageUrl}
+            source={props.artistAlbum.imageBigUrl}
             height={Dimensions.get('window').width}
           />
           <ActionBar

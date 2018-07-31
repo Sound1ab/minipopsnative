@@ -26,7 +26,12 @@ type PropTypes = {
 
 export const FavouritesRow = (props: PropTypes) => (
   <Wrapper index={props.index}>
-    <ImageWrapper height={100} width={100} source={props.imageUrl} fixedWidth />
+    <ImageWrapper
+      height={100}
+      width={100}
+      source={props.imageMediumUrl}
+      fixedWidth
+    />
     <TextWrapper>
       <Heading color="black" size="l">
         {props.artist}

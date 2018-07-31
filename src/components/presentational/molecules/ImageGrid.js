@@ -36,7 +36,7 @@ export const ImageGrid = (props: PropTypes) => (
             onPress={props.handlePress.bind(null, item[0])}
           >
             <ImageWrapper
-              source={item[0].imageUrl}
+              source={item[0].imageMediumUrl}
               height={Dimensions.get('window').width / 3}
               width={'33%'}
               handlePress={props.handlePress}
