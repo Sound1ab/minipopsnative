@@ -27,8 +27,8 @@ const TouchableOpacity = styled.TouchableOpacity`
 
 export const ImageGrid = (props: PropTypes) => (
   <GridWrapper>
-    {chunk(Object.values(props.items), 3).map((row, index) => (
-      <RowWrapper key={index}>
+    {chunk(Object.values(props.items), 3).map(row => (
+      <RowWrapper key={`${row[0][0].spotifyId}`}>
         {row.map(item => (
           <TouchableOpacity
             activeOpacity={1}

@@ -28,7 +28,9 @@ export function discovery(state = initialState, action) {
     case SAVE_ARTIST_RELEASES:
       return {
         ...state,
-        artistReleases: action.payload.items,
+        artistReleases: action.payload.isNewRequest
+          ? action.payload.items
+          : { ...state.artistReleases, ...action.payload.items },
       }
     case SAVE_ARTIST_ALBUM:
       return {
