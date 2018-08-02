@@ -48,7 +48,7 @@ export class Request {
       return {
         items,
         isNewRequest,
-        isDone: this.state.done,
+        isDone: false,
       }
     } else {
       return {
