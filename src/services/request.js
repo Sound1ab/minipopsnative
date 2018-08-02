@@ -2,14 +2,15 @@
 import Axios from 'axios'
 
 export class Request {
-  constructor(url) {
+  constructor(url, limit = 20) {
     this.url = url
+    this.limit = limit
   }
 
   initialState = () => ({
     id: null,
     offset: 0,
-    limit: 20,
+    limit: this.limit,
     total: null,
     done: false,
   })
@@ -27,7 +28,6 @@ export class Request {
   }
 
   paginationComposer = fn => async (params, headers) => {
-    console.log('state', this.state)
     const id = JSON.stringify(params)
     const isNewRequest = this.state.id !== id
     if (isNewRequest) {
@@ -48,9 +48,12 @@ export class Request {
       return {
         items,
         isNewRequest,
+        isDone: this.state.done,
       }
     } else {
-      console.warn('no more results')
+      return {
+        isDone: true,
+      }
     }
   }
 
