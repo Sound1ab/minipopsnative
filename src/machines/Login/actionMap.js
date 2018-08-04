@@ -22,7 +22,6 @@ export const actionMap = {
       await currentUser.signOut()
       actions.SIGN_OUT_SUCCESS(currentUser)
     } catch (error) {
-      console.log(error)
       actions.SIGN_OUT_FAILURE(error)
     }
   },

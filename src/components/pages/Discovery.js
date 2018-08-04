@@ -36,6 +36,10 @@ class Discovery extends Component<PropTypes> {
       },
     })
   }
+  fetchMoreArtistReleases = item => {
+    this.props.fetchMoreArtistReleases({ spotifyId: item.spotifyId })
+    return item
+  }
   fetchArtistReleases = item => {
     this.props.fetchArtistReleases({ spotifyId: item.spotifyId })
     return item
@@ -47,6 +51,7 @@ class Discovery extends Component<PropTypes> {
       passProps: {
         artistSpotifyId: spotifyId,
         title,
+        fetchMoreArtistReleases: this.fetchMoreArtistReleases,
         handlePushArtistAlbum: Functional.compose(
           this.handlePushArtistAlbum,
           this.fetchArtistAlbum,
@@ -91,6 +96,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchArtistReleases: spotifyId => {
     dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_RELEASES(spotifyId))
+  },
+  fetchMoreArtistReleases: spotifyId => {
+    dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_MORE_RELEASES(spotifyId))
   },
   fetchArtistAlbum: payload => {
     dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_ALBUM(payload))

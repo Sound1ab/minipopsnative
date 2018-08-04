@@ -10,12 +10,21 @@ export const machine = Machine({
     idle: {
       on: {
         FETCH_RELEASES: 'fetchingReleases',
+        FETCH_MORE_RELEASES: 'fetchingMoreReleases',
         FETCH_ALBUM: 'fetchingAlbum',
         ADD_FAVOURITE: 'addingFavourite',
         REMOVE_FAVOURITE: 'removingFavourite',
       },
     },
     fetchingReleases: {
+      onEntry: ['FETCH_RELEASES', 'SHOW_LOADING'],
+      on: {
+        FETCH_SUCCESS: 'idle',
+        FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
+      },
+      onExit: ['HIDE_LOADING'],
+    },
+    fetchingMoreReleases: {
       onEntry: ['FETCH_RELEASES', 'SHOW_LOADING'],
       on: {
         FETCH_SUCCESS: 'idle',
