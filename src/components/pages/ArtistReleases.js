@@ -8,6 +8,7 @@ import {
   Heading,
   NavBar,
   Spinner,
+  ScrollViewWrapper,
 } from '../presentational/atoms'
 import { ImageGrid } from '../presentational/molecules'
 import { ImageGridSkeleton } from '../presentational/skeletons'
@@ -19,6 +20,7 @@ type PropTypes = {
   loading: Boolean,
   artistReleases: Array<Object>,
   handlePushArtistAlbum: Function,
+  fetchMoreArtistReleases: Function,
 }
 
 export function ArtistReleases(props: PropTypes) {
@@ -30,7 +32,11 @@ export function ArtistReleases(props: PropTypes) {
           {props.title}
         </Heading>
       </NavBar>
-      <ScrollView>
+      <ScrollViewWrapper
+        onEndReached={props.fetchMoreArtistReleases.bind(null, {
+          spotifyId: props.artistSpotifyId,
+        })}
+      >
         {props.loading && props.state === 'fetchingReleases' ? (
           <ImageGridSkeleton />
         ) : (
@@ -39,7 +45,7 @@ export function ArtistReleases(props: PropTypes) {
             items={props.artistReleases}
           />
         )}
-      </ScrollView>
+      </ScrollViewWrapper>
     </GrowContainer>
   )
 }
@@ -51,6 +57,7 @@ ArtistReleases.defaultProps = {
   loading: false,
   artistReleases: {},
   handlePushArtistAlbum: () => {},
+  fetchMoreArtistReleases: () => {},
 }
 
 const mapStateToProps = state => ({

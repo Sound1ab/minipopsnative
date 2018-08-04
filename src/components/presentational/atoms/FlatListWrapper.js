@@ -25,23 +25,19 @@ const TextStyled = styled.Text`
 `
 
 export const FlatListWrapper = (props: Props) => (
-  <LazyDrip data={props.data}>
-    {({ requestMore, data }) => (
-      <FlatListStyled
-        data={data}
-        ListHeaderComponent={props.ListHeaderComponent}
-        ListEmptyComponent={
-          props.ListEmptyComponent ? props.ListEmptyComponent : FlatListEmpty
-        }
-        renderItem={props.renderItem}
-        onRefresh={props.onRefresh}
-        refreshing={props.refreshing}
-        keyExtractor={props.keyExtractor}
-        onEndReached={requestMore}
-        onEndReachedThreshold={props.onEndReachedThreshold}
-      />
-    )}
-  </LazyDrip>
+  <FlatListStyled
+    data={props.data}
+    ListHeaderComponent={props.ListHeaderComponent}
+    ListEmptyComponent={
+      props.ListEmptyComponent ? props.ListEmptyComponent : FlatListEmpty
+    }
+    renderItem={props.renderItem}
+    onRefresh={props.onRefresh}
+    refreshing={props.refreshing}
+    keyExtractor={props.keyExtractor}
+    onEndReached={props.onEndReached}
+    onEndReachedThreshold={props.onEndReachedThreshold}
+  />
 )
 
 FlatListWrapper.defaultProps = {
