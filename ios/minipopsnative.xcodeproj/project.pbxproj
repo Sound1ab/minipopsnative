@@ -53,6 +53,7 @@
 		48C75EC320DE78CE00082C3F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48C75EB820DE78CE00082C3F /* SimpleLineIcons.ttf */; };
 		48C75EC420DE78CE00082C3F /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48C75EB920DE78CE00082C3F /* MaterialIcons.ttf */; };
 		48C942A2210B4B1100FD30AA /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48C9429F210B4B0A00FD30AA /* libRNSVG.a */; };
+		48ED5FE32114524900A3029F /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48ED5FBF21142AE100A3029F /* libRCTPushNotification.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -496,6 +497,7 @@
 				48280F39210217C700FA7EFF /* libRNAWSCognito.a in Frameworks */,
 				480B7DAA21033E8200A85214 /* libRNSpinkit.a in Frameworks */,
 				48C942A2210B4B1100FD30AA /* libRNSVG.a in Frameworks */,
+				48ED5FE32114524900A3029F /* libRCTPushNotification.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

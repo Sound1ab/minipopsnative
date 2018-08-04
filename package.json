@@ -48,6 +48,8 @@
     "/test/unit/coverage/"
   ],
   "dependencies": {
+    "@aws-amplify/analytics": "^1.0.3",
+    "@aws-amplify/pushnotification": "^1.0.3",
     "aws-amplify": "^1.0.4",
     "aws-amplify-react-native": "^1.0.4",
     "axios": "^0.18.0",

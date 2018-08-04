@@ -10,4 +10,6 @@ dependencies: \
   /Users/phillipparker/Repos/minipopsnative/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
   /Users/phillipparker/Repos/minipopsnative/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
   /Users/phillipparker/Repos/minipopsnative/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
-  /Users/phillipparker/Repos/minipopsnative/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h
+  /Users/phillipparker/Repos/minipopsnative/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/phillipparker/Repos/minipopsnative/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPushNotificationManager.h \
+  /Users/phillipparker/Repos/minipopsnative/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h

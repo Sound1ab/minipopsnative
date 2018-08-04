@@ -3,6 +3,7 @@ package com.minipopsnative;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.amazonaws.amplify.pushnotification.RNPushNotificationPackage;
 import com.horcrux.svg.SvgPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.amazonaws.RNAWSCognitoPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNPushNotificationPackage(),
             new SvgPackage(),
             new RNSpinkitPackage(),
             new RNAWSCognitoPackage(),
