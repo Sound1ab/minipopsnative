@@ -16,8 +16,7 @@ type PropTypes = {
 }
 
 const Profile = (props: PropTypes) => (
-  <GrowContainer>
-    <Spinner isVisible={props.loading} />
+  <React.Fragment>
     <NavBar>
       <Heading color="black" size="xl">
         Profile
@@ -26,12 +25,10 @@ const Profile = (props: PropTypes) => (
     <GrowContainer justifyContent={'center'} alignItems={'center'}>
       <Button title="Sign Out" handlePress={props.signOut} />
     </GrowContainer>
-  </GrowContainer>
+  </React.Fragment>
 )
 
-const mapStateToProps = state => ({
-  loading: state.app.loading,
-})
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
   signOut: () => {

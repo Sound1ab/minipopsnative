@@ -2,9 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  GrowContainer,
   Heading,
-  Spinner,
   NavBar,
   FlatListWrapper,
   FlatListItemSearch,
@@ -27,8 +25,7 @@ export class Feed extends Component<PropTypes> {
 
   render() {
     return (
-      <GrowContainer>
-        <Spinner isVisible={this.props.loading} />
+      <React.Fragment>
         <NavBar>
           <Heading color="black" size="xl">
             Feed
@@ -43,13 +40,12 @@ export class Feed extends Component<PropTypes> {
             renderItem={FlatListItemSearch}
           />
         )}
-      </GrowContainer>
+      </React.Fragment>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  loading: state.app.loading,
   id: state.login.cognitoUser.id,
   feed: state.feed.feed,
   state: state.feed.state,

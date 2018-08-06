@@ -1,5 +1,4 @@
 import { Navigation } from 'react-native-navigation'
-import { MOCK_ARTIST_ALBUM } from '../store/mockData'
 import { prepareIcons } from '../helpers'
 
 export const startApp = async () => {
@@ -7,53 +6,64 @@ export const startApp = async () => {
 
   Navigation.startTabBasedApp({
     tabs: [
-      // {
-      //   screen: 'ArtistAlbum',
-      //   title: 'ArtistAlbum',
-      // },
       {
-        screen: 'Favourites',
+        screen: 'App',
         title: 'Favourites',
         icon: icons.favourites,
         iconInsets: {
           top: 6,
           bottom: -6,
         },
+        passProps: {
+          screen: 'Favourites',
+        },
       },
       {
-        screen: 'Discovery',
+        screen: 'App',
         title: 'Discovery',
         icon: icons.discovery,
         iconInsets: {
           top: 6,
           bottom: -6,
         },
+        passProps: {
+          screen: 'Discovery',
+        },
       },
       {
-        screen: 'Feed',
+        screen: 'App',
         title: 'Feed',
         icon: icons.feed,
         iconInsets: {
           top: 6,
           bottom: -6,
         },
+        passProps: {
+          screen: 'Feed',
+        },
       },
       {
-        screen: 'Search',
+        screen: 'App',
         title: 'Search',
         icon: icons.search,
         iconInsets: {
           top: 6,
           bottom: -6,
         },
+        passProps: {
+          screen: 'Search',
+        },
       },
       {
-        screen: 'Profile',
+        screen: 'App',
         title: 'Profile',
         icon: icons.profile,
         iconInsets: {
           top: 6,
           bottom: -6,
+        },
+        passProps: {
+          screen: 'Profile',
         },
       },
     ],
@@ -76,17 +86,17 @@ export const startLogin = () => {
   Navigation.startTabBasedApp({
     tabs: [
       {
-        screen: 'SignIn',
+        screen: 'App',
         label: 'SignIn',
         passProps: {
-          form: 'signIn',
+          screen: 'SignIn',
         },
       },
       {
-        screen: 'SignUp',
+        screen: 'App',
         label: 'SignUp',
         passProps: {
-          form: 'signUp',
+          screen: 'SignUp',
         },
       },
     ],

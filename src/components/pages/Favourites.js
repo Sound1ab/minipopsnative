@@ -15,8 +15,7 @@ import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 type PropTypes = {}
 
 export const Favourites = (props: PropTypes) => (
-  <GrowContainer>
-    <Spinner isVisible={props.loading} />
+  <React.Fragment>
     <NavBar>
       <Heading color="black" size="xl">
         Favourites
@@ -53,13 +52,12 @@ export const Favourites = (props: PropTypes) => (
         rightOpenValue={-100}
       />
     )}
-  </GrowContainer>
+  </React.Fragment>
 )
 
 Favourites.defaultProps = {}
 
 const mapStateToProps = state => ({
-  loading: state.app.loading,
   favourites: state.discovery.favourites,
   id: state.login.cognitoUser.id,
   state: state.app.state,

@@ -9,7 +9,6 @@ import {
   FlatListItemSearch,
   Heading,
   NavBar,
-  Spinner,
 } from '../presentational/atoms'
 
 type PropTypes = {
@@ -18,8 +17,7 @@ type PropTypes = {
 }
 
 const Search = (props: PropTypes) => (
-  <GrowContainer>
-    <Spinner isVisible={props.loading} />
+  <React.Fragment>
     <NavBar>
       <Heading color="black" size="xl" marginBottom>
         Search
@@ -31,11 +29,10 @@ const Search = (props: PropTypes) => (
       keyExtractor={(item, index) => `${item.title}-${index}`}
       renderItem={FlatListItemSearch}
     />
-  </GrowContainer>
+  </React.Fragment>
 )
 
 const mapStateToProps = state => ({
-  loading: state.app.loading,
   searchResults: state.search.searchResults,
 })
 
