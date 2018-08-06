@@ -1,55 +1,34 @@
 import React from 'react'
-import Amplify from 'aws-amplify'
-import config from './aws-exports'
+import { Linking, PushNotificationIOS } from 'react-native'
 import store from './src/store'
-import { PushNotificationIOS } from 'react-native'
-// import Analytics from '@aws-amplify/analytics';
-import PushNotification from '@aws-amplify/pushnotification'
 import { APP_MACHINE_ACTIONS } from './src/machines/App/actions'
-// Amplify.Logger.LOG_LEVEL = 'DEBUG'
+import { AwsMobile } from './src/helpers'
+import { setupNetworkMonitoring } from './src/helpers'
 
-const setupPushNotifications = () => {
-  PushNotification.onNotification(notification => {
-    console.warn('in app notification', notification)
-    // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
-    notification.finish(PushNotificationIOS.FetchResult.NoData)
-  })
-
-  // gets the registration token
-  PushNotification.onRegister(token => {
-    console.warn('in app registration', token)
-  })
-}
-
-setupPushNotifications()
-
-Amplify.configure(config)
-// Analytics.configure(config)
-
-const setupNetworkMonitoring = () => {
-  global.XMLHttpRequest = global.originalXMLHttpRequest
-    ? global.originalXMLHttpRequest
-    : global.XMLHttpRequest
-  global.FormData = global.originalFormData
-    ? global.originalFormData
-    : global.FormData
-
-  fetch // Ensure to get the lazy property
-
-  if (window.__FETCH_SUPPORT__) {
-    // it's RNDebugger only to have
-    window.__FETCH_SUPPORT__.blob = false
-  } else {
-    /*
-     * Set __FETCH_SUPPORT__ to false is just work for `fetch`.
-     * If you're using another way you can just use the native Blob and remove the `else` statement
-     */
-    global.Blob = global.originalBlob ? global.originalBlob : global.Blob
-    global.FileReader = global.originalFileReader
-      ? global.originalFileReader
-      : global.FileReader
-  }
-}
-
+const awsMobile = new AwsMobile({ debug: true })
+awsMobile.setupPushNotifications()
+awsMobile.configure()
 setupNetworkMonitoring()
+
+// Linking.getInitialURL().then((url) => {
+//   console.warn('url: ' + url);
+//   if (url) {
+//     console.warn('Initial url is: ' + url);
+//   }
+// }).catch(err => console.warn('An error occurred', err));
+
+PushNotificationIOS.getInitialNotification()
+  .then(PushNotificationIOSObj => {
+    if (PushNotificationIOSObj === null) {
+      return
+    }
+    const data = PushNotificationIOSObj && PushNotificationIOSObj.getData()
+    const payload = data.url
+    Linking.openURL(payload).catch(err =>
+      console.error('An error occurred', err),
+    )
+    console.warn('payload', payload)
+  })
+  .catch(err => console.warn('An error occurred', err))
+
 store.dispatch(APP_MACHINE_ACTIONS.INIT())
