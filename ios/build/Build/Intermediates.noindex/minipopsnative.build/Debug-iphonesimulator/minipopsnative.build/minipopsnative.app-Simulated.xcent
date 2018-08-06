@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>R8QVY8XYNA.org.reactjs.native.example.minipopsnative</string>
+	<string>PYN7T7PKVN.org.reactjs.native.example.minipopsnative</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>R8QVY8XYNA.org.reactjs.native.example.minipopsnative</string>
+		<string>PYN7T7PKVN.org.reactjs.native.example.minipopsnative</string>
 	</array>
 </dict>
 </plist>
