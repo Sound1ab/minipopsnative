@@ -61,8 +61,7 @@ class Discovery extends Component<PropTypes> {
   }
   render() {
     return (
-      <GrowContainer>
-        <Spinner isVisible={this.props.loading} />
+      <React.Fragment>
         <NavBar>
           <Heading color="black" size="xl" marginBottom>
             Discovery
@@ -82,13 +81,12 @@ class Discovery extends Component<PropTypes> {
             />
           )}
         />
-      </GrowContainer>
+      </React.Fragment>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  loading: state.app.loading,
   discoveryResults: state.search.discoveryResults,
   artistReleases: state.discovery.artistReleases,
 })

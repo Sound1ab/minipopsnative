@@ -25,8 +25,7 @@ type PropTypes = {
 
 export function ArtistReleases(props: PropTypes) {
   return (
-    <GrowContainer>
-      <Spinner isVisible={props.loading} />
+    <React.Fragment>
       <NavBar handleBack={popScreen.bind(null, props.navigator)}>
         <Heading color="black" size="l">
           {props.title}
@@ -46,7 +45,7 @@ export function ArtistReleases(props: PropTypes) {
           />
         )}
       </ScrollViewWrapper>
-    </GrowContainer>
+    </React.Fragment>
   )
 }
 
@@ -62,7 +61,6 @@ ArtistReleases.defaultProps = {
 
 const mapStateToProps = state => ({
   artistReleases: state.discovery.artistReleases,
-  loading: state.app.loading,
   state: state.discovery.state,
 })
 

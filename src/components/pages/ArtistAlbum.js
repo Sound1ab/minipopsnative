@@ -34,8 +34,7 @@ type PropTypes = {
 
 export const ArtistAlbum = (props: PropTypes) => {
   return (
-    <GrowContainer>
-      <Spinner isVisible={props.loading} />
+    <React.Fragment>
       <NavBar handleBack={popScreen.bind(null, props.navigator)}>
         {props.loading && props.state === 'fetchingAlbum' ? (
           <HeadingSkeleton />
@@ -74,7 +73,7 @@ export const ArtistAlbum = (props: PropTypes) => {
           ))}
         </ScrollView>
       )}
-    </GrowContainer>
+    </React.Fragment>
   )
 }
 
@@ -98,7 +97,6 @@ const mapStateToProps = state => ({
   artistAlbum: state.discovery.artistAlbum,
   favourites: state.discovery.favourites,
   id: state.login.cognitoUser.id,
-  loading: state.app.loading,
   state: state.discovery.state,
 })
 
