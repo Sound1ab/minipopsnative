@@ -16,6 +16,7 @@ export const startApp = async () => {
         },
         passProps: {
           screen: 'Favourites',
+          tabIndex: 0,
         },
       },
       {
@@ -28,6 +29,7 @@ export const startApp = async () => {
         },
         passProps: {
           screen: 'Discovery',
+          tabIndex: 1,
         },
       },
       {
@@ -40,6 +42,7 @@ export const startApp = async () => {
         },
         passProps: {
           screen: 'Feed',
+          tabIndex: 2,
         },
       },
       {
@@ -52,6 +55,7 @@ export const startApp = async () => {
         },
         passProps: {
           screen: 'Search',
+          tabIndex: 3,
         },
       },
       {
@@ -64,6 +68,7 @@ export const startApp = async () => {
         },
         passProps: {
           screen: 'Profile',
+          tabIndex: 4,
         },
       },
     ],
@@ -90,6 +95,7 @@ export const startLogin = () => {
         label: 'SignIn',
         passProps: {
           screen: 'SignIn',
+          tabIndex: 0,
         },
       },
       {
@@ -97,6 +103,7 @@ export const startLogin = () => {
         label: 'SignUp',
         passProps: {
           screen: 'SignUp',
+          tabIndex: 1,
         },
       },
     ],

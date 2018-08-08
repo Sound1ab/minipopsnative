@@ -1,34 +1,28 @@
 import React from 'react'
-import { Linking, PushNotificationIOS } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import store from './src/store'
+import { Aws } from './src/helpers'
+import config from './aws-exports'
 import { APP_MACHINE_ACTIONS } from './src/machines/App/actions'
-import { AwsMobile } from './src/helpers'
+import { NOTIFICATION_MACHINE_ACTIONS } from './src/machines/LocalNotification/actions'
 import { setupNetworkMonitoring } from './src/helpers'
 
-const awsMobile = new AwsMobile({ debug: true })
-awsMobile.setupPushNotifications()
-awsMobile.configure()
+Aws.configure(config)
+Aws.setupPushNotificationListeners(notification => {
+  store.dispatch(NOTIFICATION_MACHINE_ACTIONS.ADD_NOTIFICATION(notification))
+})
 setupNetworkMonitoring()
+getDeviceToken()
 
-// Linking.getInitialURL().then((url) => {
-//   console.warn('url: ' + url);
-//   if (url) {
-//     console.warn('Initial url is: ' + url);
-//   }
-// }).catch(err => console.warn('An error occurred', err));
-
-PushNotificationIOS.getInitialNotification()
-  .then(PushNotificationIOSObj => {
-    if (PushNotificationIOSObj === null) {
-      return
+async function getDeviceToken() {
+  try {
+    const value = await AsyncStorage.getItem('@Minipops:deviceToken')
+    if (value !== null) {
+      console.warn('DeviceToken', value)
     }
-    const data = PushNotificationIOSObj && PushNotificationIOSObj.getData()
-    const payload = data.url
-    Linking.openURL(payload).catch(err =>
-      console.error('An error occurred', err),
-    )
-    console.warn('payload', payload)
-  })
-  .catch(err => console.warn('An error occurred', err))
+  } catch (error) {
+    console.warn(`could not retrieve data from AsyncStore: ${error}`)
+  }
+}
 
 store.dispatch(APP_MACHINE_ACTIONS.INIT())

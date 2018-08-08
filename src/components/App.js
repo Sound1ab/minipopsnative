@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { GrowContainer, Spinner, NavBar, Heading } from './presentational/atoms'
-import { SearchField } from './container'
+import { GrowContainer, Spinner } from './presentational/atoms'
+import { NativeEventSubscription } from '../helpers'
 import {
   SignIn,
   SignUp,
@@ -12,22 +12,28 @@ import {
   Search,
   Profile,
 } from './pages'
-import { popScreen } from '../navigation'
+import { LocalNotificationManager } from './container'
 
 type PropTypes = {
-  // loading: Boolean,
+  loading: Boolean,
 }
 
-type StateTypes = {}
-
-export class App extends Component<PropTypes, StateTypes> {
-  static defaultProps = {
-    // loading: false,
-  }
-  constructor(props: PropTypes) {
+export class App extends Component<PropTypes> {
+  constructor(props) {
     super(props)
+    this.setupLocalNotificationListenerForActiveTab()
   }
-  state = {}
+
+  setupLocalNotificationListenerForActiveTab = () => {
+    NativeEventSubscription.subscribe(selectedTabIndex => {
+      if (this.props.tabIndex === selectedTabIndex) {
+        console.log('selectedTabIndex', selectedTabIndex)
+        // Aws.setupPushNotificationListeners((e) => console.log(e))
+      } else {
+        // Aws.removePushNotificationListeners()
+      }
+    })
+  }
 
   components = {
     SignIn,
@@ -39,16 +45,13 @@ export class App extends Component<PropTypes, StateTypes> {
     Profile,
   }
 
-  popScreenWrapper = fn => {
-    const validOn = ['ArtistAlbum', 'ArtistReleases']
-  }
-
   render() {
     const Component = this.components[this.props.screen]
     return (
       <GrowContainer>
         <Spinner isVisible={this.props.loading} />
         <Component navigator={this.props.navigator} />
+        <LocalNotificationManager />
       </GrowContainer>
     )
   }

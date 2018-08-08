@@ -4,6 +4,8 @@ import {
   Platform,
 } from 'react-native'
 
+let nativeEventSubscription = null
+
 export class NativeEventSubscription {
   constructor() {
     this.callbacks = []
@@ -38,3 +40,9 @@ export class NativeEventSubscription {
     this.callbacks.push(callback)
   }
 }
+
+if (!nativeEventSubscription) {
+  nativeEventSubscription = new NativeEventSubscription()
+}
+
+export default nativeEventSubscription

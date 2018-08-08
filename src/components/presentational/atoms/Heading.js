@@ -7,9 +7,10 @@ import { colors } from '../../../theme'
 type Props = {
   numberOfLines: ?number,
   font: string,
+  weight: string,
 }
 
-const styles = (size, color, marginBottom) => {
+const styles = (size, color, marginBottom, weight) => {
   const style = StyleSheet.create({
     xl: {
       ...iOSUIKit.largeTitleEmphasizedObject,
@@ -31,7 +32,7 @@ const styles = (size, color, marginBottom) => {
     },
     s: {
       ...iOSUIKit.subheadObject,
-      ...sanFranciscoWeights.thin,
+      ...sanFranciscoWeights[weight],
       color,
     },
     xs: {
@@ -51,7 +52,7 @@ const styles = (size, color, marginBottom) => {
 export const Heading = (props: Props) => (
   <Text
     numberOfLines={props.numberOfLines}
-    style={styles(props.size, props.color, props.marginBottom)}
+    style={styles(props.size, props.color, props.marginBottom, props.weight)}
   >
     {props.children}
   </Text>
@@ -62,4 +63,5 @@ Heading.defaultProps = {
   size: 's',
   color: 'white',
   marginBottom: false,
+  weight: 'thin',
 }
