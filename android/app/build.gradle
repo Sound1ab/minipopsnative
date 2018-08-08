@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-blur')
     compile project(':@aws-amplify/pushnotification')
     compile project(':react-native-svg')
     compile project(':react-native-spinkit')
