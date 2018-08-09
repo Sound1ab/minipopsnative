@@ -14,6 +14,7 @@ export const machine = Machine({
         FETCH_ALBUM: 'fetchingAlbum',
         ADD_FAVOURITE: 'addingFavourite',
         REMOVE_FAVOURITE: 'removingFavourite',
+        ADD_TO_WATCH_LIST: 'addingToWatchList',
       },
     },
     fetchingReleases: {
@@ -61,6 +62,14 @@ export const machine = Machine({
       on: {
         FETCH_SUCCESS: 'idle',
         FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
+      },
+      onExit: ['HIDE_LOADING'],
+    },
+    addingToWatchList: {
+      onEntry: ['ADD_TO_WATCH_LIST', 'SHOW_LOADING'],
+      on: {
+        ADD_SUCCESS: 'idle',
+        ADD_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
       },
       onExit: ['HIDE_LOADING'],
     },

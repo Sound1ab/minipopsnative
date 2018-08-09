@@ -30,20 +30,43 @@ export const appMachine = Machine({
     loadingApp: {
       onEntry: ['REDIRECT_TO_APP', 'SAVE_COGNITO_USER_OBJECT'],
       on: {
-        LOAD_SUCCESS: 'fetchingFavourites',
-      },
-    },
-    fetchingFavourites: {
-      onEntry: ['FETCHING_FAVOURITES', 'UPDATE_DEVICE_TOKEN'],
-      on: {
-        FETCH_SUCCESS: 'idle',
-        FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
+        LOAD_SUCCESS: 'fetchingInitialData',
       },
     },
     loadingLogin: {
       onEntry: ['REDIRECT_TO_LOGIN'],
       on: {
         LOAD_SUCCESS: 'idle',
+      },
+    },
+    fetchingInitialData: {
+      initial: 'fetchingFavourites',
+      states: {
+        fetchingFavourites: {
+          onEntry: ['FETCHING_FAVOURITES'],
+          on: {
+            FETCH_FAVOURITES_SUCCESS: 'fetchingWatchList',
+            FETCH_FAVOURITES_FAILURE: {
+              fetchingWatchList: { actions: ['SHOW_ERROR_MESSAGE'] },
+            },
+          },
+        },
+        fetchingWatchList: {
+          onEntry: ['FETCHING_WATCH_LIST'],
+        },
+      },
+      on: {
+        FETCH_WATCH_LIST_SUCCESS: 'updateTokenRemotely',
+        FETCH_WATCH_LIST_FAILURE: {
+          updateTokenRemotely: { actions: ['SHOW_ERROR_MESSAGE'] },
+        },
+      },
+    },
+    updateTokenRemotely: {
+      onEntry: ['UPDATE_DEVICE_TOKEN_REMOTELY'],
+      on: {
+        UPDATE_TOKEN_REMOTELY_SUCCESS: 'idle',
+        UPDATE_TOKEN_REMOTELY_FAILURE: 'idle',
       },
     },
   },

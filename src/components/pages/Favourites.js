@@ -12,7 +12,10 @@ import { FavouritesRow, FavouritesRowHidden } from '../presentational/molecules'
 import { FavouritesListSkeleton } from '../presentational/skeletons'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 
-type PropTypes = {}
+type PropTypes = {
+  removeFromFavourite: Function,
+  addToWatchList: Function,
+}
 
 export const Favourites = (props: PropTypes) => (
   <React.Fragment>
@@ -26,7 +29,7 @@ export const Favourites = (props: PropTypes) => (
     ) : (
       <SwipeListView
         useFlatList
-        disableRightSwipe
+        // disableRightSwipe
         closeOnScroll
         recalculateHiddenLayout
         preview={false}
@@ -45,11 +48,13 @@ export const Favourites = (props: PropTypes) => (
             index={index}
             rowMap={rowMap}
             handlePress={props.removeFromFavourite}
+            handleWatchPress={props.addToWatchList}
             id={props.id}
             artistAlbum={item}
           />
         )}
         rightOpenValue={-100}
+        leftOpenValue={100}
       />
     )}
   </React.Fragment>
@@ -66,6 +71,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   removeFromFavourite: payload => {
     dispatch(FAVOURITES_MACHINE_ACTIONS.REMOVE_FAVOURITE(payload))
+  },
+  addToWatchList: payload => {
+    dispatch(FAVOURITES_MACHINE_ACTIONS.ADD_TO_WATCH_LIST(payload))
   },
 })
 

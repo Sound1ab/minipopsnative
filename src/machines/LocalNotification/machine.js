@@ -27,9 +27,9 @@ export const machine = Machine({
       },
     },
     savingToken: {
-      onEntry: ['SAVE_TOKEN'],
+      onEntry: ['SAVE_TOKEN_LOCALLY'],
       on: {
-        TOKEN_SAVED: 'idle',
+        TOKEN_SAVED_LOCALLY: 'idle',
       },
     },
   },

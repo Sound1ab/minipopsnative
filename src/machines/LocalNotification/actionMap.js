@@ -30,8 +30,8 @@ export const actionMap = {
     )
     actions.NOTIFICATION_REMOVED()
   },
-  async SAVE_TOKEN({ dispatch, payload, actions }) {
+  SAVE_TOKEN_LOCALLY({ dispatch, payload, actions }) {
     dispatch(saveToken(payload))
-    actions.TOKEN_SAVED()
+    actions.TOKEN_SAVED_LOCALLY(payload)
   },
 }

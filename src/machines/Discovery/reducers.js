@@ -2,6 +2,7 @@ import {
   SAVE_ARTIST_RELEASES,
   SAVE_ARTIST_ALBUM,
   SAVE_FAVOURITES,
+  SAVE_WATCH_LIST,
 } from './actions'
 import { machine } from './machine'
 
@@ -16,6 +17,7 @@ export const initialState = {
     imageUrl: '',
     spotifyId: '',
   },
+  watchList: [],
 }
 
 export function discovery(state = initialState, action) {
@@ -41,6 +43,11 @@ export function discovery(state = initialState, action) {
       return {
         ...state,
         favourites: action.payload,
+      }
+    case SAVE_WATCH_LIST:
+      return {
+        ...state,
+        watchList: action.payload.items,
       }
     default:
       return state

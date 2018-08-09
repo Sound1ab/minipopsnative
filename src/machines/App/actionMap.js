@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify'
 import { Request } from '../../services'
 import { API } from '../../services'
-import { saveFavourites } from '../Discovery/actions'
+import { saveFavourites, saveWatchList } from '../Discovery/actions'
 import {
   startApp,
   startLogin,
@@ -31,9 +31,20 @@ export const actionMap = {
         id: payload.id,
       })
       dispatch(saveFavourites(favourites.data))
-      actions.FETCH_SUCCESS()
+      actions.FETCH_FAVOURITES_SUCCESS(payload)
     } catch (error) {
-      actions.FETCH_FAILURE(error)
+      actions.FETCH_FAVOURITES_FAILURE(error)
+    }
+  },
+  async FETCHING_WATCH_LIST({ dispatch, actions, payload }) {
+    try {
+      const watchList = await Request.get(API('get-watch-list'), {
+        id: payload.id,
+      })
+      dispatch(saveWatchList({ items: watchList.data }))
+      actions.FETCH_WATCH_LIST_SUCCESS(payload)
+    } catch (error) {
+      actions.FETCH_WATCH_LIST_FAILURE(error)
     }
   },
   REDIRECT_TO_APP({ actions, payload }) {
@@ -47,8 +58,9 @@ export const actionMap = {
   SAVE_COGNITO_USER_OBJECT({ dispatch, payload }) {
     dispatch(saveCognitoUserObject(payload))
   },
-  async UPDATE_DEVICE_TOKEN({ dispatch, payload, state }) {
+  async UPDATE_DEVICE_TOKEN_REMOTELY({ dispatch, payload, state, actions }) {
     if (!state.localNotifications.deviceToken || !payload.id) {
+      actions.UPDATE_TOKEN_REMOTELY_FAILURE('no device token or id')
       return
     }
     try {
@@ -56,8 +68,10 @@ export const actionMap = {
         id: payload.id,
         deviceToken: state.localNotifications.deviceToken,
       })
+      actions.UPDATE_TOKEN_REMOTELY_SUCCESS(payload)
     } catch (error) {
       console.warn(`could not update device token: ${error}`)
+      actions.UPDATE_TOKEN_REMOTELY_FAILURE(error)
     }
   },
 }

@@ -1,6 +1,11 @@
 import { Request } from '../../services'
 import { API } from '../../services'
-import { saveArtistReleases, saveArtistAlbum, saveFavourites } from './actions'
+import {
+  saveArtistReleases,
+  saveArtistAlbum,
+  saveFavourites,
+  saveWatchList,
+} from './actions'
 import { uiActionMap } from '../App/genericActionMap'
 import { saveFeed } from '../Feed/actions'
 
@@ -68,6 +73,18 @@ export const actionMap = {
       actions.FETCH_SUCCESS()
     } catch (error) {
       actions.FETCH_FAILURE()
+    }
+  },
+  async ADD_TO_WATCH_LIST({ dispatch, payload, actions }) {
+    try {
+      const items = await Request.post(API('add-to-watch-list'), {
+        id: payload.id,
+        item: payload.item,
+      })
+      dispatch(saveWatchList({ items: items.data }))
+      actions.ADD_SUCCESS()
+    } catch (error) {
+      actions.ADD_FAILURE()
     }
   },
 }
