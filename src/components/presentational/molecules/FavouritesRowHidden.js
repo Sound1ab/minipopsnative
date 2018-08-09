@@ -40,25 +40,41 @@ const TextWrapperRemove = styled(TextWrapper)`
 type PropTypes = {
   artistAlbum: {},
   index: number,
-  handleWatchPress: Function,
+  handleRemoveFromWatchList: Function,
+  handleAddToWatchList: Function,
   handlePress: Function,
   rowMap: Function,
   id: string,
+  watched: Boolean,
 }
 
 export const FavouritesRowHidden = (props: PropTypes) => (
   <Wrapper index={props.index}>
-    <TextWrapperWatch
-      onPress={() => {
-        props.handleWatchPress({
-          id: props.id,
-          item: props.artistAlbum,
-        })
-        props.rowMap[props.artistAlbum.spotifyId].closeRow()
-      }}
-    >
-      <Icon name="ios-add-circle" color="white" />
-    </TextWrapperWatch>
+    {props.watched ? (
+      <TextWrapperWatch
+        onPress={() => {
+          props.handleRemoveFromWatchList({
+            id: props.id,
+            item: props.artistAlbum,
+          })
+          props.rowMap[props.artistAlbum.spotifyId].closeRow()
+        }}
+      >
+        <Icon name="ios-remove-circle" color="white" />
+      </TextWrapperWatch>
+    ) : (
+      <TextWrapperWatch
+        onPress={() => {
+          props.handleAddToWatchList({
+            id: props.id,
+            item: props.artistAlbum,
+          })
+          props.rowMap[props.artistAlbum.spotifyId].closeRow()
+        }}
+      >
+        <Icon name="ios-add-circle" color="white" />
+      </TextWrapperWatch>
+    )}
     <TextWrapperRemove
       onPress={() => {
         props.handlePress({
@@ -76,10 +92,12 @@ export const FavouritesRowHidden = (props: PropTypes) => (
 FavouritesRowHidden.defaultProps = {
   artistAlbum: {},
   index: 0,
-  handleWatchPress: () => {},
+  handleAddToWatchList: () => {},
+  handleRemoveFromWatchList: () => {},
   handlePress: () => {},
   rowMap: () => {},
   id: '',
+  watched: false,
 }
 
 export default FavouritesRowHidden

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, ImageWrapper } from '../atoms/index'
+import { Heading, ImageWrapper, Icon, Triangle } from '../atoms'
 import { colors } from '../../../theme/index'
 
 const Wrapper = styled.View`
@@ -17,11 +17,22 @@ const TextWrapper = styled.View`
   padding: 16px;
 `
 
+const Watched = styled.View`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50;
+  height: 50;
+  justify-content: flex-start;
+  align-items: flex-end;
+`
+
 type PropTypes = {
-  imageUrl: string,
+  imageMediumUrl: string,
   artist: string,
   album: string,
   index: number,
+  watched: Boolean,
 }
 
 export const FavouritesRow = (props: PropTypes) => (
@@ -40,14 +51,20 @@ export const FavouritesRow = (props: PropTypes) => (
         {props.album}
       </Heading>
     </TextWrapper>
+    {props.watched && (
+      <Watched>
+        <Triangle color={colors.tertiary} />
+      </Watched>
+    )}
   </Wrapper>
 )
 
 FavouritesRow.defaultProps = {
-  imageUrl: '',
+  imageMediumUrl: '',
   artist: '',
   album: '',
   index: 0,
+  watched: false,
 }
 
 export default FavouritesRow

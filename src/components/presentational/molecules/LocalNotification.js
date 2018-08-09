@@ -14,7 +14,7 @@ type PropTypes = {}
 type StateTypes = {}
 
 const BORDER_RADIUS = 12
-const NOTIFICATION_HEADER = 'AN ITEM IS ABOUT TO SELL!'
+const NOTIFICATION_HEADER = 'MINIPOPS'
 
 const Wrapper = Animatable.createAnimatableComponent(styled.View`
   padding: ${ifIphoneX ? '38px 8px 8px 8px' : '8px'};

@@ -87,4 +87,16 @@ export const actionMap = {
       actions.ADD_FAILURE()
     }
   },
+  async REMOVE_FROM_WATCH_LIST({ dispatch, payload, actions }) {
+    try {
+      const items = await Request.delete(API('remove-from-watch-list'), {
+        id: payload.id,
+        item: payload.item,
+      })
+      dispatch(saveWatchList({ items: items.data }))
+      actions.REMOVE_FROM_WATCH_LIST_SUCCESS(payload)
+    } catch (error) {
+      actions.REMOVE_FROM_WATCH_LIST_FAILURE(error)
+    }
+  },
 }

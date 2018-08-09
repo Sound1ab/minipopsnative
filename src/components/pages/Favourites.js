@@ -15,6 +15,8 @@ import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 type PropTypes = {
   removeFromFavourite: Function,
   addToWatchList: Function,
+  removeFromWatchList: Function,
+  watchListIds: Array<string>,
 }
 
 export const Favourites = (props: PropTypes) => (
@@ -37,9 +39,10 @@ export const Favourites = (props: PropTypes) => (
         data={props.favourites}
         renderItem={({ item, index }) => (
           <FavouritesRow
+            {...item}
             index={index}
             key={`${item.artist}-${item.album}`}
-            {...item}
+            watched={props.watchListIds.includes(item.spotifyId)}
           />
         )}
         renderHiddenItem={({ item, index }, rowMap) => (
@@ -48,9 +51,11 @@ export const Favourites = (props: PropTypes) => (
             index={index}
             rowMap={rowMap}
             handlePress={props.removeFromFavourite}
-            handleWatchPress={props.addToWatchList}
+            handleAddToWatchList={props.addToWatchList}
+            handleRemoveFromWatchList={props.removeFromWatchList}
             id={props.id}
             artistAlbum={item}
+            watched={props.watchListIds.includes(item.spotifyId)}
           />
         )}
         rightOpenValue={-100}
@@ -64,6 +69,7 @@ Favourites.defaultProps = {}
 
 const mapStateToProps = state => ({
   favourites: state.discovery.favourites,
+  watchListIds: state.discovery.watchList.ids,
   id: state.login.cognitoUser.id,
   state: state.app.state,
 })
@@ -74,6 +80,9 @@ const mapDispatchToProps = dispatch => ({
   },
   addToWatchList: payload => {
     dispatch(FAVOURITES_MACHINE_ACTIONS.ADD_TO_WATCH_LIST(payload))
+  },
+  removeFromWatchList: payload => {
+    dispatch(FAVOURITES_MACHINE_ACTIONS.REMOVE_FROM_WATCH_LIST(payload))
   },
 })
 

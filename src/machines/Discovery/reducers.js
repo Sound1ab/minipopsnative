@@ -17,7 +17,10 @@ export const initialState = {
     imageUrl: '',
     spotifyId: '',
   },
-  watchList: [],
+  watchList: {
+    items: [],
+    ids: [],
+  },
 }
 
 export function discovery(state = initialState, action) {
@@ -47,7 +50,10 @@ export function discovery(state = initialState, action) {
     case SAVE_WATCH_LIST:
       return {
         ...state,
-        watchList: action.payload.items,
+        watchList: {
+          items: action.payload.items,
+          ids: action.payload.items.map(item => item.spotifyId),
+        },
       }
     default:
       return state

@@ -15,6 +15,7 @@ export const machine = Machine({
         ADD_FAVOURITE: 'addingFavourite',
         REMOVE_FAVOURITE: 'removingFavourite',
         ADD_TO_WATCH_LIST: 'addingToWatchList',
+        REMOVE_FROM_WATCH_LIST: 'removingFromWatchList',
       },
     },
     fetchingReleases: {
@@ -70,6 +71,16 @@ export const machine = Machine({
       on: {
         ADD_SUCCESS: 'idle',
         ADD_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
+      },
+      onExit: ['HIDE_LOADING'],
+    },
+    removingFromWatchList: {
+      onEntry: ['REMOVE_FROM_WATCH_LIST', 'SHOW_LOADING'],
+      on: {
+        REMOVE_FROM_WATCH_LIST_SUCCESS: 'idle',
+        REMOVE_FROM_WATCH_LIST_FAILURE: {
+          idle: { actions: ['SHOW_ERROR_MESSAGE'] },
+        },
       },
       onExit: ['HIDE_LOADING'],
     },
