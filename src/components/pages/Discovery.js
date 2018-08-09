@@ -20,6 +20,9 @@ type PropTypes = {
 }
 
 class Discovery extends Component<PropTypes> {
+  static defaultProps = {
+    discoveryResults: [],
+  }
   fetchArtistAlbum = item => {
     this.props.fetchArtistAlbum({ spotifyId: item.spotifyId })
     return item

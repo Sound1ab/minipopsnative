@@ -16,11 +16,16 @@ class AwsMobile {
     Amplify.configure(config)
   }
 
-  setupPushNotificationListeners = callback => {
+  setupPushNotificationListeners = async (onNotification, onRegister) => {
     PushNotification.onNotification(
-      this.handleInAppNotification.bind(null, callback),
+      this.handleInAppNotification.bind(null, onNotification),
     )
-    PushNotification.onRegister(this.handleRegister)
+    const deviceToken = await this.getDeviceToken()
+    if (deviceToken) {
+      onRegister(deviceToken)
+    } else {
+      PushNotification.onRegister(this.handleRegister.bind(null, onRegister))
+    }
   }
 
   handleInAppNotification = (callback, notification) => {
@@ -28,12 +33,21 @@ class AwsMobile {
     notification.finish(PushNotificationIOS.FetchResult.NoData)
   }
 
-  handleRegister = async token => {
+  handleRegister = async (onRegister, token) => {
     try {
       await AsyncStorage.setItem('@Minipops:deviceToken', token)
+      onRegister(token)
       console.warn('in app registration', token)
     } catch (error) {
       console.log(`error saving data to AsyncStore: ${error}`)
+    }
+  }
+
+  getDeviceToken = async () => {
+    try {
+      return AsyncStorage.getItem('@Minipops:deviceToken')
+    } catch (error) {
+      console.warn(`could not retrieve data from AsyncStore: ${error}`)
     }
   }
 

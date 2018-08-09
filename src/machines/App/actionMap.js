@@ -47,4 +47,17 @@ export const actionMap = {
   SAVE_COGNITO_USER_OBJECT({ dispatch, payload }) {
     dispatch(saveCognitoUserObject(payload))
   },
+  async UPDATE_DEVICE_TOKEN({ dispatch, payload, state }) {
+    if (!state.localNotifications.deviceToken || !payload.id) {
+      return
+    }
+    try {
+      await Request.post(API('update-device-token'), {
+        id: payload.id,
+        deviceToken: state.localNotifications.deviceToken,
+      })
+    } catch (error) {
+      console.warn(`could not update device token: ${error}`)
+    }
+  },
 }

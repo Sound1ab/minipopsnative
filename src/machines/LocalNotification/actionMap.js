@@ -1,14 +1,14 @@
-import { updateLocalNotifications } from './actions'
+import { updateLocalNotifications, saveToken } from './actions'
 import uuidv1 from 'uuid/v1'
 import get from 'lodash/get'
 
 export const actionMap = {
-  async ADD_NOTIFICATION({ dispatch, payload, actions, state }) {
+  ADD_NOTIFICATION({ dispatch, payload, actions, state }) {
     const notification = {
-      title: get(payload, ['_alert', 'title'], ''),
-      message: get(payload, ['_alert', 'body'], ''),
-      url: get(payload, ['_data', 'url'], ''),
-      id: get(payload, ['_notificationId'], uuidv1()),
+      title: get(payload, ['notification', '_alert', 'title'], ''),
+      message: get(payload, ['notification', '_alert', 'body'], ''),
+      url: get(payload, ['notification', '_data', 'url'], ''),
+      id: get(payload, ['notification', '_notificationId'], uuidv1()),
     }
     dispatch(
       updateLocalNotifications({
@@ -20,7 +20,7 @@ export const actionMap = {
     )
     actions.NOTIFICATION_ADDED()
   },
-  async REMOVE_NOTIFICATION({ dispatch, payload, actions, state }) {
+  REMOVE_NOTIFICATION({ dispatch, payload, actions, state }) {
     dispatch(
       updateLocalNotifications({
         notifications: state.localNotifications.notifications.filter(
@@ -29,5 +29,9 @@ export const actionMap = {
       }),
     )
     actions.NOTIFICATION_REMOVED()
+  },
+  async SAVE_TOKEN({ dispatch, payload, actions }) {
+    dispatch(saveToken(payload))
+    actions.TOKEN_SAVED()
   },
 }

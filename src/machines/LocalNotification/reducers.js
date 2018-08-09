@@ -1,9 +1,10 @@
-import { UPDATE_LOCAL_NOTIFICATIONS } from './actions'
+import { UPDATE_LOCAL_NOTIFICATIONS, SAVE_TOKEN } from './actions'
 import { machine } from './machine'
 
 export const initialState = {
   state: machine.initial,
   notifications: [],
+  deviceToken: '',
 }
 
 export function localNotifications(state = initialState, action) {
@@ -14,10 +15,14 @@ export function localNotifications(state = initialState, action) {
         state: action.payload,
       }
     case UPDATE_LOCAL_NOTIFICATIONS:
-      console.log('reducer', action.payload)
       return {
         ...state,
         notifications: action.payload.notifications,
+      }
+    case SAVE_TOKEN:
+      return {
+        ...state,
+        deviceToken: action.payload.token,
       }
     default:
       return state

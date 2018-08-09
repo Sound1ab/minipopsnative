@@ -7,10 +7,18 @@ import { APP_MACHINE_ACTIONS } from './src/machines/App/actions'
 import { NOTIFICATION_MACHINE_ACTIONS } from './src/machines/LocalNotification/actions'
 import { setupNetworkMonitoring } from './src/helpers'
 
+const onNotification = notification => {
+  store.dispatch(
+    NOTIFICATION_MACHINE_ACTIONS.ADD_NOTIFICATION({ notification }),
+  )
+}
+
+const onRegister = token => {
+  store.dispatch(NOTIFICATION_MACHINE_ACTIONS.SAVE_TOKEN({ token }))
+}
+
 Aws.configure(config)
-Aws.setupPushNotificationListeners(notification => {
-  store.dispatch(NOTIFICATION_MACHINE_ACTIONS.ADD_NOTIFICATION(notification))
-})
+Aws.setupPushNotificationListeners(onNotification, onRegister)
 setupNetworkMonitoring()
 getDeviceToken()
 

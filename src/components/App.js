@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { GrowContainer, Spinner } from './presentational/atoms'
-import { NativeEventSubscription } from '../helpers'
 import {
   SignIn,
   SignUp,
@@ -19,22 +18,6 @@ type PropTypes = {
 }
 
 export class App extends Component<PropTypes> {
-  constructor(props) {
-    super(props)
-    this.setupLocalNotificationListenerForActiveTab()
-  }
-
-  setupLocalNotificationListenerForActiveTab = () => {
-    NativeEventSubscription.subscribe(selectedTabIndex => {
-      if (this.props.tabIndex === selectedTabIndex) {
-        console.log('selectedTabIndex', selectedTabIndex)
-        // Aws.setupPushNotificationListeners((e) => console.log(e))
-      } else {
-        // Aws.removePushNotificationListeners()
-      }
-    })
-  }
-
   components = {
     SignIn,
     SignUp,
@@ -50,7 +33,10 @@ export class App extends Component<PropTypes> {
     return (
       <GrowContainer>
         <Spinner isVisible={this.props.loading} />
-        <Component navigator={this.props.navigator} />
+        <Component
+          navigator={this.props.navigator}
+          loading={this.props.loading}
+        />
         <LocalNotificationManager />
       </GrowContainer>
     )

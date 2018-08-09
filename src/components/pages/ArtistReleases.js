@@ -62,6 +62,7 @@ ArtistReleases.defaultProps = {
 const mapStateToProps = state => ({
   artistReleases: state.discovery.artistReleases,
   state: state.discovery.state,
+  loading: state.app.loading,
 })
 
 export default connect(mapStateToProps)(ArtistReleases)

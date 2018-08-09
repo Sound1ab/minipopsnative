@@ -11,6 +11,7 @@ export const machine = Machine({
       on: {
         ADD_NOTIFICATION: 'addingNotification',
         REMOVE_NOTIFICATION: 'removingNotification',
+        SAVE_TOKEN: 'savingToken',
       },
     },
     addingNotification: {
@@ -23,6 +24,12 @@ export const machine = Machine({
       onEntry: ['REMOVE_NOTIFICATION'],
       on: {
         NOTIFICATION_REMOVED: 'idle',
+      },
+    },
+    savingToken: {
+      onEntry: ['SAVE_TOKEN'],
+      on: {
+        TOKEN_SAVED: 'idle',
       },
     },
   },

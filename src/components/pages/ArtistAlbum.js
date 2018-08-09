@@ -98,6 +98,7 @@ const mapStateToProps = state => ({
   favourites: state.discovery.favourites,
   id: state.login.cognitoUser.id,
   state: state.discovery.state,
+  loading: state.app.loading,
 })
 
 export default connect(mapStateToProps)(ArtistAlbum)

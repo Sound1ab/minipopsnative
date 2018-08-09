@@ -34,7 +34,7 @@ export const appMachine = Machine({
       },
     },
     fetchingFavourites: {
-      onEntry: ['FETCHING_FAVOURITES'],
+      onEntry: ['FETCHING_FAVOURITES', 'UPDATE_DEVICE_TOKEN'],
       on: {
         FETCH_SUCCESS: 'idle',
         FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
