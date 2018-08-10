@@ -91,7 +91,7 @@ export const startLogin = () => {
   Navigation.startTabBasedApp({
     tabs: [
       {
-§        screen: 'SignIn',
+        screen: 'SignIn',
         label: 'SignIn',
         passProps: {
           screen: 'SignIn',
