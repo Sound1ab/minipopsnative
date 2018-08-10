@@ -8,6 +8,7 @@ import { ImageWrapper } from '../atoms'
 type PropTypes = {
   items: Array<string>,
   handlePress: ?Function,
+  navigator: any,
 }
 
 const GridWrapper = styled.View`
@@ -33,7 +34,10 @@ export const ImageGrid = (props: PropTypes) => (
           <TouchableOpacity
             activeOpacity={1}
             key={item[0].spotifyId}
-            onPress={props.handlePress.bind(null, item[0])}
+            onPress={props.handlePress.bind(null, {
+              ...item[0],
+              navigator: props.navigator,
+            })}
           >
             <ImageWrapper
               source={item[0].imageMediumUrl}
@@ -51,4 +55,5 @@ export const ImageGrid = (props: PropTypes) => (
 ImageGrid.defaultProps = {
   items: [],
   handlePress: () => {},
+  navigator: {},
 }

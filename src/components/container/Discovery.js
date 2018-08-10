@@ -2,17 +2,7 @@
 import React, { Component } from 'react'
 import { Functional } from '../../helpers/functional'
 import { connect } from 'react-redux'
-import SearchField from '../../components/container/SearchField'
 import { pushScreen } from '../../navigation'
-import { Skeleton } from '../presentational/molecules'
-import {
-  FlatListWrapper,
-  GrowContainer,
-  FlatListItemDiscovery,
-  Heading,
-  NavBar,
-  Spinner,
-} from '../presentational/atoms'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 
 type PropTypes = {
@@ -27,9 +17,17 @@ class Discovery extends Component<PropTypes> {
     this.props.fetchArtistAlbum({ spotifyId: item.spotifyId })
     return item
   }
-  handlePushArtistAlbum = ({ spotifyId, title }) => {
+  fetchArtistReleases = item => {
+    this.props.fetchArtistReleases({ spotifyId: item.spotifyId })
+    return item
+  }
+  fetchMoreArtistReleases = item => {
+    this.props.fetchMoreArtistReleases({ spotifyId: item.spotifyId })
+    return item
+  }
+  handlePushArtistAlbum = ({ spotifyId, title, navigator }) => {
     pushScreen({
-      navigator: this.props.navigator,
+      navigator: navigator,
       screen: 'ArtistAlbum',
       passProps: {
         albumSpotifyId: spotifyId,
@@ -39,19 +37,12 @@ class Discovery extends Component<PropTypes> {
       },
     })
   }
-  fetchMoreArtistReleases = item => {
-    this.props.fetchMoreArtistReleases({ spotifyId: item.spotifyId })
-    return item
-  }
-  fetchArtistReleases = item => {
-    this.props.fetchArtistReleases({ spotifyId: item.spotifyId })
-    return item
-  }
-  handlePushArtistReleases = ({ spotifyId, title }) => {
+  handlePushArtistReleases = ({ spotifyId, title, navigator }) => {
     pushScreen({
-      navigator: this.props.navigator,
+      navigator: navigator,
       screen: 'ArtistReleases',
       passProps: {
+        navigator: navigator,
         artistSpotifyId: spotifyId,
         title,
         fetchMoreArtistReleases: this.fetchMoreArtistReleases,
@@ -63,29 +54,11 @@ class Discovery extends Component<PropTypes> {
     })
   }
   render() {
-    return (
-      <React.Fragment>
-        <NavBar>
-          <Heading color="black" size="xl" marginBottom>
-            Discovery
-          </Heading>
-          <SearchField api="related-artists" />
-        </NavBar>
-        <FlatListWrapper
-          data={this.props.discoveryResults}
-          keyExtractor={(item, index) => `${item.title}-${index}`}
-          renderItem={renderProps => (
-            <FlatListItemDiscovery
-              {...renderProps}
-              handlePushArtistReleases={Functional.compose(
-                this.handlePushArtistReleases,
-                this.fetchArtistReleases,
-              )}
-            />
-          )}
-        />
-      </React.Fragment>
-    )
+    return this.props.children({
+      ...this.props,
+      handlePushArtistReleases: this.handlePushArtistReleases,
+      fetchArtistReleases: this.fetchArtistReleases,
+    })
   }
 }
 

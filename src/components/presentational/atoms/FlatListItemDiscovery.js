@@ -42,21 +42,30 @@ const styles = StyleSheet.create({
   },
 })
 
-export const FlatListItemDiscovery = (props: Props) => (
+export const FlatListItemDiscovery = ({
+  item,
+  index,
+  handlePushArtistReleases,
+  navigator,
+}: Props) => (
   <Wrapper
     activeOpacity={1}
-    index={props.index}
+    index={index}
     height={300}
-    onPress={props.handlePushArtistReleases.bind(null, props.item)}
+    onPress={handlePushArtistReleases.bind(null, {
+      spotifyId: item.spotifyId,
+      title: item.title,
+      navigator,
+    })}
   >
     <RelativeWrapper>
-      <ImageWrapper source={props.item.imageUrl} />
+      <ImageWrapper source={item.imageUrl} />
       <LinearGradient
         colors={['rgba(0,0,0,0.5)', 'rgba(0, 0, 0,0)']}
         style={styles.linearGradient}
       />
       <TextWrapper position={{ top: 0 }}>
-        <Heading size="m">{props.item.title}</Heading>
+        <Heading size="m">{item.title}</Heading>
       </TextWrapper>
     </RelativeWrapper>
   </Wrapper>

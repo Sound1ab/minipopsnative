@@ -3,10 +3,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { SIGN_UP_MACHINE_ACTIONS } from '../../machines/SignUp/actions'
 import { FormValidation } from '../../helpers/index'
-import {
-  SignUpForm,
-  SignUpConfirmation,
-} from '../presentational/organisms/index'
 
 type PropTypes = {
   navigator: Object,
@@ -75,33 +71,19 @@ export class SignUp extends Component<PropTypes, StateTypes> {
   }
 
   render() {
-    const { username, password, phone_number, email } = this.state.form
-    const { code } = this.state.confirmation
-    return this.props.signUpState === 'confirmingUser' ||
-      (this.props.signUpState.idle &&
-        this.props.signUpState.idle === 'waitingForConfirmation') ? (
-      <SignUpConfirmation
-        code={code}
-        validationErrors={this.state.validationErrors}
-        handleChangeText={this.handleCodeText}
-        handleSubmit={this.handleConfirmation}
-      />
-    ) : (
-      <SignUpForm
-        username={username}
-        password={password}
-        phone_number={phone_number}
-        email={email}
-        validationErrors={this.state.validationErrors}
-        handleChangeText={this.handleChangeText}
-        handleSubmit={this.handleSignUp}
-      />
-    )
+    return this.props.children({
+      ...this.state,
+      ...this.props,
+      handleChangeText: this.handleChangeText,
+      handleCodeText: this.handleCodeText,
+      handleSignUp: this.handleSignUp,
+      handleConfirmation: this.handleConfirmation,
+    })
   }
 }
 
 const mapStateToProps = state => ({
-  signUpState: state.signUp.state,
+  state: state.signUp.state,
 })
 
 const mapDispatchToProps = dispatch => ({

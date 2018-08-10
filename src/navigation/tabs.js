@@ -7,7 +7,7 @@ export const startApp = async () => {
   Navigation.startTabBasedApp({
     tabs: [
       {
-        screen: 'App',
+        screen: 'Favourites',
         title: 'Favourites',
         icon: icons.favourites,
         iconInsets: {
@@ -20,7 +20,7 @@ export const startApp = async () => {
         },
       },
       {
-        screen: 'App',
+        screen: 'Discovery',
         title: 'Discovery',
         icon: icons.discovery,
         iconInsets: {
@@ -33,7 +33,7 @@ export const startApp = async () => {
         },
       },
       {
-        screen: 'App',
+        screen: 'Feed',
         title: 'Feed',
         icon: icons.feed,
         iconInsets: {
@@ -46,7 +46,7 @@ export const startApp = async () => {
         },
       },
       {
-        screen: 'App',
+        screen: 'Search',
         title: 'Search',
         icon: icons.search,
         iconInsets: {
@@ -59,7 +59,7 @@ export const startApp = async () => {
         },
       },
       {
-        screen: 'App',
+        screen: 'Profile',
         title: 'Profile',
         icon: icons.profile,
         iconInsets: {

@@ -15,18 +15,7 @@ type PropTypes = {
   signOut: Function,
 }
 
-const Profile = (props: PropTypes) => (
-  <React.Fragment>
-    <NavBar>
-      <Heading color="black" size="xl">
-        Profile
-      </Heading>
-    </NavBar>
-    <GrowContainer justifyContent={'center'} alignItems={'center'}>
-      <Button title="Sign Out" handlePress={props.signOut} />
-    </GrowContainer>
-  </React.Fragment>
-)
+const Profile = (props: PropTypes) => props.children(props)
 
 const mapStateToProps = state => ({})
 

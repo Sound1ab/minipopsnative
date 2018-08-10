@@ -3,10 +3,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { LOGIN_MACHINE_ACTIONS } from '../../machines/Login/actions'
 import { FormValidation } from '../../helpers/index'
-import {
-  SignInForm,
-  SignInConfirmation,
-} from '../presentational/organisms/index'
 
 type PropTypes = {
   navigator: Object,
@@ -77,29 +73,19 @@ export class SignIn extends Component<PropTypes, StateTypes> {
     })
   }
   render() {
-    const { username, password } = this.state.form
-    return this.props.signInState.idle &&
-      this.props.signInState.idle === 'waitingForConfirmation' ? (
-      <SignInConfirmation
-        code={this.state.confirmation.code}
-        validationErrors={this.state.validationErrors}
-        handleChangeText={this.handleCodeText}
-        handleSubmit={this.handleConfirmation}
-      />
-    ) : (
-      <SignInForm
-        username={username}
-        password={password}
-        validationErrors={this.state.validationErrors}
-        handleChangeText={this.handleChangeText}
-        handleSubmit={this.handleSignIn}
-      />
-    )
+    return this.props.children({
+      ...this.props,
+      ...this.state,
+      handleChangeText: this.handleChangeText,
+      handleCodeText: this.handleCodeText,
+      handleSignIn: this.handleSignIn,
+      handleConfirmation: this.handleConfirmation,
+    })
   }
 }
 
 const mapStateToProps = state => ({
-  signInState: state.login.state,
+  state: state.login.state,
   cognitoUser: state.login.cognitoUser,
 })
 

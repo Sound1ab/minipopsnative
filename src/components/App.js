@@ -10,7 +10,7 @@ import {
   Feed,
   Search,
   Profile,
-} from './pages'
+} from './presentational/pages'
 import { LocalNotificationManager } from './container'
 
 type PropTypes = {

@@ -1,1 +1,1 @@
-export { default } from '../../components/pages/Search'
+export { default } from '../../components/presentational/pages/Search'
