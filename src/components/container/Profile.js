@@ -1,13 +1,6 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-  GrowContainer,
-  Spinner,
-  NavBar,
-  Heading,
-  Button,
-} from '../presentational/atoms'
 import { LOGIN_MACHINE_ACTIONS } from '../../machines/Login/actions'
 
 type PropTypes = {
@@ -17,7 +10,9 @@ type PropTypes = {
 
 const Profile = (props: PropTypes) => props.children(props)
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  loading: state.app.loading,
+})
 
 const mapDispatchToProps = dispatch => ({
   signOut: () => {

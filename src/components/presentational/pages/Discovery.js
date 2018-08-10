@@ -1,24 +1,28 @@
 // @flow
 import React from 'react'
 import { Functional } from '../../../helpers/functional'
-import {
-  FlatListWrapper,
-  FlatListItemDiscovery,
-  Heading,
-  NavBar,
-} from '../atoms/index'
-import { SearchField, DiscoveryContainer } from '../../container/index'
+import { DiscoveryContainer } from '../../container'
+import { Screen } from '../templates'
+import { FlatListWrapper, FlatListItemDiscovery } from '../atoms'
 
 export const Discovery = ({ navigator }) => (
   <DiscoveryContainer>
-    {({ discoveryResults, handlePushArtistReleases, fetchArtistReleases }) => (
-      <React.Fragment>
-        <NavBar>
-          <Heading color="black" size="xl" marginBottom>
-            Discovery
-          </Heading>
-          <SearchField api="related-artists" />
-        </NavBar>
+    {({
+      loading,
+      discoveryResults,
+      handlePushArtistReleases,
+      fetchArtistReleases,
+    }) => (
+      <Screen
+        loading={loading}
+        heading={{
+          value: 'Discovery',
+          color: 'black',
+          size: 'xl',
+          marginBottom: true,
+        }}
+        searchApi="related-artists"
+      >
         <FlatListWrapper
           data={discoveryResults}
           keyExtractor={(item, index) => `${item.title}-${index}`}
@@ -33,7 +37,7 @@ export const Discovery = ({ navigator }) => (
             />
           )}
         />
-      </React.Fragment>
+      </Screen>
     )}
   </DiscoveryContainer>
 )

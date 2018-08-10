@@ -1,11 +1,12 @@
 // @flow
 import React from 'react'
 import { Dimensions, ScrollView } from 'react-native'
-import { popScreen } from '../../../navigation/index'
-import { ArtistAlbumContainer } from '../../container/index'
-import { ActionBar, TrackRow } from '../molecules/index'
-import { NavBar, Heading, ImageWrapper } from '../atoms/index'
-import { ArtistAlbumSkeleton, HeadingSkeleton } from '../zkeletons'
+import { popScreen } from '../../../navigation'
+import { ArtistAlbumContainer } from '../../container'
+import { Screen } from '../templates'
+import { ActionBar, TrackRow } from '../molecules'
+import { ImageWrapper } from '../atoms'
+import { ArtistAlbumSkeleton } from '../zkeletons'
 
 export const ArtistAlbum = ({ navigator }) => (
   <ArtistAlbumContainer>
@@ -19,16 +20,20 @@ export const ArtistAlbum = ({ navigator }) => (
       addToFavourites,
       removeFromFavourites,
     }) => (
-      <React.Fragment>
-        <NavBar handleBack={popScreen.bind(null, navigator)}>
-          {loading && state === 'fetchingAlbum' ? (
-            <HeadingSkeleton />
-          ) : (
-            <Heading color="black" size="l">
-              {artistAlbum.album}
-            </Heading>
-          )}
-        </NavBar>
+      <Screen
+        loading={loading}
+        handleBack={popScreen.bind(null, navigator)}
+        state={{
+          currentState: state,
+          loadingState: 'fetchingAlbum',
+        }}
+        heading={{
+          value: artistAlbum.album,
+          color: 'black',
+          size: 'l',
+          marginBottom: false,
+        }}
+      >
         {loading && state === 'fetchingAlbum' ? (
           <ArtistAlbumSkeleton />
         ) : (
@@ -58,7 +63,7 @@ export const ArtistAlbum = ({ navigator }) => (
             ))}
           </ScrollView>
         )}
-      </React.Fragment>
+      </Screen>
     )}
   </ArtistAlbumContainer>
 )

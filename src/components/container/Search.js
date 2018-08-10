@@ -10,6 +10,7 @@ type PropTypes = {
 const Search = (props: PropTypes) => props.children(props)
 
 const mapStateToProps = state => ({
+  loading: state.app.loading,
   searchResults: state.search.searchResults,
 })
 

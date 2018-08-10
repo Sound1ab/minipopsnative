@@ -1,9 +1,10 @@
 // @flow
 import React from 'react'
-import { popScreen } from '../../../navigation/index'
-import { Heading, NavBar, ScrollViewWrapper } from '../atoms/index'
-import { ImageGrid } from '../molecules/index'
-import { ArtistReleasesContainer } from '../../container/index'
+import { popScreen } from '../../../navigation'
+import { ArtistReleasesContainer } from '../../container'
+import { Screen } from '../templates'
+import { ImageGrid } from '../molecules'
+import { ScrollViewWrapper } from '../atoms'
 import { ImageGridSkeleton } from '../zkeletons'
 
 export const ArtistReleases = ({
@@ -15,12 +16,20 @@ export const ArtistReleases = ({
 }) => (
   <ArtistReleasesContainer>
     {({ artistReleases, state, loading }) => (
-      <React.Fragment>
-        <NavBar handleBack={popScreen.bind(null, navigator)}>
-          <Heading color="black" size="l">
-            {title}
-          </Heading>
-        </NavBar>
+      <Screen
+        loading={loading}
+        handleBack={popScreen.bind(null, navigator)}
+        state={{
+          currentState: state,
+          loadingState: 'fetchingReleases',
+        }}
+        heading={{
+          value: title,
+          color: 'black',
+          size: 'l',
+          marginBottom: false,
+        }}
+      >
         <ScrollViewWrapper
           onEndReached={fetchMoreArtistReleases.bind(null, {
             spotifyId: artistSpotifyId,
@@ -36,7 +45,7 @@ export const ArtistReleases = ({
             />
           )}
         </ScrollViewWrapper>
-      </React.Fragment>
+      </Screen>
     )}
   </ArtistReleasesContainer>
 )

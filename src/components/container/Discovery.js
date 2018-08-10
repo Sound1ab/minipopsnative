@@ -63,6 +63,7 @@ class Discovery extends Component<PropTypes> {
 }
 
 const mapStateToProps = state => ({
+  loading: state.app.loading,
   discoveryResults: state.search.discoveryResults,
   artistReleases: state.discovery.artistReleases,
 })

@@ -1,29 +1,28 @@
 // @flow
 import React from 'react'
-import { SearchField, SearchContainer } from '../../container/index'
-import {
-  FlatListWrapper,
-  FlatListItemSearch,
-  Heading,
-  NavBar,
-} from '../atoms/index'
+import { Screen } from '../templates'
+import { SearchContainer } from '../../container'
+import { FlatListWrapper, FlatListItemSearch } from '../atoms/index'
 
 export const Search = () => (
   <SearchContainer>
-    {({ searchResults }) => (
-      <React.Fragment>
-        <NavBar>
-          <Heading color="black" size="xl" marginBottom>
-            Search
-          </Heading>
-          <SearchField api="current-items" />
-        </NavBar>
+    {({ loading, searchResults }) => (
+      <Screen
+        loading={loading}
+        heading={{
+          value: 'Feed',
+          color: 'black',
+          size: 'xl',
+          marginBottom: true,
+        }}
+        searchApi="current-items"
+      >
         <FlatListWrapper
           data={searchResults}
           keyExtractor={(item, index) => `${item.title}-${index}`}
           renderItem={FlatListItemSearch}
         />
-      </React.Fragment>
+      </Screen>
     )}
   </SearchContainer>
 )

@@ -1,23 +1,22 @@
 // @flow
 import React from 'react'
-import { FeedContainer } from '../../container/index'
-import {
-  Heading,
-  NavBar,
-  FlatListWrapper,
-  FlatListItemSearch,
-} from '../atoms/index'
+import { FeedContainer } from '../../container'
+import { Screen } from '../templates'
+import { FlatListWrapper, FlatListItemSearch } from '../atoms'
 import { FeedListSkeleton } from '../zkeletons'
 
 export const Feed = () => (
   <FeedContainer>
     {({ loading, id, feed, state }) => (
-      <React.Fragment>
-        <NavBar>
-          <Heading color="black" size="xl">
-            Feed
-          </Heading>
-        </NavBar>
+      <Screen
+        loading={loading}
+        heading={{
+          value: 'Feed',
+          color: 'black',
+          size: 'xl',
+          marginBottom: false,
+        }}
+      >
         {loading && state === 'fetchingFeed' ? (
           <FeedListSkeleton />
         ) : (
@@ -27,7 +26,7 @@ export const Feed = () => (
             renderItem={FlatListItemSearch}
           />
         )}
-      </React.Fragment>
+      </Screen>
     )}
   </FeedContainer>
 )

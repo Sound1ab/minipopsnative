@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
 import { SwipeListView } from 'react-native-swipe-list-view'
-import { FavouritesListSkeleton } from '../zkeletons'
 import { FavouritesContainer } from '../../container'
+import { Screen } from '../templates'
 import { FavouritesRow, FavouritesRowHidden } from '../molecules'
-import { Heading, NavBar } from '../atoms'
+import { FavouritesListSkeleton } from '../zkeletons'
 
 export const Favourites = () => (
   <FavouritesContainer>
@@ -18,12 +18,15 @@ export const Favourites = () => (
       addToWatchList,
       removeFromWatchList,
     }) => (
-      <React.Fragment>
-        <NavBar>
-          <Heading color="black" size="xl">
-            Favourites
-          </Heading>
-        </NavBar>
+      <Screen
+        loading={loading}
+        heading={{
+          value: 'Favourites',
+          color: 'black',
+          size: 'xl',
+          marginBottom: false,
+        }}
+      >
         {loading && state === 'fetchingFavourites' ? (
           <FavouritesListSkeleton />
         ) : (
@@ -59,7 +62,7 @@ export const Favourites = () => (
             leftOpenValue={100}
           />
         )}
-      </React.Fragment>
+      </Screen>
     )}
   </FavouritesContainer>
 )
