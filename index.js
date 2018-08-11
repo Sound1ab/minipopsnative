@@ -19,7 +19,10 @@ const onRegister = token => {
 
 Aws.configure(config)
 Aws.setupPushNotificationListeners(onNotification, onRegister)
+Aws.checkInitialNotification()
+
 setupNetworkMonitoring()
+
 getDeviceToken()
 
 async function getDeviceToken() {

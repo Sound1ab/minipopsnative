@@ -2,6 +2,7 @@ import Amplify from 'aws-amplify'
 import config from '../../aws-exports'
 import { PushNotificationIOS, AsyncStorage, Linking } from 'react-native'
 import PushNotification from '@aws-amplify/pushnotification'
+import get from 'lodash/get'
 
 let aws = null
 
@@ -56,7 +57,7 @@ class AwsMobile {
       const PushNotificationIOSObj = await PushNotificationIOS.getInitialNotification()
       const url =
         PushNotificationIOSObj &&
-        get(PushNotificationIOSObj.getData(), ['data', 'url'], null)
+        get(PushNotificationIOSObj.getData(), ['url'], null)
       if (url) {
         Linking.openURL(url)
       }

@@ -3,7 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 import * as Animatable from 'react-native-animatable'
 import { colors } from '../../../theme'
-const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
+import { MinipopsIcon } from './MinipopsIcon'
+// const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
 
 type PropTypes = {
   isVisible: Boolean,
@@ -16,10 +17,9 @@ const Wrapper = Animatable.createAnimatableComponent(styled.View`
   align-self: flex-start;
 `)
 
-const Image = Animatable.createAnimatableComponent(styled.Image`
-  height: 40;
-  width: 40;
-`)
+const MinipopsIconAnimatable = Animatable.createAnimatableComponent(
+  MinipopsIcon,
+)
 
 export const Spinner = (props: PropTypes) => (
   <Wrapper
@@ -27,11 +27,12 @@ export const Spinner = (props: PropTypes) => (
     transition={['opacity']}
     style={{ opacity: props.isVisible ? 1 : 0 }}
   >
-    <Image
+    <MinipopsIconAnimatable
+      size={40}
       useNativeDriver={true}
       animation="rotate"
       iterationCount="infinite"
-      source={recordImage}
+      // source={recordImage}
     />
   </Wrapper>
 )

@@ -40,7 +40,7 @@ export const ImageGrid = (props: PropTypes) => (
             })}
           >
             <ImageWrapper
-              source={item[0].imageMediumUrl}
+              source={item[0].imageSmallUrl}
               height={Dimensions.get('window').width / 3}
               width={'33%'}
               handlePress={props.handlePress}
