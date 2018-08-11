@@ -47,12 +47,12 @@ export const actionMap = {
       actions.FETCH_WATCH_LIST_FAILURE(error)
     }
   },
-  REDIRECT_TO_APP({ actions, payload }) {
-    startApp()
+  async REDIRECT_TO_APP({ actions, payload }) {
+    await startApp()
     actions.LOAD_SUCCESS(payload)
   },
-  REDIRECT_TO_LOGIN({ actions, payload }) {
-    startLogin()
+  async REDIRECT_TO_LOGIN({ actions, payload }) {
+    await startLogin()
     actions.LOAD_SUCCESS(payload)
   },
   SAVE_COGNITO_USER_OBJECT({ dispatch, payload }) {

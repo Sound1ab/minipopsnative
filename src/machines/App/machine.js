@@ -37,7 +37,7 @@ export const appMachine = Machine({
     loadingLogin: {
       onEntry: ['REDIRECT_TO_LOGIN'],
       on: {
-        LOAD_SUCCESS: 'idle',
+        SIGN_IN: 'checkingAuthenticatedUser',
       },
     },
     fetchingInitialData: {

@@ -24,7 +24,7 @@ export const machine = Machine({
       on: {
         SIGN_IN_SUCCESS: {
           'idle.waitingForSignOut': {
-            actions: ['SAVE_COGNITO_USER_OBJECT', 'REDIRECT_TO_APP'],
+            actions: ['REDIRECT_TO_APP'],
           },
         },
         SIGN_IN_FAILURE: {

@@ -2,6 +2,7 @@ import { saveCognitoUserObject, removeCognitoUserObject } from './actions'
 import { Auth } from 'aws-amplify'
 import { startApp, startLogin } from '../../navigation/index'
 import { uiActionMap } from '../App/genericActionMap'
+import { APP_MACHINE_ACTIONS } from '../App/actions'
 
 console.log('uiActionMap', uiActionMap)
 
@@ -9,9 +10,8 @@ export const actionMap = {
   ...uiActionMap,
   async SIGN_IN({ payload, actions }) {
     try {
-      const cognitoUser = await Auth.signIn(payload.username, payload.password)
-      const { id } = await Auth.currentUserInfo()
-      actions.SIGN_IN_SUCCESS({ id, ...cognitoUser })
+      await Auth.signIn(payload.username, payload.password)
+      actions.SIGN_IN_SUCCESS()
     } catch (error) {
       actions.SIGN_IN_FAILURE(error)
     }
@@ -25,17 +25,11 @@ export const actionMap = {
       actions.SIGN_OUT_FAILURE(error)
     }
   },
-  SAVE_COGNITO_USER_OBJECT({ dispatch, payload }) {
-    dispatch(saveCognitoUserObject(payload))
-  },
   REMOVE_COGNITO_USER_OBJECT({ dispatch }) {
     dispatch(removeCognitoUserObject())
   },
-  REDIRECT_TO_APP() {
-    startApp()
-  },
-  REDIRECT_TO_LOGIN() {
-    startLogin()
+  REDIRECT_TO_APP({ dispatch }) {
+    dispatch(APP_MACHINE_ACTIONS.SIGN_IN())
   },
   async CONFIRM_USER({ payload, actions }) {
     try {
