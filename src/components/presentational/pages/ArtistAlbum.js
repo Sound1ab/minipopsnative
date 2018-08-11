@@ -8,7 +8,7 @@ import { ActionBar, TrackRow } from '../molecules'
 import { ImageWrapper } from '../atoms'
 import { ArtistAlbumSkeleton } from '../zkeletons'
 
-export const ArtistAlbum = ({ navigator }) => (
+export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
   <ArtistAlbumContainer>
     {({
       loading,
@@ -16,7 +16,6 @@ export const ArtistAlbum = ({ navigator }) => (
       artistAlbum,
       id,
       favourites,
-      albumSpotifyId,
       addToFavourites,
       removeFromFavourites,
     }) => (
