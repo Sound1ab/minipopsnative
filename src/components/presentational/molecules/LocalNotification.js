@@ -7,7 +7,6 @@ import { Linking, Vibration } from 'react-native'
 import { Heading } from '../atoms'
 import { ifIphoneX } from '../../../helpers/iphoneXHelper'
 import { BlurView } from 'react-native-blur'
-import { Icon } from '../atoms'
 const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
 
 type PropTypes = {}

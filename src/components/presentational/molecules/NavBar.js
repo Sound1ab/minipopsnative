@@ -19,7 +19,6 @@ const Wrapper = styled.View`
   justify-content: flex-start;
   align-items: flex-start;
   background-color: white;
-  z-index: 10;
   ${shadow.map(
     ({ property, value }) =>
       css`

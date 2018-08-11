@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import { LocalNotificationManager, SearchField } from '../../container'
+import styled from 'styled-components'
 import { NavBar } from '../molecules'
-import { Spinner } from '../atoms'
 
 type PropTypes = {
   loading: Boolean,
@@ -21,6 +21,11 @@ type PropTypes = {
   children: Function,
 }
 
+const Sink = styled.View`
+  flex: 1;
+  z-index: -1;
+`
+
 export const Screen = ({
   loading,
   handleBack,
@@ -38,8 +43,7 @@ export const Screen = ({
     >
       {searchApi && <SearchField api={searchApi} />}
     </NavBar>
-    {children}
-    {/*<Spinner isVisible={loading} />*/}
+    <Sink>{children}</Sink>
     <LocalNotificationManager />
   </React.Fragment>
 )
