@@ -8,6 +8,7 @@ import { Heading } from '../atoms'
 import { ifIphoneX } from '../../../helpers/iphoneXHelper'
 import { BlurView } from 'react-native-blur'
 import { Icon } from '../atoms'
+const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
 
 type PropTypes = {}
 
@@ -53,6 +54,11 @@ const HorizontalWrapper = styled.View`
 
 const IconWrapper = styled.View`
   margin-right: 8px;
+`
+
+const Image = styled.Image`
+  width: 30;
+  height: 30;
 `
 
 export class LocalNotification extends Component<PropTypes, StateTypes> {
@@ -146,7 +152,7 @@ export class LocalNotification extends Component<PropTypes, StateTypes> {
             <Blurred blurType="light" blurAmount={10} />
             <HorizontalWrapper>
               <IconWrapper>
-                <Icon name="ios-heart" />
+                <Image source={recordImage} />
               </IconWrapper>
               <Heading size="xs" weight="regular" color="#434348">
                 {NOTIFICATION_HEADER}
