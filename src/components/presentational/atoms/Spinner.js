@@ -1,8 +1,9 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import SpinKit from 'react-native-spinkit'
+import * as Animatable from 'react-native-animatable'
 import { colors } from '../../../theme'
+const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
 
 type PropTypes = {
   isVisible: Boolean,
@@ -10,21 +11,27 @@ type PropTypes = {
   color: String,
 }
 
-const Wrapper = styled.View`
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 42px 16px 0 0;
-  z-index: 10;
-`
+const Wrapper = Animatable.createAnimatableComponent(styled.View`
+  margin-left: auto;
+  align-self: flex-start;
+`)
+
+const Image = Animatable.createAnimatableComponent(styled.Image`
+  height: 40;
+  width: 40;
+`)
 
 export const Spinner = (props: PropTypes) => (
-  <Wrapper>
-    <SpinKit
-      isVisible={props.isVisible}
-      size={props.size}
-      type={'ChasingDots'}
-      color={props.color}
+  <Wrapper
+    useNativeDriver={true}
+    transition={['opacity']}
+    style={{ opacity: props.isVisible ? 1 : 0 }}
+  >
+    <Image
+      useNativeDriver={true}
+      animation="rotate"
+      iterationCount="infinite"
+      source={recordImage}
     />
   </Wrapper>
 )

@@ -39,7 +39,7 @@ export const Screen = ({
       {searchApi && <SearchField api={searchApi} />}
     </NavBar>
     {children}
-    <Spinner isVisible={loading} />
+    {/*<Spinner isVisible={loading} />*/}
     <LocalNotificationManager />
   </React.Fragment>
 )

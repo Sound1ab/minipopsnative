@@ -1,8 +1,7 @@
 // @flow
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { TouchableOpacity } from 'react-native'
-import { Icon, Heading } from '../atoms'
+import { Icon, Heading, Spinner } from '../atoms'
 import { HeadingSkeleton } from '../zkeletons'
 import { colors, shadow } from '../../../theme/index'
 
@@ -15,7 +14,7 @@ type Props = {
 
 const Wrapper = styled.View`
   flex: 0 0 auto;
-  flex-direction: ${({ handleBack }) => (handleBack ? 'row' : 'column')};
+  flex-direction: column;
   padding: 48px 16px 16px 16px;
   justify-content: flex-start;
   align-items: flex-start;
@@ -30,8 +29,9 @@ const Wrapper = styled.View`
 `
 
 const TouchableWrapper = styled.TouchableOpacity`
+  width: 100%;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
 `
 
@@ -47,32 +47,35 @@ export const NavBar = ({
   children,
 }: Props) => (
   <Wrapper handleBack={handleBack}>
-    {handleBack ? (
-      <TouchableWrapper onPress={handleBack}>
-        <IconWrapper>
-          <Icon name="ios-arrow-back" top="-2" color={colors.primary} />
-        </IconWrapper>
-        {loading && state && state.currentState === state.loadingState ? (
-          <HeadingSkeleton />
-        ) : (
-          <Heading
-            color={heading.color}
-            size={heading.size}
-            marginBottom={heading.marginBottom}
-          >
-            {heading.value}
-          </Heading>
-        )}
-      </TouchableWrapper>
-    ) : (
-      <Heading
-        color={heading.color}
-        size={heading.size}
-        marginBottom={heading.marginBottom}
-      >
-        {heading.value}
-      </Heading>
-    )}
+    <TouchableWrapper onPress={handleBack}>
+      {handleBack ? (
+        <React.Fragment>
+          <IconWrapper>
+            <Icon name="ios-arrow-back" color={colors.primary} />
+          </IconWrapper>
+          {loading && state && state.currentState === state.loadingState ? (
+            <HeadingSkeleton />
+          ) : (
+            <Heading
+              color={heading.color}
+              size={heading.size}
+              marginBottom={heading.marginBottom}
+            >
+              {heading.value}
+            </Heading>
+          )}
+        </React.Fragment>
+      ) : (
+        <Heading
+          color={heading.color}
+          size={heading.size}
+          marginBottom={heading.marginBottom}
+        >
+          {heading.value}
+        </Heading>
+      )}
+      <Spinner isVisible={loading} />
+    </TouchableWrapper>
     {children}
   </Wrapper>
 )
