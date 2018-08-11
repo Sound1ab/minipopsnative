@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { iOSColors } from 'react-native-typography'
 import { colors } from '../../../theme'
@@ -15,6 +15,10 @@ type Props = {
   error: Boolean,
   autoCapitalize: String,
   keyboardType: String,
+  selectionColor: string,
+  returnKeyType: string,
+  handleSubmitEditing: ?Function,
+  blurOnSubmit: Boolean,
 }
 
 const Input = styled.TextInput`
@@ -29,35 +33,52 @@ const Input = styled.TextInput`
   margin-bottom: ${({ marginBottom }) => (marginBottom ? '16px' : '0')};
 `
 
-export const InputWrapper = (props: Props) => (
-  <Input
-    autoCorrect={false}
-    autoFocus={props.autoFocus}
-    keyboardAppearance="dark"
-    clearButtonMode="always"
-    placeholder={props.placeholder}
-    onChangeText={props.handleChange}
-    search={props.search}
-    placeholderTextColor={props.placeholderTextColor}
-    marginBottom={props.marginBottom}
-    value={props.value}
-    secureTextEntry={props.password}
-    error={props.error}
-    autoCapitalize={props.autoCapitalize}
-    keyboardType={props.keyboardType}
-  />
-)
+export class InputWrapper extends Component<Props> {
+  static defaultProps = {
+    placeholder: 'test',
+    value: '',
+    handleChange: () => {},
+    search: false,
+    placeholderTextColor: iOSColors.gray,
+    marginBottom: false,
+    autoFocus: false,
+    password: false,
+    error: false,
+    autoCapitalize: 'sentences',
+    keyboardType: 'default',
+    selectionColor: colors.primary,
+    returnKeyType: 'search',
+    handleSubmitEditing: null,
+    blurOnSubmit: true,
+  }
 
-InputWrapper.defaultProps = {
-  placeholder: 'test',
-  value: '',
-  handleChange: () => {},
-  search: false,
-  placeholderTextColor: iOSColors.gray,
-  marginBottom: false,
-  autoFocus: false,
-  password: false,
-  error: false,
-  autoCapitalize: 'sentences',
-  keyboardType: 'default',
+  focus = () => {
+    this.input.root.focus()
+  }
+
+  render() {
+    return (
+      <Input
+        ref={input => (this.input = input)}
+        autoCorrect={false}
+        autoFocus={this.props.autoFocus}
+        keyboardAppearance="dark"
+        clearButtonMode="always"
+        placeholder={this.props.placeholder}
+        onChangeText={this.props.handleChange}
+        search={this.props.search}
+        placeholderTextColor={this.props.placeholderTextColor}
+        marginBottom={this.props.marginBottom}
+        value={this.props.value}
+        secureTextEntry={this.props.password}
+        error={this.props.error}
+        autoCapitalize={this.props.autoCapitalize}
+        keyboardType={this.props.keyboardType}
+        selectionColor={this.props.selectionColor}
+        returnKeyType={this.props.returnKeyType}
+        onSubmitEditing={this.props.handleSubmitEditing}
+        blurOnSubmit={this.props.blurOnSubmit}
+      />
+    )
+  }
 }

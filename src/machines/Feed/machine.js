@@ -10,9 +10,18 @@ export const machine = Machine({
     idle: {
       on: {
         FETCH_FEED: 'fetchingFeed',
+        REFETCH_FEED: 'refetchingFeed',
       },
     },
     fetchingFeed: {
+      onEntry: ['FETCH_FEED', 'SHOW_LOADING'],
+      on: {
+        FETCH_SUCCESS: 'idle',
+        FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
+      },
+      onExit: ['HIDE_LOADING'],
+    },
+    refetchingFeed: {
       onEntry: ['FETCH_FEED', 'SHOW_LOADING'],
       on: {
         FETCH_SUCCESS: 'idle',

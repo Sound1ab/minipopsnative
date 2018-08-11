@@ -37,18 +37,23 @@ export const SignInForm = (props: PropTypes) => (
         handleChange={props.handleChangeText.bind(null, 'username')}
         value={props.username}
         marginBottom
-        autoFocus
         autoCapitalize="none"
         error={props.validationErrors.includes('username')}
         placeholder="username"
+        returnKeyType="next"
+        handleSubmitEditing={() => this.passwordField.focus()}
+        blurOnSubmit={false}
       />
       <InputWrapper
+        ref={ref => (this.passwordField = ref)}
         handleChange={props.handleChangeText.bind(null, 'password')}
         value={props.password}
         password
         autoCapitalize="none"
         error={props.validationErrors.includes('password')}
         placeholder="password"
+        returnKeyType="go"
+        handleSubmitEditing={props.handleSubmit}
       />
     </Section>
     <TouchableOpacity onPress={props.handleSubmit}>

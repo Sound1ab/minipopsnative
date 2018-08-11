@@ -8,6 +8,8 @@ type PropTypes = {
   id: string,
   feed: Array<{}>,
   state: string | Object,
+  fetchFeed: Function,
+  refetchFeed: Function,
 }
 
 export class Feed extends Component<PropTypes> {
@@ -16,6 +18,8 @@ export class Feed extends Component<PropTypes> {
     id: '',
     feed: [],
     state: '',
+    fetchFeed: () => {},
+    refetchFeed: () => {},
   }
   componentDidMount() {
     this.props.fetchFeed({ id: this.props.id })
@@ -36,6 +40,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchFeed: payload => {
     dispatch(FEED_MACHINE_ACTIONS.FETCH_FEED(payload))
+  },
+  refetchFeed: payload => {
+    dispatch(FEED_MACHINE_ACTIONS.REFETCH_FEED(payload))
   },
 })
 

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import { Linking } from 'react-native'
 import { Heading, Button } from '../atoms'
 import { ImageSlider } from '../molecules'
 import { View, Dimensions } from 'react-native'
@@ -57,7 +58,16 @@ export const FlatListItemSearch = (props: Props) => (
           Bids: {props.item.bids}
         </Heading>
         <AbsoluteWrapper>
-          <Button title="View" />
+          <Button
+            handlePress={() => {
+              try {
+                Linking.openURL(props.item.itemUrl)
+              } catch (error) {
+                console.warn(error)
+              }
+            }}
+            title="View"
+          />
         </AbsoluteWrapper>
       </RelativeWrapper>
     </ContentWrapper>

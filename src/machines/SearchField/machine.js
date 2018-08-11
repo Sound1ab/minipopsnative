@@ -27,6 +27,7 @@ export const searchMachine = Machine({
       },
       on: {
         TIMER_COUNTDOWN_PASSED: 'fetchingSearch',
+        SUBMIT: 'fetchingSearch',
         UPDATE_SEARCH: {
           searching: {
             actions: ['UPDATE_SEARCH'],
@@ -41,6 +42,7 @@ export const searchMachine = Machine({
         FETCH_FAILURE: {
           'searching.searchReady': { actions: ['SHOW_ERROR_MESSAGE'] },
         },
+        TEXT_INPUT: 'searching.typing',
       },
       onExit: ['HIDE_LOADING'],
     },

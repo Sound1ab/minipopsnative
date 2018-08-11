@@ -10,7 +10,7 @@ export const Search = () => (
       <Screen
         loading={loading}
         heading={{
-          value: 'Feed',
+          value: 'Search',
           color: 'black',
           size: 'xl',
           marginBottom: true,

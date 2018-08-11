@@ -13,6 +13,7 @@ const RelativeWrapper = styled.View``
 
 type PropTypes = {
   handleChange: Function,
+  textInputEmpty: Function,
   value: string,
   api: string,
 }
@@ -20,6 +21,7 @@ type PropTypes = {
 export class SearchField extends Component<PropTypes> {
   static defaultProps = {
     textInput: () => {},
+    textInputEmpty: () => {},
     api: 'current-items',
   }
 
@@ -46,7 +48,6 @@ export class SearchField extends Component<PropTypes> {
           />
           <InputWrapper
             search
-            autoFocus
             handleChange={this.handleChange}
             placeholder="The Cure"
           />

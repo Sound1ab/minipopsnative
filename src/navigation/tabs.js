@@ -1,8 +1,8 @@
 import { Navigation } from 'react-native-navigation'
-import { prepareIcons } from '../helpers'
+import { prepareAppIcons, prepareLoginIcons } from '../helpers'
 
 export const startApp = async () => {
-  const icons = await prepareIcons()
+  const icons = await prepareAppIcons()
 
   Navigation.startTabBasedApp({
     tabs: [
@@ -73,8 +73,8 @@ export const startApp = async () => {
       },
     ],
     tabsStyle: {
-      tabBarButtonColor: '#ff6f72',
-      tabBarSelectedButtonColor: '#e24347',
+      tabBarSelectedButtonColor: '#ff6f72',
+      tabBarButtonColor: '#e24347',
       initialTabIndex: 0,
       tabBarTranslucent: true,
     },
@@ -87,12 +87,18 @@ export const startApp = async () => {
   })
 }
 
-export const startLogin = () => {
+export const startLogin = async () => {
+  const icons = await prepareLoginIcons()
+
   Navigation.startTabBasedApp({
     tabs: [
       {
         screen: 'SignIn',
-        label: 'SignIn',
+        icon: icons.signIn,
+        iconInsets: {
+          top: 6,
+          bottom: -6,
+        },
         passProps: {
           screen: 'SignIn',
           tabIndex: 0,
@@ -100,7 +106,11 @@ export const startLogin = () => {
       },
       {
         screen: 'SignUp',
-        label: 'SignUp',
+        icon: icons.signUp,
+        iconInsets: {
+          top: 6,
+          bottom: -6,
+        },
         passProps: {
           screen: 'SignUp',
           tabIndex: 1,

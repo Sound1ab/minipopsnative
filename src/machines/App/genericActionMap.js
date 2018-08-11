@@ -8,6 +8,6 @@ export const uiActionMap = {
     dispatch(updateLoading(false))
   },
   SHOW_ERROR_MESSAGE({ payload }) {
-    console.error('SHOW_ERROR_MESSAGE', payload)
+    console.warn('SHOW_ERROR_MESSAGE', payload)
   },
 }

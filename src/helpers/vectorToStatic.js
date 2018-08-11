@@ -4,7 +4,7 @@ import { PixelRatio } from 'react-native'
 const size = size =>
   __DEV__ ? size : PixelRatio.getPixelSizeForLayoutSize(size)
 
-export async function prepareIcons() {
+export async function prepareAppIcons() {
   const icons = await Promise.all([
     Icon.getImageSource('ios-analytics', size(35)),
     Icon.getImageSource('ios-heart', size(30)),
@@ -14,4 +14,13 @@ export async function prepareIcons() {
   ])
   const [feed, favourites, discovery, search, profile] = icons
   return { feed, favourites, discovery, search, profile }
+}
+
+export async function prepareLoginIcons() {
+  const icons = await Promise.all([
+    Icon.getImageSource('ios-log-in', size(30)),
+    Icon.getImageSource('ios-person-add', size(30)),
+  ])
+  const [signIn, signUp] = icons
+  return { signIn, signUp }
 }

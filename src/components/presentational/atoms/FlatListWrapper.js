@@ -2,7 +2,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FlatListEmpty } from '../atoms'
-import { LazyDrip } from '../molecules'
 
 type Props = {
   data: Array<Object>,
@@ -43,7 +42,7 @@ export const FlatListWrapper = (props: Props) => (
 FlatListWrapper.defaultProps = {
   data: [],
   renderItem: () => {},
-  onRefresh: () => {},
+  onRefresh: null,
   refreshing: false,
   onEndReached: () => {},
   onEndReachedThreshold: 0,

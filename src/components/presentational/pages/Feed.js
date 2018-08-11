@@ -7,7 +7,7 @@ import { FeedListSkeleton } from '../zkeletons'
 
 export const Feed = () => (
   <FeedContainer>
-    {({ loading, id, feed, state }) => (
+    {({ loading, id, feed, state, fetchFeed, refetchFeed }) => (
       <Screen
         loading={loading}
         heading={{
@@ -22,6 +22,8 @@ export const Feed = () => (
         ) : (
           <FlatListWrapper
             data={feed}
+            refreshing={state === 'refetchingFeed'}
+            onRefresh={refetchFeed.bind(null, { id })}
             keyExtractor={(item, index) => `${item.title}-${index}`}
             renderItem={FlatListItemSearch}
           />

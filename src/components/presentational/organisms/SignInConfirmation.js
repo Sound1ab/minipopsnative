@@ -38,10 +38,10 @@ export const SignInConfirmation = (props: PropTypes) => (
       <InputWrapper
         handleChange={props.handleChangeText.bind(null, 'code')}
         value={props.code}
-        autoFocus
         autoCapitalize="none"
         error={props.validationErrors.includes('code')}
         placeholder="confirmation code"
+        handleSubmitEditing={props.handleSubmit}
       />
     </Section>
     <TouchableOpacity onPress={props.handleSubmit}>

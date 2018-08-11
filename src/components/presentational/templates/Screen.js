@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import { LocalNotificationManager, SearchField } from '../../container'
-import { NavBar, Heading, Spinner } from '../atoms'
-import { HeadingSkeleton } from '../zkeletons'
+import { NavBar } from '../molecules'
+import { Spinner } from '../atoms'
 
 type PropTypes = {
   loading: Boolean,
@@ -30,18 +30,12 @@ export const Screen = ({
   children,
 }: PropTypes) => (
   <React.Fragment>
-    <NavBar handleBack={handleBack}>
-      {loading && state && state.currentState === state.loadingState ? (
-        <HeadingSkeleton />
-      ) : (
-        <Heading
-          color={heading.color}
-          size={heading.size}
-          marginBottom={heading.marginBottom}
-        >
-          {heading.value}
-        </Heading>
-      )}
+    <NavBar
+      handleBack={handleBack}
+      loading={loading}
+      state={state}
+      heading={heading}
+    >
       {searchApi && <SearchField api={searchApi} />}
     </NavBar>
     {children}

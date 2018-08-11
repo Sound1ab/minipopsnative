@@ -42,12 +42,14 @@ export const SignUpForm = (props: PropTypes) => (
         handleChange={props.handleChangeText.bind(null, 'username')}
         value={props.username}
         marginBottom
-        autoFocus
         autoCapitalize="none"
         error={props.validationErrors.includes('username')}
         placeholder="username"
+        returnKeyType="next"
+        handleSubmitEditing={() => this.passwordInput.focus()}
       />
       <InputWrapper
+        ref={passwordInput => (this.passwordInput = passwordInput)}
         handleChange={props.handleChangeText.bind(null, 'password')}
         value={props.password}
         marginBottom
@@ -55,8 +57,11 @@ export const SignUpForm = (props: PropTypes) => (
         autoCapitalize="none"
         error={props.validationErrors.includes('password')}
         placeholder="password"
+        returnKeyType="next"
+        handleSubmitEditing={() => this.phoneNumberInput.focus()}
       />
       <InputWrapper
+        ref={phoneNumberInput => (this.phoneNumberInput = phoneNumberInput)}
         handleChange={props.handleChangeText.bind(null, 'phone_number')}
         value={props.phone_number}
         marginBottom
@@ -64,14 +69,19 @@ export const SignUpForm = (props: PropTypes) => (
         error={props.validationErrors.includes('phone_number')}
         placeholder="+4412345678987"
         keyboardType="numeric"
+        returnKeyType="next"
+        handleSubmitEditing={() => this.emailInput.focus()}
       />
       <InputWrapper
+        ref={emailInput => (this.emailInput = emailInput)}
         handleChange={props.handleChangeText.bind(null, 'email')}
         value={props.email}
         placeholder="email@email.com"
         autoCapitalize="none"
         error={props.validationErrors.includes('email')}
         keyboardType="email-address"
+        returnKeyType="go"
+        handleSubmitEditing={props.handleSubmit}
       />
     </Section>
     <TouchableOpacity onPress={props.handleSubmit}>
