@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { TouchableOpacity } from 'react-native'
-import { InputWrapper, Heading, MinipopsIcon } from '../../presentational/atoms'
+import { InputWrapper, Heading, Spinner } from '../../presentational/atoms'
 import { colors } from '../../../theme'
 
 type PropTypes = {
@@ -25,7 +25,7 @@ const Section = styled.View`
 export const SignInForm = (props: PropTypes) => (
   <Wrapper>
     <Section>
-      <MinipopsIcon />
+      <Spinner size={60} iterationCount={3} />
     </Section>
     <Section>
       <Heading size="xl" color={colors.black}>

@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Icon, Heading, Spinner } from '../atoms'
 import { HeadingSkeleton } from '../zkeletons'
-import { colors, shadow } from '../../../theme/index'
+import { colors, shadow } from '../../../theme'
 
 type Props = {
   handleBack: Function,
@@ -73,7 +73,7 @@ export const NavBar = ({
           {heading.value}
         </Heading>
       )}
-      <Spinner isVisible={loading} />
+      <Spinner isVisible={loading} stickRight />
     </TouchableWrapper>
     {children}
   </Wrapper>

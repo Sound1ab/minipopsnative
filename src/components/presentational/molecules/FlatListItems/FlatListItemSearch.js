@@ -1,10 +1,11 @@
 // @flow
 import React from 'react'
 import { Linking } from 'react-native'
-import { Heading, Button } from '../../atoms/index'
-import { ImageSlider } from '../index'
+import { Heading, Icon, ImageWrapper as Image } from '../../atoms'
+import { ImageSlider } from '../ImageSlider'
 import { View, Dimensions } from 'react-native'
 import styled from 'styled-components'
+import { colors } from '../../../../theme'
 
 type Props = {
   index: number,
@@ -35,10 +36,15 @@ const AbsoluteWrapper = styled.View`
   right: 0;
 `
 
+const Button = styled.TouchableOpacity`
+  height: 28px;
+`
+
 export const FlatListItemSearch = (props: Props) => (
   <View>
     <ImageWrapper index={props.index} height={Dimensions.get('window').width}>
-      <ImageSlider images={props.item.imageUrl} />
+      {/*<ImageSlider images={props.item.imageUrl} />*/}
+      <Image source={props.item.imageUrl[0]} />
     </ImageWrapper>
     <ContentWrapper>
       <RelativeWrapper>
@@ -59,15 +65,16 @@ export const FlatListItemSearch = (props: Props) => (
         </Heading>
         <AbsoluteWrapper>
           <Button
-            handlePress={() => {
+            onPress={() => {
               try {
                 Linking.openURL(props.item.itemUrl)
               } catch (error) {
                 console.warn(error)
               }
             }}
-            title="View"
-          />
+          >
+            <Icon name="ios-arrow-dropright-circle" color={colors.primary} />
+          </Button>
         </AbsoluteWrapper>
       </RelativeWrapper>
     </ContentWrapper>
