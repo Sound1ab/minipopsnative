@@ -7,24 +7,18 @@ import { colors } from '../../../theme'
 import { GrowContainer } from '../atoms'
 
 const Wrapper = styled.View`
-  flex: 0;
-  flex-direction: row;
+  flex: 1;
   width: ${Dimensions.get('window').width};
-  height: ${Dimensions.get('window').width / 3};
-  background-color: ${colors.lightGray};
-  padding: ${({ index }) =>
-    parseInt(index) === parseInt(0) ? '8px' : '0 8px 8px 8px'};
+  flex-direction: row;
+  flex-wrap: wrap;
 `
 
-const AlbumWrapper = styled.View`
-  flex: 1;
-  height: 100%;
-  padding: ${({ index, length }) =>
-    parseInt(index) === parseInt(0)
-      ? '0 4px 0 0'
-      : index === length - 1
-        ? '0 0 0 4px'
-        : '0 4px'};
+const Album = styled.View`
+  padding: ${({ index }) =>
+    index % 2 === 0 ? '8px 4px 8px 8px' : '8px 8px 8px 4px'};
+  width: ${Dimensions.get('window').width / 2};
+  height: ${Dimensions.get('window').width / 2};
+  background-color: ${colors.lightGray};
 `
 
 type PropTypes = {
@@ -32,33 +26,27 @@ type PropTypes = {
 }
 
 export const ImageGridSkeleton = (props: PropTypes) => (
-  <GrowContainer>
+  <Wrapper>
     {Array(7)
       .fill(1, 0)
       .map((v, i) => (
-        <Wrapper key={`${v}-${i}`} index={i}>
-          {Array(3)
-            .fill(1, 0)
-            .map((v2, i2, a2) => (
-              <AlbumWrapper key={`${v2}-${i2}`} index={i2} length={a2.length}>
-                <Skeleton
-                  height={'100%'}
-                  width={'100%'}
-                  layout={{
-                    image: {
-                      type: 'rect',
-                      x: 0,
-                      y: 0,
-                      height: '100%',
-                      width: '100%',
-                    },
-                  }}
-                />
-              </AlbumWrapper>
-            ))}
-        </Wrapper>
+        <Album index={i + 1}>
+          <Skeleton
+            height={'100%'}
+            width={'100%'}
+            layout={{
+              heading: {
+                type: 'rect',
+                x: 0,
+                y: 0,
+                height: '100%',
+                width: '100%',
+              },
+            }}
+          />
+        </Album>
       ))}
-  </GrowContainer>
+  </Wrapper>
 )
 
 ImageGridSkeleton.defaultProps = {

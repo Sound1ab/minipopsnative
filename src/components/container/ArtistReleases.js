@@ -1,31 +1,24 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
+import { artistReleasesChunked } from '../../machines/Discovery/selectors'
 
 type PropTypes = {
-  title: String,
-  navigator: Object,
-  artistSpotifyId: String,
+  artistReleases: Object,
+  state: string | Object,
   loading: Boolean,
-  artistReleases: Array<Object>,
-  handlePushArtistAlbum: Function,
-  fetchMoreArtistReleases: Function,
 }
 
 const ArtistReleases = (props: PropTypes) => props.children(props)
 
 ArtistReleases.defaultProps = {
-  title: '',
-  navigator: {},
-  artistSpotifyId: '',
+  artistReleases: [],
+  state: '',
   loading: false,
-  artistReleases: {},
-  handlePushArtistAlbum: () => {},
-  fetchMoreArtistReleases: () => {},
 }
 
 const mapStateToProps = state => ({
-  artistReleases: state.discovery.artistReleases,
+  artistReleases: artistReleasesChunked(state),
   state: state.discovery.state,
   loading: state.app.loading,
 })

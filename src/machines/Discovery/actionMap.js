@@ -12,18 +12,13 @@ import { saveFeed } from '../Feed/actions'
 export const actionMap = {
   ...uiActionMap,
   FETCH_RELEASES: (() => {
-    const request = new Request(API('artist-releases'), 40)
+    const request = new Request(API('artist-releases'), 10)
     return async ({ dispatch, payload, actions, state }) => {
-      console.log('async')
       try {
         const { items, isNewRequest, isDone } = await request.paginatedGet({
           id: payload.spotifyId,
         })
         !isDone ? dispatch(saveArtistReleases({ items, isNewRequest })) : null
-        // if (Object.keys(state.discovery.artist).length < 19) {
-        //   console.warn(state)
-        //   this.FETCH_RELEASES({ dispatch, payload, actions, state })
-        // }
         actions.FETCH_SUCCESS()
       } catch (error) {
         actions.FETCH_FAILURE(error)

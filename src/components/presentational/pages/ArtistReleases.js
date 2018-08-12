@@ -1,10 +1,12 @@
 // @flow
 import React from 'react'
+import chunk from 'lodash/chunk'
+import get from 'lodash/get'
 import { popScreen } from '../../../navigation'
 import { ArtistReleasesContainer } from '../../container'
 import { Screen } from '../templates'
 import { ImageGrid } from '../molecules'
-import { ScrollViewWrapper } from '../atoms'
+import { ScrollViewWrapper, FlatListWrapper } from '../atoms'
 import { ImageGridSkeleton } from '../zkeletons'
 
 export const ArtistReleases = ({
@@ -30,21 +32,32 @@ export const ArtistReleases = ({
           marginBottom: false,
         }}
       >
-        <ScrollViewWrapper
-          onEndReached={fetchMoreArtistReleases.bind(null, {
-            spotifyId: artistSpotifyId,
-          })}
-        >
-          {loading && state === 'fetchingReleases' ? (
-            <ImageGridSkeleton />
-          ) : (
-            <ImageGrid
-              navigator={navigator}
-              handlePress={handlePushArtistAlbum}
-              items={artistReleases}
-            />
-          )}
-        </ScrollViewWrapper>
+        {loading && state === 'fetchingReleases' ? (
+          <ImageGridSkeleton />
+        ) : (
+          <FlatListWrapper
+            data={artistReleases}
+            keyExtractor={item =>
+              `${get(item[0], ['spotifyId'], '')}-${get(
+                item[1],
+                ['spotifyId'],
+                '',
+              )}`
+            }
+            onEndReached={fetchMoreArtistReleases.bind(null, {
+              spotifyId: artistSpotifyId,
+            })}
+            onEndReachedThreshold={1}
+            removeClippedSubviews={true}
+            renderItem={({ item }) => (
+              <ImageGrid
+                item={item}
+                navigator={navigator}
+                handlePress={handlePushArtistAlbum}
+              />
+            )}
+          />
+        )}
       </Screen>
     )}
   </ArtistReleasesContainer>

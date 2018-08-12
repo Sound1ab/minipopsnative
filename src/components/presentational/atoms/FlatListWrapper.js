@@ -13,6 +13,7 @@ type Props = {
   keyExtractor: Function,
   onEndReached: Function,
   onEndReachedThreshold: number,
+  removeClippedSubviews: Boolean,
 }
 
 const FlatListStyled = styled.FlatList`
@@ -36,6 +37,7 @@ export const FlatListWrapper = (props: Props) => (
     keyExtractor={props.keyExtractor}
     onEndReached={props.onEndReached}
     onEndReachedThreshold={props.onEndReachedThreshold}
+    removeClippedSubviews={props.removeClippedSubviews}
   />
 )
 
@@ -46,4 +48,5 @@ FlatListWrapper.defaultProps = {
   refreshing: false,
   onEndReached: () => {},
   onEndReachedThreshold: 0,
+  removeClippedSubviews: false,
 }

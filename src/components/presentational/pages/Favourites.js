@@ -27,7 +27,9 @@ export const Favourites = () => (
           marginBottom: false,
         }}
       >
-        {loading && state === 'fetchingFavourites' ? (
+        {loading &&
+        state.fetchingInitialData &&
+        state.fetchingInitialData === 'fetchingFavourites' ? (
           <FavouritesListSkeleton />
         ) : (
           <SwipeListView

@@ -9,7 +9,7 @@ import { machine } from './machine'
 export const initialState = {
   state: machine.initial,
   favourites: [],
-  artistReleases: {},
+  artistReleases: [],
   artistAlbum: {
     artist: '',
     name: '',
@@ -35,7 +35,7 @@ export function discovery(state = initialState, action) {
         ...state,
         artistReleases: action.payload.isNewRequest
           ? action.payload.items
-          : { ...state.artistReleases, ...action.payload.items },
+          : [...state.artistReleases, ...action.payload.items],
       }
     case SAVE_ARTIST_ALBUM:
       return {

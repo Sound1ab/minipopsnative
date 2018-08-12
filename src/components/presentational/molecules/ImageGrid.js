@@ -11,49 +11,42 @@ type PropTypes = {
   navigator: any,
 }
 
-const GridWrapper = styled.View`
-  flex: 1;
-`
-
 const RowWrapper = styled.View`
-  flex: 1;
   flex-direction: row;
+  width: ${Dimensions.get('window').width};
+  height: ${Dimensions.get('window').width / 2};
 `
 
 const TouchableOpacity = styled.TouchableOpacity`
-  flex: 1;
-  flex-direction: row;
-  width: 100%;
+  width: ${Dimensions.get('window').width / 2};
 `
 
-export const ImageGrid = (props: PropTypes) => (
-  <GridWrapper>
-    {chunk(Object.values(props.items), 3).map(row => (
-      <RowWrapper key={`${row[0][0].spotifyId}`}>
-        {row.map(item => (
-          <TouchableOpacity
-            activeOpacity={1}
-            key={item[0].spotifyId}
-            onPress={props.handlePress.bind(null, {
-              ...item[0],
-              navigator: props.navigator,
-            })}
-          >
-            <ImageWrapper
-              source={item[0].imageSmallUrl}
-              height={Dimensions.get('window').width / 3}
-              width={'33%'}
-              handlePress={props.handlePress}
-            />
-          </TouchableOpacity>
-        ))}
-      </RowWrapper>
-    ))}
-  </GridWrapper>
+export const ImageGrid = ({ item, navigator, handlePress }: PropTypes) => (
+  <RowWrapper>
+    {item.map(album => {
+      return (
+        <TouchableOpacity
+          activeOpacity={1}
+          key={album.spotifyId}
+          onPress={handlePress.bind(null, {
+            ...album,
+            navigator: navigator,
+          })}
+        >
+          <ImageWrapper
+            source={album.imageMediumUrl}
+            height={Dimensions.get('window').width / 2}
+            width={Dimensions.get('window').width / 2}
+            handlePress={handlePress}
+          />
+        </TouchableOpacity>
+      )
+    })}
+  </RowWrapper>
 )
 
 ImageGrid.defaultProps = {
-  items: [],
+  item: [],
   handlePress: () => {},
   navigator: {},
 }
