@@ -6,6 +6,7 @@ import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
 
 const Wrapper = styled.View`
+  padding-top: 8px;
   flex: 1;
   width: ${Dimensions.get('window').width};
   flex-direction: row;
@@ -15,7 +16,7 @@ const Wrapper = styled.View`
 
 const Album = styled.View`
   padding: ${({ index }) =>
-    index % 2 === 0 ? '8px 4px 8px 8px' : '8px 8px 8px 4px'};
+    index % 2 === 0 ? '0 8px 8px 4px' : '0 4px 8px 8px'};
   width: ${Dimensions.get('window').width / 2};
   height: ${Dimensions.get('window').width / 2};
 `
