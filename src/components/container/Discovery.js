@@ -22,6 +22,7 @@ class Discovery extends Component<PropTypes> {
     return item
   }
   fetchMoreArtistReleases = item => {
+    console.log('fetching more')
     this.props.fetchMoreArtistReleases({ spotifyId: item.spotifyId })
     return item
   }

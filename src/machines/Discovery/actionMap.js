@@ -14,6 +14,7 @@ export const actionMap = {
   FETCH_RELEASES: (() => {
     const request = new Request(API('artist-releases'), 40)
     return async ({ dispatch, payload, actions, state }) => {
+      console.log('async')
       try {
         const { items, isNewRequest, isDone } = await request.paginatedGet({
           id: payload.spotifyId,

@@ -79,6 +79,7 @@ export class ImageWrapper extends Component<Props> {
             uri: this.props.source
               ? this.props.source
               : 'https://facebook.github.io/react-native/docs/assets/favicon.png',
+            cache: 'force-cache',
           }}
           resizeMode={this.props.resizeMode}
           borderRadius={this.props.borderRadius}
