@@ -4,8 +4,8 @@ import { Dimensions, ScrollView } from 'react-native'
 import { popScreen } from '../../../navigation'
 import { ArtistAlbumContainer } from '../../container'
 import { Screen } from '../templates'
-import { ActionBar, TrackRow } from '../molecules'
-import { ImageWrapper } from '../atoms'
+import { ActionBar } from '../molecules'
+import { ImageWrapper, TrackRow } from '../atoms'
 import { ArtistAlbumSkeleton } from '../zkeletons'
 
 export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (

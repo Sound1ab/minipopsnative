@@ -3,7 +3,8 @@ import React from 'react'
 import { Functional } from '../../../helpers/functional'
 import { DiscoveryContainer } from '../../container'
 import { Screen } from '../templates'
-import { FlatListWrapper, FlatListItemDiscovery } from '../atoms'
+import { FlatListWrapper } from '../atoms'
+import { FlatListItemDiscovery } from '../molecules'
 
 export const Discovery = ({ navigator }) => (
   <DiscoveryContainer>

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Heading } from '../atoms'
-import { colors, shadow } from '../../../theme'
+import { Heading } from './index'
+import { colors, shadow } from '../../../theme/index'
 
 type PropTypes = {
   index: number,

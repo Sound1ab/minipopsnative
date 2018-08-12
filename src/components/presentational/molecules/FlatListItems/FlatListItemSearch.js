@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import { Linking } from 'react-native'
-import { Heading, Button } from '../atoms'
-import { ImageSlider } from '../molecules'
+import { Heading, Button } from '../../atoms/index'
+import { ImageSlider } from '../index'
 import { View, Dimensions } from 'react-native'
 import styled from 'styled-components'
 

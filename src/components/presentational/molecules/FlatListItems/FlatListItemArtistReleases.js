@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import chunk from 'lodash/chunk'
 import { Dimensions } from 'react-native'
-import { ImageWrapper } from '../atoms'
+import { ImageWrapper } from '../../atoms/index'
 
 type PropTypes = {
   items: Array<string>,
@@ -21,7 +21,11 @@ const TouchableOpacity = styled.TouchableOpacity`
   width: ${Dimensions.get('window').width / 2};
 `
 
-export const ImageGrid = ({ item, navigator, handlePress }: PropTypes) => (
+export const FlatListItemArtistReleases = ({
+  item,
+  navigator,
+  handlePress,
+}: PropTypes) => (
   <RowWrapper>
     {item.map(album => {
       return (
@@ -45,7 +49,7 @@ export const ImageGrid = ({ item, navigator, handlePress }: PropTypes) => (
   </RowWrapper>
 )
 
-ImageGrid.defaultProps = {
+FlatListItemArtistReleases.defaultProps = {
   item: [],
   handlePress: () => {},
   navigator: {},

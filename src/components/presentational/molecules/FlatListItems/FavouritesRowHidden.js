@@ -2,9 +2,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { TouchableOpacity, View } from 'react-native'
-import { Heading, Icon } from '../atoms/index'
-import { colors, shadow } from '../../../theme/index'
-import { Functional } from '../../../helpers/index'
+import { Heading, Icon } from '../../atoms/index'
+import { colors, shadow } from '../../../../theme/index'
+import { Functional } from '../../../../helpers/index'
 
 const Wrapper = styled.View`
   flex: 1;

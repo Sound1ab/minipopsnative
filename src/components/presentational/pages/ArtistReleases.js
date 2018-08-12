@@ -5,8 +5,8 @@ import get from 'lodash/get'
 import { popScreen } from '../../../navigation'
 import { ArtistReleasesContainer } from '../../container'
 import { Screen } from '../templates'
-import { ImageGrid } from '../molecules'
-import { ScrollViewWrapper, FlatListWrapper } from '../atoms'
+import { FlatListItemArtistReleases } from '../molecules'
+import { FlatListWrapper } from '../atoms'
 import { ImageGridSkeleton } from '../zkeletons'
 
 export const ArtistReleases = ({
@@ -50,7 +50,7 @@ export const ArtistReleases = ({
             onEndReachedThreshold={1}
             removeClippedSubviews={true}
             renderItem={({ item }) => (
-              <ImageGrid
+              <FlatListItemArtistReleases
                 item={item}
                 navigator={navigator}
                 handlePress={handlePushArtistAlbum}

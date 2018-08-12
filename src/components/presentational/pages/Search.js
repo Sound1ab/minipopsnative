@@ -2,7 +2,8 @@
 import React from 'react'
 import { Screen } from '../templates'
 import { SearchContainer } from '../../container'
-import { FlatListWrapper, FlatListItemSearch } from '../atoms/index'
+import { FlatListWrapper } from '../atoms'
+import { FlatListItemSearch } from '../molecules'
 
 export const Search = () => (
   <SearchContainer>

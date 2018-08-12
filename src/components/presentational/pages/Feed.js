@@ -2,7 +2,8 @@
 import React from 'react'
 import { FeedContainer } from '../../container'
 import { Screen } from '../templates'
-import { FlatListWrapper, FlatListItemSearch } from '../atoms'
+import { FlatListWrapper } from '../atoms'
+import { FlatListItemSearch } from '../molecules'
 import { FeedListSkeleton } from '../zkeletons'
 
 export const Feed = () => (
