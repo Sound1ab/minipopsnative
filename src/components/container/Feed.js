@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FEED_MACHINE_ACTIONS } from '../../machines/Feed/actions'
+import { feed } from '../../machines/Feed/selectors'
 
 type PropTypes = {
   loading: Boolean,
@@ -33,7 +34,7 @@ export class Feed extends Component<PropTypes> {
 const mapStateToProps = state => ({
   loading: state.app.loading,
   id: state.login.cognitoUser.id,
-  feed: state.feed.feed,
+  feed: feed(state),
   state: state.feed.state,
 })
 

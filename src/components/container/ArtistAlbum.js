@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
+import { artistAlbum, favourites } from '../../machines/Discovery/selectors'
 
 type PropTypes = {
   artistAlbum: {
@@ -38,8 +39,8 @@ ArtistAlbum.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  artistAlbum: state.discovery.artistAlbum,
-  favourites: state.discovery.favourites,
+  artistAlbum: artistAlbum(state),
+  favourites: favourites(state),
   id: state.login.cognitoUser.id,
   state: state.discovery.state,
   loading: state.app.loading,

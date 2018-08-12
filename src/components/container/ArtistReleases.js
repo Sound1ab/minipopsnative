@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import { artistReleasesChunked } from '../../machines/Discovery/selectors'
+import { artistReleases } from '../../machines/Discovery/selectors'
 
 type PropTypes = {
   artistReleases: Object,
@@ -18,7 +18,7 @@ ArtistReleases.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  artistReleases: artistReleasesChunked(state),
+  artistReleases: artistReleases(state),
   state: state.discovery.state,
   loading: state.app.loading,
 })

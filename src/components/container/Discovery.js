@@ -4,13 +4,16 @@ import { Functional } from '../../helpers/functional'
 import { connect } from 'react-redux'
 import { pushScreen } from '../../navigation'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
+import { discoveryResults } from '../../machines/SearchField/selectors'
 
 type PropTypes = {
+  loading: Boolean,
   discoveryResults: Array<Object>,
 }
 
 class Discovery extends Component<PropTypes> {
   static defaultProps = {
+    loading: false,
     discoveryResults: [],
   }
   fetchArtistAlbum = item => {
@@ -22,7 +25,6 @@ class Discovery extends Component<PropTypes> {
     return item
   }
   fetchMoreArtistReleases = item => {
-    console.log('fetching more')
     this.props.fetchMoreArtistReleases({ spotifyId: item.spotifyId })
     return item
   }
@@ -65,8 +67,7 @@ class Discovery extends Component<PropTypes> {
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
-  discoveryResults: state.search.discoveryResults,
-  artistReleases: state.discovery.artistReleases,
+  discoveryResults: discoveryResults(state),
 })
 
 const mapDispatchToProps = dispatch => ({

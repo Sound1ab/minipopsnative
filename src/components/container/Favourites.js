@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
+import { favourites, watchList } from '../../machines/Discovery/selectors'
 
 type PropTypes = {
   removeFromFavourite: Function,
@@ -16,8 +17,8 @@ Favourites.defaultProps = {}
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
-  favourites: state.discovery.favourites,
-  watchListIds: state.discovery.watchList.ids,
+  favourites: favourites(state),
+  watchListIds: watchList(state),
   id: state.login.cognitoUser.id,
   state: state.app.state,
 })

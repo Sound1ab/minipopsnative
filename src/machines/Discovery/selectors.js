@@ -1,10 +1,13 @@
 import chunk from 'lodash/chunk'
 import { createSelector } from 'reselect'
 
-const artistReleases = state => state.discovery.artistReleases
+const getArtistReleases = state => state.discovery.artistReleases
+const getFavourites = state => state.discovery.favourites
+const getArtistAlbum = state => state.discovery.artistAlbum
+const getWatchList = state => state.discovery.watchList
 
-export const artistReleasesChunked = createSelector(
-  artistReleases,
+export const artistReleases = createSelector(
+  getArtistReleases,
   singularReleases => {
     return chunk(
       singularReleases.reduce((a, b) => {
@@ -16,4 +19,18 @@ export const artistReleasesChunked = createSelector(
       2,
     )
   },
+)
+
+export const favourites = createSelector(
+  getFavourites,
+  getFavourites => getFavourites,
+)
+
+export const artistAlbum = createSelector(
+  getArtistAlbum,
+  getArtistAlbum => getArtistAlbum,
+)
+
+export const watchList = createSelector(getWatchList, getWatchList =>
+  getWatchList.map(item => item.spotifyId),
 )
