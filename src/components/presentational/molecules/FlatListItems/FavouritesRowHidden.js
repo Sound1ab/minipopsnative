@@ -30,11 +30,11 @@ const TextWrapper = styled.TouchableOpacity`
 `
 
 const TextWrapperWatch = styled(TextWrapper)`
-  background-color: ${colors.tertiary};
+  background-color: white;
 `
 
 const TextWrapperRemove = styled(TextWrapper)`
-  background-color: ${colors.primary};
+  background-color: white;
 `
 
 type PropTypes = {
@@ -60,7 +60,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-remove-circle" color="white" />
+        <Icon name="ios-remove-circle" color={colors.primary} />
       </TextWrapperWatch>
     ) : (
       <TextWrapperWatch
@@ -72,7 +72,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-add-circle" color="white" />
+        <Icon name="ios-add-circle" color={colors.tertiary} />
       </TextWrapperWatch>
     )}
     <TextWrapperRemove
@@ -84,7 +84,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
         props.rowMap[props.artistAlbum.spotifyId].closeRow()
       }}
     >
-      <Icon name="ios-trash" color="white" />
+      <Icon name="ios-trash" color={colors.primary} />
     </TextWrapperRemove>
   </Wrapper>
 )

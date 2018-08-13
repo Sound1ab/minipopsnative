@@ -53,7 +53,7 @@ export const FavouritesRow = (props: PropTypes) => (
     </TextWrapper>
     {props.watched && (
       <Watched>
-        <Triangle color={colors.tertiary} />
+        <Triangle color={colors.primary} />
       </Watched>
     )}
   </Wrapper>
