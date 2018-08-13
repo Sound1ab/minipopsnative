@@ -80,6 +80,7 @@ export const startApp = async () => {
     },
     appStyle: {
       navBarHidden: true,
+      drawUnderTabBar: true,
     },
     // passProps: {
     //   artistAlbum: MOCK_ARTIST_ALBUM
@@ -127,4 +128,40 @@ export const startLogin = async () => {
       navBarHidden: true,
     },
   })
+}
+
+export const hideTabsOnScroll = navigator => {
+  let pastY = 0
+  return e => {
+    if (!navigator) {
+      return
+    }
+    const currentY = e.nativeEvent.contentOffset.y
+    if (currentY <= 0 || (currentY > 0 && currentY < 100)) {
+      navigator.toggleTabs({
+        to: 'visible',
+        animate: true,
+      })
+    } else if (currentY > pastY) {
+      navigator.toggleTabs({
+        to: 'hidden',
+        animate: true,
+      })
+    } else if (currentY < pastY && currentY > pastY - 10) {
+    } else {
+      navigator.toggleTabs({
+        to: 'visible',
+        animate: true,
+      })
+    }
+    pastY = currentY
+  }
+}
+
+export const showTabs = navigator => {
+  navigator &&
+    navigator.toggleTabs({
+      to: 'visible',
+      animate: true,
+    })
 }

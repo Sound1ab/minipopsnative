@@ -4,9 +4,10 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 import { FavouritesContainer } from '../../container'
 import { Screen } from '../templates'
 import { FavouritesRow, FavouritesRowHidden } from '../molecules'
+import { TabBarPlaceholder } from '../atoms'
 import { FavouritesListSkeleton } from '../zkeletons'
 
-export const Favourites = () => (
+export const Favourites = ({ navigator }) => (
   <FavouritesContainer>
     {({
       loading,
@@ -39,6 +40,7 @@ export const Favourites = () => (
             preview={false}
             keyExtractor={item => item.spotifyId}
             data={favourites}
+            ListFooterComponent={TabBarPlaceholder}
             renderItem={({ item, index }) => (
               <FavouritesRow
                 {...item}

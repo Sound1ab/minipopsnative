@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
+import { searchResults } from '../../machines/SearchField/selectors'
 
 type PropTypes = {
   loading: Boolean,
@@ -11,7 +12,7 @@ const Search = (props: PropTypes) => props.children(props)
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
-  searchResults: state.search.searchResults,
+  searchResults: searchResults(state),
 })
 
 export default connect(mapStateToProps)(Search)

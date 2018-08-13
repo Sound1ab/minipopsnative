@@ -2,6 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FlatListEmpty } from '../molecules'
+import { TabBarPlaceholder } from '../atoms'
 
 type Props = {
   data: Array<Object>,
@@ -14,14 +15,14 @@ type Props = {
   onEndReached: Function,
   onEndReachedThreshold: number,
   removeClippedSubviews: Boolean,
+  onScrollBeginDrag: ?Function,
+  onScrollEndDrag: ?Function,
+  onScroll: ?Function,
+  isTabHidden: Boolean,
 }
 
 const FlatListStyled = styled.FlatList`
   flex: 1;
-`
-
-const TextStyled = styled.Text`
-  color: black;
 `
 
 export const FlatListWrapper = (props: Props) => (
@@ -38,6 +39,10 @@ export const FlatListWrapper = (props: Props) => (
     onEndReached={props.onEndReached}
     onEndReachedThreshold={props.onEndReachedThreshold}
     removeClippedSubviews={props.removeClippedSubviews}
+    onScrollBeginDrag={props.onScrollBeginDrag}
+    onScrollEndDrag={props.onScrollEndDrag}
+    onScroll={props.onScroll}
+    ListFooterComponent={props.isTabHidden ? TabBarPlaceholder : null}
   />
 )
 
@@ -49,4 +54,8 @@ FlatListWrapper.defaultProps = {
   onEndReached: () => {},
   onEndReachedThreshold: 0,
   removeClippedSubviews: false,
+  onScrollBeginDrag: null,
+  onScrollEndDrag: null,
+  onScroll: null,
+  isTabHidden: false,
 }

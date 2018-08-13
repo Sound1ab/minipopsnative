@@ -4,8 +4,9 @@ import { Screen } from '../templates'
 import { SearchContainer } from '../../container'
 import { FlatListWrapper } from '../atoms'
 import { FlatListItemSearch } from '../molecules'
+import { hideTabsOnScroll } from '../../../navigation'
 
-export const Search = () => (
+export const Search = ({ navigator }) => (
   <SearchContainer>
     {({ loading, searchResults }) => (
       <Screen
@@ -22,6 +23,8 @@ export const Search = () => (
           data={searchResults}
           keyExtractor={(item, index) => `${item.title}-${index}`}
           renderItem={FlatListItemSearch}
+          onScroll={searchResults.length > 0 && hideTabsOnScroll(navigator)}
+          isTabHidden
         />
       </Screen>
     )}
