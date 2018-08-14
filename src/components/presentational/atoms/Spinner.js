@@ -10,10 +10,11 @@ type PropTypes = {
   size: Number,
   color: String,
   stickRight: Boolean,
+  iterationCount: string | number,
 }
 
 const Wrapper = Animatable.createAnimatableComponent(styled.View`
-  margin-left: ${({ stickRight }) => (stickRight ? 'auto' : '')};
+  margin-left: ${({ stickRight }) => (stickRight ? 'auto' : 0)};
 `)
 
 const MinipopsIconAnimatable = Animatable.createAnimatableComponent(
@@ -31,7 +32,7 @@ export const Spinner = (props: PropTypes) => (
       size={props.size}
       useNativeDriver={true}
       animation="rotate"
-      iterationCount="infinite"
+      iterationCount={props.iterationCount}
     />
   </Wrapper>
 )
@@ -41,4 +42,5 @@ Spinner.defaultProps = {
   size: 40,
   color: colors.primary,
   stickRight: false,
+  interationCount: 'infinite',
 }
