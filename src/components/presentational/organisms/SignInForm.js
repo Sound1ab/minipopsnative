@@ -24,9 +24,7 @@ const Section = styled.View`
 
 export const SignInForm = (props: PropTypes) => (
   <Wrapper>
-    <Section>
-      <Spinner size={60} iterationCount={3} />
-    </Section>
+    <Section>{/*<Spinner size={60} iterationCount={3} />*/}</Section>
     <Section>
       <Heading size="xl" color={colors.black}>
         Welcome

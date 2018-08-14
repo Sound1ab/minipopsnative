@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import VectorIcon from 'react-native-vector-icons/Ionicons'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 type Props = {
   name: string,
@@ -12,24 +12,31 @@ type Props = {
   bottom: number,
   left: number,
   right: number,
+  margin: string,
 }
 
 const Wrapper = styled.View`
-  position: ${({ position }) => position};
-  top: ${({ top }) => top};
-  bottom: ${({ bottom }) => bottom};
-  left: ${({ left }) => left};
-  right: ${({ right }) => right};
+  position: ${({ styledPosition }) => styledPosition};
+  top: ${({ styledTop }) => styledTop};
+  bottom: ${({ styledBottom }) => styledBottom};
+  left: ${({ styledLeft }) => styledLeft};
+  right: ${({ styledRight }) => styledRight};
+  ${({ styledMargin }) =>
+    styledMargin &&
+    css`
+      margin: ${styledMargin};
+    `};
   z-index: 2;
 `
 
 export const Icon = (props: Props) => (
   <Wrapper
-    position={props.position}
-    top={props.top}
-    bottom={props.bottom}
-    left={props.left}
-    right={props.right}
+    styledPosition={props.position}
+    styledTop={props.top}
+    styledBottom={props.bottom}
+    styledLeft={props.left}
+    styledRight={props.right}
+    styledMargin={props.margin}
   >
     <VectorIcon name={props.name} size={props.size} color={props.color} />
   </Wrapper>
@@ -44,4 +51,5 @@ Icon.defaultProps = {
   bottom: 'auto',
   left: 'auto',
   right: 'auto',
+  margin: null,
 }

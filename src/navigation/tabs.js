@@ -122,7 +122,7 @@ export const startLogin = async () => {
     tabsStyle: {
       tabBarSelectedButtonColor: colors.secondary,
       tabBarButtonColor: colors.primary,
-      initialTabIndex: 2,
+      initialTabIndex: 0,
     },
     appStyle: {
       navBarHidden: true,

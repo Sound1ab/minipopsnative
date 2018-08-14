@@ -12,6 +12,7 @@ const Profile = (props: PropTypes) => props.children(props)
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
+  user: state.login.cognitoUser,
 })
 
 const mapDispatchToProps = dispatch => ({
