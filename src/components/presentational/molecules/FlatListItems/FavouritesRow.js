@@ -21,10 +21,11 @@ const Watched = styled.View`
   position: absolute;
   top: 0;
   right: 0;
-  width: 50;
-  height: 50;
-  justify-content: flex-start;
-  align-items: flex-end;
+  width: 30;
+  height: 30;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
 `
 
 type PropTypes = {
@@ -53,7 +54,8 @@ export const FavouritesRow = (props: PropTypes) => (
     </TextWrapper>
     {props.watched && (
       <Watched>
-        <Triangle color={colors.primary} />
+        {/*<Triangle color={colors.primary} />*/}
+        <Icon name="ios-megaphone" size={20} color={colors.primary} />
       </Watched>
     )}
   </Wrapper>

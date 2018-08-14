@@ -60,7 +60,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-remove-circle" color={colors.primary} />
+        <Icon name="ios-remove-circle" color={colors.black} />
       </TextWrapperWatch>
     ) : (
       <TextWrapperWatch
@@ -72,7 +72,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-add-circle" color={colors.tertiary} />
+        <Icon name="ios-megaphone" color={colors.primary} />
       </TextWrapperWatch>
     )}
     <TextWrapperRemove
@@ -84,7 +84,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
         props.rowMap[props.artistAlbum.spotifyId].closeRow()
       }}
     >
-      <Icon name="ios-trash" color={colors.primary} />
+      <Icon name="ios-trash" color={colors.black} />
     </TextWrapperRemove>
   </Wrapper>
 )

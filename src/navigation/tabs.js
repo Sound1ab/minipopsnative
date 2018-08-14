@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation'
 import { prepareAppIcons, prepareLoginIcons } from '../helpers'
+import { colors } from '../theme'
 
 export const startApp = async () => {
   const icons = await prepareAppIcons()
@@ -73,8 +74,8 @@ export const startApp = async () => {
       },
     ],
     tabsStyle: {
-      tabBarSelectedButtonColor: '#ff6f72',
-      tabBarButtonColor: '#e24347',
+      tabBarSelectedButtonColor: colors.secondary,
+      tabBarButtonColor: colors.primary,
       initialTabIndex: 2,
       tabBarTranslucent: true,
     },
@@ -119,9 +120,8 @@ export const startLogin = async () => {
       },
     ],
     tabsStyle: {
-      tabBarButtonColor: '#ff6f72',
-      tabBarSelectedButtonColor: '#e24347',
-      tabBarBackgroundColor: '#ffffff',
+      tabBarSelectedButtonColor: colors.secondary,
+      tabBarButtonColor: colors.primary,
       initialTabIndex: 2,
     },
     appStyle: {
