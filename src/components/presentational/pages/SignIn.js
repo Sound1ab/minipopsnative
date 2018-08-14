@@ -9,6 +9,7 @@ export const SignIn = () => (
       state,
       confirmation,
       form,
+      loading,
       validationErrors,
       handleCodeText,
       handleConfirmation,
@@ -17,6 +18,7 @@ export const SignIn = () => (
     }) =>
       state.idle && state.idle === 'waitingForConfirmation' ? (
         <SignInConfirmation
+          loading={loading}
           code={confirmation.code}
           validationErrors={validationErrors}
           handleChangeText={handleCodeText}
@@ -24,6 +26,7 @@ export const SignIn = () => (
         />
       ) : (
         <SignInForm
+          loading={loading}
           username={form.username}
           password={form.password}
           validationErrors={validationErrors}

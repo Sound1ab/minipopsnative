@@ -86,6 +86,7 @@ export class SignIn extends Component<PropTypes, StateTypes> {
 
 const mapStateToProps = state => ({
   state: state.login.state,
+  loading: state.app.loading,
   cognitoUser: state.login.cognitoUser,
 })
 

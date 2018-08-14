@@ -9,6 +9,7 @@ export const SignUp = () => (
       state,
       confirmation,
       form,
+      loading,
       validationErrors,
       handleCodeText,
       handleConfirmation,
@@ -18,6 +19,7 @@ export const SignUp = () => (
       state === 'confirmingUser' ||
       (state.idle && state.idle === 'waitingForConfirmation') ? (
         <SignUpConfirmation
+          loading={loading}
           code={code}
           validationErrors={validationErrors}
           handleChangeText={handleCodeText}
@@ -25,6 +27,7 @@ export const SignUp = () => (
         />
       ) : (
         <SignUpForm
+          loading={loading}
           username={form.username}
           password={form.password}
           phone_number={form.phone_number}

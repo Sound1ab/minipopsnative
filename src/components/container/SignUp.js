@@ -84,6 +84,7 @@ export class SignUp extends Component<PropTypes, StateTypes> {
 
 const mapStateToProps = state => ({
   state: state.signUp.state,
+  loading: state.app.loading,
 })
 
 const mapDispatchToProps = dispatch => ({

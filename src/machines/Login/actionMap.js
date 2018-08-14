@@ -31,6 +31,9 @@ export const actionMap = {
   REDIRECT_TO_APP({ dispatch }) {
     dispatch(APP_MACHINE_ACTIONS.SIGN_IN())
   },
+  REDIRECT_TO_LOGIN({ dispatch }) {
+    dispatch(APP_MACHINE_ACTIONS.SIGN_OUT())
+  },
   async CONFIRM_USER({ payload, actions }) {
     try {
       await Auth.confirmSignIn(payload.cognitoUser, payload.code)

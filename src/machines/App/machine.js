@@ -11,6 +11,8 @@ export const appMachine = Machine({
       on: {
         INIT: 'registeringComponents',
         LOAD_APP: 'loadingApp',
+        SIGN_IN: 'checkingAuthenticatedUser',
+        SIGN_OUT: 'loadingLogin',
       },
     },
     registeringComponents: {
@@ -37,7 +39,7 @@ export const appMachine = Machine({
     loadingLogin: {
       onEntry: ['REDIRECT_TO_LOGIN'],
       on: {
-        SIGN_IN: 'checkingAuthenticatedUser',
+        LOAD_SUCCESS: 'idle',
       },
     },
     fetchingInitialData: {
