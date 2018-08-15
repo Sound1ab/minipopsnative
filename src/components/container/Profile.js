@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import { PushNotificationIOS, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { pushScreen } from '../../navigation'
 import { LOGIN_MACHINE_ACTIONS } from '../../machines/Login/actions'
@@ -21,10 +22,52 @@ class Profile extends Component<PropTypes> {
       },
     })
   }
+  CheckNotificationPermissions = () => {
+    PushNotificationIOS.checkPermissions(status => {
+      const deniedPermissions = Object.entries(status).filter(
+        permission => !permission[1],
+      )
+      if (deniedPermissions.length === 0) {
+        Alert.alert(
+          'Notifications',
+          'All Notifications are active!',
+          [
+            {
+              text: 'Stop notifications',
+              onPress: () => PushNotificationIOS.abandonPermissions(),
+            },
+            { text: 'Cancel' },
+          ],
+          { cancelable: false },
+        )
+      } else {
+        Alert.alert(
+          'Notifications',
+          'Some notification settings missing',
+          [
+            {
+              text: 'Stop notifications',
+              onPress: () => PushNotificationIOS.abandonPermissions(),
+            },
+            {
+              text: 'Activate notifications',
+              onPress: () =>
+                PushNotificationIOS.requestPermissions(
+                  deniedPermissions.map(permission => permission[0]),
+                ),
+            },
+            { text: 'Cancel' },
+          ],
+          { cancelable: false },
+        )
+      }
+    })
+  }
   render() {
     return this.props.children({
       ...this.props,
       handlePushMyScreen: this.handlePushMyScreen,
+      CheckNotificationPermissions: this.CheckNotificationPermissions,
     })
   }
 }

@@ -61,7 +61,14 @@ const SignOutButton = styled.TouchableOpacity`
 
 export const Profile = ({ navigator }) => (
   <ProfileContainer>
-    {({ loading, signOut, showNotification, user, handlePushMyScreen }) => (
+    {({
+      loading,
+      signOut,
+      showNotification,
+      user,
+      handlePushMyScreen,
+      CheckNotificationPermissions,
+    }) => (
       <Screen
         loading={loading}
         heading={{
@@ -106,7 +113,7 @@ export const Profile = ({ navigator }) => (
               Change Password
             </Heading>
           </Row>
-          <Row>
+          <Row onPress={CheckNotificationPermissions}>
             <IconWrapper>
               <Icon name="ios-megaphone" color={colors.primary} />
             </IconWrapper>
