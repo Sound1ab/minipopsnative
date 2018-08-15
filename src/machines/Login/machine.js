@@ -17,6 +17,7 @@ export const machine = Machine({
         SIGN_IN: 'signingIn',
         SIGN_OUT: 'signingOut',
         CONFIRM_USER: 'confirmingUser',
+        UPDATE_USER_ATTRIBUTES: 'updatingUserAttributes',
       },
     },
     signingIn: {
@@ -65,6 +66,22 @@ export const machine = Machine({
           },
         },
       },
+    },
+    updatingUserAttributes: {
+      onEntry: ['POST_USER_ATTRIBUTES', 'SHOW_LOADING'],
+      on: {
+        POST_USER_ATTRIBUTES_SUCCESS: {
+          ['idle.waitingForSignOut']: {
+            actions: ['SAVE_COGNITO_USER_OBJECT'],
+          },
+        },
+        POST_USER_ATTRIBUTES_FAILURE: {
+          ['idle.waitingForSignOut']: {
+            actions: ['SHOW_ERROR_MESSAGE'],
+          },
+        },
+      },
+      onExit: ['HIDE_LOADING'],
     },
   },
 })

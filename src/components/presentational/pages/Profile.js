@@ -1,35 +1,20 @@
 // @flow
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
-import styled from 'styled-components'
+import { Dimensions } from 'react-native'
+import styled, { css } from 'styled-components'
 import { ProfileContainer } from '../../container'
 import { Screen } from '../templates'
 import {
-  GrowContainer,
-  Button,
   TabBarPlaceholder,
   Heading,
   Icon,
   MinipopsIcon,
+  ScrollViewWrapper,
 } from '../atoms'
-import { colors } from '../../../theme'
+import { colors, shadow } from '../../../theme'
 import get from 'lodash/get'
 
-const toggleTabs = navigator => {
-  navigator.toggleTabs({
-    to: 'hidden',
-    animate: true,
-  })
-}
-
-const toggleTabsShow = navigator => {
-  navigator.toggleTabs({
-    to: 'visible',
-    animate: true,
-  })
-}
-
-const Section1 = styled.View`
+const HeadingWrapper = styled.View`
   flex: 1;
   padding: 16px;
 `
@@ -40,16 +25,33 @@ const Section2 = styled.View`
   align-items: center;
 `
 
-const Section3 = styled.View`
-  flex: 2;
+const ImageHeader = styled.View`
+  width: 100%;
+  height: ${Dimensions.get('window').width};
   justify-content: center;
   align-items: center;
   background-color: ${colors.primary};
 `
 
-const Row = styled.View`
+const Row = styled.TouchableOpacity`
+  height: 60;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
+  margin: 0 8px 8px 8px;
+  background-color: white;
+  ${shadow.map(
+    ({ property, value }) =>
+      css`
+        ${property}: ${value};
+      `,
+  )};
+`
+
+const IconWrapper = styled.View`
+  width: 20%;
+  height: 100%;
+  justify-content: center;
   align-items: center;
 `
 
@@ -59,7 +61,7 @@ const SignOutButton = styled.TouchableOpacity`
 
 export const Profile = ({ navigator }) => (
   <ProfileContainer>
-    {({ loading, signOut, showNotification, user }) => (
+    {({ loading, signOut, showNotification, user, handlePushMyDetails }) => (
       <Screen
         loading={loading}
         heading={{
@@ -69,27 +71,39 @@ export const Profile = ({ navigator }) => (
           marginBottom: false,
         }}
       >
-        <GrowContainer>
-          <Section3>
+        <ScrollViewWrapper>
+          <ImageHeader>
             <MinipopsIcon size={124} />
-          </Section3>
-          <Section1>
+          </ImageHeader>
+          <HeadingWrapper>
             <Heading size="xl" color="black" marginBottom>
               {get(user, ['username'])}
             </Heading>
-            <Row>
-              <Icon name="ios-mail" margin="0 8px 0 0" color={colors.primary} />
-              <Heading size="l" color="black">
-                {get(user, ['attributes', 'email'])}
-              </Heading>
-            </Row>
-            <Row>
-              <Icon name="ios-call" margin="0 8px 0 0" color={colors.primary} />
-              <Heading size="l" color="black">
-                {get(user, ['attributes', 'phone_number'])}
-              </Heading>
-            </Row>
-          </Section1>
+          </HeadingWrapper>
+          <Row onPress={handlePushMyDetails.bind(null, { navigator })}>
+            <IconWrapper>
+              <Icon name="ios-options" color={colors.primary} />
+            </IconWrapper>
+            <Heading size="l" color="black">
+              My Details
+            </Heading>
+          </Row>
+          <Row>
+            <IconWrapper>
+              <Icon name="ios-lock" color={colors.primary} />
+            </IconWrapper>
+            <Heading size="l" color="black">
+              Change Password
+            </Heading>
+          </Row>
+          <Row>
+            <IconWrapper>
+              <Icon name="ios-megaphone" color={colors.primary} />
+            </IconWrapper>
+            <Heading size="l" color="black">
+              Notifications
+            </Heading>
+          </Row>
           <Section2>
             <SignOutButton onPress={signOut}>
               <Heading size="l" color={colors.primary}>
@@ -98,7 +112,7 @@ export const Profile = ({ navigator }) => (
             </SignOutButton>
           </Section2>
           <TabBarPlaceholder />
-        </GrowContainer>
+        </ScrollViewWrapper>
       </Screen>
     )}
   </ProfileContainer>
