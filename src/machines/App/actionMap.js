@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { Auth } from 'aws-amplify'
 import { Request } from '../../services'
 import { API } from '../../services'
@@ -56,6 +57,8 @@ export const actionMap = {
     actions.LOAD_SUCCESS(payload)
   },
   SAVE_COGNITO_USER_OBJECT({ dispatch, payload }) {
+    axios.defaults.headers.common['Authorization'] =
+      payload.signInUserSession.idToken.jwtToken
     dispatch(saveCognitoUserObject(payload))
   },
   async UPDATE_DEVICE_TOKEN_REMOTELY({ dispatch, payload, state, actions }) {

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { saveCognitoUserObject, removeCognitoUserObject } from './actions'
 import { Auth } from 'aws-amplify'
 import { uiActionMap } from '../App/genericActionMap'
@@ -23,6 +24,8 @@ export const actionMap = {
     }
   },
   SAVE_COGNITO_USER_OBJECT({ dispatch, payload }) {
+    axios.defaults.headers.common['Authorization'] =
+      payload.signInUserSession.idToken.jwtToken
     dispatch(saveCognitoUserObject(payload))
   },
   REMOVE_COGNITO_USER_OBJECT({ dispatch }) {
