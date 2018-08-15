@@ -10,10 +10,10 @@ type PropTypes = {
 }
 
 class Profile extends Component<PropTypes> {
-  handlePushMyDetails = ({ navigator }) => {
+  handlePushMyScreen = ({ navigator, screen }) => {
     pushScreen({
       navigator: navigator,
-      screen: 'MyDetails',
+      screen: screen,
       passProps: {
         loading: this.props.loading,
         user: this.props.user,
@@ -24,7 +24,7 @@ class Profile extends Component<PropTypes> {
   render() {
     return this.props.children({
       ...this.props,
-      handlePushMyDetails: this.handlePushMyDetails,
+      handlePushMyScreen: this.handlePushMyScreen,
     })
   }
 }

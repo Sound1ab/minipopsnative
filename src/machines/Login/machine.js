@@ -18,6 +18,7 @@ export const machine = Machine({
         SIGN_OUT: 'signingOut',
         CONFIRM_USER: 'confirmingUser',
         UPDATE_USER_ATTRIBUTES: 'updatingUserAttributes',
+        UPDATE_PASSWORD: 'updatingPassword',
       },
     },
     signingIn: {
@@ -76,6 +77,18 @@ export const machine = Machine({
           },
         },
         POST_USER_ATTRIBUTES_FAILURE: {
+          ['idle.waitingForSignOut']: {
+            actions: ['SHOW_ERROR_MESSAGE'],
+          },
+        },
+      },
+      onExit: ['HIDE_LOADING'],
+    },
+    updatingPassword: {
+      onEntry: ['POST_NEW_PASSWORD', 'SHOW_LOADING'],
+      on: {
+        POST_NEW_PASSWORD_SUCCESS: 'idle.waitingForSignOut',
+        POST_NEW_PASSWORD_FAILURE: {
           ['idle.waitingForSignOut']: {
             actions: ['SHOW_ERROR_MESSAGE'],
           },

@@ -61,7 +61,7 @@ const SignOutButton = styled.TouchableOpacity`
 
 export const Profile = ({ navigator }) => (
   <ProfileContainer>
-    {({ loading, signOut, showNotification, user, handlePushMyDetails }) => (
+    {({ loading, signOut, showNotification, user, handlePushMyScreen }) => (
       <Screen
         loading={loading}
         heading={{
@@ -80,7 +80,12 @@ export const Profile = ({ navigator }) => (
               {get(user, ['username'])}
             </Heading>
           </HeadingWrapper>
-          <Row onPress={handlePushMyDetails.bind(null, { navigator })}>
+          <Row
+            onPress={handlePushMyScreen.bind(null, {
+              navigator,
+              screen: 'MyDetails',
+            })}
+          >
             <IconWrapper>
               <Icon name="ios-options" color={colors.primary} />
             </IconWrapper>
@@ -88,7 +93,12 @@ export const Profile = ({ navigator }) => (
               My Details
             </Heading>
           </Row>
-          <Row>
+          <Row
+            onPress={handlePushMyScreen.bind(null, {
+              navigator,
+              screen: 'ChangePassword',
+            })}
+          >
             <IconWrapper>
               <Icon name="ios-lock" color={colors.primary} />
             </IconWrapper>

@@ -54,4 +54,16 @@ export const actionMap = {
       actions.POST_USER_ATTRIBUTES_FAILURE(error)
     }
   },
+  async POST_NEW_PASSWORD({ payload, actions }) {
+    try {
+      await Auth.changePassword(
+        await Auth.currentAuthenticatedUser(),
+        payload.currentPassword,
+        payload.password,
+      )
+      actions.POST_NEW_PASSWORD_SUCCESS()
+    } catch (error) {
+      actions.POST_NEW_PASSWORD_FAILURE(error)
+    }
+  },
 }

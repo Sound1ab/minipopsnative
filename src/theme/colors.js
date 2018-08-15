@@ -2,7 +2,7 @@ import { iOSColors } from 'react-native-typography'
 
 export const colors = {
   primary: '#e24347',
-  secondary: '#e2aead',
+  secondary: '#a72d2e',
   tertiary: '#9fe2b8',
   black: iOSColors.black,
   gray: '#cccccc',

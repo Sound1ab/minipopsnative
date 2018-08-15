@@ -12,6 +12,7 @@ import {
   SignIn,
   SignUp,
   MyDetails,
+  ChangePassword,
 } from '../components/presentational/pages'
 
 export const registerComponents = () => {
@@ -26,6 +27,7 @@ export const registerComponents = () => {
     ['SignIn', SignIn],
     ['SignUp', SignUp],
     ['MyDetails', MyDetails],
+    ['ChangePassword', ChangePassword],
   ])
   register.forEach((Component, key) => {
     Navigation.registerComponent(key, () => Component, store, Provider)
