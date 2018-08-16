@@ -30,7 +30,11 @@ const Section = styled.View`
 export const SignUpForm = (props: PropTypes) => (
   <Wrapper>
     <Section>
-      <Spinner size={60} iterationCount={3} />
+      <Spinner
+        key={`spinner-${props.loading}`}
+        size={60}
+        iterationCount={props.loading ? 'infinite' : 2}
+      />
     </Section>
     <Section>
       <Heading size="xl" color={colors.black}>

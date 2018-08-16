@@ -14,6 +14,12 @@ export const inAppNotification = ({
         message: message,
         url: url,
       },
+      animation: {
+        animated: true,
+        duration: 0.3,
+        type: 'slide-down',
+        fade: true,
+      },
       autoDismiss: false,
     })
   }, timeout)

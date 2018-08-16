@@ -24,10 +24,20 @@ const Section = styled.View`
   width: 100%;
 `
 
-export const SignInConfirmation = (props: PropTypes) => (
+export const SignInConfirmation = ({
+  handleChangeText,
+  code,
+  validationErrors,
+  handleSubmit,
+  loading,
+}) => (
   <Wrapper>
     <Section>
-      <Spinner size={60} iterationCount={3} />
+      <Spinner
+        key={`spinner-${props.loading}`}
+        size={60}
+        iterationCount={loading ? 'infinite' : 2}
+      />
     </Section>
     <Section>
       <Heading size="xl" color={colors.black}>
@@ -39,15 +49,15 @@ export const SignInConfirmation = (props: PropTypes) => (
     </Section>
     <Section>
       <InputWrapper
-        handleChange={props.handleChangeText.bind(null, 'code')}
-        value={props.code}
+        handleChange={handleChangeText.bind(null, 'code')}
+        value={code}
         autoCapitalize="none"
-        error={props.validationErrors.includes('code')}
+        error={validationErrors.includes('code')}
         placeholder="confirmation code"
-        handleSubmitEditing={props.handleSubmit}
+        handleSubmitEditing={handleSubmit}
       />
     </Section>
-    <TouchableOpacity onPress={props.handleSubmit}>
+    <TouchableOpacity onPress={handleSubmit}>
       <Heading size="l" color={colors.primary}>
         Confirm code
       </Heading>
