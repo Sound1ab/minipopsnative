@@ -82,7 +82,7 @@ export class LocalNotification extends Component<PropTypes, StateTypes> {
   componentDidMount = () => {
     this.timeout = setTimeout(() => {
       this.close()
-    }, 3000)
+    }, 4000)
   }
 
   onSwipeUp = () => {

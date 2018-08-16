@@ -11,9 +11,9 @@ import { NOTIFICATION_MACHINE_ACTIONS } from './src/machines/LocalNotification/a
 
 const onNotification = notification => {
   inAppNotification({
-    title: get(notification, ['notification', '_alert', 'title'], ''),
-    message: get(notification, ['notification', '_alert', 'body'], ''),
-    url: get(notification, ['notification', '_data', 'url'], ''),
+    title: get(notification, ['_alert', 'title'], ''),
+    message: get(notification, ['_alert', 'body'], ''),
+    url: get(notification, ['_data', 'url'], ''),
   })
 }
 

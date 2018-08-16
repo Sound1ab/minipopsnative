@@ -1,4 +1,5 @@
 import { Request } from '../../services'
+import { inAppNotification } from '../../navigation'
 import { API } from '../../services'
 import {
   saveArtistReleases,
@@ -13,7 +14,7 @@ export const actionMap = {
   ...uiActionMap,
   FETCH_RELEASES: (() => {
     const request = new Request(API('artist-releases'), 10)
-    return async ({ dispatch, payload, actions, state }) => {
+    return async ({ dispatch, payload, actions }) => {
       try {
         const { items, isNewRequest, isDone } = await request.paginatedGet({
           id: payload.spotifyId,
@@ -43,8 +44,13 @@ export const actionMap = {
         item: payload.item,
       })
       dispatch(saveFavourites(favourites.data))
+      inAppNotification({ title: 'Favourite added!', timeout: 500 })
       actions.FAVOURITE_SUCCESS({ id: payload.id })
     } catch (error) {
+      inAppNotification({
+        title: 'Could not add favourite',
+        timeout: 500,
+      })
       actions.FAVOURITE_FAILURE(error)
     }
   },
@@ -55,8 +61,13 @@ export const actionMap = {
         item: payload.item,
       })
       dispatch(saveFavourites(favourites.data))
+      inAppNotification({ title: 'Favourite removed!', timeout: 500 })
       actions.REMOVE_FAVOURITE_SUCCESS({ id: payload.id })
     } catch (error) {
+      inAppNotification({
+        title: 'Could not remove favourite',
+        timeout: 500,
+      })
       actions.REMOVE_FAVOURITE_FAILURE(error)
     }
   },
@@ -78,8 +89,17 @@ export const actionMap = {
         item: payload.item,
       })
       dispatch(saveWatchList({ items: items.data }))
+      inAppNotification({
+        title: 'Your favourite is being watched!',
+        message: "If an item is selling on eBay, we'll let you know.",
+        timeout: 500,
+      })
       actions.ADD_SUCCESS()
     } catch (error) {
+      inAppNotification({
+        title: 'Could not add favourite',
+        timeout: 500,
+      })
       actions.ADD_FAILURE()
     }
   },
@@ -90,8 +110,16 @@ export const actionMap = {
         item: payload.item,
       })
       dispatch(saveWatchList({ items: items.data }))
+      inAppNotification({
+        title: 'Your favourite is no longer being watched!',
+        timeout: 500,
+      })
       actions.REMOVE_FROM_WATCH_LIST_SUCCESS(payload)
     } catch (error) {
+      inAppNotification({
+        title: 'Something went wrong',
+        timeout: 500,
+      })
       actions.REMOVE_FROM_WATCH_LIST_FAILURE(error)
     }
   },

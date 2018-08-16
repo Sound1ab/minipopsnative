@@ -31,13 +31,7 @@ class Profile extends Component<PropTypes> {
         Alert.alert(
           'Notifications',
           'All Notifications are active!',
-          [
-            {
-              text: 'Stop notifications',
-              onPress: () => PushNotificationIOS.abandonPermissions(),
-            },
-            { text: 'Cancel' },
-          ],
+          [{ text: 'OK' }],
           { cancelable: false },
         )
       } else {
@@ -45,10 +39,6 @@ class Profile extends Component<PropTypes> {
           'Notifications',
           'Some notification settings missing',
           [
-            {
-              text: 'Stop notifications',
-              onPress: () => PushNotificationIOS.abandonPermissions(),
-            },
             {
               text: 'Activate notifications',
               onPress: () =>

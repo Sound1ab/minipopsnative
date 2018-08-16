@@ -46,14 +46,23 @@ export const MyDetails = ({ navigator }: PropTypes) => (
             placeholder="email"
             marginBottom
             error={validationErrors.includes('email')}
+            returnKeyType="next"
+            handleSubmitEditing={() => this.phone_number.focus()}
+            blurOnSubmit={false}
           />
           <InputWrapper
+            ref={ref => (this.phone_number = ref)}
             handleChange={handleChangeText.bind(null, 'phone_number')}
             value={form.phone_number}
             autoCapitalize="none"
             placeholder="Phone number"
             marginBottom
             error={validationErrors.includes('phone_number')}
+            returnKeyType="go"
+            handleSubmitEditing={Functional.pipe(
+              handleSaveUserAttributes,
+              popScreen.bind(null, navigator),
+            )}
           />
           <TouchableOpacity
             onPress={Functional.pipe(
@@ -73,5 +82,3 @@ export const MyDetails = ({ navigator }: PropTypes) => (
 )
 
 MyDetails.defaultProps = {}
-
-export default MyDetails
