@@ -35,7 +35,7 @@ export const Skeleton = (props: PropTypes) => (
 )
 
 Skeleton.defaultProps = {
-  primaryColor: colors.gray,
+  primaryColor: colors.primary,
   secondaryColor: colors.secondary,
   height: 50,
   width: 50,

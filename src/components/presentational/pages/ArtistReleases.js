@@ -49,8 +49,9 @@ export const ArtistReleases = ({
             })}
             onEndReachedThreshold={1}
             removeClippedSubviews={true}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <FlatListItemArtistReleases
+                index={index}
                 item={item}
                 navigator={navigator}
                 handlePress={handlePushArtistAlbum}

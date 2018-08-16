@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import FastImage from 'react-native-fast-image'
 import styled, { css } from 'styled-components'
 import { colors } from '../../../theme'
 import { Animated, Easing } from 'react-native'
@@ -32,6 +33,37 @@ const ImagePlaceholder = styled(Animated.View)`
   background-color: white;
   justify-content: center;
   align-items: center;
+  padding: 8px;
+  ${({ hasSibling, leftAlignPlaceholder }) =>
+    hasSibling &&
+    leftAlignPlaceholder &&
+    css`
+      padding: 8px 4px 8px 8px;
+    `};
+  ${({ hasSibling, rightAlignPlaceholder }) =>
+    hasSibling &&
+    rightAlignPlaceholder &&
+    css`
+      padding: 8px 8px 8px 4px;
+    `};
+  ${({ hasSibling, topAlignPlaceholder }) =>
+    hasSibling &&
+    topAlignPlaceholder &&
+    css`
+      padding-top: 8px;
+    `};
+  ${({ hasSibling, topAlignPlaceholder }) =>
+    hasSibling &&
+    !topAlignPlaceholder &&
+    css`
+      padding-top: 0px;
+    `};
+`
+
+const Inner = styled.View`
+  flex: 1;
+  width: 100%;
+  background-color: ${colors.primary};
 `
 
 type Props = {
@@ -41,6 +73,10 @@ type Props = {
   borderRadius: number,
   resizeMode: string,
   fixedWidth: Boolean,
+  leftAlignPlaceholder: Boolean,
+  rightAlignPlaceholder: Boolean,
+  topAlignPlaceholder: Boolean,
+  hasSibling: Boolean,
 }
 
 export class ImageWrapper extends Component<Props> {
@@ -51,6 +87,10 @@ export class ImageWrapper extends Component<Props> {
     borderRadius: 0,
     resizeMode: 'cover',
     fixedWidth: false,
+    leftAlignPlaceholder: false,
+    rightAlignPlaceholder: false,
+    topAlignPlaceholder: false,
+    hasSibling: false,
   }
   constructor(props) {
     super(props)
@@ -73,19 +113,17 @@ export class ImageWrapper extends Component<Props> {
         height={this.props.height}
         fixedWidth={this.props.fixedWidth}
       >
-        <Image
-          onLoadEnd={this.startAnimation}
+        <FastImage
+          style={{ flex: 1 }}
           source={{
             uri: this.props.source
               ? this.props.source
               : 'https://facebook.github.io/react-native/docs/assets/favicon.png',
+            priority: FastImage.priority.normal,
           }}
-          resizeMode={this.props.resizeMode}
-          borderRadius={this.props.borderRadius}
+          resizeMode={FastImage.resizeMode.cover}
+          onLoadEnd={this.startAnimation}
         />
-        <ImagePlaceholder style={{ opacity: this.opacity }}>
-          <Icon name="ios-image" />
-        </ImagePlaceholder>
       </ImageContainer>
     )
   }

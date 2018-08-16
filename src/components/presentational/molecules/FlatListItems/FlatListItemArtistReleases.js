@@ -25,9 +25,10 @@ export const FlatListItemArtistReleases = ({
   item,
   navigator,
   handlePress,
+  index: verticalIndex,
 }: PropTypes) => (
   <RowWrapper>
-    {item.map(album => {
+    {item.map((album, horizontalIndex) => {
       return (
         <TouchableOpacity
           activeOpacity={1}
