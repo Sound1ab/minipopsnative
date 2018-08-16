@@ -9,21 +9,7 @@ export const machine = Machine({
   states: {
     idle: {
       on: {
-        ADD_NOTIFICATION: 'addingNotification',
-        REMOVE_NOTIFICATION: 'removingNotification',
         SAVE_TOKEN: 'savingToken',
-      },
-    },
-    addingNotification: {
-      onEntry: ['ADD_NOTIFICATION'],
-      on: {
-        NOTIFICATION_ADDED: 'idle',
-      },
-    },
-    removingNotification: {
-      onEntry: ['REMOVE_NOTIFICATION'],
-      on: {
-        NOTIFICATION_REMOVED: 'idle',
       },
     },
     savingToken: {

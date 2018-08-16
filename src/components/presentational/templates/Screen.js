@@ -1,9 +1,8 @@
 // @flow
 import React, { Component } from 'react'
-import { LocalNotificationManager, SearchField } from '../../container'
+import { SearchField } from '../../container'
 import styled from 'styled-components'
 import { NavBar } from '../molecules'
-import { showTabs } from '../../../navigation'
 
 type PropTypes = {
   loading: Boolean,
@@ -62,7 +61,6 @@ export class Screen extends Component<PropTypes> {
           {searchApi && <SearchField api={searchApi} />}
         </NavBar>
         <Sink>{children}</Sink>
-        <LocalNotificationManager />
       </React.Fragment>
     )
   }

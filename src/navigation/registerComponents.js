@@ -14,6 +14,7 @@ import {
   MyDetails,
   ChangePassword,
 } from '../components/presentational/pages'
+import { LocalNotification } from '../components/presentational/molecules'
 
 export const registerComponents = () => {
   const register = new Map([
@@ -28,6 +29,7 @@ export const registerComponents = () => {
     ['SignUp', SignUp],
     ['MyDetails', MyDetails],
     ['ChangePassword', ChangePassword],
+    ['LocalNotification', LocalNotification],
   ])
   register.forEach((Component, key) => {
     Navigation.registerComponent(key, () => Component, store, Provider)

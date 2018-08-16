@@ -3,6 +3,7 @@ import { saveCognitoUserObject, removeCognitoUserObject } from './actions'
 import { Auth } from 'aws-amplify'
 import { uiActionMap } from '../App/genericActionMap'
 import { APP_MACHINE_ACTIONS } from '../App/actions'
+import { inAppNotification } from '../../navigation'
 
 export const actionMap = {
   ...uiActionMap,
@@ -53,8 +54,13 @@ export const actionMap = {
       )
       const updatedUser = await Auth.currentAuthenticatedUser()
       actions.POST_USER_ATTRIBUTES_SUCCESS(updatedUser)
+      inAppNotification({ title: 'New details saved', timeout: 500 })
     } catch (error) {
       actions.POST_USER_ATTRIBUTES_FAILURE(error)
+      inAppNotification({
+        title: 'The details entered were incorrect',
+        timeout: 500,
+      })
     }
   },
   async POST_NEW_PASSWORD({ payload, actions }) {
@@ -65,8 +71,13 @@ export const actionMap = {
         payload.password,
       )
       actions.POST_NEW_PASSWORD_SUCCESS()
+      inAppNotification({ title: 'New password saved', timeout: 500 })
     } catch (error) {
       actions.POST_NEW_PASSWORD_FAILURE(error)
+      inAppNotification({
+        title: 'The details entered were incorrect',
+        timeout: 500,
+      })
     }
   },
 }

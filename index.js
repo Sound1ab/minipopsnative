@@ -1,16 +1,20 @@
 import React from 'react'
-import { AsyncStorage } from 'react-native'
 import store from './src/store'
-import { Aws } from './src/helpers'
 import config from './aws-exports'
+import get from 'lodash/get'
+import { inAppNotification } from './src/navigation'
+import { AsyncStorage } from 'react-native'
+import { Aws } from './src/helpers'
 import { APP_MACHINE_ACTIONS } from './src/machines/App/actions'
-import { NOTIFICATION_MACHINE_ACTIONS } from './src/machines/LocalNotification/actions'
 import { setupNetworkMonitoring } from './src/helpers'
+import { NOTIFICATION_MACHINE_ACTIONS } from './src/machines/LocalNotification/actions'
 
 const onNotification = notification => {
-  store.dispatch(
-    NOTIFICATION_MACHINE_ACTIONS.ADD_NOTIFICATION({ notification }),
-  )
+  inAppNotification({
+    title: get(notification, ['notification', '_alert', 'title'], ''),
+    message: get(notification, ['notification', '_alert', 'body'], ''),
+    url: get(notification, ['notification', '_data', 'url'], ''),
+  })
 }
 
 const onRegister = token => {

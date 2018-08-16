@@ -1,10 +1,11 @@
 // @flow
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components'
+import { TouchableOpacity } from 'react-native'
+import { Functional } from '../../../helpers'
+import { popScreen } from '../../../navigation'
 import { ChangePasswordContainer } from '../../container'
 import { Screen } from '../templates'
-import { popScreen } from '../../../navigation'
 import { Heading, TabBarPlaceholder, InputWrapper } from '../atoms'
 import { colors } from '../../../theme'
 
@@ -55,7 +56,12 @@ export const ChangePassword = ({ navigator }: PropTypes) => (
             password
             error={validationErrors.includes('password')}
           />
-          <TouchableOpacity onPress={handleUpdatePassword}>
+          <TouchableOpacity
+            onPress={Functional.pipe(
+              handleUpdatePassword,
+              popScreen.bind(null, navigator),
+            )}
+          >
             <Heading size="l" color={colors.primary}>
               Save
             </Heading>

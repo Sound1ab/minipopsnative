@@ -5,6 +5,7 @@ export class RXState {
     this.machine = machine
     this.actionMap = actionMap
   }
+
   static createMiddleware = () => ({
     dispatch,
     getState,
@@ -45,6 +46,7 @@ export class RXState {
     }
     next(action)
   }
+
   static composeActionsWithDispatch = (dispatch, actions) =>
     Object.entries(actions).reduce((composedActions, v) => {
       const [actionKey, actionFunction] = v
@@ -56,6 +58,7 @@ export class RXState {
       }
       return composedActions
     }, {})
+
   findActions = states =>
     Object.keys(states)
       .map(key => {
@@ -65,6 +68,7 @@ export class RXState {
       })
       .reduce((a, b) => a.concat(b), [])
       .filter((key, pos, arr) => arr.indexOf(key) === pos)
+
   createActionCreators = actions =>
     actions.reduce((actionObject, action) => {
       if (!actionObject[action]) {
@@ -78,6 +82,7 @@ export class RXState {
       }
       return actionObject
     }, {})
+
   getActionCreators = () =>
     Functional.pipe(
       this.findActions,

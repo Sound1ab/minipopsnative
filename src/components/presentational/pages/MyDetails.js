@@ -1,10 +1,11 @@
 // @flow
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components'
+import { TouchableOpacity } from 'react-native'
+import { Functional } from '../../../helpers'
+import { popScreen } from '../../../navigation'
 import { MyDetailsContainer } from '../../container'
 import { Screen } from '../templates'
-import { popScreen } from '../../../navigation'
 import { Heading, TabBarPlaceholder, InputWrapper } from '../atoms'
 import { colors } from '../../../theme'
 
@@ -54,7 +55,12 @@ export const MyDetails = ({ navigator }: PropTypes) => (
             marginBottom
             error={validationErrors.includes('phone_number')}
           />
-          <TouchableOpacity onPress={handleSaveUserAttributes}>
+          <TouchableOpacity
+            onPress={Functional.pipe(
+              handleSaveUserAttributes,
+              popScreen.bind(null, navigator),
+            )}
+          >
             <Heading size="l" color={colors.primary}>
               Save
             </Heading>

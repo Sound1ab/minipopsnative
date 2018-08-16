@@ -1,5 +1,4 @@
 export { default as SearchField } from './SearchField'
-export { default as LocalNotificationManager } from './LocalNotificationManager'
 export { default as ArtistAlbumContainer } from './ArtistAlbum'
 export { default as ArtistReleasesContainer } from './ArtistReleases'
 export { default as DiscoveryContainer } from './Discovery'

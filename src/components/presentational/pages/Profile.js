@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
-import { Dimensions } from 'react-native'
+import get from 'lodash/get'
 import styled, { css } from 'styled-components'
+import { Dimensions } from 'react-native'
 import { ProfileContainer } from '../../container'
 import { Screen } from '../templates'
 import {
@@ -12,14 +13,13 @@ import {
   ScrollViewWrapper,
 } from '../atoms'
 import { colors, shadow } from '../../../theme'
-import get from 'lodash/get'
 
 const HeadingWrapper = styled.View`
   flex: 1;
   padding: 16px;
 `
 
-const Section2 = styled.View`
+const SignOutWrapper = styled.View`
   flex: 1;
   justify-content: flex-end;
   align-items: center;
@@ -121,13 +121,13 @@ export const Profile = ({ navigator }) => (
               Notifications
             </Heading>
           </Row>
-          <Section2>
+          <SignOutWrapper>
             <SignOutButton onPress={signOut}>
               <Heading size="l" color={colors.primary}>
                 Sign Out
               </Heading>
             </SignOutButton>
-          </Section2>
+          </SignOutWrapper>
           <TabBarPlaceholder />
         </ScrollViewWrapper>
       </Screen>
