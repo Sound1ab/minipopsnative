@@ -130,30 +130,26 @@ export const startLogin = async () => {
   })
 }
 
-export const hideTabsOnScroll = navigator => {
+export const hideTabsOnScroll = () => {
   let pastY = 0
-  return e => {
+  return (navigator, e) => {
     if (!navigator) {
       return
     }
+    let to = 'visible'
     const currentY = e.nativeEvent.contentOffset.y
     if (currentY <= 0 || (currentY > 0 && currentY < 100)) {
-      navigator.toggleTabs({
-        to: 'visible',
-        animate: true,
-      })
+      to = 'visible'
     } else if (currentY > pastY) {
-      navigator.toggleTabs({
-        to: 'hidden',
-        animate: true,
-      })
+      to = 'hidden'
     } else if (currentY < pastY && currentY > pastY - 10) {
     } else {
-      navigator.toggleTabs({
-        to: 'visible',
-        animate: true,
-      })
+      to = 'visible'
     }
+    navigator.toggleTabs({
+      to,
+      animate: true,
+    })
     pastY = currentY
   }
 }

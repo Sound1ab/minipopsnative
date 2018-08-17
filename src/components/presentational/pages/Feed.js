@@ -7,6 +7,8 @@ import { FlatListItemSearch } from '../molecules'
 import { FeedListSkeleton } from '../zkeletons'
 import { hideTabsOnScroll } from '../../../navigation'
 
+const hideTabs = hideTabsOnScroll()
+
 export const Feed = ({ navigator }) => (
   <FeedContainer navigator={navigator}>
     {({ loading, id, feed, state, fetchFeed, refetchFeed }) => (
@@ -29,7 +31,7 @@ export const Feed = ({ navigator }) => (
             onRefresh={refetchFeed.bind(null, { id })}
             keyExtractor={(item, index) => `${item.title}-${index}`}
             renderItem={FlatListItemSearch}
-            onScroll={feed.length > 0 && hideTabsOnScroll(navigator)}
+            onScroll={feed.length > 0 && hideTabs.bind(null, navigator)}
             isTabHidden
           />
         )}

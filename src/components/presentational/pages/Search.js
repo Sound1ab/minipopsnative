@@ -6,6 +6,8 @@ import { FlatListWrapper } from '../atoms'
 import { FlatListItemSearch } from '../molecules'
 import { hideTabsOnScroll } from '../../../navigation'
 
+const hideTabs = hideTabsOnScroll()
+
 export const Search = ({ navigator }) => (
   <SearchContainer navigator={navigator}>
     {({ loading, searchResults }) => (
@@ -24,7 +26,7 @@ export const Search = ({ navigator }) => (
           data={searchResults}
           keyExtractor={(item, index) => `${item.title}-${index}`}
           renderItem={FlatListItemSearch}
-          onScroll={searchResults.length > 0 && hideTabsOnScroll(navigator)}
+          onScroll={searchResults.length > 0 && hideTabs.bind(null, navigator)}
           isTabHidden
         />
       </Screen>
