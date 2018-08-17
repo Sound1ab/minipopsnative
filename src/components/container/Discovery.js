@@ -16,27 +16,6 @@ class Discovery extends Component<PropTypes> {
     loading: false,
     discoveryResults: [],
   }
-  constructor(props) {
-    super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
-    this.isVisible = true
-  }
-  onNavigatorEvent = event => {
-    switch (event.id) {
-      case 'willAppear':
-        this.isVisible = true
-        break
-      case 'didAppear':
-        this.forceUpdate()
-        break
-      case 'didDisappear':
-        this.isVisible = false
-        break
-    }
-  }
-  shouldComponentUpdate = () => {
-    return this.isVisible
-  }
   fetchArtistAlbum = item => {
     this.props.fetchArtistAlbum({ spotifyId: item.spotifyId })
     return item

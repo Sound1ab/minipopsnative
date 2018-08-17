@@ -22,27 +22,6 @@ export class Feed extends Component<PropTypes> {
     fetchFeed: () => {},
     refetchFeed: () => {},
   }
-  constructor(props) {
-    super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
-    this.isVisible = false
-  }
-  onNavigatorEvent = event => {
-    switch (event.id) {
-      case 'willAppear':
-        this.isVisible = true
-        break
-      case 'didAppear':
-        this.props.fetchFeed({ id: this.props.id })
-        break
-      case 'didDisappear':
-        this.isVisible = false
-        break
-    }
-  }
-  shouldComponentUpdate = () => {
-    return this.isVisible
-  }
   componentDidMount() {
     this.props.fetchFeed({ id: this.props.id })
   }

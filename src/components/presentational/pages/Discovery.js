@@ -15,6 +15,7 @@ export const Discovery = ({ navigator }) => (
       fetchArtistReleases,
     }) => (
       <Screen
+        navigator={navigator}
         loading={loading}
         heading={{
           value: 'Discovery',

@@ -19,6 +19,7 @@ export const ArtistReleases = ({
   <ArtistReleasesContainer navigator={navigator}>
     {({ artistReleases, state, loading }) => (
       <Screen
+        navigator={navigator}
         loading={loading}
         handleBack={popScreen.bind(null, navigator)}
         state={{

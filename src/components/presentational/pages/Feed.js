@@ -11,6 +11,7 @@ export const Feed = ({ navigator }) => (
   <FeedContainer navigator={navigator}>
     {({ loading, id, feed, state, fetchFeed, refetchFeed }) => (
       <Screen
+        navigator={navigator}
         loading={loading}
         heading={{
           value: 'Feed',

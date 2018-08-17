@@ -70,6 +70,7 @@ export const Profile = ({ navigator }) => (
       CheckNotificationPermissions,
     }) => (
       <Screen
+        navigator={navigator}
         loading={loading}
         heading={{
           value: 'Profile',

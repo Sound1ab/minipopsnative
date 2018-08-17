@@ -18,27 +18,6 @@ type StateTypes = {
 
 export class ChangePassword extends Component<PropTypes, StateTypes> {
   static defaultProps = {}
-  constructor(props) {
-    super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
-    this.isVisible = false
-  }
-  onNavigatorEvent = event => {
-    switch (event.id) {
-      case 'willAppear':
-        this.isVisible = true
-        break
-      case 'didAppear':
-        this.forceUpdate()
-        break
-      case 'didDisappear':
-        this.isVisible = false
-        break
-    }
-  }
-  shouldComponentUpdate = () => {
-    return this.isVisible
-  }
   state = {
     form: {
       currentPassword: '',

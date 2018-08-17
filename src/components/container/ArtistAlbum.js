@@ -36,28 +36,6 @@ class ArtistAlbum extends Component<PropTypes> {
     loading: false,
     children: () => {},
   }
-  constructor(props) {
-    super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
-    this.isVisible = false
-  }
-  onNavigatorEvent = event => {
-    switch (event.id) {
-      case 'willAppear':
-        this.isVisible = true
-        break
-      case 'didAppear':
-        this.forceUpdate()
-        break
-      case 'didDisappear':
-        this.isVisible = false
-        break
-    }
-  }
-  shouldComponentUpdate = () => {
-    return this.isVisible
-  }
-
   render() {
     return this.props.children(this.props)
   }

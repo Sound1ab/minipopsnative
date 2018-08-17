@@ -11,27 +11,6 @@ type PropTypes = {
 }
 
 class Profile extends Component<PropTypes> {
-  constructor(props) {
-    super(props)
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
-    this.isVisible = false
-  }
-  onNavigatorEvent = event => {
-    switch (event.id) {
-      case 'willAppear':
-        this.isVisible = true
-        break
-      case 'didAppear':
-        this.forceUpdate()
-        break
-      case 'didDisappear':
-        this.isVisible = false
-        break
-    }
-  }
-  shouldComponentUpdate = () => {
-    return this.isVisible
-  }
   handlePushMyScreen = ({ navigator, screen }) => {
     pushScreen({
       navigator: navigator,
@@ -39,7 +18,6 @@ class Profile extends Component<PropTypes> {
       passProps: {
         loading: this.props.loading,
         user: this.props.user,
-        navigator,
       },
     })
   }

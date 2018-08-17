@@ -20,6 +20,7 @@ export const Favourites = ({ navigator }) => (
       removeFromWatchList,
     }) => (
       <Screen
+        navigator={navigator}
         loading={loading}
         heading={{
           value: 'Favourites',

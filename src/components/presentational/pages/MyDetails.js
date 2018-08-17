@@ -29,6 +29,7 @@ export const MyDetails = ({ navigator }: PropTypes) => (
       validationErrors,
     }) => (
       <Screen
+        navigator={navigator}
         loading={loading}
         handleBack={popScreen.bind(null, navigator)}
         heading={{

@@ -9,7 +9,7 @@ import { ImageWrapper, TrackRow } from '../atoms'
 import { ArtistAlbumSkeleton } from '../zkeletons'
 
 export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
-  <ArtistAlbumContainer navigator={navigator}>
+  <ArtistAlbumContainer>
     {({
       loading,
       state,
@@ -20,6 +20,7 @@ export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
       removeFromFavourites,
     }) => (
       <Screen
+        navigator={navigator}
         loading={loading}
         handleBack={popScreen.bind(null, navigator)}
         state={{

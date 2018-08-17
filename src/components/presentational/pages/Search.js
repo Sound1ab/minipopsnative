@@ -10,6 +10,7 @@ export const Search = ({ navigator }) => (
   <SearchContainer navigator={navigator}>
     {({ loading, searchResults }) => (
       <Screen
+        navigator={navigator}
         loading={loading}
         heading={{
           value: 'Search',
