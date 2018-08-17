@@ -8,7 +8,7 @@ import { TabBarPlaceholder } from '../atoms'
 import { FavouritesListSkeleton } from '../zkeletons'
 
 export const Favourites = ({ navigator }) => (
-  <FavouritesContainer>
+  <FavouritesContainer navigator={navigator}>
     {({
       loading,
       favourites,

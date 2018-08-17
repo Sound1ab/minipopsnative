@@ -16,7 +16,7 @@ export const ArtistReleases = ({
   handlePushArtistAlbum,
   fetchMoreArtistReleases,
 }) => (
-  <ArtistReleasesContainer>
+  <ArtistReleasesContainer navigator={navigator}>
     {({ artistReleases, state, loading }) => (
       <Screen
         loading={loading}

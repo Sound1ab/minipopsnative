@@ -9,7 +9,7 @@ import { ImageWrapper, TrackRow } from '../atoms'
 import { ArtistAlbumSkeleton } from '../zkeletons'
 
 export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
-  <ArtistAlbumContainer>
+  <ArtistAlbumContainer navigator={navigator}>
     {({
       loading,
       state,

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 import { favourites, watchList } from '../../machines/Discovery/selectors'
@@ -11,9 +11,33 @@ type PropTypes = {
   watchListIds: Array<string>,
 }
 
-export const Favourites = (props: PropTypes) => props.children(props)
-
-Favourites.defaultProps = {}
+export class Favourites extends Component<PropTypes> {
+  static defaultProps = {}
+  constructor(props) {
+    super(props)
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+    this.isVisible = false
+  }
+  onNavigatorEvent = event => {
+    switch (event.id) {
+      case 'willAppear':
+        this.isVisible = true
+        break
+      case 'didAppear':
+        this.forceUpdate()
+        break
+      case 'didDisappear':
+        this.isVisible = false
+        break
+    }
+  }
+  shouldComponentUpdate = () => {
+    return this.isVisible
+  }
+  render() {
+    return this.props.children(this.props)
+  }
+}
 
 const mapStateToProps = state => ({
   loading: state.app.loading,

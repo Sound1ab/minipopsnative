@@ -8,7 +8,7 @@ import { FeedListSkeleton } from '../zkeletons'
 import { hideTabsOnScroll } from '../../../navigation'
 
 export const Feed = ({ navigator }) => (
-  <FeedContainer>
+  <FeedContainer navigator={navigator}>
     {({ loading, id, feed, state, fetchFeed, refetchFeed }) => (
       <Screen
         loading={loading}

@@ -13,7 +13,7 @@ import { saveFeed } from '../Feed/actions'
 export const actionMap = {
   ...uiActionMap,
   FETCH_RELEASES: (() => {
-    const request = new Request(API('artist-releases'), 10)
+    const request = new Request(API('artist-releases'), 30)
     return async ({ dispatch, payload, actions }) => {
       try {
         const { items, isNewRequest, isDone } = await request.paginatedGet({

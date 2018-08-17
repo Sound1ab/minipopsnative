@@ -19,7 +19,7 @@ const GrowContainerWrapper = styled.View`
 `
 
 export const MyDetails = ({ navigator }: PropTypes) => (
-  <MyDetailsContainer>
+  <MyDetailsContainer navigator={navigator}>
     {({
       loading,
       user,

@@ -60,7 +60,7 @@ const SignOutButton = styled.TouchableOpacity`
 `
 
 export const Profile = ({ navigator }) => (
-  <ProfileContainer>
+  <ProfileContainer navigator={navigator}>
     {({
       loading,
       signOut,

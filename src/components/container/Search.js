@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchResults } from '../../machines/SearchField/selectors'
 
@@ -8,7 +8,32 @@ type PropTypes = {
   searchResults: Array<Object>,
 }
 
-const Search = (props: PropTypes) => props.children(props)
+class Search extends Component<PropTypes> {
+  constructor(props) {
+    super(props)
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+    this.isVisible = false
+  }
+  onNavigatorEvent = event => {
+    switch (event.id) {
+      case 'willAppear':
+        this.isVisible = true
+        break
+      case 'didAppear':
+        this.forceUpdate()
+        break
+      case 'didDisappear':
+        this.isVisible = false
+        break
+    }
+  }
+  shouldComponentUpdate = () => {
+    return this.isVisible
+  }
+  render() {
+    return this.props.children(this.props)
+  }
+}
 
 const mapStateToProps = state => ({
   loading: state.app.loading,

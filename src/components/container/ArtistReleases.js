@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { artistReleases } from '../../machines/Discovery/selectors'
 
@@ -9,12 +9,36 @@ type PropTypes = {
   loading: Boolean,
 }
 
-const ArtistReleases = (props: PropTypes) => props.children(props)
-
-ArtistReleases.defaultProps = {
-  artistReleases: [],
-  state: '',
-  loading: false,
+class ArtistReleases extends Component<PropTypes> {
+  static defaultProps = {
+    artistReleases: [],
+    state: '',
+    loading: false,
+  }
+  constructor(props) {
+    super(props)
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+    this.isVisible = true
+  }
+  onNavigatorEvent = event => {
+    switch (event.id) {
+      case 'willAppear':
+        this.isVisible = true
+        break
+      case 'didAppear':
+        this.forceUpdate()
+        break
+      case 'didDisappear':
+        this.isVisible = false
+        break
+    }
+  }
+  shouldComponentUpdate = () => {
+    return this.isVisible
+  }
+  render() {
+    return this.props.children(this.props)
+  }
 }
 
 const mapStateToProps = state => ({

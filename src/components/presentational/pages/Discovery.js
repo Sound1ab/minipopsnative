@@ -7,7 +7,7 @@ import { FlatListWrapper } from '../atoms'
 import { FlatListItemDiscovery } from '../molecules'
 
 export const Discovery = ({ navigator }) => (
-  <DiscoveryContainer>
+  <DiscoveryContainer navigator={navigator}>
     {({
       loading,
       discoveryResults,

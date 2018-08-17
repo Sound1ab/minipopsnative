@@ -7,7 +7,7 @@ import { FlatListItemSearch } from '../molecules'
 import { hideTabsOnScroll } from '../../../navigation'
 
 export const Search = ({ navigator }) => (
-  <SearchContainer>
+  <SearchContainer navigator={navigator}>
     {({ loading, searchResults }) => (
       <Screen
         loading={loading}

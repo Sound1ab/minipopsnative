@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
 import { artistAlbum, favourites } from '../../machines/Discovery/selectors'
@@ -20,22 +20,47 @@ type PropTypes = {
   children: Function,
 }
 
-const ArtistAlbum = (props: PropTypes) => props.children(props)
+class ArtistAlbum extends Component<PropTypes> {
+  static defaultProps = {
+    artistAlbum: {
+      artist: '',
+      name: '',
+      tracks: [],
+      imageUrl: '',
+      spotifyId: '',
+    },
+    favourites: [],
+    id: '',
+    addToFavourites: () => {},
+    removeFromFavourites: () => {},
+    loading: false,
+    children: () => {},
+  }
+  constructor(props) {
+    super(props)
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+    this.isVisible = false
+  }
+  onNavigatorEvent = event => {
+    switch (event.id) {
+      case 'willAppear':
+        this.isVisible = true
+        break
+      case 'didAppear':
+        this.forceUpdate()
+        break
+      case 'didDisappear':
+        this.isVisible = false
+        break
+    }
+  }
+  shouldComponentUpdate = () => {
+    return this.isVisible
+  }
 
-ArtistAlbum.defaultProps = {
-  artistAlbum: {
-    artist: '',
-    name: '',
-    tracks: [],
-    imageUrl: '',
-    spotifyId: '',
-  },
-  favourites: [],
-  id: '',
-  addToFavourites: () => {},
-  removeFromFavourites: () => {},
-  loading: false,
-  children: () => {},
+  render() {
+    return this.props.children(this.props)
+  }
 }
 
 const mapStateToProps = state => ({

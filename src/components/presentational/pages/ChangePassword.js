@@ -19,7 +19,7 @@ const GrowContainerWrapper = styled.View`
 `
 
 export const ChangePassword = ({ navigator }: PropTypes) => (
-  <ChangePasswordContainer>
+  <ChangePasswordContainer navigator={navigator}>
     {({
       loading,
       user,

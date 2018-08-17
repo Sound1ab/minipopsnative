@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import { Functional } from '../../helpers/functional'
+import { Functional } from '../../helpers'
 import { connect } from 'react-redux'
 import { pushScreen } from '../../navigation'
 import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
@@ -15,6 +15,27 @@ class Discovery extends Component<PropTypes> {
   static defaultProps = {
     loading: false,
     discoveryResults: [],
+  }
+  constructor(props) {
+    super(props)
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+    this.isVisible = true
+  }
+  onNavigatorEvent = event => {
+    switch (event.id) {
+      case 'willAppear':
+        this.isVisible = true
+        break
+      case 'didAppear':
+        this.forceUpdate()
+        break
+      case 'didDisappear':
+        this.isVisible = false
+        break
+    }
+  }
+  shouldComponentUpdate = () => {
+    return this.isVisible
   }
   fetchArtistAlbum = item => {
     this.props.fetchArtistAlbum({ spotifyId: item.spotifyId })
@@ -45,7 +66,6 @@ class Discovery extends Component<PropTypes> {
       navigator: navigator,
       screen: 'ArtistReleases',
       passProps: {
-        navigator: navigator,
         artistSpotifyId: spotifyId,
         title,
         fetchMoreArtistReleases: this.fetchMoreArtistReleases,
