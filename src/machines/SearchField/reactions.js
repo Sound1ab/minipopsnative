@@ -39,7 +39,11 @@ export const reactions = {
       dispatchReduxAction(localActions[payload.api](items.data))
       dispatchMachineAction('FETCH_SUCCESS')
     } catch (error) {
-      dispatchMachineAction('FETCH_FAILURE', error)
+      dispatchMachineAction('FETCH_FAILURE', {
+        notification: false,
+        title: 'Fetch search',
+        message: error,
+      })
     }
   },
 }

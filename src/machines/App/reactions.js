@@ -14,11 +14,15 @@ export const reactions = {
     dispatchReduxAction(updateLoading(false))
   },
   SHOW_ERROR_MESSAGE({ payload }) {
-    inAppNotification({
-      title: get(payload, 'title', ''),
-      message: get(payload, 'message', ''),
-      timeout: 500,
-    })
+    if (payload.notification) {
+      inAppNotification({
+        title: '🤦‍♀',
+        message: get(payload, 'message', ''),
+        timeout: 500,
+      })
+    } else {
+      console.warn(`${payload.title}: `, payload.message)
+    }
   },
   REGISTER_COMPONENTS({ dispatchMachineAction }) {
     registerComponents()
@@ -37,7 +41,10 @@ export const reactions = {
       dispatchReduxAction(saveFavourites(favourites.data))
       dispatchMachineAction('FETCH_FAVOURITES_SUCCESS', payload)
     } catch (error) {
-      dispatchMachineAction('FETCH_FAVOURITES_FAILURE', error)
+      dispatchMachineAction('FETCH_FAVOURITES_FAILURE', {
+        notification: true,
+        message: "Oh no, I can't get your favourites right now",
+      })
     }
   },
   async FETCHING_WATCH_LIST({
@@ -53,7 +60,11 @@ export const reactions = {
       dispatchReduxAction(saveWatchList({ items: watchList.data }))
       dispatchMachineAction('FETCH_WATCH_LIST_SUCCESS', payload)
     } catch (error) {
-      dispatchMachineAction('FETCH_WATCH_LIST_FAILURE', error)
+      dispatchMachineAction('FETCH_WATCH_LIST_FAILURE', {
+        notification: false,
+        title: 'Watch fetch failure',
+        message: JSON.stringify(error),
+      })
     }
   },
   async REDIRECT_TO_APP({ dispatchMachineAction, payload }) {
@@ -88,7 +99,11 @@ export const reactions = {
       })
       dispatchMachineAction('UPDATE_TOKEN_REMOTELY_SUCCESS', payload)
     } catch (error) {
-      dispatchMachineAction('UPDATE_TOKEN_REMOTELY_FAILURE', error)
+      dispatchMachineAction('UPDATE_TOKEN_REMOTELY_FAILURE', {
+        notification: false,
+        title: 'Watch fetch failure',
+        message: error,
+      })
     }
   },
 }

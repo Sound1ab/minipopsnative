@@ -17,7 +17,11 @@ export const reactions = {
       dispatchReduxAction(saveFeed({ items: items.data }))
       dispatchMachineAction('FETCH_SUCCESS')
     } catch (error) {
-      dispatchReduxAction('FETCH_FAILURE')
+      dispatchReduxAction('FETCH_FAILURE', {
+        notification: false,
+        title: 'Fetch feed failure',
+        message: error,
+      })
     }
   },
 }

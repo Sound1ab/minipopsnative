@@ -17,7 +17,11 @@ export const reactions = {
       const { id } = await Auth.currentUserInfo()
       dispatchMachineAction('AUTHENTICATED_SUCCESS', { id, ...cognitoUser })
     } catch (error) {
-      dispatchMachineAction('AUTHENTICATED_FAILURE', error)
+      dispatchMachineAction('AUTHENTICATED_FAILURE', {
+        notification: false,
+        title: 'Check authenticated user',
+        message: error,
+      })
     }
   },
   async SIGN_IN({ payload, dispatchMachineAction }) {
@@ -25,7 +29,10 @@ export const reactions = {
       const cognitoUser = await Auth.signIn(payload.username, payload.password)
       dispatchMachineAction('SIGN_IN_SUCCESS', cognitoUser)
     } catch (error) {
-      dispatchMachineAction('SIGN_IN_FAILURE', error)
+      dispatchMachineAction('SIGN_IN_FAILURE', {
+        notification: true,
+        message: "Oh no, I can't sign in right now",
+      })
     }
   },
   async SIGN_OUT({ payload, dispatchMachineAction }) {
@@ -34,7 +41,10 @@ export const reactions = {
       await currentUser.signOut()
       dispatchMachineAction('SIGN_OUT_SUCCESS', currentUser)
     } catch (error) {
-      dispatchMachineAction('SIGN_OUT_FAILURE', error)
+      dispatchMachineAction('SIGN_OUT_FAILURE', {
+        notification: true,
+        message: "Oh no, I can't sign out right now",
+      })
     }
   },
   SAVE_COGNITO_USER_OBJECT({ dispatchReduxAction, payload }) {
@@ -56,7 +66,10 @@ export const reactions = {
       await Auth.confirmSignIn(payload.cognitoUser, payload.code)
       dispatchMachineAction('SIGN_IN_SUCCESS', payload)
     } catch (error) {
-      dispatchMachineAction('SIGN_IN_FAILURE', error)
+      dispatchMachineAction('SIGN_IN_FAILURE', {
+        notification: true,
+        message: 'Oh no, something went wrong, please try again',
+      })
     }
   },
   async POST_USER_ATTRIBUTES({ payload, dispatchMachineAction }) {
@@ -67,12 +80,15 @@ export const reactions = {
       )
       const updatedUser = await Auth.currentAuthenticatedUser()
       dispatchMachineAction('POST_USER_ATTRIBUTES_SUCCESS', updatedUser)
-      inAppNotification({ title: 'New details saved', timeout: 500 })
-    } catch (error) {
-      dispatchMachineAction('POST_USER_ATTRIBUTES_FAILURE', error)
       inAppNotification({
-        title: 'The details entered were incorrect',
+        title: '💁',
+        message: 'Your details have been updated!',
         timeout: 500,
+      })
+    } catch (error) {
+      dispatchMachineAction('POST_USER_ATTRIBUTES_FAILURE', {
+        notification: true,
+        message: "Oh no, we couldn't update your details, please try again",
       })
     }
   },
@@ -84,12 +100,15 @@ export const reactions = {
         payload.password,
       )
       dispatchMachineAction('POST_NEW_PASSWORD_SUCCESS')
-      inAppNotification({ title: 'New password saved', timeout: 500 })
-    } catch (error) {
-      dispatchMachineAction('POST_NEW_PASSWORD_FAILURE', error)
       inAppNotification({
-        title: 'The details entered were incorrect',
+        title: '💁',
+        message: 'Your new password has been saved',
         timeout: 500,
+      })
+    } catch (error) {
+      dispatchMachineAction('POST_NEW_PASSWORD_FAILURE', {
+        notification: true,
+        message: "Oh no, we couldn't save your new password, please try again",
       })
     }
   },

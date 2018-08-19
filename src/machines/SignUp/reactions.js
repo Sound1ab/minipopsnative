@@ -20,7 +20,10 @@ export const reactions = {
       })
       dispatchMachineAction('SIGN_UP_SUCCESS', payload)
     } catch (error) {
-      dispatchMachineAction('SIGN_UP_FAILURE', error)
+      dispatchMachineAction('SIGN_UP_FAILURE', {
+        notification: true,
+        message: "Oh no, we couldn't sign you up, please try again",
+      })
     }
   },
   async CONFIRM_USER({ payload, dispatchMachineAction }) {
@@ -28,14 +31,15 @@ export const reactions = {
       await Auth.confirmSignUp(payload.username, payload.code)
       dispatchMachineAction('CONFIRMATION_SUCCESS', payload)
       inAppNotification({
-        title: "You're signed up!",
-        message: 'Now you can login using your sign up credentials',
+        title: '💁',
+        message:
+          "You're signed up! Now you can login using your sign up credentials",
         timeout: 500,
       })
     } catch (error) {
       dispatchMachineAction('CONFIRMATION_FAILURE', {
-        title: 'Something went wrong',
-        message: 'Please try signing up again',
+        notification: true,
+        message: 'Oh no, something went wrong, please try again',
       })
     }
   },

@@ -29,8 +29,8 @@ export const reactions = {
         dispatchMachineAction('FETCH_SUCCESS')
       } catch (error) {
         dispatchMachineAction('FETCH_FAILURE', {
-          title: 'Something went wrong',
-          message: "Couldn't get artist releases",
+          notification: true,
+          message: "Oh no, I can't get any albums right now",
         })
       }
     }
@@ -44,8 +44,8 @@ export const reactions = {
       dispatchMachineAction('FETCH_SUCCESS')
     } catch (error) {
       dispatchMachineAction('FETCH_FAILURE', {
-        title: 'Something went wrong',
-        message: "Couldn't get artist album",
+        notification: true,
+        message: "Oh no, I can't get the album right now",
       })
     }
   },
@@ -56,16 +56,16 @@ export const reactions = {
         item: payload.item,
       })
       dispatchReduxAction(saveFavourites(favourites.data))
-      inAppNotification({ title: 'Favourite added!', timeout: 500 })
-      dispatchMachineAction('FAVOURITE_SUCCESS', { id: payload.id })
-    } catch (error) {
       inAppNotification({
-        title: 'Could not add favourite',
+        title: '💁',
+        message: 'Your favourite has been added!',
         timeout: 500,
       })
+      dispatchMachineAction('FAVOURITE_SUCCESS', { id: payload.id })
+    } catch (error) {
       dispatchMachineAction('FAVOURITE_FAILURE', {
-        title: 'Something went wrong',
-        message: "Couldn't add to favourites",
+        notification: true,
+        message: "Oh no, I can't favourite that album right now",
       })
     }
   },
@@ -80,12 +80,17 @@ export const reactions = {
         item: payload.item,
       })
       dispatchReduxAction(saveFavourites(favourites.data))
-      inAppNotification({ title: 'Favourite removed!', timeout: 500 })
+      inAppNotification({
+        title: '💁',
+        message: 'Your favourite has been removed!',
+        timeout: 500,
+      })
       dispatchMachineAction('REMOVE_FAVOURITE_SUCCESS', { id: payload.id })
     } catch (error) {
       dispatchMachineAction('REMOVE_FAVOURITE_FAILURE', {
-        title: 'Something went wrong',
-        message: "Couldn't remove favourite",
+        notification: true,
+        message:
+          "Oh no, we couldn't remove this album from your favourites, please try again",
       })
     }
   },
@@ -98,8 +103,8 @@ export const reactions = {
       dispatchMachineAction('FETCH_SUCCESS')
     } catch (error) {
       dispatchMachineAction('FETCH_FAILURE', {
-        title: 'Something went wrong',
-        message: "Couldn't update feed",
+        notification: false,
+        message: error,
       })
     }
   },
@@ -115,15 +120,16 @@ export const reactions = {
       })
       dispatchReduxAction(saveWatchList({ items: items.data }))
       inAppNotification({
-        title: 'Your favourite is being watched!',
-        message: "If an item is selling on eBay, we'll let you know.",
+        title: '💁',
+        message:
+          "Your favourite is being watched! If an item is selling on eBay, we'll let you know. 👌",
         timeout: 500,
       })
       dispatchMachineAction('ADD_SUCCESS')
     } catch (error) {
       dispatchMachineAction('ADD_FAILURE', {
-        title: 'Something went wrong',
-        message: "Couldn't watch favourite",
+        notification: true,
+        message: "Oh no, we couldn't watch that album, please try again",
       })
     }
   },
@@ -139,14 +145,16 @@ export const reactions = {
       })
       dispatchReduxAction(saveWatchList({ items: items.data }))
       inAppNotification({
-        title: 'Your favourite is no longer being watched!',
+        title: '💁',
+        message: 'Your favourite is no longer being watched!',
         timeout: 500,
       })
       dispatchMachineAction('REMOVE_FROM_WATCH_LIST_SUCCESS', payload)
     } catch (error) {
       dispatchMachineAction('REMOVE_FROM_WATCH_LIST_FAILURE', {
-        title: 'Something went wrong',
-        message: "Couldn't remove watcher",
+        notification: true,
+        message:
+          "Oh no, we couldn't stop watching that album, please try again",
       })
     }
   },

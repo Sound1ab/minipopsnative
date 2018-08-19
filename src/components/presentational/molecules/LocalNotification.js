@@ -53,6 +53,7 @@ const HorizontalWrapper = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 4px;
 `
 
 const IconWrapper = styled.View`
