@@ -3,8 +3,8 @@ import React from 'react'
 import { SignUpContainer } from '../../container/index'
 import { SignUpForm, SignUpConfirmation } from '../organisms/index'
 
-export const SignUp = () => (
-  <SignUpContainer>
+export const SignUp = ({ navigator }) => (
+  <SignUpContainer navigator={navigator}>
     {({
       state,
       confirmation,
@@ -15,6 +15,7 @@ export const SignUp = () => (
       handleConfirmation,
       handleChangeText,
       handleSignUp,
+      code,
     }) =>
       state === 'confirmingUser' ||
       (state.idle && state.idle === 'waitingForConfirmation') ? (

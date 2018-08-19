@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
+import { discoveryMachine } from '../../machines/Discovery'
 import { artistAlbum, favourites } from '../../machines/Discovery/selectors'
 
 type PropTypes = {
@@ -49,12 +49,12 @@ const mapStateToProps = state => ({
   loading: state.app.loading,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
   addToFavourites: payload => {
-    dispatch(FAVOURITES_MACHINE_ACTIONS.ADD_FAVOURITE(payload))
+    discoveryMachine.dispatchAction('ADD_FAVOURITE', payload)
   },
   removeFromFavourites: payload => {
-    dispatch(FAVOURITES_MACHINE_ACTIONS.REMOVE_FAVOURITE(payload))
+    discoveryMachine.dispatchAction('REMOVE_FAVOURITE', payload)
   },
 })
 

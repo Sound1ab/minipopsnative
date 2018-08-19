@@ -2,7 +2,7 @@ import { Machine } from 'xstate'
 
 const id = 'search'
 
-export const searchMachine = Machine({
+export const machine = Machine({
   id,
   initial: 'searching',
   strict: true,

@@ -1,8 +1,9 @@
-import { UPDATE_LOADING } from './genericActions'
+import { UPDATE_LOADING, SAVE_TOKEN } from './actions'
 
 export const initialState = {
   state: 'idle',
   loading: false,
+  deviceToken: '',
 }
 
 export function app(state = initialState, action) {
@@ -16,6 +17,11 @@ export function app(state = initialState, action) {
       return {
         ...state,
         loading: action.payload,
+      }
+    case SAVE_TOKEN:
+      return {
+        ...state,
+        deviceToken: action.payload.token,
       }
     default:
       return state

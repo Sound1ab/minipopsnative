@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { LOGIN_MACHINE_ACTIONS } from '../../machines/Login/actions'
+import { loginMachine } from '../../machines/Login'
 import { FormValidation } from '../../helpers/index'
 
 type PropTypes = {
@@ -80,9 +80,9 @@ const mapStateToProps = state => ({
   user: state.login.cognitoUser,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
   updateUserAttributes: payload => {
-    dispatch(LOGIN_MACHINE_ACTIONS.UPDATE_USER_ATTRIBUTES(payload))
+    loginMachine.dispatchAction('UPDATE_USER_ATTRIBUTES', payload)
   },
 })
 

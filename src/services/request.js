@@ -68,7 +68,7 @@ export class Request {
         ...headers,
       })
     } catch (e) {
-      return e
+      throw e
     }
   }
 
@@ -76,7 +76,7 @@ export class Request {
     try {
       return await Axios.post(url, data)
     } catch (e) {
-      return e
+      throw e
     }
   }
 
@@ -84,7 +84,7 @@ export class Request {
     try {
       return await Axios.delete(url, { data })
     } catch (e) {
-      return e
+      throw e
     }
   }
 }

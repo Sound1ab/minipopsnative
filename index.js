@@ -1,13 +1,11 @@
 import React from 'react'
-import store from './src/store'
 import config from './aws-exports'
 import get from 'lodash/get'
 import { inAppNotification } from './src/navigation'
 import { AsyncStorage } from 'react-native'
 import { Aws } from './src/helpers'
-import { APP_MACHINE_ACTIONS } from './src/machines/App/actions'
+import { loginMachine } from './src/machines/Login'
 import { setupNetworkMonitoring } from './src/helpers'
-import { NOTIFICATION_MACHINE_ACTIONS } from './src/machines/LocalNotification/actions'
 
 const onNotification = notification => {
   inAppNotification({
@@ -18,7 +16,7 @@ const onNotification = notification => {
 }
 
 const onRegister = token => {
-  store.dispatch(NOTIFICATION_MACHINE_ACTIONS.SAVE_TOKEN({ token }))
+  appMachine.dispatchAction('SAVE_TOKEN_LOCALLY', { token })
 }
 
 Aws.configure(config)
@@ -40,4 +38,4 @@ async function getDeviceToken() {
   }
 }
 
-store.dispatch(APP_MACHINE_ACTIONS.INIT())
+loginMachine.dispatchAction('INIT')

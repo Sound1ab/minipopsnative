@@ -2,12 +2,13 @@ import { Machine } from 'xstate'
 
 const id = 'signUp'
 
-export const signUpMachine = Machine({
+export const machine = Machine({
   id,
-  initial: 'idle.waitingForSignup',
+  initial: 'idle',
   strict: true,
   states: {
     idle: {
+      initial: 'waitingForSignup',
       states: {
         waitingForSignup: {},
         waitingForConfirmation: {},

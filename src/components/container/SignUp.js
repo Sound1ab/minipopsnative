@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { SIGN_UP_MACHINE_ACTIONS } from '../../machines/SignUp/actions'
+import { signUpMachine } from '../../machines/SignUp'
 import { FormValidation } from '../../helpers/index'
 
 type PropTypes = {
@@ -87,12 +87,12 @@ const mapStateToProps = state => ({
   loading: state.app.loading,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
   signUp: form => {
-    dispatch(SIGN_UP_MACHINE_ACTIONS.SIGN_UP(form))
+    signUpMachine.dispatchAction('SIGN_UP', form)
   },
   confirmUser: form => {
-    dispatch(SIGN_UP_MACHINE_ACTIONS.CONFIRM_USER(form))
+    signUpMachine.dispatchAction('CONFIRM_USER', form)
   },
 })
 

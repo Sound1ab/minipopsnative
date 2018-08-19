@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { InputWrapper, Icon } from '../presentational/atoms/index'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { SEARCH_MACHINE } from '../../machines/SearchField/actions'
+import { searchMachine } from '../../machines/SearchField'
 
 const Wrapper = styled.View`
   width: 100%;
@@ -61,12 +61,12 @@ const mapStateToProps = state => ({
   searchValue: state.search.value,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
   textInput: (value, api) => {
-    dispatch(SEARCH_MACHINE.TEXT_INPUT({ value, api }))
+    searchMachine.dispatchAction('TEXT_INPUT', { value, api })
   },
   textInputEmpty: () => {
-    dispatch(SEARCH_MACHINE.TEXT_INPUT_EMPTY({ value: null }))
+    searchMachine.dispatchAction('TEXT_INPUT_EMPTY', { value: null })
   },
 })
 

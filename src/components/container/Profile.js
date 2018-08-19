@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { PushNotificationIOS, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { pushScreen } from '../../navigation'
-import { LOGIN_MACHINE_ACTIONS } from '../../machines/Login/actions'
+import { loginMachine } from '../../machines/Login'
 
 type PropTypes = {
   loading: Boolean,
@@ -66,9 +66,9 @@ const mapStateToProps = state => ({
   user: state.login.cognitoUser,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
   signOut: () => {
-    dispatch(LOGIN_MACHINE_ACTIONS.SIGN_OUT())
+    loginMachine.dispatchAction('SIGN_OUT')
   },
 })
 

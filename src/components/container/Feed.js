@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FEED_MACHINE_ACTIONS } from '../../machines/Feed/actions'
+import { feedMachine } from '../../machines/Feed'
 import { feed } from '../../machines/Feed/selectors'
 
 type PropTypes = {
@@ -37,12 +37,12 @@ const mapStateToProps = state => ({
   state: state.feed.state,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
   fetchFeed: payload => {
-    dispatch(FEED_MACHINE_ACTIONS.FETCH_FEED(payload))
+    feedMachine.dispatchAction('FETCH_FEED', payload)
   },
   refetchFeed: payload => {
-    dispatch(FEED_MACHINE_ACTIONS.REFETCH_FEED(payload))
+    feedMachine.dispatchAction('REFETCH_FEED', payload)
   },
 })
 

@@ -4,16 +4,18 @@ const id = 'login'
 
 export const machine = Machine({
   id,
-  initial: 'idle.waitingForSignIn',
+  initial: 'idle',
   strict: true,
   states: {
     idle: {
+      initial: 'waitingForSignIn',
       states: {
         waitingForSignIn: {},
         waitingForConfirmation: {},
         waitingForSignOut: {},
       },
       on: {
+        INIT: 'checkingAuthenticatedUser',
         SIGN_IN: 'signingIn',
         SIGN_OUT: 'signingOut',
         CONFIRM_USER: 'confirmingUser',
@@ -21,12 +23,29 @@ export const machine = Machine({
         UPDATE_PASSWORD: 'updatingPassword',
       },
     },
+    checkingAuthenticatedUser: {
+      onEntry: ['CHECK_AUTHENTICATED_USER'],
+      on: {
+        AUTHENTICATED_SUCCESS: {
+          'idle.waitingForSignOut': {
+            actions: ['SAVE_COGNITO_USER_OBJECT', 'REDIRECT_TO_APP'],
+          },
+        },
+        // AUTHENTICATED_SUCCESS: 'loadingLogin',
+        AUTHENTICATED_FAILURE: {
+          ['idle.waitingForSignIn']: {
+            actions: ['REDIRECT_TO_LOGIN'],
+          },
+        },
+        // AUTHENTICATED_FAILURE: 'loadingApp',
+      },
+    },
     signingIn: {
       onEntry: ['SIGN_IN', 'SHOW_LOADING'],
       on: {
         SIGN_IN_SUCCESS: {
           'idle.waitingForSignOut': {
-            actions: ['REDIRECT_TO_APP'],
+            actions: ['SAVE_COGNITO_USER_OBJECT', 'REDIRECT_TO_APP'],
           },
         },
         SIGN_IN_FAILURE: {
@@ -42,7 +61,7 @@ export const machine = Machine({
       on: {
         SIGN_OUT_SUCCESS: {
           'idle.waitingForSignIn': {
-            actions: ['REMOVE_COGNITO_USER_OBJECT', 'REDIRECT_TO_LOGIN'],
+            actions: ['REDIRECT_TO_LOGIN', 'REMOVE_COGNITO_USER_OBJECT'],
           },
         },
         SIGN_OUT_FAILURE: {

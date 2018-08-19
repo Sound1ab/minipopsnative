@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { LOGIN_MACHINE_ACTIONS } from '../../machines/Login/actions'
+import { loginMachine } from '../../machines/Login'
 import { FormValidation } from '../../helpers/index'
 
 type PropTypes = {
@@ -90,12 +90,12 @@ const mapStateToProps = state => ({
   cognitoUser: state.login.cognitoUser,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
   signIn: form => {
-    dispatch(LOGIN_MACHINE_ACTIONS.SIGN_IN(form))
+    loginMachine.dispatchAction('SIGN_IN', form)
   },
   confirmUser: form => {
-    dispatch(LOGIN_MACHINE_ACTIONS.CONFIRM_USER(form))
+    loginMachine.dispatchAction('CONFIRM_USER', form)
   },
 })
 

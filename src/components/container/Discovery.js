@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Functional } from '../../helpers'
 import { connect } from 'react-redux'
 import { pushScreen } from '../../navigation'
-import { FAVOURITES_MACHINE_ACTIONS } from '../../machines/Discovery/actions'
+import { discoveryMachine } from '../../machines/Discovery'
 import { discoveryResults } from '../../machines/SearchField/selectors'
 
 type PropTypes = {
@@ -69,21 +69,21 @@ const mapStateToProps = state => ({
   discoveryResults: discoveryResults(state),
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
   fetchArtistReleases: spotifyId => {
-    dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_RELEASES(spotifyId))
+    discoveryMachine.dispatchAction('FETCH_RELEASES', spotifyId)
   },
   fetchMoreArtistReleases: spotifyId => {
-    dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_MORE_RELEASES(spotifyId))
+    discoveryMachine.dispatchAction('FETCH_MORE_RELEASES', spotifyId)
   },
   fetchArtistAlbum: payload => {
-    dispatch(FAVOURITES_MACHINE_ACTIONS.FETCH_ALBUM(payload))
+    discoveryMachine.dispatchAction('FETCH_ALBUM', payload)
   },
   addToFavourites: payload => {
-    dispatch(FAVOURITES_MACHINE_ACTIONS.ADD_FAVOURITE(payload))
+    discoveryMachine.dispatchAction('ADD_FAVOURITE', payload)
   },
   removeFromFavourites: payload => {
-    dispatch(FAVOURITES_MACHINE_ACTIONS.REMOVE_FAVOURITE(payload))
+    discoveryMachine.dispatchAction('REMOVE_FAVOURITE', payload)
   },
 })
 
