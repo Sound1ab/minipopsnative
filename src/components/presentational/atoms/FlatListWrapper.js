@@ -19,6 +19,7 @@ type Props = {
   onScrollEndDrag: ?Function,
   onScroll: ?Function,
   isTabHidden: Boolean,
+  ListEmptyComponent: Function,
 }
 
 const FlatListStyled = styled.FlatList`
@@ -29,9 +30,7 @@ export const FlatListWrapper = (props: Props) => (
   <FlatListStyled
     data={props.data}
     ListHeaderComponent={props.ListHeaderComponent}
-    ListEmptyComponent={
-      props.ListEmptyComponent ? props.ListEmptyComponent : FlatListEmpty
-    }
+    ListEmptyComponent={props.ListEmptyComponent}
     renderItem={props.renderItem}
     onRefresh={props.onRefresh}
     refreshing={props.refreshing}
@@ -58,4 +57,5 @@ FlatListWrapper.defaultProps = {
   onScrollEndDrag: null,
   onScroll: null,
   isTabHidden: false,
+  ListEmptyComponent: FlatListEmpty,
 }

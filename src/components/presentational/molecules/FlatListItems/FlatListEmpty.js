@@ -8,7 +8,7 @@ const TextStyled = styled.Text`
 `
 
 export const FlatListEmpty = () => (
-  <TextStyled>Use the search field to find some records</TextStyled>
+  <TextStyled>Use the search field to get started 🤙</TextStyled>
 )
 
 FlatListEmpty.defaultProps = {}

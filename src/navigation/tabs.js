@@ -76,7 +76,7 @@ export const startApp = async () => {
     tabsStyle: {
       tabBarSelectedButtonColor: colors.secondary,
       tabBarButtonColor: colors.primary,
-      initialTabIndex: 1,
+      initialTabIndex: 2,
       tabBarTranslucent: true,
     },
     appStyle: {

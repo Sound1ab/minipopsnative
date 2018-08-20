@@ -30,6 +30,7 @@ export const Feed = ({ navigator }) => (
             refreshing={state === 'refetchingFeed'}
             onRefresh={refetchFeed.bind(null, { id })}
             keyExtractor={(item, index) => `${item.title}-${index}`}
+            ListEmptyComponent={null}
             renderItem={props => (
               <FlatListItemSearch {...props} isOnline={isOnline} />
             )}
