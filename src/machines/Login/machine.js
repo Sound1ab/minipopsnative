@@ -26,28 +26,14 @@ export const machine = Machine({
     checkingAuthenticatedUser: {
       onEntry: ['CHECK_AUTHENTICATED_USER'],
       on: {
-        AUTHENTICATED_SUCCESS: {
-          'idle.waitingForSignOut': {
-            actions: ['SAVE_COGNITO_USER_OBJECT', 'REDIRECT_TO_APP'],
-          },
-        },
-        // AUTHENTICATED_SUCCESS: 'loadingLogin',
-        AUTHENTICATED_FAILURE: {
-          ['idle.waitingForSignIn']: {
-            actions: ['REDIRECT_TO_LOGIN'],
-          },
-        },
-        // AUTHENTICATED_FAILURE: 'loadingApp',
+        AUTHENTICATED_SUCCESS: 'updatingUserData.savingCognitoUserObject',
+        AUTHENTICATED_FAILURE: 'redirecting.toLogin',
       },
     },
     signingIn: {
       onEntry: ['SIGN_IN', 'SHOW_LOADING'],
       on: {
-        SIGN_IN_SUCCESS: {
-          'idle.waitingForSignOut': {
-            actions: ['SAVE_COGNITO_USER_OBJECT', 'REDIRECT_TO_APP'],
-          },
-        },
+        SIGN_IN_SUCCESS: 'checkingAuthenticatedUser',
         SIGN_IN_FAILURE: {
           ['idle.waitingForSignIn']: {
             actions: ['SHOW_ERROR_MESSAGE'],
@@ -59,11 +45,7 @@ export const machine = Machine({
     signingOut: {
       onEntry: ['SIGN_OUT', 'SHOW_LOADING'],
       on: {
-        SIGN_OUT_SUCCESS: {
-          'idle.waitingForSignIn': {
-            actions: ['REDIRECT_TO_LOGIN', 'REMOVE_COGNITO_USER_OBJECT'],
-          },
-        },
+        SIGN_OUT_SUCCESS: 'updatingUserData.removingUserData',
         SIGN_OUT_FAILURE: {
           ['idle.waitingForSignOut']: {
             actions: ['SHOW_ERROR_MESSAGE'],
@@ -71,6 +53,34 @@ export const machine = Machine({
         },
       },
       onExit: ['HIDE_LOADING'],
+    },
+    updatingUserData: {
+      states: {
+        savingCognitoUserObject: {
+          onEntry: ['SAVE_COGNITO_USER_OBJECT'],
+        },
+        removingUserData: {
+          onEntry: ['REMOVE_USER_DATA'],
+        },
+      },
+      on: {
+        SAVE_COGNITO_USER_OBJECT_SUCCESS: 'redirecting.toApp',
+        REMOVE_USER_DATA_SUCCESS: 'redirecting.toLogin',
+      },
+    },
+    redirecting: {
+      states: {
+        toApp: {
+          onEntry: ['REDIRECT_TO_APP'],
+        },
+        toLogin: {
+          onEntry: ['REDIRECT_TO_LOGIN'],
+        },
+      },
+      on: {
+        REDIRECT_TO_APP_SUCCESS: 'idle.waitingForSignOut',
+        REDIRECT_TO_LOGIN_SUCCESS: 'idle.waitingForSignIn',
+      },
     },
     confirmingUser: {
       onEntry: ['CONFIRM_USER'],

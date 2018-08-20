@@ -1,5 +1,8 @@
 import axios from 'axios'
-import { saveCognitoUserObject, removeCognitoUserObject } from './actions'
+import { saveCognitoUserObject, removeUserData } from './actions'
+import { removeDiscoveryData } from '../Discovery'
+import { removeFeedData } from '../Feed'
+import { removeSearchResults } from '../SearchField'
 import { Auth } from 'aws-amplify'
 import { appMachine } from '../App'
 import { inAppNotification } from '../../navigation'
@@ -26,8 +29,8 @@ export const reactions = {
   },
   async SIGN_IN({ payload, dispatchMachineAction }) {
     try {
-      const cognitoUser = await Auth.signIn(payload.username, payload.password)
-      dispatchMachineAction('SIGN_IN_SUCCESS', cognitoUser)
+      await Auth.signIn(payload.username, payload.password)
+      dispatchMachineAction('SIGN_IN_SUCCESS')
     } catch (error) {
       dispatchMachineAction('SIGN_IN_FAILURE', {
         notification: true,
@@ -39,7 +42,7 @@ export const reactions = {
     try {
       const currentUser = await Auth.currentAuthenticatedUser()
       await currentUser.signOut()
-      dispatchMachineAction('SIGN_OUT_SUCCESS', currentUser)
+      dispatchMachineAction('SIGN_OUT_SUCCESS')
     } catch (error) {
       dispatchMachineAction('SIGN_OUT_FAILURE', {
         notification: true,
@@ -47,19 +50,30 @@ export const reactions = {
       })
     }
   },
-  SAVE_COGNITO_USER_OBJECT({ dispatchReduxAction, payload }) {
+  SAVE_COGNITO_USER_OBJECT({
+    dispatchReduxAction,
+    dispatchMachineAction,
+    payload,
+  }) {
     axios.defaults.headers.common['Authorization'] =
       payload.signInUserSession.idToken.jwtToken
     dispatchReduxAction(saveCognitoUserObject(payload))
+    dispatchMachineAction('SAVE_COGNITO_USER_OBJECT_SUCCESS', payload)
   },
-  REMOVE_COGNITO_USER_OBJECT({ dispatchReduxAction }) {
-    dispatchReduxAction(removeCognitoUserObject())
+  REMOVE_USER_DATA({ dispatchReduxAction, dispatchMachineAction }) {
+    dispatchReduxAction(removeUserData())
+    dispatchReduxAction(removeDiscoveryData())
+    dispatchReduxAction(removeFeedData())
+    dispatchReduxAction(removeSearchResults())
+    dispatchMachineAction('REMOVE_USER_DATA_SUCCESS')
   },
-  REDIRECT_TO_APP() {
-    appMachine.dispatchAction('LOAD_APP')
+  REDIRECT_TO_APP({ dispatchMachineAction }) {
+    appMachine.dispatchAction('REGISTER_COMPONENTS', { isAuthenticated: true })
+    dispatchMachineAction('REDIRECT_TO_APP_SUCCESS')
   },
-  REDIRECT_TO_LOGIN() {
-    appMachine.dispatchAction('LOAD_LOGIN')
+  REDIRECT_TO_LOGIN({ dispatchMachineAction }) {
+    appMachine.dispatchAction('REGISTER_COMPONENTS', { isAuthenticated: false })
+    dispatchMachineAction('REDIRECT_TO_LOGIN_SUCCESS')
   },
   async CONFIRM_USER({ payload, dispatchMachineAction }) {
     try {

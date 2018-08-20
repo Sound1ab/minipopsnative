@@ -12,25 +12,24 @@ export const machine = Machine({
       states: {
         startUpIdle: {
           on: {
-            INIT: 'registeringComponents',
-            LOAD_APP: 'loadingApp',
-            LOAD_LOGIN: 'loadingLogin',
+            REGISTER_COMPONENTS: 'registeringComponents',
           },
         },
         registeringComponents: {
           onEntry: ['REGISTER_COMPONENTS'],
           on: {
-            REGISTER_COMPONENTS_SUCCESS: 'checkingAuthenticatedUser',
+            LOAD_APP: 'loadingApp',
+            LOAD_LOGIN: 'loadingLogin',
           },
         },
         loadingApp: {
-          onEntry: ['REGISTER_COMPONENTS', 'REDIRECT_TO_APP'],
+          onEntry: ['REDIRECT_TO_APP'],
           on: {
             LOAD_SUCCESS: 'fetchingInitialData',
           },
         },
         loadingLogin: {
-          onEntry: ['REGISTER_COMPONENTS', 'REDIRECT_TO_LOGIN'],
+          onEntry: ['REDIRECT_TO_LOGIN'],
           on: {
             LOAD_SUCCESS: 'startUpIdle',
           },

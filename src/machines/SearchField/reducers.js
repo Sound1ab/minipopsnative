@@ -2,6 +2,7 @@ import {
   UPDATE_SEARCH_VALUE,
   UPDATE_SEARCH_RESULTS,
   UPDATE_DISCOVERY_RESULTS,
+  REMOVE_SEARCH_RESULTS,
 } from './actions'
 
 export const initialState = {
@@ -33,6 +34,8 @@ export function search(state = initialState, action) {
         ...state,
         discoveryResults: action.payload,
       }
+    case REMOVE_SEARCH_RESULTS:
+      return initialState
     default:
       return state
   }

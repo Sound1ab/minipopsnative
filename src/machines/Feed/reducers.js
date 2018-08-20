@@ -1,4 +1,4 @@
-import { SAVE_FEED } from './actions'
+import { SAVE_FEED, REMOVE_FEED_DATA } from './actions'
 import { machine } from './machine'
 
 export const initialState = {
@@ -18,6 +18,8 @@ export function feed(state = initialState, action) {
         ...state,
         feed: action.payload.items,
       }
+    case REMOVE_FEED_DATA:
+      return initialState
     default:
       return state
   }

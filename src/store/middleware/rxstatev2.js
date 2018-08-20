@@ -23,18 +23,32 @@ export class RXState {
   }
 
   actionHandler = action => {
-    this.debug && console.warn('action', action.type)
     const nextState = this.machine.transition(this.state, action.type)
 
+    if (this.debug) {
+      console.log(`%c${this.machine.id}`, 'color: tomato')
+      console.group(
+        `%c${
+          typeof this.state.value === 'string'
+            ? this.state.value
+            : JSON.stringify(this.state.value)
+        }`,
+        'color: yellow',
+      )
+      console.log('action', action.type)
+      console.log('nextStateValue', nextState.value)
+      console.log('nextReactions', nextState.actions)
+      console.groupEnd()
+    }
+
     this.state = nextState
+
     if (store) {
       store.dispatch({
         type: `@@${this.machine.id}/UPDATE_STATE`,
         payload: this.state.value,
       })
     }
-    this.debug && console.warn('nextStateValue', nextState.value)
-    this.debug && console.warn('nextReactions', nextState.actions)
 
     nextState.actions
       .filter(nextAction => this.reactions[nextAction])
