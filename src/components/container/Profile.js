@@ -16,9 +16,7 @@ class Profile extends Component<PropTypes> {
       navigator: navigator,
       screen: screen,
       passProps: {
-        loading: this.props.loading,
         user: this.props.user,
-        isOnline: this.props.isOnline,
       },
     })
   }

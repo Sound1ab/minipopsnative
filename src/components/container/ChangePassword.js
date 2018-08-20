@@ -63,6 +63,7 @@ const mapStateToProps = state => ({
   state: state.login.state,
   loading: state.app.loading,
   user: state.login.cognitoUser,
+  isOnline: state.app.isOnline,
 })
 
 const mapDispatchToProps = () => ({
