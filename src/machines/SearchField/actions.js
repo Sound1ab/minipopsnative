@@ -2,6 +2,7 @@
 export const UPDATE_SEARCH_VALUE = 'UPDATE_SEARCH_VALUE'
 export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS'
 export const UPDATE_DISCOVERY_RESULTS = 'UPDATE_DISCOVERY_RESULTS'
+export const REMOVE_SEARCH_RESULTS = 'REMOVE_SEARCH_RESULTS'
 
 export const updateSearchValue = (payload: string) => ({
   type: UPDATE_SEARCH_VALUE,
@@ -15,5 +16,10 @@ export const updateSearchResults = (payload: Array<Object>) => ({
 
 export const updateDiscoveryResults = (payload: Array<Object>) => ({
   type: UPDATE_DISCOVERY_RESULTS,
+  payload,
+})
+
+export const removeSearchResults = (payload: Array<Object>) => ({
+  type: REMOVE_SEARCH_RESULTS,
   payload,
 })

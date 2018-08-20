@@ -3,6 +3,7 @@ import {
   SAVE_ARTIST_ALBUM,
   SAVE_FAVOURITES,
   SAVE_WATCH_LIST,
+  REMOVE_DISCOVERY_DATA,
 } from './actions'
 import { machine } from './machine'
 
@@ -49,6 +50,8 @@ export function discovery(state = initialState, action) {
         ...state,
         watchList: action.payload.items,
       }
+    case REMOVE_DISCOVERY_DATA:
+      return initialState
     default:
       return state
   }

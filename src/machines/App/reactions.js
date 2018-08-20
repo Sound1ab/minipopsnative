@@ -2,8 +2,12 @@ import { Request } from '../../services'
 import { API } from '../../services'
 import { saveFavourites, saveWatchList } from '../Discovery/actions'
 import { updateLoading, saveToken, updateNetInfoStatus } from './actions'
-import { startApp, startLogin, registerComponents } from '../../navigation'
-import { inAppNotification } from '../../navigation'
+import {
+  startApp,
+  startLogin,
+  registerComponents,
+  inAppNotification,
+} from '../../navigation'
 import get from 'lodash/get'
 
 export const reactions = {
@@ -24,14 +28,15 @@ export const reactions = {
       console.warn(`${payload.title}: `, payload.message)
     }
   },
-  REGISTER_COMPONENTS({ dispatchMachineAction }) {
+  REGISTER_COMPONENTS({ dispatchMachineAction, payload }) {
     registerComponents()
-    dispatchMachineAction('REGISTER_COMPONENTS_SUCCESS')
+    payload.isAuthenticated
+      ? dispatchMachineAction('LOAD_APP')
+      : dispatchMachineAction('LOAD_LOGIN')
   },
   async FETCHING_FAVOURITES({
     dispatchReduxAction,
     dispatchMachineAction,
-    payload,
     reduxState,
   }) {
     try {
@@ -39,7 +44,7 @@ export const reactions = {
         id: reduxState.login.cognitoUser.id,
       })
       dispatchReduxAction(saveFavourites(favourites.data))
-      dispatchMachineAction('FETCH_FAVOURITES_SUCCESS', payload)
+      dispatchMachineAction('FETCH_FAVOURITES_SUCCESS')
     } catch (error) {
       dispatchMachineAction('FETCH_FAVOURITES_FAILURE', {
         notification: true,
@@ -103,16 +108,17 @@ export const reactions = {
     dispatchMachineAction,
     reduxState,
   }) {
-    if (!reduxState.app.deviceToken || !payload.id) {
-      dispatchMachineAction(
-        'UPDATE_TOKEN_REMOTELY_FAILURE',
-        'no device token or id',
-      )
+    if (!reduxState.app.deviceToken || !reduxState.login.cognitoUser.id) {
+      dispatchMachineAction('UPDATE_TOKEN_REMOTELY_FAILURE', {
+        notification: false,
+        title: 'Watch fetch failure',
+        message: 'no id or deviceToken in store',
+      })
       return
     }
     try {
       await Request.post(API('update-device-token'), {
-        id: payload.id,
+        id: reduxState.login.cognitoUser.id,
         deviceToken: reduxState.app.deviceToken,
       })
       dispatchMachineAction('UPDATE_TOKEN_REMOTELY_SUCCESS', payload)

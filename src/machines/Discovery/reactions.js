@@ -56,11 +56,6 @@ export const reactions = {
         item: payload.item,
       })
       dispatchReduxAction(saveFavourites(favourites.data))
-      inAppNotification({
-        title: '💁',
-        message: 'Your favourite has been added!',
-        timeout: 500,
-      })
       dispatchMachineAction('FAVOURITE_SUCCESS', { id: payload.id })
     } catch (error) {
       dispatchMachineAction('FAVOURITE_FAILURE', {
@@ -80,11 +75,6 @@ export const reactions = {
         item: payload.item,
       })
       dispatchReduxAction(saveFavourites(favourites.data))
-      inAppNotification({
-        title: '💁',
-        message: 'Your favourite has been removed!',
-        timeout: 500,
-      })
       dispatchMachineAction('REMOVE_FAVOURITE_SUCCESS', { id: payload.id })
     } catch (error) {
       dispatchMachineAction('REMOVE_FAVOURITE_FAILURE', {
