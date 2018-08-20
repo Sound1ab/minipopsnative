@@ -11,7 +11,7 @@ const hideTabs = hideTabsOnScroll()
 
 export const Feed = ({ navigator }) => (
   <FeedContainer navigator={navigator}>
-    {({ loading, id, feed, state, fetchFeed, refetchFeed }) => (
+    {({ loading, id, feed, state, fetchFeed, refetchFeed, isOnline }) => (
       <Screen
         navigator={navigator}
         loading={loading}
@@ -30,7 +30,9 @@ export const Feed = ({ navigator }) => (
             refreshing={state === 'refetchingFeed'}
             onRefresh={refetchFeed.bind(null, { id })}
             keyExtractor={(item, index) => `${item.title}-${index}`}
-            renderItem={FlatListItemSearch}
+            renderItem={props => (
+              <FlatListItemSearch {...props} isOnline={isOnline} />
+            )}
             onScroll={feed.length > 0 && hideTabs.bind(null, navigator)}
             isTabHidden
           />

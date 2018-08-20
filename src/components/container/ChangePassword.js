@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { popScreen } from '../../navigation'
 import { loginMachine } from '../../machines/Login'
 import { FormValidation } from '../../helpers/index'
 
@@ -46,6 +47,7 @@ export class ChangePassword extends Component<PropTypes, StateTypes> {
       return
     }
     this.props.updatePassword(this.state.form)
+    popScreen(this.props.navigator)
   }
   render() {
     return this.props.children({

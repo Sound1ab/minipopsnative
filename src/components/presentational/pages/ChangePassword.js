@@ -27,6 +27,7 @@ export const ChangePassword = ({ navigator }: PropTypes) => (
       handleUpdatePassword,
       form,
       validationErrors,
+      isOnline,
     }) => (
       <Screen
         navigator={navigator}
@@ -47,8 +48,13 @@ export const ChangePassword = ({ navigator }: PropTypes) => (
             placeholder="Current password"
             password
             marginBottom
+            returnKeyType="next"
+            handleSubmitEditing={() => this.newPassword.focus()}
+            blurOnSubmit={false}
+            disabled={!isOnline}
           />
           <InputWrapper
+            ref={ref => (this.newPassword = ref)}
             handleChange={handleChangeText.bind(null, 'password')}
             value={form.password}
             autoCapitalize="none"
@@ -56,14 +62,16 @@ export const ChangePassword = ({ navigator }: PropTypes) => (
             marginBottom
             password
             error={validationErrors.includes('password')}
+            returnKeyType="go"
+            handleSubmitEditing={handleUpdatePassword}
+            disabled={!isOnline}
           />
           <TouchableOpacity
-            onPress={Functional.pipe(
-              handleUpdatePassword,
-              popScreen.bind(null, navigator),
-            )}
+            onPress={() => {
+              isOnline && handleUpdatePassword()
+            }}
           >
-            <Heading size="l" color={colors.primary}>
+            <Heading size="l" color={isOnline ? colors.primary : colors.gray}>
               Save
             </Heading>
           </TouchableOpacity>

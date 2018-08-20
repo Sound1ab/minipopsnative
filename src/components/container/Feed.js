@@ -11,6 +11,7 @@ type PropTypes = {
   state: string | Object,
   fetchFeed: Function,
   refetchFeed: Function,
+  isOnline: Boolean,
 }
 
 export class Feed extends Component<PropTypes> {
@@ -21,6 +22,7 @@ export class Feed extends Component<PropTypes> {
     state: '',
     fetchFeed: () => {},
     refetchFeed: () => {},
+    isOnline: true,
   }
   componentDidMount() {
     this.props.fetchFeed({ id: this.props.id })
@@ -35,6 +37,7 @@ const mapStateToProps = state => ({
   id: state.login.cognitoUser.id,
   feed: feed(state),
   state: state.feed.state,
+  isOnline: state.app.isOnline,
 })
 
 const mapDispatchToProps = () => ({

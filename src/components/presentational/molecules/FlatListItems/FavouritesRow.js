@@ -34,6 +34,7 @@ type PropTypes = {
   album: string,
   index: number,
   watched: Boolean,
+  isOnline: Boolean,
 }
 
 export const FavouritesRow = (props: PropTypes) => (
@@ -54,8 +55,11 @@ export const FavouritesRow = (props: PropTypes) => (
     </TextWrapper>
     {props.watched && (
       <Watched>
-        {/*<Triangle color={colors.primary} />*/}
-        <Icon name="ios-megaphone" size={20} color={colors.primary} />
+        <Icon
+          name="ios-megaphone"
+          size={20}
+          color={props.isOnline ? colors.primary : colors.gray}
+        />
       </Watched>
     )}
   </Wrapper>
@@ -67,6 +71,7 @@ FavouritesRow.defaultProps = {
   album: '',
   index: 0,
   watched: false,
+  isOnline: true,
 }
 
 export default FavouritesRow

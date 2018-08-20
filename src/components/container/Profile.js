@@ -18,6 +18,7 @@ class Profile extends Component<PropTypes> {
       passProps: {
         loading: this.props.loading,
         user: this.props.user,
+        isOnline: this.props.isOnline,
       },
     })
   }
@@ -64,6 +65,7 @@ class Profile extends Component<PropTypes> {
 const mapStateToProps = state => ({
   loading: state.app.loading,
   user: state.login.cognitoUser,
+  isOnline: state.app.isOnline,
 })
 
 const mapDispatchToProps = () => ({

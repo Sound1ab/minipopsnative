@@ -1,7 +1,7 @@
 import { Request } from '../../services'
 import { API } from '../../services'
 import { saveFavourites, saveWatchList } from '../Discovery/actions'
-import { updateLoading, saveToken } from './actions'
+import { updateLoading, saveToken, updateNetInfoStatus } from './actions'
 import { startApp, startLogin, registerComponents } from '../../navigation'
 import { inAppNotification } from '../../navigation'
 import get from 'lodash/get'
@@ -78,6 +78,24 @@ export const reactions = {
   SAVE_TOKEN_LOCALLY({ payload, dispatchMachineAction, dispatchReduxAction }) {
     dispatchReduxAction(saveToken(payload))
     dispatchMachineAction('TOKEN_SAVED_LOCALLY', payload)
+  },
+  NOTIFY_NETINFO_STATUS({ payload, dispatchReduxAction }) {
+    if (payload.status === 'offline' && !payload.initial) {
+      inAppNotification({
+        title: '❌',
+        message: "Oh no, looks like you've gone offline",
+        timeout: 500,
+      })
+    } else if (payload.status === 'online' && !payload.initial) {
+      inAppNotification({
+        title: '🎉',
+        message: "Woo, we're back online, baby!",
+        timeout: 500,
+      })
+    }
+    dispatchReduxAction(
+      updateNetInfoStatus({ isOnline: payload.status === 'online' }),
+    )
   },
   async UPDATE_DEVICE_TOKEN_REMOTELY({
     dispatchReduxAction,

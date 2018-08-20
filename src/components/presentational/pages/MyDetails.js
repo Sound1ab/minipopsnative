@@ -27,6 +27,7 @@ export const MyDetails = ({ navigator }: PropTypes) => (
       handleSaveUserAttributes,
       form,
       validationErrors,
+      isOnline,
     }) => (
       <Screen
         navigator={navigator}
@@ -50,6 +51,7 @@ export const MyDetails = ({ navigator }: PropTypes) => (
             returnKeyType="next"
             handleSubmitEditing={() => this.phone_number.focus()}
             blurOnSubmit={false}
+            disabled={!isOnline}
           />
           <InputWrapper
             ref={ref => (this.phone_number = ref)}
@@ -60,18 +62,15 @@ export const MyDetails = ({ navigator }: PropTypes) => (
             marginBottom
             error={validationErrors.includes('phone_number')}
             returnKeyType="go"
-            handleSubmitEditing={Functional.pipe(
-              handleSaveUserAttributes,
-              popScreen.bind(null, navigator),
-            )}
+            handleSubmitEditing={handleSaveUserAttributes}
+            disabled={!isOnline}
           />
           <TouchableOpacity
-            onPress={Functional.pipe(
-              handleSaveUserAttributes,
-              popScreen.bind(null, navigator),
-            )}
+            onPress={() => {
+              isOnline && handleSaveUserAttributes()
+            }}
           >
-            <Heading size="l" color={colors.primary}>
+            <Heading size="l" color={isOnline ? colors.primary : colors.gray}>
               Save
             </Heading>
           </TouchableOpacity>

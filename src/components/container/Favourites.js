@@ -24,6 +24,7 @@ const mapStateToProps = state => ({
   watchListIds: watchList(state),
   id: state.login.cognitoUser.id,
   state: state.app.state,
+  isOnline: state.app.isOnline,
 })
 
 const mapDispatchToProps = () => ({

@@ -76,7 +76,7 @@ export const startApp = async () => {
     tabsStyle: {
       tabBarSelectedButtonColor: colors.secondary,
       tabBarButtonColor: colors.primary,
-      initialTabIndex: 4,
+      initialTabIndex: 1,
       tabBarTranslucent: true,
     },
     appStyle: {
@@ -115,7 +115,7 @@ export const startLogin = async () => {
         },
         passProps: {
           screen: 'SignUp',
-          tabIndex: 1,
+          tabIndex: 2,
         },
       },
     ],
@@ -152,12 +152,4 @@ export const hideTabsOnScroll = () => {
     })
     pastY = currentY
   }
-}
-
-export const showTabs = navigator => {
-  navigator &&
-    navigator.toggleTabs({
-      to: 'visible',
-      animate: true,
-    })
 }

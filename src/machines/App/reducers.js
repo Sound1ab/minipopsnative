@@ -1,9 +1,10 @@
-import { UPDATE_LOADING, SAVE_TOKEN } from './actions'
+import { UPDATE_LOADING, SAVE_TOKEN, UPDATE_NETINFO_STATUS } from './actions'
 
 export const initialState = {
   state: 'idle',
   loading: false,
   deviceToken: '',
+  isOnline: true,
 }
 
 export function app(state = initialState, action) {
@@ -22,6 +23,11 @@ export function app(state = initialState, action) {
       return {
         ...state,
         deviceToken: action.payload.token,
+      }
+    case UPDATE_NETINFO_STATUS:
+      return {
+        ...state,
+        isOnline: action.payload.isOnline,
       }
     default:
       return state

@@ -2,7 +2,6 @@
 import React from 'react'
 import { Linking } from 'react-native'
 import { Heading, Icon, ImageWrapper as Image } from '../../atoms'
-import { ImageSlider } from '../ImageSlider'
 import { View, Dimensions } from 'react-native'
 import styled from 'styled-components'
 import { colors } from '../../../../theme'
@@ -12,6 +11,7 @@ type Props = {
   item: Object,
   separators: Object,
   height: number,
+  isOnline: Boolean,
 }
 
 const ImageWrapper = styled.View`
@@ -43,7 +43,6 @@ const Button = styled.TouchableOpacity`
 export const FlatListItemSearch = (props: Props) => (
   <View>
     <ImageWrapper index={props.index} height={Dimensions.get('window').width}>
-      {/*<ImageSlider images={props.item.imageUrl} />*/}
       <Image source={props.item.imageUrl[0]} />
     </ImageWrapper>
     <ContentWrapper>
@@ -67,13 +66,16 @@ export const FlatListItemSearch = (props: Props) => (
           <Button
             onPress={() => {
               try {
-                Linking.openURL(props.item.itemUrl)
+                props.isOnline && Linking.openURL(props.item.itemUrl)
               } catch (error) {
                 console.warn(error)
               }
             }}
           >
-            <Icon name="ios-arrow-dropright-circle" color={colors.primary} />
+            <Icon
+              name="ios-arrow-dropright-circle"
+              color={props.isOnline ? colors.primary : colors.gray}
+            />
           </Button>
         </AbsoluteWrapper>
       </RelativeWrapper>
@@ -83,4 +85,5 @@ export const FlatListItemSearch = (props: Props) => (
 
 FlatListItemSearch.defaultProps = {
   height: 300,
+  isOnline: true,
 }

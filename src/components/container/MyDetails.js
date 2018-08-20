@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { popScreen } from '../../navigation'
 import { loginMachine } from '../../machines/Login'
 import { FormValidation } from '../../helpers/index'
 
@@ -63,6 +64,7 @@ export class MyDetails extends Component<PropTypes, StateTypes> {
       form: this.state.form,
       user: this.props.user,
     })
+    popScreen(this.props.navigator)
   }
   render() {
     return this.props.children({

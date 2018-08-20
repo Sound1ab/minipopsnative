@@ -18,6 +18,7 @@ export const Favourites = ({ navigator }) => (
       removeFromFavourite,
       addToWatchList,
       removeFromWatchList,
+      isOnline,
     }) => (
       <Screen
         navigator={navigator}
@@ -42,12 +43,15 @@ export const Favourites = ({ navigator }) => (
             keyExtractor={item => item.spotifyId}
             data={favourites}
             ListFooterComponent={TabBarPlaceholder}
+            disableLeftSwipe={!isOnline}
+            disableRightSwipe={!isOnline}
             renderItem={({ item, index }) => (
               <FavouritesRow
                 {...item}
                 index={index}
                 key={`${item.artist}-${item.album}`}
                 watched={watchListIds.includes(item.spotifyId)}
+                isOnline={isOnline}
               />
             )}
             renderHiddenItem={({ item, index }, rowMap) => (

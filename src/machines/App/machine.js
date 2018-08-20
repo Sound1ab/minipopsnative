@@ -84,5 +84,28 @@ export const machine = Machine({
         },
       },
     },
+    netInfo: {
+      initial: 'unknown',
+      states: {
+        unknown: {
+          on: {
+            ONLINE: 'online',
+            OFFLINE: 'offline',
+          },
+        },
+        online: {
+          onEntry: ['NOTIFY_NETINFO_STATUS'],
+          on: {
+            OFFLINE: 'offline',
+          },
+        },
+        offline: {
+          onEntry: ['NOTIFY_NETINFO_STATUS'],
+          on: {
+            ONLINE: 'online',
+          },
+        },
+      },
+    },
   },
 })

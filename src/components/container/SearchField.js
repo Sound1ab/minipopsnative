@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react'
-import { InputWrapper, Icon } from '../presentational/atoms/index'
 import styled from 'styled-components'
+import { InputWrapper, Icon } from '../presentational/atoms/index'
 import { connect } from 'react-redux'
 import { searchMachine } from '../../machines/SearchField'
+import { colors } from '../../theme'
 
 const Wrapper = styled.View`
   width: 100%;
@@ -16,6 +17,7 @@ type PropTypes = {
   textInputEmpty: Function,
   value: string,
   api: string,
+  isOnline: Boolean,
 }
 
 export class SearchField extends Component<PropTypes> {
@@ -44,12 +46,13 @@ export class SearchField extends Component<PropTypes> {
             top="5px"
             left="16px"
             size={20}
-            color="#e24347"
+            color={this.props.isOnline ? colors.primary : colors.gray}
           />
           <InputWrapper
             search
             handleChange={this.handleChange}
             placeholder="The Cure"
+            disabled={!this.props.isOnline}
           />
         </RelativeWrapper>
       </Wrapper>
@@ -59,6 +62,7 @@ export class SearchField extends Component<PropTypes> {
 
 const mapStateToProps = state => ({
   searchValue: state.search.value,
+  isOnline: state.app.isOnline,
 })
 
 const mapDispatchToProps = () => ({

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { iOSColors } from 'react-native-typography'
 import { colors } from '../../../theme'
 
@@ -19,6 +19,7 @@ type Props = {
   returnKeyType: string,
   handleSubmitEditing: ?Function,
   blurOnSubmit: Boolean,
+  disabled: Boolean,
 }
 
 const Input = styled.TextInput`
@@ -26,8 +27,17 @@ const Input = styled.TextInput`
   color: ${({ error }) => (error ? colors.error : colors.black)};
   height: 32px;
   padding: ${({ search }) => (search ? '0 16px 0 40px' : '0 16px')};
-  border: ${({ error }) => (error ? '2px' : '1px')} solid
-    ${({ error }) => (error ? colors.error : colors.secondary)};
+  border: 1px solid ${colors.secondary};
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      border: 1px solid lightgray;
+    `};
+  ${({ error }) =>
+    error &&
+    css`
+      border: 2px solid red;
+    `};
   border-radius: 25px;
   background-color: white;
   margin-bottom: ${({ marginBottom }) => (marginBottom ? '16px' : '0')};
@@ -50,6 +60,7 @@ export class InputWrapper extends Component<Props> {
     returnKeyType: 'search',
     handleSubmitEditing: null,
     blurOnSubmit: true,
+    disabled: false,
   }
 
   focus = () => {
@@ -78,6 +89,9 @@ export class InputWrapper extends Component<Props> {
         returnKeyType={this.props.returnKeyType}
         onSubmitEditing={this.props.handleSubmitEditing}
         blurOnSubmit={this.props.blurOnSubmit}
+        editable={!this.props.disabled}
+        selectTextOnFocus={!this.props.disabled}
+        disabled={this.props.disabled}
       />
     )
   }

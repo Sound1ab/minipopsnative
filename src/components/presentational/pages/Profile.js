@@ -68,6 +68,7 @@ export const Profile = ({ navigator }) => (
       user,
       handlePushMyScreen,
       CheckNotificationPermissions,
+      isOnline,
     }) => (
       <Screen
         navigator={navigator}
@@ -123,8 +124,12 @@ export const Profile = ({ navigator }) => (
             </Heading>
           </Row>
           <SignOutWrapper>
-            <SignOutButton onPress={signOut}>
-              <Heading size="l" color={colors.primary}>
+            <SignOutButton
+              onPress={() => {
+                isOnline && signOut()
+              }}
+            >
+              <Heading size="l" color={isOnline ? colors.primary : colors.gray}>
                 Sign Out
               </Heading>
             </SignOutButton>
