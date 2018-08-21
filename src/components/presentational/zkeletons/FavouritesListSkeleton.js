@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
-import { GrowContainer } from '../atoms'
+import { Fade } from '../zanimations'
 
 const Wrapper = styled.View`
   flex: 0;
@@ -16,11 +16,11 @@ const Wrapper = styled.View`
 `
 
 type PropTypes = {
-  index: number,
+  isVisible: boolean,
 }
 
-export const FavouritesListSkeleton = (props: PropTypes) => (
-  <GrowContainer>
+export const FavouritesListSkeleton = ({ isVisible }: PropTypes) => (
+  <Fade isVisible={isVisible}>
     {Array(3)
       .fill(1, 0)
       .map((v, i) => (
@@ -54,11 +54,9 @@ export const FavouritesListSkeleton = (props: PropTypes) => (
           />
         </Wrapper>
       ))}
-  </GrowContainer>
+  </Fade>
 )
 
 FavouritesListSkeleton.defaultProps = {
-  index: 0,
+  isVisible: true,
 }
-
-export default FavouritesListSkeleton

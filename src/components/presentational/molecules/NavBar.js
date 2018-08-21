@@ -52,17 +52,18 @@ export const NavBar = ({
           <IconWrapper>
             <Icon name="ios-arrow-back" color={colors.primary} />
           </IconWrapper>
-          {loading && state && state.currentState === state.loadingState ? (
-            <HeadingSkeleton />
-          ) : (
-            <Heading
-              color={heading.color}
-              size={heading.size}
-              marginBottom={heading.marginBottom}
-            >
-              {heading.value}
-            </Heading>
-          )}
+          <Heading
+            color={heading.color}
+            size={heading.size}
+            marginBottom={heading.marginBottom}
+          >
+            {heading.value}
+          </Heading>
+          <HeadingSkeleton
+            isVisible={
+              loading && state && state.currentState === state.loadingState
+            }
+          />
         </React.Fragment>
       ) : (
         <Heading
@@ -73,7 +74,7 @@ export const NavBar = ({
           {heading.value}
         </Heading>
       )}
-      <Spinner isVisible={loading} stickRight />
+      {/*<Spinner isVisible={loading} stickRight />*/}
     </TouchableWrapper>
     {children}
   </Wrapper>

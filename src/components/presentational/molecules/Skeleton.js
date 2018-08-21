@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
 import { SkeletonSvgGradient } from '../molecules'
 import { Circle, Rect } from 'react-native-svg'
 import { colors } from '../../../theme/colors'
@@ -35,7 +34,7 @@ export const Skeleton = (props: PropTypes) => (
 )
 
 Skeleton.defaultProps = {
-  primaryColor: colors.primary,
+  primaryColor: colors.gray,
   secondaryColor: colors.secondary,
   height: 50,
   width: 50,

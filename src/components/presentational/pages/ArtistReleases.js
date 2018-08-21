@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import chunk from 'lodash/chunk'
 import get from 'lodash/get'
 import { popScreen } from '../../../navigation'
 import { ArtistReleasesContainer } from '../../container'
@@ -33,33 +32,32 @@ export const ArtistReleases = ({
           marginBottom: false,
         }}
       >
-        {loading && state === 'fetchingReleases' ? (
-          <ImageGridSkeleton />
-        ) : (
-          <FlatListWrapper
-            data={artistReleases}
-            keyExtractor={item =>
-              `${get(item[0], ['spotifyId'], '')}-${get(
-                item[1],
-                ['spotifyId'],
-                '',
-              )}`
-            }
-            onEndReached={fetchMoreArtistReleases.bind(null, {
-              spotifyId: artistSpotifyId,
-            })}
-            onEndReachedThreshold={1}
-            removeClippedSubviews={true}
-            renderItem={({ item, index }) => (
-              <FlatListItemArtistReleases
-                index={index}
-                item={item}
-                navigator={navigator}
-                handlePress={handlePushArtistAlbum}
-              />
-            )}
-          />
-        )}
+        <FlatListWrapper
+          data={artistReleases}
+          keyExtractor={item =>
+            `${get(item[0], ['spotifyId'], '')}-${get(
+              item[1],
+              ['spotifyId'],
+              '',
+            )}`
+          }
+          onEndReached={fetchMoreArtistReleases.bind(null, {
+            spotifyId: artistSpotifyId,
+          })}
+          onEndReachedThreshold={1}
+          removeClippedSubviews={true}
+          renderItem={({ item, index }) => (
+            <FlatListItemArtistReleases
+              index={index}
+              item={item}
+              navigator={navigator}
+              handlePress={handlePushArtistAlbum}
+            />
+          )}
+        />
+        <ImageGridSkeleton
+          isVisible={loading && state === 'fetchingReleases'}
+        />
       </Screen>
     )}
   </ArtistReleasesContainer>

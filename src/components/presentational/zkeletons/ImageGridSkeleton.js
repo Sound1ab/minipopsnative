@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
+import { Fade } from '../zanimations'
 
 const Wrapper = styled.View`
   padding-top: 8px;
@@ -21,32 +22,36 @@ const Album = styled.View`
   height: ${Dimensions.get('window').width / 2};
 `
 
-export const ImageGridSkeleton = () => (
-  <Wrapper>
-    {Array(8)
-      .fill(1, 0)
-      .map((v, i) => (
-        <Album key={i} index={i + 1}>
-          <Skeleton
-            height={'100%'}
-            width={'100%'}
-            layout={{
-              heading: {
-                type: 'rect',
-                x: 0,
-                y: 0,
-                height: '100%',
-                width: '100%',
-              },
-            }}
-          />
-        </Album>
-      ))}
-  </Wrapper>
+type PropTypes = {
+  isVisible: boolean,
+}
+
+export const ImageGridSkeleton = ({ isVisible }: PropTypes) => (
+  <Fade isVisible={isVisible}>
+    <Wrapper>
+      {Array(8)
+        .fill(1, 0)
+        .map((v, i) => (
+          <Album key={i} index={i + 1}>
+            <Skeleton
+              height={'100%'}
+              width={'100%'}
+              layout={{
+                heading: {
+                  type: 'rect',
+                  x: 0,
+                  y: 0,
+                  height: '100%',
+                  width: '100%',
+                },
+              }}
+            />
+          </Album>
+        ))}
+    </Wrapper>
+  </Fade>
 )
 
 ImageGridSkeleton.defaultProps = {
-  index: 0,
+  isVisible: true,
 }
-
-export default ImageGridSkeleton
