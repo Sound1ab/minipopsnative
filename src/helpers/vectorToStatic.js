@@ -1,16 +1,12 @@
 import Icon from 'react-native-vector-icons/Ionicons'
-import { PixelRatio } from 'react-native'
-
-const size = size =>
-  __DEV__ ? size : PixelRatio.getPixelSizeForLayoutSize(size)
 
 export async function prepareAppIcons() {
   const icons = await Promise.all([
-    Icon.getImageSource('ios-analytics', size(35)),
-    Icon.getImageSource('ios-heart', size(30)),
-    Icon.getImageSource('ios-globe', size(30)),
-    Icon.getImageSource('ios-search', size(30)),
-    Icon.getImageSource('ios-contact', size(30)),
+    Icon.getImageSource('ios-analytics', 35),
+    Icon.getImageSource('ios-heart', 30),
+    Icon.getImageSource('ios-globe', 30),
+    Icon.getImageSource('ios-search', 30),
+    Icon.getImageSource('ios-contact', 30),
   ])
   const [feed, favourites, discovery, search, profile] = icons
   return { feed, favourites, discovery, search, profile }
@@ -18,8 +14,8 @@ export async function prepareAppIcons() {
 
 export async function prepareLoginIcons() {
   const icons = await Promise.all([
-    Icon.getImageSource('ios-log-in', size(30)),
-    Icon.getImageSource('ios-person-add', size(30)),
+    Icon.getImageSource('ios-log-in', 30),
+    Icon.getImageSource('ios-person-add', 30),
   ])
   const [signIn, signUp] = icons
   return { signIn, signUp }

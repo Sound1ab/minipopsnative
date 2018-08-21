@@ -45,9 +45,9 @@ Aws.configure(config)
 Aws.setupPushNotificationListeners(onNotification, onRegister)
 Aws.checkInitialNotification()
 
-setupNetworkMonitoring()
+__DEV__ && setupNetworkMonitoring()
 
-getDeviceToken()
+__DEV__ && getDeviceToken()
 
 async function getDeviceToken() {
   try {
