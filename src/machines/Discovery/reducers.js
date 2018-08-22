@@ -1,4 +1,6 @@
 import {
+  UPDATE_DISCOVERY_SEARCH_VALUE,
+  UPDATE_DISCOVERY_SEARCH_RESULTS,
   SAVE_ARTIST_RELEASES,
   SAVE_ARTIST_ALBUM,
   SAVE_FAVOURITES,
@@ -9,6 +11,8 @@ import { machine } from './machine'
 
 export const initialState = {
   state: machine.initial,
+  searchValue: '',
+  searchResults: [],
   favourites: [],
   artistReleases: [],
   artistAlbum: {
@@ -27,6 +31,16 @@ export function discovery(state = initialState, action) {
       return {
         ...state,
         state: action.payload,
+      }
+    case UPDATE_DISCOVERY_SEARCH_VALUE:
+      return {
+        ...state,
+        searchValue: action.payload,
+      }
+    case UPDATE_DISCOVERY_SEARCH_RESULTS:
+      return {
+        ...state,
+        searchResults: action.payload,
       }
     case SAVE_ARTIST_RELEASES:
       return {

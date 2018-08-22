@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import { SearchField } from '../../container'
 import styled from 'styled-components'
 import { NavBar } from '../molecules'
 
@@ -68,7 +67,6 @@ export class Screen extends Component<PropTypes> {
       handleBack,
       state,
       heading,
-      searchApi,
       children,
     }: PropTypes = this.props
     return (
@@ -78,9 +76,7 @@ export class Screen extends Component<PropTypes> {
           loading={loading}
           state={state}
           heading={heading}
-        >
-          {searchApi && <SearchField api={searchApi} />}
-        </NavBar>
+        />
         <Sink>{children}</Sink>
       </React.Fragment>
     )

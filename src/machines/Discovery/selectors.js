@@ -5,6 +5,8 @@ const getArtistReleases = state => state.discovery.artistReleases
 const getFavourites = state => state.discovery.favourites
 const getArtistAlbum = state => state.discovery.artistAlbum
 const getWatchList = state => state.discovery.watchList
+const getSearchValue = state => state.discovery.searchValue
+const getSearchResults = state => state.discovery.searchResults
 
 export const artistReleases = createSelector(
   getArtistReleases,
@@ -33,4 +35,14 @@ export const artistAlbum = createSelector(
 
 export const watchList = createSelector(getWatchList, getWatchList =>
   getWatchList.map(item => item.spotifyId),
+)
+
+export const searchValue = createSelector(
+  getSearchValue,
+  getSearchValue => getSearchValue,
+)
+
+export const searchResults = createSelector(
+  getSearchResults,
+  getSearchResults => getSearchResults,
 )

@@ -6,16 +6,30 @@ import {
   saveArtistAlbum,
   saveFavourites,
   saveWatchList,
+  updateDiscoverySearchValue,
+  updateDiscoverySearchResults,
 } from './actions'
 import { saveFeed } from '../Feed/actions'
 import { reactions as appReactions } from '../App'
+import { reactions as searchReactions } from '../SearchField'
 
 const { SHOW_LOADING, HIDE_LOADING, SHOW_ERROR_MESSAGE } = appReactions
+const { START_TIMER, CANCEL_TIMER, FETCH_SEARCH } = searchReactions
 
 export const reactions = {
   SHOW_LOADING,
   HIDE_LOADING,
   SHOW_ERROR_MESSAGE,
+  START_TIMER,
+  CANCEL_TIMER,
+  FETCH_SEARCH,
+  UPDATE_SEARCH({ dispatchReduxAction, payload }) {
+    dispatchReduxAction(updateDiscoverySearchValue(payload.value))
+  },
+  UPDATE_RESULTS({ dispatchReduxAction, payload, dispatchMachineAction }) {
+    dispatchReduxAction(updateDiscoverySearchResults(payload.items))
+    dispatchMachineAction('UPDATE_RESULTS_SUCCESS')
+  },
   FETCH_RELEASES: (() => {
     const request = new Request(API('artist-releases'), 30)
     return async ({ dispatchReduxAction, payload, dispatchMachineAction }) => {

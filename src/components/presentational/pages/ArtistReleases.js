@@ -22,7 +22,7 @@ export const ArtistReleases = ({
         loading={loading}
         handleBack={popScreen.bind(null, navigator)}
         state={{
-          currentState: state,
+          currentState: state.discovery,
           loadingState: 'fetchingReleases',
         }}
         heading={{
@@ -56,7 +56,7 @@ export const ArtistReleases = ({
           )}
         />
         <ImageGridSkeleton
-          isVisible={loading && state === 'fetchingReleases'}
+          isVisible={loading && state.discovery === 'fetchingReleases'}
         />
       </Screen>
     )}

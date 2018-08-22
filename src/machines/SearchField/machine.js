@@ -1,11 +1,5 @@
-import { Machine } from 'xstate'
-
-const id = 'search'
-
-export const machine = Machine({
-  id,
+export const Machine = {
   initial: 'searching',
-  strict: true,
   states: {
     searching: {
       initial: 'searchReady',
@@ -38,13 +32,20 @@ export const machine = Machine({
     fetchingSearch: {
       onEntry: ['FETCH_SEARCH', 'SHOW_LOADING'],
       on: {
-        FETCH_SUCCESS: 'searching.searchReady',
+        FETCH_SUCCESS: 'updatingResults',
         FETCH_FAILURE: {
           'searching.searchReady': { actions: ['SHOW_ERROR_MESSAGE'] },
         },
         TEXT_INPUT: 'searching.typing',
       },
+    },
+    updatingResults: {
+      onEntry: ['UPDATE_RESULTS'],
+      on: {
+        UPDATE_RESULTS_SUCCESS: 'searching.searchReady',
+        TEXT_INPUT: 'searching.typing',
+      },
       onExit: ['HIDE_LOADING'],
     },
   },
-})
+}

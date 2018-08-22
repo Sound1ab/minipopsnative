@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { Functional } from '../../../helpers/functional'
-import { DiscoveryContainer } from '../../container'
+import { DiscoveryContainer, SearchField } from '../../container'
 import { Screen } from '../templates'
 import { FlatListWrapper } from '../atoms'
 import { FlatListItemDiscovery } from '../molecules'
@@ -10,9 +10,12 @@ export const Discovery = ({ navigator }) => (
   <DiscoveryContainer navigator={navigator}>
     {({
       loading,
-      discoveryResults,
+      searchValue,
+      searchResults,
       handlePushArtistReleases,
       fetchArtistReleases,
+      searchInput,
+      searchEmpty,
     }) => (
       <Screen
         navigator={navigator}
@@ -21,13 +24,18 @@ export const Discovery = ({ navigator }) => (
           value: 'Discovery',
           color: 'black',
           size: 'xl',
-          marginBottom: true,
+          marginBottom: false,
         }}
-        searchApi="related-artists"
       >
         <FlatListWrapper
-          data={discoveryResults}
+          data={searchResults}
           keyExtractor={(item, index) => `${item.title}-${index}`}
+          ListHeaderComponent={React.createElement(SearchField, {
+            searchInput,
+            searchEmpty,
+            searchValue,
+            api: 'related-artists',
+          })}
           renderItem={renderProps => (
             <FlatListItemDiscovery
               {...renderProps}

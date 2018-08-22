@@ -2,37 +2,39 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { InputWrapper, Icon } from '../presentational/atoms/index'
-import { connect } from 'react-redux'
-import { searchMachine } from '../../machines/SearchField'
 import { colors } from '../../theme'
 
 const Wrapper = styled.View`
   width: 100%;
+  padding: 16px;
 `
 
 const RelativeWrapper = styled.View``
 
 type PropTypes = {
-  handleChange: Function,
-  textInputEmpty: Function,
-  value: string,
+  searchInput: Function,
+  searchEmpty: Function,
   api: string,
   isOnline: Boolean,
+  searchValue: string,
 }
 
+// TODO: Move out of container folder
 export class SearchField extends Component<PropTypes> {
   static defaultProps = {
-    textInput: () => {},
-    textInputEmpty: () => {},
+    searchInput: () => {},
+    searchEmpty: () => {},
     api: 'current-items',
+    isOnline: true,
+    searchValue: '',
   }
 
   handleChange = value => {
-    const { textInput, textInputEmpty, api } = this.props
+    const { searchInput, searchEmpty, api } = this.props
     if (value) {
-      textInput(value, api)
+      searchInput({ value, api })
     } else {
-      textInputEmpty(value)
+      searchEmpty(value)
     }
   }
 
@@ -50,6 +52,7 @@ export class SearchField extends Component<PropTypes> {
           />
           <InputWrapper
             search
+            value={this.props.searchValue}
             handleChange={this.handleChange}
             placeholder="The Cure"
             disabled={!this.props.isOnline}
@@ -60,21 +63,4 @@ export class SearchField extends Component<PropTypes> {
   }
 }
 
-const mapStateToProps = state => ({
-  searchValue: state.search.value,
-  isOnline: state.app.isOnline,
-})
-
-const mapDispatchToProps = () => ({
-  textInput: (value, api) => {
-    searchMachine.dispatchAction('TEXT_INPUT', { value, api })
-  },
-  textInputEmpty: () => {
-    searchMachine.dispatchAction('TEXT_INPUT_EMPTY', { value: null })
-  },
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SearchField)
+export default SearchField

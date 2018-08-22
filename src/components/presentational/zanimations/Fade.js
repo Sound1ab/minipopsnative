@@ -16,6 +16,10 @@ export class Fade extends Component {
     isMounted: true,
   }
 
+  componentDidMount = () => {
+    !this.props.isVisible && this.setState({ isMounted: false })
+  }
+
   async componentDidUpdate(prevProps) {
     if (prevProps.isVisible && !this.props.isVisible) {
       const animation = await this.animate.fadeOut(250)

@@ -24,7 +24,7 @@ export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
         loading={loading}
         handleBack={popScreen.bind(null, navigator)}
         state={{
-          currentState: state,
+          currentState: state.discovery,
           loadingState: 'fetchingAlbum',
         }}
         heading={{
@@ -59,7 +59,9 @@ export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
             </TrackRow>
           ))}
         </ScrollView>
-        <ArtistAlbumSkeleton isVisible={loading && state === 'fetchingAlbum'} />
+        <ArtistAlbumSkeleton
+          isVisible={loading && state.discovery === 'fetchingAlbum'}
+        />
       </Screen>
     )}
   </ArtistAlbumContainer>

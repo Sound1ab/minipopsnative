@@ -3,8 +3,11 @@ import React, { Component } from 'react'
 import { Functional } from '../../helpers'
 import { connect } from 'react-redux'
 import { pushScreen } from '../../navigation'
-import { discoveryMachine } from '../../machines/Discovery'
-import { discoveryResults } from '../../machines/SearchField/selectors'
+import {
+  discoveryMachine,
+  searchResults,
+  searchValue,
+} from '../../machines/Discovery'
 
 type PropTypes = {
   loading: Boolean,
@@ -16,6 +19,7 @@ class Discovery extends Component<PropTypes> {
     loading: false,
     discoveryResults: [],
   }
+  // TODO: Pass these down directly as props from connect
   fetchArtistAlbum = item => {
     this.props.fetchArtistAlbum({ spotifyId: item.spotifyId })
     return item
@@ -66,7 +70,8 @@ class Discovery extends Component<PropTypes> {
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
-  discoveryResults: discoveryResults(state),
+  searchValue: searchValue(state),
+  searchResults: searchResults(state),
 })
 
 const mapDispatchToProps = () => ({
@@ -84,6 +89,12 @@ const mapDispatchToProps = () => ({
   },
   removeFromFavourites: payload => {
     discoveryMachine.dispatchAction('REMOVE_FAVOURITE', payload)
+  },
+  searchInput: payload => {
+    discoveryMachine.dispatchAction('TEXT_INPUT', payload)
+  },
+  searchEmpty: () => {
+    discoveryMachine.dispatchAction('TEXT_INPUT_EMPTY', { value: null })
   },
 })
 
