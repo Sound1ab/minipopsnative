@@ -55,9 +55,8 @@ export const ArtistReleases = ({
             />
           )}
         />
-        <ImageGridSkeleton
-          isVisible={loading && state.discovery === 'fetchingReleases'}
-        />
+        {loading &&
+          state.discovery === 'fetchingReleases' && <ImageGridSkeleton />}
       </Screen>
     )}
   </ArtistReleasesContainer>

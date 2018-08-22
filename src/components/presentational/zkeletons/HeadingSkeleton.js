@@ -11,7 +11,7 @@ export const HeadingSkeleton = ({ isVisible }: PropTypes) => (
   <Fade isVisible={isVisible}>
     <Skeleton
       height={27}
-      width={150}
+      width={250}
       layout={{
         heading: {
           type: 'rect',

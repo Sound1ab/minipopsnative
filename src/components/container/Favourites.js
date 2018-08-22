@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import { LayoutAnimation } from 'react-native'
 import { connect } from 'react-redux'
 import { discoveryMachine } from '../../machines/Discovery'
 import { favourites, watchList } from '../../machines/Discovery/selectors'
@@ -12,7 +13,11 @@ type PropTypes = {
 }
 
 export class Favourites extends Component<PropTypes> {
-  static defaultProps = {}
+  componentDidUpdate(nextProps) {
+    if (this.props.favourites !== nextProps.favourites) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+    }
+  }
   render() {
     return this.props.children(this.props)
   }

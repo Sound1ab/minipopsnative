@@ -7,6 +7,7 @@ import { Fade } from '../zanimations'
 
 const Wrapper = styled.View`
   width: ${Dimensions.get('window').width};
+  background-color: white;
 `
 
 const ContentWrapper = styled.View`

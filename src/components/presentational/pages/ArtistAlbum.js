@@ -59,9 +59,8 @@ export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
             </TrackRow>
           ))}
         </ScrollView>
-        <ArtistAlbumSkeleton
-          isVisible={loading && state.discovery === 'fetchingAlbum'}
-        />
+        {loading &&
+          state.discovery === 'fetchingAlbum' && <ArtistAlbumSkeleton />}
       </Screen>
     )}
   </ArtistAlbumContainer>

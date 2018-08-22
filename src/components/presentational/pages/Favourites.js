@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import { Text } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { FavouritesContainer } from '../../container'
 import { Screen } from '../templates'
@@ -30,46 +31,43 @@ export const Favourites = ({ navigator }) => (
           marginBottom: false,
         }}
       >
-        {loading &&
-        state.fetchingInitialData &&
-        state.fetchingInitialData === 'fetchingFavourites' ? (
+        <SwipeListView
+          useFlatList
+          closeOnScroll
+          recalculateHiddenLayout
+          preview={false}
+          keyExtractor={item => item.spotifyId}
+          data={favourites}
+          ListFooterComponent={TabBarPlaceholder}
+          disableLeftSwipe={!isOnline}
+          disableRightSwipe={!isOnline}
+          renderItem={({ item, index }) => (
+            <FavouritesRow
+              {...item}
+              index={index}
+              key={`${item.artist}-${item.album}`}
+              watched={watchListIds.includes(item.spotifyId)}
+              isOnline={isOnline}
+            />
+          )}
+          renderHiddenItem={({ item, index }, rowMap) => (
+            <FavouritesRowHidden
+              key={`${item.artist}-${item.album}`}
+              index={index}
+              rowMap={rowMap}
+              handlePress={removeFromFavourite}
+              handleAddToWatchList={addToWatchList}
+              handleRemoveFromWatchList={removeFromWatchList}
+              id={id}
+              artistAlbum={item}
+              watched={watchListIds.includes(item.spotifyId)}
+            />
+          )}
+          rightOpenValue={-100}
+          leftOpenValue={100}
+        />
+        {state.startUp.fetchingInitialData === 'fetchingFavourites' && (
           <FavouritesListSkeleton />
-        ) : (
-          <SwipeListView
-            useFlatList
-            closeOnScroll
-            recalculateHiddenLayout
-            preview={false}
-            keyExtractor={item => item.spotifyId}
-            data={favourites}
-            ListFooterComponent={TabBarPlaceholder}
-            disableLeftSwipe={!isOnline}
-            disableRightSwipe={!isOnline}
-            renderItem={({ item, index }) => (
-              <FavouritesRow
-                {...item}
-                index={index}
-                key={`${item.artist}-${item.album}`}
-                watched={watchListIds.includes(item.spotifyId)}
-                isOnline={isOnline}
-              />
-            )}
-            renderHiddenItem={({ item, index }, rowMap) => (
-              <FavouritesRowHidden
-                key={`${item.artist}-${item.album}`}
-                index={index}
-                rowMap={rowMap}
-                handlePress={removeFromFavourite}
-                handleAddToWatchList={addToWatchList}
-                handleRemoveFromWatchList={removeFromWatchList}
-                id={id}
-                artistAlbum={item}
-                watched={watchListIds.includes(item.spotifyId)}
-              />
-            )}
-            rightOpenValue={-100}
-            leftOpenValue={100}
-          />
         )}
       </Screen>
     )}

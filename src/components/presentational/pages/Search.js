@@ -6,6 +6,7 @@ import { SearchContainer } from '../../container'
 import { FlatListWrapper } from '../atoms'
 import { FlatListItemSearch, SearchField } from '../molecules'
 import { hideTabsOnScroll } from '../../../navigation'
+import { SearchListSkeleton } from '../zkeletons'
 
 const hideTabs = hideTabsOnScroll()
 
@@ -54,6 +55,7 @@ export const Search = ({ navigator }) => (
           onScroll={searchResults.length > 0 && hideTabs.bind(null, navigator)}
           isTabHidden
         />
+        {state === 'fetchingSearch' && <SearchListSkeleton />}
       </Screen>
     )}
   </SearchContainer>

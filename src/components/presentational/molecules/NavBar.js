@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Icon, Heading, Spinner } from '../atoms'
+import { Icon, Heading } from '../atoms'
 import { HeadingSkeleton } from '../zkeletons'
 import { colors, shadow } from '../../../theme'
 
@@ -59,11 +59,9 @@ export const NavBar = ({
           >
             {heading.value}
           </Heading>
-          <HeadingSkeleton
-            isVisible={
-              loading && state && state.currentState === state.loadingState
-            }
-          />
+          {loading &&
+            state &&
+            state.currentState === state.loadingState && <HeadingSkeleton />}
         </React.Fragment>
       ) : (
         <Heading
@@ -74,7 +72,6 @@ export const NavBar = ({
           {heading.value}
         </Heading>
       )}
-      {/*<Spinner isVisible={loading} stickRight />*/}
     </TouchableWrapper>
     {children}
   </Wrapper>
