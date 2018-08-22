@@ -17,6 +17,7 @@ export const Search = ({ navigator }) => (
       searchResults,
       searchInput,
       searchEmpty,
+      isOnline,
     }) => (
       <Screen
         navigator={navigator}
@@ -38,7 +39,9 @@ export const Search = ({ navigator }) => (
             api: 'current-items',
           })}
           keyExtractor={(item, index) => `${item.title}-${index}`}
-          renderItem={FlatListItemSearch}
+          renderItem={props => (
+            <FlatListItemSearch {...props} isOnline={isOnline} />
+          )}
           onScroll={searchResults.length > 0 && hideTabs.bind(null, navigator)}
           isTabHidden
         />

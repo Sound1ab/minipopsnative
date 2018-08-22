@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
   loading: state.app.loading,
   searchValue: searchValue(state),
   searchResults: searchResults(state),
+  isOnline: state.app.isOnline,
 })
 
 const mapDispatchToProps = () => ({
