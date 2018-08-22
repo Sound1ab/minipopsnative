@@ -39,7 +39,8 @@ const Input = styled.TextInput`
       border: 2px solid red;
     `};
   border-radius: 25px;
-  background-color: white;
+  border-radius: ${({ search }) => (search ? '8px' : '25px')};
+  background-color: ${({ search }) => (search ? colors.lightGray : 'white')};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? '16px' : '0')};
 `
 

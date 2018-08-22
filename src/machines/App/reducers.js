@@ -1,7 +1,8 @@
 import { UPDATE_LOADING, SAVE_TOKEN, UPDATE_NETINFO_STATUS } from './actions'
+import { machine } from './machine'
 
 export const initialState = {
-  state: 'idle',
+  state: machine.initialState.value,
   loading: false,
   deviceToken: '',
   isOnline: true,

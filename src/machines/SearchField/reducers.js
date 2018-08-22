@@ -3,9 +3,10 @@ import {
   UPDATE_SEARCH_RESULTS,
   REMOVE_SEARCH_RESULTS,
 } from './actions'
+import { machine } from './machine'
 
 export const initialState = {
-  state: 'searching',
+  state: machine.initialState.value,
   searchValue: '',
   searchResults: [],
 }

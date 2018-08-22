@@ -2,6 +2,7 @@ import { Machine } from 'xstate'
 
 const id = 'search'
 
+// TODO: Make this a generic machine and rename searchfield => search
 export const internalMachine = {
   initial: 'searching',
   states: {

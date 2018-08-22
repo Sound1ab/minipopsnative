@@ -2,7 +2,7 @@ import { SAVE_COGNITO_USER_OBJECT, REMOVE_USER_DATA } from './actions'
 import { machine } from './machine'
 
 export const initialState = {
-  state: machine.initial,
+  state: machine.initialState.value,
   cognitoUser: {},
   isSignedIn: false,
 }

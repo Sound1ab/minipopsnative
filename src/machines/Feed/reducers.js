@@ -2,7 +2,7 @@ import { SAVE_FEED, REMOVE_FEED_DATA } from './actions'
 import { machine } from './machine'
 
 export const initialState = {
-  state: machine.initial,
+  state: machine.initialState.value,
   feed: [],
 }
 

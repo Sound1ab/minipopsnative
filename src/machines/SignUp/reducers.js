@@ -1,5 +1,7 @@
+import { machine } from './machine'
+
 export const initialState = {
-  state: 'idle',
+  state: machine.initialState.value,
 }
 
 export function signUp(state = initialState, action) {

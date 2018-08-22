@@ -8,7 +8,9 @@ import {
 import { searchMachine } from '../../machines/SearchField'
 
 type PropTypes = {
-  loading: Boolean,
+  state: string | Object,
+  loading: boolean,
+  searchValue: string,
   searchResults: Array<Object>,
 }
 
@@ -19,6 +21,7 @@ class Search extends Component<PropTypes> {
 }
 
 const mapStateToProps = state => ({
+  state: state.search.state,
   loading: state.app.loading,
   searchValue: searchValue(state),
   searchResults: searchResults(state),

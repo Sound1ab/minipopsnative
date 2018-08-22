@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
 import { Functional } from '../../../helpers/functional'
-import { DiscoveryContainer, SearchField } from '../../container'
+import { DiscoveryContainer } from '../../container'
 import { Screen } from '../templates'
 import { FlatListWrapper } from '../atoms'
-import { FlatListItemDiscovery } from '../molecules'
+import { FlatListItemDiscovery, SearchField } from '../molecules'
 
 export const Discovery = ({ navigator }) => (
   <DiscoveryContainer navigator={navigator}>

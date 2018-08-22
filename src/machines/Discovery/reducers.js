@@ -10,7 +10,7 @@ import {
 import { machine } from './machine'
 
 export const initialState = {
-  state: machine.initial,
+  state: machine.initialState.value,
   searchValue: '',
   searchResults: [],
   favourites: [],
