@@ -22,11 +22,11 @@ export class Fade extends Component {
 
   async componentDidUpdate(prevProps) {
     if (prevProps.isVisible && !this.props.isVisible) {
-      const animation = await this.animate.fadeOut(250)
+      const animation = this.animate && (await this.animate.fadeOut(250))
       animation.finished && this.setState({ isMounted: false })
     } else if (!prevProps.isVisible && this.props.isVisible) {
       this.setState({ isMounted: true })
-      this.animate.fadeIn(250)
+      this.animate && this.animate.fadeIn(250)
     }
   }
 

@@ -1,4 +1,8 @@
-export const Machine = {
+import { Machine } from 'xstate'
+
+const id = 'search'
+
+export const internalMachine = {
   initial: 'searching',
   states: {
     searching: {
@@ -49,3 +53,9 @@ export const Machine = {
     },
   },
 }
+
+export const machine = Machine({
+  id,
+  strict: true,
+  ...internalMachine,
+})

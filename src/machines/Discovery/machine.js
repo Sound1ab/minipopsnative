@@ -1,5 +1,5 @@
 import { Machine } from 'xstate'
-import { Machine as searchMachine } from '../SearchField'
+import { internalMachine as searchInternalMachine } from '../SearchField'
 
 const id = 'discovery'
 
@@ -94,7 +94,7 @@ export const machine = Machine({
       },
     },
     search: {
-      ...searchMachine,
+      ...searchInternalMachine,
     },
   },
 })

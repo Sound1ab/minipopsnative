@@ -1,7 +1,11 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { searchResults } from '../../machines/SearchField/selectors'
+import {
+  searchValue,
+  searchResults,
+} from '../../machines/SearchField/selectors'
+import { searchMachine } from '../../machines/SearchField'
 
 type PropTypes = {
   loading: Boolean,
@@ -16,7 +20,20 @@ class Search extends Component<PropTypes> {
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
+  searchValue: searchValue(state),
   searchResults: searchResults(state),
 })
 
-export default connect(mapStateToProps)(Search)
+const mapDispatchToProps = () => ({
+  searchInput: payload => {
+    searchMachine.dispatchAction('TEXT_INPUT', payload)
+  },
+  searchEmpty: () => {
+    searchMachine.dispatchAction('TEXT_INPUT_EMPTY', { value: null })
+  },
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Search)

@@ -1,5 +1,6 @@
 import { Request } from '../../services/index'
 import { API } from '../../services/index'
+import { updateSearchValue, updateSearchResults } from './actions'
 
 let timeout
 
@@ -26,5 +27,12 @@ export const reactions = {
         message: error,
       })
     }
+  },
+  UPDATE_SEARCH({ dispatchReduxAction, payload }) {
+    dispatchReduxAction(updateSearchValue(payload.value))
+  },
+  UPDATE_RESULTS({ dispatchReduxAction, payload, dispatchMachineAction }) {
+    dispatchReduxAction(updateSearchResults(payload.items))
+    dispatchMachineAction('UPDATE_RESULTS_SUCCESS')
   },
 }

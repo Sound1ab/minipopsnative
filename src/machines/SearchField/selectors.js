@@ -1,14 +1,14 @@
 import { createSelector } from 'reselect'
 
+const getSearchValue = state => state.search.searchValue
 const getSearchResults = state => state.search.searchResults
-const getDiscoveryResults = state => state.search.discoveryResults
+
+export const searchValue = createSelector(
+  getSearchValue,
+  getSearchValue => getSearchValue,
+)
 
 export const searchResults = createSelector(
   getSearchResults,
   getSearchResults => getSearchResults,
-)
-
-export const discoveryResults = createSelector(
-  getDiscoveryResults,
-  getDiscoveryResults => getDiscoveryResults,
 )
