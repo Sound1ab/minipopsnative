@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { LayoutAnimation } from 'react-native'
 import { NavBar } from '../molecules'
 
 type PropTypes = {
@@ -50,6 +51,7 @@ export class Screen extends Component<PropTypes> {
         this.isVisible = true
         break
       case 'didAppear':
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
         this.forceUpdate()
         break
       case 'didDisappear':

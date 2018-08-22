@@ -11,7 +11,7 @@ import { FeedListSkeleton } from '../zkeletons'
 const hideTabs = hideTabsOnScroll()
 
 const TextStyled = styled.Text`
-  margin: 0 16px 16px 16px;
+  margin: 16px;
   color: black;
 `
 

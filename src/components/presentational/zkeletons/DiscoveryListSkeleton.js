@@ -13,15 +13,9 @@ const Wrapper = styled.View`
       margin-top: 64px;
     `};
   width: ${Dimensions.get('window').width};
-  height: ${Dimensions.get('window').width};
+  height: 300;
   padding: 8px;
   background-color: ${colors.lightGray};
-`
-
-const ContentWrapper = styled.View`
-  width: ${Dimensions.get('window').width};
-  flex: 1;
-  padding: 16px;
 `
 
 type PropTypes = {
