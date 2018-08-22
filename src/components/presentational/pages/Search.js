@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import styled from 'styled-components'
 import { Screen } from '../templates'
 import { SearchContainer } from '../../container'
 import { FlatListWrapper } from '../atoms'
@@ -7,6 +8,13 @@ import { FlatListItemSearch, SearchField } from '../molecules'
 import { hideTabsOnScroll } from '../../../navigation'
 
 const hideTabs = hideTabsOnScroll()
+
+const TextStyled = styled.Text`
+  margin: 0 16px 16px 16px;
+  color: black;
+`
+
+const emptyText = 'Search for your favourite albums on eBay ✌️'
 
 export const Search = ({ navigator }) => (
   <SearchContainer navigator={navigator}>
@@ -31,6 +39,7 @@ export const Search = ({ navigator }) => (
       >
         <FlatListWrapper
           data={searchResults}
+          ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
           ListHeaderComponent={React.createElement(SearchField, {
             searchInput,
             searchEmpty,

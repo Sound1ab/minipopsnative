@@ -1,10 +1,18 @@
 // @flow
 import React from 'react'
+import styled from 'styled-components'
 import { Functional } from '../../../helpers/functional'
 import { DiscoveryContainer } from '../../container'
 import { Screen } from '../templates'
 import { FlatListWrapper } from '../atoms'
 import { FlatListItemDiscovery, SearchField } from '../molecules'
+
+const TextStyled = styled.Text`
+  margin: 0 16px 16px 16px;
+  color: black;
+`
+
+const emptyText = 'Get started finding your favourite albums 🤙'
 
 export const Discovery = ({ navigator }) => (
   <DiscoveryContainer navigator={navigator}>
@@ -31,6 +39,7 @@ export const Discovery = ({ navigator }) => (
         <FlatListWrapper
           data={searchResults}
           keyExtractor={(item, index) => `${item.title}-${index}`}
+          ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
           ListHeaderComponent={React.createElement(SearchField, {
             searchInput,
             searchEmpty,
