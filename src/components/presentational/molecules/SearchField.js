@@ -25,7 +25,17 @@ export function SearchField(props: PropTypes) {
     <Wrapper>
       <RelativeWrapper>
         {props.loading ? (
-          <Spinner isVisible={true} size={20} />
+          <Spinner
+            style={{
+              position: 'absolute',
+              top: 5,
+              left: 13,
+              zIndex: 1,
+            }}
+            iterationCount="infinite"
+            isVisible={true}
+            size={20}
+          />
         ) : (
           <Icon
             name="ios-search"

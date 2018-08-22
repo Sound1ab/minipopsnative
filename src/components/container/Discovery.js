@@ -69,6 +69,7 @@ class Discovery extends Component<PropTypes> {
 }
 
 const mapStateToProps = state => ({
+  state: state.discovery.state,
   loading: state.app.loading,
   searchValue: searchValue(state),
   searchResults: searchResults(state),

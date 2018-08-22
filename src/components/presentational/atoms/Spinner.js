@@ -11,6 +11,7 @@ type PropTypes = {
   color: String,
   stickRight: Boolean,
   iterationCount: string | number,
+  style: Object,
 }
 
 const Wrapper = Animatable.createAnimatableComponent(styled.View`
@@ -26,7 +27,10 @@ export const Spinner = (props: PropTypes) => (
     stickRight={props.stickRight}
     useNativeDriver={true}
     transition={['opacity']}
-    style={{ opacity: props.isVisible ? 1 : 0 }}
+    style={{
+      ...props.style,
+      opacity: props.isVisible ? 1 : 0,
+    }}
   >
     <MinipopsIconAnimatable
       size={props.size}
@@ -43,4 +47,5 @@ Spinner.defaultProps = {
   color: colors.primary,
   stickRight: false,
   interationCount: 'infinite',
+  style: {},
 }

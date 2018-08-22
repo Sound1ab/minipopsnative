@@ -9,6 +9,7 @@ import { FlatListItemDiscovery, SearchField } from '../molecules'
 export const Discovery = ({ navigator }) => (
   <DiscoveryContainer navigator={navigator}>
     {({
+      state,
       loading,
       searchValue,
       searchResults,
@@ -34,6 +35,7 @@ export const Discovery = ({ navigator }) => (
             searchInput,
             searchEmpty,
             searchValue,
+            loading: state && state.search && state.search === 'fetchingSearch',
             api: 'related-artists',
           })}
           renderItem={renderProps => (
