@@ -7,6 +7,7 @@ import { FlatListWrapper } from '../atoms'
 import { FlatListItemSearch, SearchField } from '../molecules'
 import { hideTabsOnScroll } from '../../../navigation'
 import { SearchListSkeleton } from '../zkeletons'
+import { Fade } from '../zanimations'
 
 const hideTabs = hideTabsOnScroll()
 
@@ -55,7 +56,9 @@ export const Search = ({ navigator }) => (
           onScroll={searchResults.length > 0 && hideTabs.bind(null, navigator)}
           isTabHidden
         />
-        {state === 'fetchingSearch' && <SearchListSkeleton />}
+        <Fade isVisible={state === 'fetchingSearch'} fadeIn fadeOut>
+          <SearchListSkeleton />
+        </Fade>
       </Screen>
     )}
   </SearchContainer>

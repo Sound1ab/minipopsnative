@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
+import { View } from 'react-native'
 import styled, { css } from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
-import { Fade } from '../zanimations'
 
 const Wrapper = styled.View`
   ${({ index }) =>
@@ -18,12 +18,8 @@ const Wrapper = styled.View`
   background-color: ${colors.lightGray};
 `
 
-type PropTypes = {
-  isVisible: boolean,
-}
-
-export const DiscoveryListSkeleton = ({ isVisible }: PropTypes) => (
-  <Fade isVisible={isVisible}>
+export const DiscoveryListSkeleton = () => (
+  <View>
     {Array(2)
       .fill(1, 0)
       .map((v, i) => (
@@ -43,9 +39,5 @@ export const DiscoveryListSkeleton = ({ isVisible }: PropTypes) => (
           />
         </Wrapper>
       ))}
-  </Fade>
+  </View>
 )
-
-DiscoveryListSkeleton.defaultProps = {
-  isVisible: true,
-}

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
-import { Fade } from '../zanimations'
+import { GrowContainer } from '../atoms'
 
 const Wrapper = styled.View`
   width: ${Dimensions.get('window').width};
@@ -18,12 +18,8 @@ const ContentWrapper = styled.View`
   padding: 16px;
 `
 
-type PropTypes = {
-  isVisible: boolean,
-}
-
-export const FeedListSkeleton = ({ isVisible }: PropTypes) => (
-  <Fade isVisible={isVisible}>
+export const FeedListSkeleton = () => (
+  <GrowContainer>
     {Array(2)
       .fill(1, 0)
       .map((v, i) => (
@@ -79,9 +75,5 @@ export const FeedListSkeleton = ({ isVisible }: PropTypes) => (
           </ContentWrapper>
         </Wrapper>
       ))}
-  </Fade>
+  </GrowContainer>
 )
-
-FeedListSkeleton.defaultProps = {
-  isVisible: true,
-}

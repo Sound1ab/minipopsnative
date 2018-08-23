@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
-import { Fade } from '../zanimations'
+import { GrowContainer } from '../atoms'
 
 const Wrapper = styled.View`
   ${({ index }) =>
@@ -23,12 +23,8 @@ const ContentWrapper = styled.View`
   padding: 16px;
 `
 
-type PropTypes = {
-  isVisible: boolean,
-}
-
-export const SearchListSkeleton = ({ isVisible }: PropTypes) => (
-  <Fade isVisible={isVisible}>
+export const SearchListSkeleton = () => (
+  <GrowContainer>
     {Array(2)
       .fill(1, 0)
       .map((v, i) => (
@@ -84,9 +80,5 @@ export const SearchListSkeleton = ({ isVisible }: PropTypes) => (
           </ContentWrapper>
         </Wrapper>
       ))}
-  </Fade>
+  </GrowContainer>
 )
-
-SearchListSkeleton.defaultProps = {
-  isVisible: true,
-}

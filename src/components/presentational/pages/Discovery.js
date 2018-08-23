@@ -6,6 +6,7 @@ import { Screen } from '../templates'
 import { FlatListWrapper } from '../atoms'
 import { FlatListItemDiscovery, SearchField } from '../molecules'
 import { DiscoveryListSkeleton } from '../zkeletons'
+import { Fade } from '../zanimations'
 
 const TextStyled = styled.Text`
   margin: 0 16px 16px 16px;
@@ -54,15 +55,13 @@ export const Discovery = ({ navigator }) => (
           )}
           isTabHidden
         />
-        {/*{state &&*/}
-        {/*state.search &&*/}
-        {/*state.search === 'fetchingSearch' && (*/}
-        {/*<DiscoveryListSkeleton*/}
-        {/*isVisible={*/}
-        {/*state && state.search && state.search === 'fetchingSearch'*/}
-        {/*}*/}
-        {/*/>*/}
-        {/*)}*/}
+        <Fade
+          isVisible={state && state.search && state.search === 'fetchingSearch'}
+          fadeIn
+          fadeOut
+        >
+          <DiscoveryListSkeleton />
+        </Fade>
       </Screen>
     )}
   </DiscoveryContainer>

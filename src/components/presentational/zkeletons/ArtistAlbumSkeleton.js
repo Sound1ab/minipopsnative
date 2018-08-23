@@ -3,7 +3,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
-import { Fade } from '../zanimations'
+
+const OuterWrapper = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+`
 
 const Wrapper = styled.View`
   width: ${Dimensions.get('window').width};
@@ -23,12 +28,8 @@ const TrackWrapper = styled.View`
   margin: 0 0 8px 0;
 `
 
-type PropTypes = {
-  isVisible: number,
-}
-
-export const ArtistAlbumSkeleton = ({ isVisible }: PropTypes) => (
-  <Fade isVisible={isVisible}>
+export const ArtistAlbumSkeleton = () => (
+  <OuterWrapper>
     <Skeleton
       height={Dimensions.get('window').width}
       width={Dimensions.get('window').width}
@@ -78,9 +79,5 @@ export const ArtistAlbumSkeleton = ({ isVisible }: PropTypes) => (
           </TrackWrapper>
         ))}
     </Wrapper>
-  </Fade>
+  </OuterWrapper>
 )
-
-ArtistAlbumSkeleton.defaultProps = {
-  isVisible: true,
-}

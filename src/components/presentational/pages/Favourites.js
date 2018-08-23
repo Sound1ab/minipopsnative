@@ -1,12 +1,12 @@
 // @flow
 import React from 'react'
-import { Text } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { FavouritesContainer } from '../../container'
 import { Screen } from '../templates'
 import { FavouritesRow, FavouritesRowHidden } from '../molecules'
 import { TabBarPlaceholder } from '../atoms'
 import { FavouritesListSkeleton } from '../zkeletons'
+import { Fade } from '../zanimations'
 
 export const Favourites = ({ navigator }) => (
   <FavouritesContainer navigator={navigator}>
@@ -66,12 +66,13 @@ export const Favourites = ({ navigator }) => (
           rightOpenValue={-100}
           leftOpenValue={100}
         />
-        {state.startUp.fetchingInitialData === 'fetchingFavourites' && (
+        <Fade
+          isVisible={state.startUp.fetchingInitialData === 'fetchingFavourites'}
+          fadeOut
+        >
           <FavouritesListSkeleton />
-        )}
+        </Fade>
       </Screen>
     )}
   </FavouritesContainer>
 )
-
-Favourites.defaultProps = {}

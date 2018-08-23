@@ -7,6 +7,7 @@ import { Screen } from '../templates'
 import { FlatListWrapper } from '../atoms'
 import { FlatListItemSearch } from '../molecules'
 import { FeedListSkeleton } from '../zkeletons'
+import { Fade } from '../zanimations'
 
 const hideTabs = hideTabsOnScroll()
 
@@ -42,7 +43,9 @@ export const Feed = ({ navigator }) => (
           onScroll={feed.length > 0 && hideTabs.bind(null, navigator)}
           isTabHidden
         />
-        {loading && state === 'fetchingFeed' && <FeedListSkeleton />}
+        <Fade isVisible={loading && state === 'fetchingFeed'} fadeIn fadeOut>
+          <FeedListSkeleton />
+        </Fade>
       </Screen>
     )}
   </FeedContainer>

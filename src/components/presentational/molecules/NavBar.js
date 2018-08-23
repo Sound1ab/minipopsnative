@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { Icon, Heading } from '../atoms'
 import { HeadingSkeleton } from '../zkeletons'
 import { colors, shadow } from '../../../theme'
+import { Fade } from '../zanimations'
 
 type Props = {
   handleBack: Function,
@@ -59,9 +60,14 @@ export const NavBar = ({
           >
             {heading.value}
           </Heading>
-          {loading &&
-            state &&
-            state.currentState === state.loadingState && <HeadingSkeleton />}
+          <Fade
+            isVisible={
+              loading && state && state.currentState === state.loadingState
+            }
+            fadeOut
+          >
+            <HeadingSkeleton />
+          </Fade>
         </React.Fragment>
       ) : (
         <Heading

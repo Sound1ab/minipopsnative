@@ -4,7 +4,13 @@ import styled from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
-import { Fade } from '../zanimations'
+
+const OuterWrapper = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+`
 
 const Wrapper = styled.View`
   padding-top: 8px;
@@ -22,12 +28,8 @@ const Album = styled.View`
   height: ${Dimensions.get('window').width / 2};
 `
 
-type PropTypes = {
-  isVisible: boolean,
-}
-
-export const ImageGridSkeleton = ({ isVisible }: PropTypes) => (
-  <Fade isVisible={isVisible}>
+export const ImageGridSkeleton = () => (
+  <OuterWrapper>
     <Wrapper>
       {Array(8)
         .fill(1, 0)
@@ -49,9 +51,5 @@ export const ImageGridSkeleton = ({ isVisible }: PropTypes) => (
           </Album>
         ))}
     </Wrapper>
-  </Fade>
+  </OuterWrapper>
 )
-
-ImageGridSkeleton.defaultProps = {
-  isVisible: true,
-}

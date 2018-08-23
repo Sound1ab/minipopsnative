@@ -7,6 +7,7 @@ import { Screen } from '../templates'
 import { FlatListItemArtistReleases } from '../molecules'
 import { FlatListWrapper } from '../atoms'
 import { ImageGridSkeleton } from '../zkeletons'
+import { Fade } from '../zanimations'
 
 export const ArtistReleases = ({ title, spotifyId, navigator }) => (
   <ArtistReleasesContainer navigator={navigator} spotifyId={spotifyId}>
@@ -48,8 +49,12 @@ export const ArtistReleases = ({ title, spotifyId, navigator }) => (
             />
           )}
         />
-        {/*{loading &&*/}
-        {/*state.discovery === 'fetchingReleases' && <ImageGridSkeleton />}*/}
+        <Fade
+          isVisible={loading && state.discovery === 'fetchingReleases'}
+          fadeOut
+        >
+          <ImageGridSkeleton />
+        </Fade>
       </Screen>
     )}
   </ArtistReleasesContainer>

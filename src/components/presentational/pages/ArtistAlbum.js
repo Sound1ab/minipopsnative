@@ -7,6 +7,7 @@ import { Screen } from '../templates'
 import { ActionBar } from '../molecules'
 import { ImageWrapper, TrackRow } from '../atoms'
 import { ArtistAlbumSkeleton } from '../zkeletons'
+import { Fade } from '../zanimations'
 
 export const ArtistAlbum = ({ navigator, spotifyId }) => (
   <ArtistAlbumContainer spotifyId={spotifyId}>
@@ -59,8 +60,12 @@ export const ArtistAlbum = ({ navigator, spotifyId }) => (
             </TrackRow>
           ))}
         </ScrollView>
-        {loading &&
-          state.discovery === 'fetchingAlbum' && <ArtistAlbumSkeleton />}
+        <Fade
+          isVisible={loading && state.discovery === 'fetchingAlbum'}
+          fadeOut
+        >
+          <ArtistAlbumSkeleton />
+        </Fade>
       </Screen>
     )}
   </ArtistAlbumContainer>
