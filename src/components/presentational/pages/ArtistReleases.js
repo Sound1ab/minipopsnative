@@ -8,15 +8,9 @@ import { FlatListItemArtistReleases } from '../molecules'
 import { FlatListWrapper } from '../atoms'
 import { ImageGridSkeleton } from '../zkeletons'
 
-export const ArtistReleases = ({
-  title,
-  navigator,
-  artistSpotifyId,
-  handlePushArtistAlbum,
-  fetchMoreArtistReleases,
-}) => (
-  <ArtistReleasesContainer navigator={navigator}>
-    {({ artistReleases, state, loading }) => (
+export const ArtistReleases = ({ title, spotifyId, navigator }) => (
+  <ArtistReleasesContainer navigator={navigator} spotifyId={spotifyId}>
+    {({ artistReleases, state, loading, fetchMoreArtistReleases }) => (
       <Screen
         navigator={navigator}
         loading={loading}
@@ -42,7 +36,7 @@ export const ArtistReleases = ({
             )}`
           }
           onEndReached={fetchMoreArtistReleases.bind(null, {
-            spotifyId: artistSpotifyId,
+            spotifyId,
           })}
           onEndReachedThreshold={1}
           removeClippedSubviews={true}
@@ -51,12 +45,11 @@ export const ArtistReleases = ({
               index={index}
               item={item}
               navigator={navigator}
-              handlePress={handlePushArtistAlbum}
             />
           )}
         />
-        {loading &&
-          state.discovery === 'fetchingReleases' && <ImageGridSkeleton />}
+        {/*{loading &&*/}
+        {/*state.discovery === 'fetchingReleases' && <ImageGridSkeleton />}*/}
       </Screen>
     )}
   </ArtistReleasesContainer>

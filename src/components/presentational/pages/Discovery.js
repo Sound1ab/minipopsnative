@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { Functional } from '../../../helpers/functional'
 import { DiscoveryContainer } from '../../container'
 import { Screen } from '../templates'
 import { FlatListWrapper } from '../atoms'
@@ -22,8 +21,6 @@ export const Discovery = ({ navigator }) => (
       loading,
       searchValue,
       searchResults,
-      handlePushArtistReleases,
-      fetchArtistReleases,
       searchInput,
       searchEmpty,
     }) => (
@@ -48,27 +45,24 @@ export const Discovery = ({ navigator }) => (
             loading: state && state.search && state.search === 'fetchingSearch',
             api: 'related-artists',
           })}
-          renderItem={renderProps => (
+          renderItem={({ item, index }) => (
             <FlatListItemDiscovery
-              {...renderProps}
+              item={item}
+              index={index}
               navigator={navigator}
-              handlePushArtistReleases={Functional.compose(
-                handlePushArtistReleases,
-                fetchArtistReleases,
-              )}
             />
           )}
           isTabHidden
         />
-        {state &&
-          state.search &&
-          state.search === 'fetchingSearch' && (
-            <DiscoveryListSkeleton
-              isVisible={
-                state && state.search && state.search === 'fetchingSearch'
-              }
-            />
-          )}
+        {/*{state &&*/}
+        {/*state.search &&*/}
+        {/*state.search === 'fetchingSearch' && (*/}
+        {/*<DiscoveryListSkeleton*/}
+        {/*isVisible={*/}
+        {/*state && state.search && state.search === 'fetchingSearch'*/}
+        {/*}*/}
+        {/*/>*/}
+        {/*)}*/}
       </Screen>
     )}
   </DiscoveryContainer>

@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import chunk from 'lodash/chunk'
 import { Dimensions } from 'react-native'
-import { ImageWrapper } from '../../atoms/index'
+import { ImageWrapper } from '../../atoms'
+import { pushScreen } from '../../../../navigation'
 
 type PropTypes = {
   items: Array<string>,
@@ -21,28 +21,25 @@ const TouchableOpacity = styled.TouchableOpacity`
   width: ${Dimensions.get('window').width / 2};
 `
 
-export const FlatListItemArtistReleases = ({
-  item,
-  navigator,
-  handlePress,
-  index: verticalIndex,
-}: PropTypes) => (
+export const FlatListItemArtistReleases = ({ item, navigator }: PropTypes) => (
   <RowWrapper>
-    {item.map((album, horizontalIndex) => {
+    {item.map(album => {
       return (
         <TouchableOpacity
           activeOpacity={1}
           key={album.spotifyId}
-          onPress={handlePress.bind(null, {
-            ...album,
+          onPress={pushScreen.bind(null, {
             navigator: navigator,
+            screen: 'ArtistAlbum',
+            passProps: {
+              spotifyId: album.spotifyId,
+            },
           })}
         >
           <ImageWrapper
             source={album.imageMediumUrl}
             height={Dimensions.get('window').width / 2}
             width={Dimensions.get('window').width / 2}
-            handlePress={handlePress}
           />
         </TouchableOpacity>
       )

@@ -4,6 +4,7 @@ import { ImageWrapper, Heading } from '../../atoms/index'
 import styled, { css } from 'styled-components'
 import LinearGradient from 'react-native-linear-gradient'
 import { StyleSheet } from 'react-native'
+import { pushScreen } from '../../../../navigation'
 
 type Props = {
   index: number,
@@ -42,20 +43,18 @@ const styles = StyleSheet.create({
   },
 })
 
-export const FlatListItemDiscovery = ({
-  item,
-  index,
-  handlePushArtistReleases,
-  navigator,
-}: Props) => (
+export const FlatListItemDiscovery = ({ item, index, navigator }: Props) => (
   <Wrapper
     activeOpacity={1}
     index={index}
     height={300}
-    onPress={handlePushArtistReleases.bind(null, {
-      spotifyId: item.spotifyId,
-      title: item.title,
-      navigator,
+    onPress={pushScreen.bind(null, {
+      navigator: navigator,
+      screen: 'ArtistReleases',
+      passProps: {
+        spotifyId: item.spotifyId,
+        title: item.title,
+      },
     })}
   >
     <RelativeWrapper>
@@ -73,5 +72,4 @@ export const FlatListItemDiscovery = ({
 
 FlatListItemDiscovery.defaultProps = {
   height: 300,
-  handlePushArtistReleases: () => {},
 }

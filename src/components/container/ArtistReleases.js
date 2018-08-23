@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { artistReleases } from '../../machines/Discovery/selectors'
+import { discoveryMachine } from '../../machines/Discovery'
 
 type PropTypes = {
   artistReleases: Object,
@@ -15,6 +16,11 @@ class ArtistReleases extends Component<PropTypes> {
     state: '',
     loading: false,
   }
+
+  componentDidMount = () => {
+    this.props.fetchArtistReleases({ spotifyId: this.props.spotifyId })
+  }
+
   render() {
     return this.props.children(this.props)
   }
@@ -26,4 +32,16 @@ const mapStateToProps = state => ({
   loading: state.app.loading,
 })
 
-export default connect(mapStateToProps)(ArtistReleases)
+const mapDispatchToProps = () => ({
+  fetchArtistReleases: payload => {
+    discoveryMachine.dispatchAction('FETCH_RELEASES', payload)
+  },
+  fetchMoreArtistReleases: payload => {
+    discoveryMachine.dispatchAction('FETCH_MORE_RELEASES', payload)
+  },
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ArtistReleases)

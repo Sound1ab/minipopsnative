@@ -36,6 +36,11 @@ class ArtistAlbum extends Component<PropTypes> {
     loading: false,
     children: () => {},
   }
+
+  componentDidMount = () => {
+    this.props.fetchArtistAlbum({ spotifyId: this.props.spotifyId })
+  }
+
   render() {
     return this.props.children(this.props)
   }
@@ -50,6 +55,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = () => ({
+  fetchArtistAlbum: payload => {
+    discoveryMachine.dispatchAction('FETCH_ALBUM', payload)
+  },
   addToFavourites: payload => {
     discoveryMachine.dispatchAction('ADD_FAVOURITE', payload)
   },

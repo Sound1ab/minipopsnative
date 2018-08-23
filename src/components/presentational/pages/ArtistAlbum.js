@@ -8,8 +8,8 @@ import { ActionBar } from '../molecules'
 import { ImageWrapper, TrackRow } from '../atoms'
 import { ArtistAlbumSkeleton } from '../zkeletons'
 
-export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
-  <ArtistAlbumContainer>
+export const ArtistAlbum = ({ navigator, spotifyId }) => (
+  <ArtistAlbumContainer spotifyId={spotifyId}>
     {({
       loading,
       state,
@@ -49,7 +49,7 @@ export const ArtistAlbum = ({ navigator, albumSpotifyId }) => (
               item: artistAlbum,
             })}
             isFavourite={favourites.find(
-              favourite => favourite.spotifyId === albumSpotifyId,
+              favourite => favourite.spotifyId === spotifyId,
             )}
           />
           {artistAlbum.tracks.map((track, index) => (
