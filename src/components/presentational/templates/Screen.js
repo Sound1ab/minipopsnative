@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { NavBar } from '../molecules'
 
 type PropTypes = {
+  noLoading: Boolean,
   loading: Boolean,
   handleBack: ?Function,
   state: ?{
@@ -27,6 +28,7 @@ const Sink = styled.View`
 
 export class Screen extends Component<PropTypes> {
   static defaultProps = {
+    noLoading: false,
     loading: false,
     handleBack: null,
     state: null,
@@ -63,6 +65,7 @@ export class Screen extends Component<PropTypes> {
 
   render() {
     let {
+      noLoading,
       loading,
       handleBack,
       state,
@@ -72,6 +75,7 @@ export class Screen extends Component<PropTypes> {
     return (
       <React.Fragment>
         <NavBar
+          noLoading={noLoading}
           handleBack={handleBack}
           loading={loading}
           state={state}

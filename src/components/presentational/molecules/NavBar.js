@@ -40,6 +40,7 @@ const IconWrapper = styled.View`
 `
 
 export const NavBar = ({
+  noLoading,
   handleBack,
   loading,
   state,
@@ -60,14 +61,16 @@ export const NavBar = ({
           >
             {heading.value}
           </Heading>
-          <Fade
-            isVisible={
-              loading && state && state.currentState === state.loadingState
-            }
-            fadeOut
-          >
-            <HeadingSkeleton />
-          </Fade>
+          {!noLoading && (
+            <Fade
+              isVisible={
+                loading && state && state.currentState === state.loadingState
+              }
+              fadeOut
+            >
+              <HeadingSkeleton />
+            </Fade>
+          )}
         </React.Fragment>
       ) : (
         <Heading

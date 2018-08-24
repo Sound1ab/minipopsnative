@@ -31,7 +31,7 @@ export const MyDetails = ({ navigator }: PropTypes) => (
     }) => (
       <Screen
         navigator={navigator}
-        loading={loading}
+        noLoading
         handleBack={popScreen.bind(null, navigator)}
         heading={{
           value: 'My Details',
