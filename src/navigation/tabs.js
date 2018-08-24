@@ -10,7 +10,8 @@ export const startApp = async () => {
       {
         screen: 'Favourites',
         title: 'Favourites',
-        icon: icons.favourites,
+        icon: icons.favouritesOutline,
+        selectedIcon: icons.favourites,
         iconInsets: {
           top: 6,
           bottom: -6,
@@ -23,7 +24,8 @@ export const startApp = async () => {
       {
         screen: 'Discovery',
         title: 'Discovery',
-        icon: icons.discovery,
+        icon: icons.discoveryOutline,
+        selectedIcon: icons.discovery,
         iconInsets: {
           top: 6,
           bottom: -6,
@@ -36,7 +38,8 @@ export const startApp = async () => {
       {
         screen: 'Feed',
         title: 'Feed',
-        icon: icons.feed,
+        icon: icons.feedOutline,
+        selectedIcon: icons.feed,
         iconInsets: {
           top: 6,
           bottom: -6,
@@ -49,7 +52,8 @@ export const startApp = async () => {
       {
         screen: 'Search',
         title: 'Search',
-        icon: icons.search,
+        icon: icons.searchOutline,
+        selectedIcon: icons.search,
         iconInsets: {
           top: 6,
           bottom: -6,
@@ -62,7 +66,8 @@ export const startApp = async () => {
       {
         screen: 'Profile',
         title: 'Profile',
-        icon: icons.profile,
+        icon: icons.profileOutline,
+        selectedIcon: icons.profile,
         iconInsets: {
           top: 6,
           bottom: -6,
@@ -74,9 +79,8 @@ export const startApp = async () => {
       },
     ],
     tabsStyle: {
-      tabBarSelectedButtonColor: colors.secondary,
       tabBarButtonColor: colors.primary,
-      initialTabIndex: 0,
+      initialTabIndex: 2,
       tabBarTranslucent: true,
     },
     appStyle: {
@@ -96,7 +100,8 @@ export const startLogin = async () => {
     tabs: [
       {
         screen: 'SignIn',
-        icon: icons.signIn,
+        selectedIcon: icons.signIn,
+        icon: icons.signInOutline,
         iconInsets: {
           top: 6,
           bottom: -6,
@@ -108,7 +113,8 @@ export const startLogin = async () => {
       },
       {
         screen: 'SignUp',
-        icon: icons.signUp,
+        selectedIcon: icons.signUp,
+        icon: icons.signUpOutline,
         iconInsets: {
           top: 6,
           bottom: -6,
@@ -120,7 +126,6 @@ export const startLogin = async () => {
       },
     ],
     tabsStyle: {
-      tabBarSelectedButtonColor: colors.secondary,
       tabBarButtonColor: colors.primary,
       initialTabIndex: 0,
     },
