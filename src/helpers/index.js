@@ -1,6 +1,6 @@
 export * from './functional'
 export * from './formValidation'
-export { default as NativeEventSubscription } from './nativeEventSubscription'
+export * from './nativeEventSubscription'
 export * from './vectorToStatic'
 export { default as Aws } from './awsmobile'
 export * from './networkMonitoring'

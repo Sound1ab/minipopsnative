@@ -9,7 +9,6 @@ import {
   updateDiscoverySearchValue,
   updateDiscoverySearchResults,
 } from './actions'
-import { saveFeed } from '../Feed/actions'
 import { reactions as appReactions } from '../App'
 import { reactions as searchReactions } from '../SearchField'
 
@@ -95,20 +94,6 @@ export const reactions = {
         notification: true,
         message:
           "Oh no, we couldn't remove this album from your favourites, please try again",
-      })
-    }
-  },
-  async UPDATE_FEED({ dispatchReduxAction, payload, dispatchMachineAction }) {
-    try {
-      const items = await Request.get(API('ebay-items-using-wantlist'), {
-        id: payload.id,
-      })
-      dispatchReduxAction(saveFeed({ items: items.data }))
-      dispatchMachineAction('FETCH_SUCCESS')
-    } catch (error) {
-      dispatchMachineAction('FETCH_FAILURE', {
-        notification: false,
-        message: error,
       })
     }
   },

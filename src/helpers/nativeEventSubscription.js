@@ -4,9 +4,9 @@ import {
   Platform,
 } from 'react-native'
 
-let nativeEventSubscription = null
+export let nativeEventSubscription = null
 
-export class NativeEventSubscription {
+class NativeEventSubscription {
   constructor() {
     this.callbacks = []
     this.register()
@@ -44,5 +44,3 @@ export class NativeEventSubscription {
 if (!nativeEventSubscription) {
   nativeEventSubscription = new NativeEventSubscription()
 }
-
-export default nativeEventSubscription

@@ -5,7 +5,7 @@ import { popScreen } from '../../../navigation'
 import { ArtistAlbumContainer } from '../../container'
 import { Screen } from '../templates'
 import { ActionBar } from '../molecules'
-import { ImageWrapper, TrackRow } from '../atoms'
+import { ImageWrapper, TrackRow, TabBarPlaceholder } from '../atoms'
 import { ArtistAlbumSkeleton } from '../zkeletons'
 import { Fade } from '../zanimations'
 
@@ -60,6 +60,7 @@ export const ArtistAlbum = ({ navigator, spotifyId }) => (
             </TrackRow>
           ))}
         </ScrollView>
+        <TabBarPlaceholder />
         <Fade
           isVisible={loading && state.discovery === 'fetchingAlbum'}
           fadeOut

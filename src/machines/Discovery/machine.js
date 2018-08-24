@@ -50,7 +50,7 @@ export const machine = Machine({
         addingFavourite: {
           onEntry: ['ADD_FAVOURITE', 'SHOW_LOADING'],
           on: {
-            FAVOURITE_SUCCESS: 'updatingFeed',
+            FAVOURITE_SUCCESS: 'idle',
             FAVOURITE_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
           },
           onExit: ['HIDE_LOADING'],
@@ -58,18 +58,10 @@ export const machine = Machine({
         removingFavourite: {
           onEntry: ['REMOVE_FAVOURITE', 'SHOW_LOADING'],
           on: {
-            REMOVE_FAVOURITE_SUCCESS: 'updatingFeed',
+            REMOVE_FAVOURITE_SUCCESS: 'idle',
             REMOVE_FAVOURITE_FAILURE: {
               idle: { actions: ['SHOW_ERROR_MESSAGE'] },
             },
-          },
-          onExit: ['HIDE_LOADING'],
-        },
-        updatingFeed: {
-          onEntry: ['UPDATE_FEED', 'SHOW_LOADING'],
-          on: {
-            FETCH_SUCCESS: 'idle',
-            FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
           },
           onExit: ['HIDE_LOADING'],
         },

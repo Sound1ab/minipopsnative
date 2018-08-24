@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { feedMachine } from '../../machines/Feed'
 import { feed } from '../../machines/Feed/selectors'
+import { nativeEventSubscription } from '../../helpers'
+import { favourites } from '../../machines/Discovery'
 
 type PropTypes = {
   loading: Boolean,
@@ -24,7 +26,24 @@ export class Feed extends Component<PropTypes> {
     refetchFeed: () => {},
     isOnline: true,
   }
+  constructor(props) {
+    super(props)
+    nativeEventSubscription.subscribe(this.onNavigatorEvent)
+    this.favouritesCopy = props.favourites
+  }
+  onNavigatorEvent = selectedTabIndex => {
+    if (
+      selectedTabIndex === 2 &&
+      this.favouritesCopy !== this.props.favourites
+    ) {
+      this.fetchFeed()
+      this.favouritesCopy = this.props.favourites
+    }
+  }
   componentDidMount() {
+    this.fetchFeed()
+  }
+  fetchFeed() {
     this.props.fetchFeed({ id: this.props.id })
   }
   render() {
@@ -38,6 +57,7 @@ const mapStateToProps = state => ({
   feed: feed(state),
   state: state.feed.state,
   isOnline: state.app.isOnline,
+  favourites: favourites(state),
 })
 
 const mapDispatchToProps = () => ({
