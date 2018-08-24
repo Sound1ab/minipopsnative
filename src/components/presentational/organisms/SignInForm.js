@@ -1,9 +1,13 @@
 // @flow
 import React from 'react'
-import { Keyboard } from 'react-native'
+import { Dimensions, TouchableOpacity } from 'react-native'
 import styled from 'styled-components'
-import { TouchableOpacity } from 'react-native'
-import { InputWrapper, Heading, Spinner } from '../../presentational/atoms'
+import {
+  Heading,
+  InputWrapper,
+  Spinner,
+  TabBarPlaceholder,
+} from '../../presentational/atoms'
 import { colors } from '../../../theme'
 
 type PropTypes = {
@@ -11,12 +15,9 @@ type PropTypes = {
   password: string,
 }
 
-const TouchWrapper = styled.TouchableWithoutFeedback`
-  flex: 1;
-`
-
 const Wrapper = styled.View`
   flex: 1;
+  height: ${Dimensions.get('window').height};
   justify-content: center;
   align-items: flex-start;
   padding: 16px;
@@ -27,8 +28,8 @@ const Section = styled.View`
   width: 100%;
 `
 
-export const SignInForm = (props: PropTypes) => (
-  <TouchWrapper onPress={() => Keyboard.dismiss()}>
+export function SignInForm(props: PropTypes) {
+  return (
     <Wrapper>
       <Section>
         <Spinner
@@ -74,9 +75,10 @@ export const SignInForm = (props: PropTypes) => (
           Sign In
         </Heading>
       </TouchableOpacity>
+      <TabBarPlaceholder />
     </Wrapper>
-  </TouchWrapper>
-)
+  )
+}
 
 SignInForm.defaultProps = {
   username: '',
