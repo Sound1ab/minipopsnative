@@ -24,8 +24,13 @@ export const reactions = {
         message: get(payload, 'message', ''),
         timeout: 500,
       })
+      payload.error && console.warn(`${payload.message}`, payload.error)
     } else {
-      console.warn(`${payload.title}: `, payload.message)
+      console.warn(
+        `${payload.title}: `,
+        payload.message,
+        payload.error ? payload.error : '',
+      )
     }
   },
   REGISTER_COMPONENTS({ dispatchMachineAction, payload }) {

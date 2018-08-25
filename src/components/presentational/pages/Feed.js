@@ -43,7 +43,7 @@ export const Feed = ({ navigator }) => (
           onScroll={feed.length > 0 && hideTabs.bind(null, navigator)}
           isTabHidden
         />
-        <Fade isVisible={loading && state === 'fetchingFeed'} fadeIn fadeOut>
+        <Fade isVisible={loading} fadeIn fadeOut>
           <FeedListSkeleton />
         </Fade>
       </Screen>

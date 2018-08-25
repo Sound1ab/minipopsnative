@@ -56,7 +56,7 @@ export const Search = ({ navigator }) => (
           onScroll={searchResults.length > 0 && hideTabs.bind(null, navigator)}
           isTabHidden
         />
-        <Fade isVisible={state === 'fetchingSearch'} fadeIn fadeOut>
+        <Fade isVisible={loading} fadeIn fadeOut>
           <SearchListSkeleton />
         </Fade>
       </Screen>

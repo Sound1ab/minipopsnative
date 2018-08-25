@@ -47,7 +47,11 @@ export class Feed extends Component<PropTypes> {
     this.props.fetchFeed({ id: this.props.id })
   }
   render() {
-    return this.props.children(this.props)
+    const { loading, state } = this.props
+    return this.props.children({
+      ...this.props,
+      loading: loading && state === 'fetchingFeed',
+    })
   }
 }
 

@@ -43,7 +43,7 @@ export const Discovery = ({ navigator }) => (
             searchInput,
             searchEmpty,
             searchValue,
-            loading: state && state.search && state.search === 'fetchingSearch',
+            loading,
             api: 'related-artists',
           })}
           renderItem={({ item, index }) => (
@@ -55,11 +55,7 @@ export const Discovery = ({ navigator }) => (
           )}
           isTabHidden
         />
-        <Fade
-          isVisible={state && state.search && state.search === 'fetchingSearch'}
-          fadeIn
-          fadeOut
-        >
+        <Fade isVisible={loading} fadeIn fadeOut>
           <DiscoveryListSkeleton />
         </Fade>
       </Screen>

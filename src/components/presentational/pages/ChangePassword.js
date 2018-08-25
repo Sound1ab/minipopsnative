@@ -31,7 +31,7 @@ export const ChangePassword = ({ navigator }: PropTypes) => (
     }) => (
       <Screen
         navigator={navigator}
-        loading={loading}
+        noLoading
         handleBack={popScreen.bind(null, navigator)}
         heading={{
           value: 'Change Password',

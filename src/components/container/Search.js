@@ -16,7 +16,11 @@ type PropTypes = {
 
 class Search extends Component<PropTypes> {
   render() {
-    return this.props.children(this.props)
+    const { state } = this.props
+    return this.props.children({
+      ...this.props,
+      loading: state === 'fetchingSearch',
+    })
   }
 }
 

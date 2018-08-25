@@ -7,10 +7,6 @@ type PropTypes = {
   noLoading: Boolean,
   loading: Boolean,
   handleBack: ?Function,
-  state: ?{
-    currentState: string | Object,
-    loadingState: string,
-  },
   heading: {
     value: string,
     color: string,
@@ -78,7 +74,6 @@ export class Screen extends Component<PropTypes> {
           noLoading={noLoading}
           handleBack={handleBack}
           loading={loading}
-          state={state}
           heading={heading}
         />
         <Sink>{children}</Sink>

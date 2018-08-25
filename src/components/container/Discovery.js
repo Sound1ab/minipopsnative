@@ -14,7 +14,12 @@ type PropTypes = {
 
 class Discovery extends Component<PropTypes> {
   render() {
-    return this.props.children(this.props)
+    const { loading, state } = this.props
+    return this.props.children({
+      ...this.props,
+      loading:
+        loading && state && state.search && state.search === 'fetchingSearch',
+    })
   }
 }
 

@@ -43,7 +43,6 @@ export const NavBar = ({
   noLoading,
   handleBack,
   loading,
-  state,
   heading,
   children,
 }: Props) => (
@@ -62,12 +61,7 @@ export const NavBar = ({
             {heading.value}
           </Heading>
           {!noLoading && (
-            <Fade
-              isVisible={
-                loading && state && state.currentState === state.loadingState
-              }
-              fadeOut
-            >
+            <Fade isVisible={loading} fadeOut>
               <HeadingSkeleton />
             </Fade>
           )}

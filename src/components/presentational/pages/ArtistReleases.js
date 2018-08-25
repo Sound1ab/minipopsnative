@@ -16,10 +16,6 @@ export const ArtistReleases = ({ title, spotifyId, navigator }) => (
         navigator={navigator}
         loading={loading}
         handleBack={popScreen.bind(null, navigator)}
-        state={{
-          currentState: state.discovery,
-          loadingState: 'fetchingReleases',
-        }}
         heading={{
           value: title,
           color: 'black',
@@ -49,10 +45,7 @@ export const ArtistReleases = ({ title, spotifyId, navigator }) => (
             />
           )}
         />
-        <Fade
-          isVisible={loading && state.discovery === 'fetchingReleases'}
-          fadeOut
-        >
+        <Fade isVisible={loading} fadeOut>
           <ImageGridSkeleton />
         </Fade>
       </Screen>

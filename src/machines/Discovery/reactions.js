@@ -72,6 +72,7 @@ export const reactions = {
       dispatchMachineAction('FAVOURITE_SUCCESS', { id: payload.id })
     } catch (error) {
       dispatchMachineAction('FAVOURITE_FAILURE', {
+        error,
         notification: true,
         message: "Oh no, I can't favourite that album right now",
       })

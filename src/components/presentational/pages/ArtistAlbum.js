@@ -24,10 +24,6 @@ export const ArtistAlbum = ({ navigator, spotifyId }) => (
         navigator={navigator}
         loading={loading}
         handleBack={popScreen.bind(null, navigator)}
-        state={{
-          currentState: state.discovery,
-          loadingState: 'fetchingAlbum',
-        }}
         heading={{
           value: artistAlbum.album,
           color: 'black',
@@ -61,10 +57,7 @@ export const ArtistAlbum = ({ navigator, spotifyId }) => (
           ))}
         </ScrollView>
         <TabBarPlaceholder />
-        <Fade
-          isVisible={loading && state.discovery === 'fetchingAlbum'}
-          fadeOut
-        >
+        <Fade isVisible={loading} fadeOut>
           <ArtistAlbumSkeleton />
         </Fade>
       </Screen>

@@ -1,4 +1,5 @@
 // @flow
+import get from 'lodash/get'
 import React, { Component } from 'react'
 import { LayoutAnimation } from 'react-native'
 import { connect } from 'react-redux'
@@ -19,7 +20,13 @@ export class Favourites extends Component<PropTypes> {
     }
   }
   render() {
-    return this.props.children(this.props)
+    const { state } = this.props
+    return this.props.children({
+      ...this.props,
+      loading:
+        get(state, ['startUp', 'fetchingInitialData'], '') ===
+        'fetchingFavourites',
+    })
   }
 }
 

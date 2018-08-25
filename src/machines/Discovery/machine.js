@@ -9,18 +9,13 @@ export const machine = Machine({
   strict: true,
   states: {
     // TODO: Split these states out into seperate parallel machines
-    discovery: {
+    artistReleases: {
       initial: 'idle',
       states: {
         idle: {
           on: {
             FETCH_RELEASES: 'fetchingReleases',
             FETCH_MORE_RELEASES: 'fetchingMoreReleases',
-            FETCH_ALBUM: 'fetchingAlbum',
-            ADD_FAVOURITE: 'addingFavourite',
-            REMOVE_FAVOURITE: 'removingFavourite',
-            ADD_TO_WATCH_LIST: 'addingToWatchList',
-            REMOVE_FROM_WATCH_LIST: 'removingFromWatchList',
           },
         },
         fetchingReleases: {
@@ -39,11 +34,42 @@ export const machine = Machine({
           },
           onExit: ['HIDE_LOADING'],
         },
+      },
+    },
+    artistAlbum: {
+      initial: 'idle',
+      states: {
+        idle: {
+          on: {
+            FETCH_ALBUM: 'fetchingAlbum',
+          },
+        },
         fetchingAlbum: {
           onEntry: ['FETCH_ALBUM', 'SHOW_LOADING'],
           on: {
             FETCH_SUCCESS: 'idle',
             FETCH_FAILURE: { idle: { actions: ['SHOW_ERROR_MESSAGE'] } },
+          },
+          onExit: ['HIDE_LOADING'],
+        },
+      },
+    },
+    favourites: {
+      initial: 'idle',
+      states: {
+        idle: {
+          on: {
+            ADD_FAVOURITE: 'addingFavourite',
+            REMOVE_FAVOURITE: 'removingFavourite',
+          },
+        },
+        removingFavourite: {
+          onEntry: ['REMOVE_FAVOURITE', 'SHOW_LOADING'],
+          on: {
+            REMOVE_FAVOURITE_SUCCESS: 'idle',
+            REMOVE_FAVOURITE_FAILURE: {
+              idle: { actions: ['SHOW_ERROR_MESSAGE'] },
+            },
           },
           onExit: ['HIDE_LOADING'],
         },
@@ -55,15 +81,16 @@ export const machine = Machine({
           },
           onExit: ['HIDE_LOADING'],
         },
-        removingFavourite: {
-          onEntry: ['REMOVE_FAVOURITE', 'SHOW_LOADING'],
+      },
+    },
+    watchList: {
+      initial: 'idle',
+      states: {
+        idle: {
           on: {
-            REMOVE_FAVOURITE_SUCCESS: 'idle',
-            REMOVE_FAVOURITE_FAILURE: {
-              idle: { actions: ['SHOW_ERROR_MESSAGE'] },
-            },
+            ADD_TO_WATCH_LIST: 'addingToWatchList',
+            REMOVE_FROM_WATCH_LIST: 'removingFromWatchList',
           },
-          onExit: ['HIDE_LOADING'],
         },
         addingToWatchList: {
           onEntry: ['ADD_TO_WATCH_LIST', 'SHOW_LOADING'],

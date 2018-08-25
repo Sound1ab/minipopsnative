@@ -1,4 +1,5 @@
 // @flow
+import get from 'lodash/get'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { discoveryMachine } from '../../machines/Discovery'
@@ -42,7 +43,11 @@ class ArtistAlbum extends Component<PropTypes> {
   }
 
   render() {
-    return this.props.children(this.props)
+    const { loading, state } = this.props
+    return this.props.children({
+      ...this.props,
+      loading: loading && get(state, ['artistAlbum'], '') === 'fetchingAlbum',
+    })
   }
 }
 

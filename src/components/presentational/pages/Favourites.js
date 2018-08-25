@@ -15,7 +15,6 @@ export const Favourites = ({ navigator }) => (
       favourites,
       watchListIds,
       id,
-      state,
       removeFromFavourite,
       addToWatchList,
       removeFromWatchList,
@@ -66,10 +65,7 @@ export const Favourites = ({ navigator }) => (
           rightOpenValue={-100}
           leftOpenValue={100}
         />
-        <Fade
-          isVisible={state.startUp.fetchingInitialData === 'fetchingFavourites'}
-          fadeOut
-        >
+        <Fade isVisible={loading} fadeOut>
           <FavouritesListSkeleton />
         </Fade>
       </Screen>
