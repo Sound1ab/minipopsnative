@@ -4,8 +4,8 @@ import { Skeleton } from '../molecules'
 
 export const HeadingSkeleton = () => (
   <Skeleton
-    height={27}
-    width={150}
+    height={35}
+    width={'100%'}
     layout={{
       heading: {
         type: 'rect',
