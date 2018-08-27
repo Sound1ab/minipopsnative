@@ -4,6 +4,10 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>AppCenter-Config.plist</key>
+		<data>
+		PIXQ1hhhybQt+XENX2WCi6a137g=
+		</data>
 		<key>AppIcon20x20@2x.png</key>
 		<data>
 		u7V5Dr347pEsrdVgXufaFj3Eg2U=
@@ -38,11 +42,11 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		F0xXdbhXGrNk4IHvqVVo19w9E3Q=
+		yTgYcjUVK1JDF6ATjF3lhMruzCg=
 		</data>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		jGjk9LEuYro2NMkUUPZiDiE8i6k=
+		5+Mf12sAZ5yGQCpHo7KyVupw1aU=
 		</data>
 		<key>Entypo.ttf</key>
 		<data>
@@ -107,7 +111,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		PEYk0kpoLMEVl5Bohbp1Kdf+n5c=
+		RuKPFXyyqHQAuZOeCA9hz8Ks1m4=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -160,6 +164,17 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>AppCenter-Config.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			PIXQ1hhhybQt+XENX2WCi6a137g=
+			</data>
+			<key>hash2</key>
+			<data>
+			pyH/FcEDKnV2371xizXzaoBrEkXO+x2XjZpceJfNSWI=
+			</data>
+		</dict>
 		<key>AppIcon20x20@2x.png</key>
 		<dict>
 			<key>hash</key>
@@ -252,22 +267,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			F0xXdbhXGrNk4IHvqVVo19w9E3Q=
+			yTgYcjUVK1JDF6ATjF3lhMruzCg=
 			</data>
 			<key>hash2</key>
 			<data>
-			2UPQJucGZglqw+i3+p9LQ8/FleO1ek/9OJm6ZGfVltU=
+			mWBf616GbWJTms8uTv5qzDYXGC//HHsOud70IrK61+4=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jGjk9LEuYro2NMkUUPZiDiE8i6k=
+			5+Mf12sAZ5yGQCpHo7KyVupw1aU=
 			</data>
 			<key>hash2</key>
 			<data>
-			yQfxZ+kweQzzCgjoBGybs5v0+FgqQBHcLIT6ikQU5E4=
+			SgE9f31jvHl6L9COhqMegJNylUBOdAyrHkBYd1tk6fk=
 			</data>
 		</dict>
 		<key>Entypo.ttf</key>

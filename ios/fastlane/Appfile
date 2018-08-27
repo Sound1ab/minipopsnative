@@ -1,0 +1,10 @@
+app_identifier("org.reactjs.native.example.minipopsnative") # The bundle identifier of your app
+apple_id("phillip-parker@outlook.com") # Your Apple email address
+
+itc_team_id("119197802") # App Store Connect Team ID
+team_id("PYN7T7PKVN") # Developer Portal Team ID
+itc_team_id("119197802") # App Store Connect Team ID
+team_id("PYN7T7PKVN") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
