@@ -18,10 +18,10 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    increment_build_number(xcodeproj: "minipopsnative.xcodeproj")
+    increment_build_number(xcodeproj: "minipopsnative.xcworkspace")
     get_certificates
     get_provisioning_profile
-    build_app(scheme: "minipopsnative")
+    build_app(scheme: "minipopsnative", workspace: "minipopsnative.xcworkspace")
     upload_to_testflight
   end
 end
@@ -30,7 +30,6 @@ platform :ios do
     lane :appcenterPost do |options|
         ENV[‘FASTLANE_PASSWORD’] = options[:password]
         ENV[‘FASTLANE_USERNAME’] = options[:user]
-        increment_build_number(xcodeproj: "minipopsnative.xcodeproj")
         get_certificates
         get_provisioning_profile
         upload_to_testflight(ipa: options[:ipa])

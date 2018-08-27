@@ -10,6 +10,4 @@
 
 # sdk("iphoneos9.0")
 
-workspace("ios/minipopsnative.xcworkspace")
-
 output_directory("./")
