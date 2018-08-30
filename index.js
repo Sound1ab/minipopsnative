@@ -1,5 +1,4 @@
 import React from 'react'
-import config from './aws-exports'
 import get from 'lodash/get'
 import { NetInfo } from 'react-native'
 import { inAppNotification } from './src/navigation'
@@ -41,7 +40,7 @@ const onConnectivityChange = () => {
 
 NetInfo.addEventListener('connectionChange', onConnectivityChange())
 
-Aws.configure(config)
+Aws.configure()
 Aws.setupPushNotificationListeners(onNotification, onRegister)
 Aws.checkInitialNotification()
 

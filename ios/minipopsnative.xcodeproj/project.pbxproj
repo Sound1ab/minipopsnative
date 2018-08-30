@@ -39,12 +39,12 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* minipopsnativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* minipopsnativeTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
-		480B7DAA21033E8200A85214 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 480B7DA621033E0200A85214 /* libRNSpinkit.a */; };
 		481E681721196F3800E1A92E /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 481E681421196F2F00E1A92E /* libRNBlur.a */; };
 		48253FEB211ACB4E001580E1 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48253FE8211ACB41001580E1 /* libRCTPushNotification.a */; };
 		48280F39210217C700FA7EFF /* libRNAWSCognito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48280F382102179100FA7EFF /* libRNAWSCognito.a */; };
 		48678242210CE5F000F4D057 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48678241210CE5EA00F4D057 /* libReactNativeNavigation.a */; };
 		4884FFCE2126169C00EEABC5 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4884FF9B2126169000EEABC5 /* libFastImage.a */; };
+		48BC3B7D213416C500F55843 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BC3B7C213416B500F55843 /* libReactNativeConfig.a */; };
 		48C75EA820DE719E00082C3F /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48C75EA720DE70B600082C3F /* libRNVectorIcons.a */; };
 		48C75EBA20DE78CE00082C3F /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48C75EAF20DE78CE00082C3F /* Octicons.ttf */; };
 		48C75EBB20DE78CE00082C3F /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48C75EB020DE78CE00082C3F /* Feather.ttf */; };
@@ -322,20 +322,6 @@
 			remoteGlobalIDString = 64AA15081EF7F30100718508;
 			remoteInfo = "BVLinearGradient-tvOS";
 		};
-		480B7DA521033E0200A85214 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86CE12982A7843A0ABAC630B /* RNSpinkit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D42CB3511B2538DE00FD0AE2;
-			remoteInfo = RNSpinkit;
-		};
-		480B7DA721033E0200A85214 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86CE12982A7843A0ABAC630B /* RNSpinkit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 641194871EC9FD4A00D4FC03;
-			remoteInfo = "RNSpinkit-tvOS";
-		};
 		481E681321196F2F00E1A92E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 481E680E21196F2F00E1A92E /* RNBlur.xcodeproj */;
@@ -419,6 +405,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 5419C2701D824AA700DDF3A1;
 			remoteInfo = AppCenterReactNativeCrashes;
+		};
+		48BC3B7B213416B500F55843 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48BC3B77213416B500F55843 /* ReactNativeConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
+			remoteInfo = ReactNativeConfig;
 		};
 		48C75EA620DE70B600082C3F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -512,6 +505,7 @@
 		4867823C210CE5EA00F4D057 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		4884FF932126169000EEABC5 /* FastImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		4887F31221176537002508B7 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		48BC3B77213416B500F55843 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		48C75EA220DE70B600082C3F /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		48C75EAF20DE78CE00082C3F /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		48C75EB020DE78CE00082C3F /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -535,7 +529,6 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7D3F1F93BA784CB28E0BEBAE /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		86CE12982A7843A0ABAC630B /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		8AC4BBAE48902B6FF6AC459F /* libPods-minipopsnativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-minipopsnativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CF3FE851B7E4DD78A9D19D9 /* libRNBlur.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBlur.a; sourceTree = "<group>"; };
 		A44162AE9AF845FAB6D0FC1B /* libAppCenterReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNative.a; sourceTree = "<group>"; };
@@ -576,6 +569,7 @@
 				48C75EA820DE719E00082C3F /* libRNVectorIcons.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
+				48BC3B7D213416C500F55843 /* libReactNativeConfig.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -588,7 +582,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				0A13359B3D564DD490ADF790 /* libBVLinearGradient.a in Frameworks */,
 				48280F39210217C700FA7EFF /* libRNAWSCognito.a in Frameworks */,
-				480B7DAA21033E8200A85214 /* libRNSpinkit.a in Frameworks */,
 				48C942A2210B4B1100FD30AA /* libRNSVG.a in Frameworks */,
 				98E17E6621834796BF4F4B0E /* libAppCenterReactNative.a in Frameworks */,
 				E39D48FB578C83D333D05181 /* libPods-minipopsnative.a in Frameworks */,
@@ -779,15 +772,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		480B7D7821033E0000A85214 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				480B7DA621033E0200A85214 /* libRNSpinkit.a */,
-				480B7DA821033E0200A85214 /* libRNSpinkit.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		481E680F21196F2F00E1A92E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,6 +843,14 @@
 			isa = PBXGroup;
 			children = (
 				48BC3AF521340A1000F55843 /* libAppCenterReactNativeCrashes.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		48BC3B78213416B500F55843 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48BC3B7C213416B500F55843 /* libReactNativeConfig.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -936,6 +928,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				48BC3B77213416B500F55843 /* ReactNativeConfig.xcodeproj */,
 				4884FF932126169000EEABC5 /* FastImage.xcodeproj */,
 				48253FE2211ACB41001580E1 /* RCTPushNotification.xcodeproj */,
 				481E680E21196F2F00E1A92E /* RNBlur.xcodeproj */,
@@ -957,7 +950,6 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				69E5C96EB429449186306C6A /* BVLinearGradient.xcodeproj */,
-				86CE12982A7843A0ABAC630B /* RNSpinkit.xcodeproj */,
 				E328DC6DA5EA4B9699CFF41B /* AppCenterReactNative.xcodeproj */,
 				5C092E9012DB4B788B151EF2 /* AppCenterReactNativeAnalytics.xcodeproj */,
 				CF736B5CF16F42139E356BC1 /* AppCenterReactNativeCrashes.xcodeproj */,
@@ -1218,6 +1210,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 48BC3B78213416B500F55843 /* Products */;
+					ProjectRef = 48BC3B77213416B500F55843 /* ReactNativeConfig.xcodeproj */;
+				},
+				{
 					ProductGroup = 4867823D210CE5EA00F4D057 /* Products */;
 					ProjectRef = 4867823C210CE5EA00F4D057 /* ReactNativeNavigation.xcodeproj */;
 				},
@@ -1228,10 +1224,6 @@
 				{
 					ProductGroup = 481E680F21196F2F00E1A92E /* Products */;
 					ProjectRef = 481E680E21196F2F00E1A92E /* RNBlur.xcodeproj */;
-				},
-				{
-					ProductGroup = 480B7D7821033E0000A85214 /* Products */;
-					ProjectRef = 86CE12982A7843A0ABAC630B /* RNSpinkit.xcodeproj */;
 				},
 				{
 					ProductGroup = 48C9429A210B4B0A00FD30AA /* Products */;
@@ -1491,20 +1483,6 @@
 			remoteRef = 48095C632100680C00107CC4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		480B7DA621033E0200A85214 /* libRNSpinkit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNSpinkit.a;
-			remoteRef = 480B7DA521033E0200A85214 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		480B7DA821033E0200A85214 /* libRNSpinkit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNSpinkit.a;
-			remoteRef = 480B7DA721033E0200A85214 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		481E681421196F2F00E1A92E /* libRNBlur.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1587,6 +1565,13 @@
 			fileType = archive.ar;
 			path = libAppCenterReactNativeCrashes.a;
 			remoteRef = 48BC3AF421340A1000F55843 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		48BC3B7C213416B500F55843 /* libReactNativeConfig.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeConfig.a;
+			remoteRef = 48BC3B7B213416B500F55843 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		48C75EA720DE70B600082C3F /* libRNVectorIcons.a */ = {
@@ -1960,7 +1945,7 @@
 				CODE_SIGN_ENTITLEMENTS = minipopsnative/minipopsnative.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = PYN7T7PKVN;
 				HEADER_SEARCH_PATHS = (
@@ -1975,6 +1960,9 @@
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 				);
 				INFOPLIST_FILE = minipopsnative/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1996,7 +1984,7 @@
 				CODE_SIGN_ENTITLEMENTS = minipopsnative/minipopsnative.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PYN7T7PKVN;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
@@ -2010,6 +1998,9 @@
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 				);
 				INFOPLIST_FILE = minipopsnative/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
