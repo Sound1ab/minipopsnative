@@ -5,13 +5,7 @@ import { Icon, Heading } from '../atoms'
 import { HeadingSkeleton } from '../zkeletons'
 import { colors, shadow } from '../../../theme'
 import { Fade } from '../zanimations'
-
-type Props = {
-  handleBack: Function,
-  loading: Boolean,
-  state: ?Object,
-  heading: Object,
-}
+import { dismissModal } from '../../../navigation'
 
 const Wrapper = styled.View`
   flex: 0 0 auto;
@@ -39,19 +33,33 @@ const IconWrapper = styled.View`
   margin-right: 8px;
 `
 
+type PropTypes = {
+  isModal: Boolean,
+  noLoading: Boolean,
+  handleBack: Function,
+  loading: Boolean,
+  state: ?Object,
+  heading: Object,
+}
+
 export const NavBar = ({
+  isModal,
   noLoading,
   handleBack,
   loading,
   heading,
   children,
-}: Props) => (
+}: PropTypes) => (
   <Wrapper handleBack={handleBack}>
-    <TouchableWrapper onPress={handleBack}>
-      {handleBack ? (
+    <TouchableWrapper onPress={isModal ? dismissModal : handleBack}>
+      {handleBack || isModal ? (
         <React.Fragment>
           <IconWrapper>
-            <Icon name="ios-arrow-back" color={colors.primary} />
+            {isModal ? (
+              <Icon name="ios-arrow-down" color={colors.primary} />
+            ) : (
+              <Icon name="ios-arrow-back" color={colors.primary} />
+            )}
           </IconWrapper>
           <Heading
             color={heading.color}
@@ -81,6 +89,8 @@ export const NavBar = ({
 )
 
 NavBar.defaultProps = {
+  isModal: false,
+  noLoading: false,
   handleBack: null,
   loading: false,
   state: null,

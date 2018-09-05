@@ -13,6 +13,7 @@ import {
   SignUp,
   MyDetails,
   ChangePassword,
+  Compare,
 } from '../components/presentational/pages'
 import { LocalNotification } from '../components/presentational/molecules'
 
@@ -30,6 +31,7 @@ export const registerComponents = () => {
     ['MyDetails', MyDetails],
     ['ChangePassword', ChangePassword],
     ['LocalNotification', LocalNotification],
+    ['Compare', Compare],
   ])
   register.forEach((Component, key) => {
     Navigation.registerComponent(key, () => Component, store, Provider)

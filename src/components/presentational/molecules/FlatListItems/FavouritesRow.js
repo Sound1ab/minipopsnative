@@ -1,10 +1,11 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, ImageWrapper, Icon, Triangle } from '../../atoms/index'
+import { showModal } from '../../../../navigation'
+import { Heading, ImageWrapper, Icon } from '../../atoms/index'
 import { colors } from '../../../../theme/index'
 
-const Wrapper = styled.View`
+const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
   margin: ${({ index }) =>
     parseInt(index) === parseInt(0) ? '8px' : '0 8px 8px 8px'};
@@ -37,28 +38,41 @@ type PropTypes = {
   isOnline: Boolean,
 }
 
-export const FavouritesRow = (props: PropTypes) => (
-  <Wrapper index={props.index}>
-    <ImageWrapper
-      height={100}
-      width={100}
-      source={props.imageMediumUrl}
-      fixedWidth
-    />
+export const FavouritesRow = ({
+  imageMediumUrl,
+  artist,
+  album,
+  index,
+  watched,
+  isOnline,
+}): PropTypes => (
+  <Wrapper
+    index={index}
+    onPress={showModal.bind(null, {
+      screen: 'Compare',
+      props: {
+        artist,
+        album,
+        imageMediumUrl,
+      },
+    })}
+    activeOpacity={10}
+  >
+    <ImageWrapper height={100} width={100} source={imageMediumUrl} fixedWidth />
     <TextWrapper>
       <Heading color="black" size="l">
-        {props.artist}
+        {artist}
       </Heading>
       <Heading color="black" size="m">
-        {props.album}
+        {album}
       </Heading>
     </TextWrapper>
-    {props.watched && (
+    {watched && (
       <Watched>
         <Icon
           name="ios-megaphone"
           size={20}
-          color={props.isOnline ? colors.primary : colors.gray}
+          color={isOnline ? colors.primary : colors.gray}
         />
       </Watched>
     )}
@@ -73,5 +87,3 @@ FavouritesRow.defaultProps = {
   watched: false,
   isOnline: true,
 }
-
-export default FavouritesRow

@@ -1,8 +1,10 @@
 import { Navigation } from 'react-native-navigation'
 
-export const showModal = options => {
+export const showModal = ({ screen, props }) => {
   Navigation.showModal({
-    ...options,
+    screen,
+    passProps: props,
+    animationType: 'slide-up',
   })
 }
 

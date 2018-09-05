@@ -14,19 +14,19 @@ const styles = (size, color, marginBottom, weight) => {
   const style = StyleSheet.create({
     xl: {
       ...iOSUIKit.largeTitleEmphasizedObject,
-      ...sanFranciscoWeights.thin,
+      ...sanFranciscoWeights[weight],
       marginBottom: marginBottom ? 8 : 0,
       color: colors.primary,
     },
     l: {
       ...iOSUIKit.title3Object,
-      ...sanFranciscoWeights.thin,
+      ...sanFranciscoWeights[weight],
       marginBottom: marginBottom ? 8 : 0,
       color,
     },
     m: {
       ...iOSUIKit.bodyObject,
-      ...sanFranciscoWeights.thin,
+      ...sanFranciscoWeights[weight],
       marginBottom: marginBottom ? 8 : 0,
       color,
     },
@@ -37,12 +37,12 @@ const styles = (size, color, marginBottom, weight) => {
     },
     xs: {
       ...iOSUIKit.footnoteObject,
-      ...sanFranciscoWeights.thin,
+      ...sanFranciscoWeights[weight],
       color,
     },
     xxs: {
       ...iOSUIKit.caption2Object,
-      ...sanFranciscoWeights.thin,
+      ...sanFranciscoWeights[weight],
       color,
       marginBottom: marginBottom ? 4 : 0,
     },

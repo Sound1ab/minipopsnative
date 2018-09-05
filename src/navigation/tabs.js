@@ -2,11 +2,63 @@ import { Navigation } from 'react-native-navigation'
 import { prepareAppIcons, prepareLoginIcons } from '../helpers'
 import { colors } from '../theme'
 
+const MOCK_DATA = {
+  artist: 'The cure',
+  album: 'Head on the door',
+  imageMediumUrl:
+    'https://images.pexels.com/photos/271955/pexels-photo-271955.jpeg?auto=compress&cs=tinysrgb&h=350',
+  discogsProducts: [
+    {
+      title: 'Cure - Head On The Door with a really long title',
+      link: 'https://www.vinyltap.co.uk/head-on-the-door',
+      price: '£19.99',
+      image:
+        'https://www.vinyltap.co.uk/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/i/m/image_236192_3_1_3_5_8_6_6_10_1_266708_1_118752_1_9_1_230137.jpg',
+    },
+    {
+      title: 'Cure - Head On The Door',
+      link: 'https://www.vinyltap.co.uk/head-on-the-door',
+      price: '£19.99',
+      image:
+        'https://www.vinyltap.co.uk/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/i/m/image_236192_3_1_3_5_8_6_6_10_1_266708_1_118752_1_9_1_230137.jpg',
+    },
+    {
+      title: 'Cure - Head On The Door',
+      link: 'https://www.vinyltap.co.uk/head-on-the-door',
+      price: '£19.99',
+      image:
+        'https://www.vinyltap.co.uk/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/i/m/image_236192_3_1_3_5_8_6_6_10_1_266708_1_118752_1_9_1_230137.jpg',
+    },
+    {
+      title: 'Cure - Head On The Door',
+      link: 'https://www.vinyltap.co.uk/head-on-the-door',
+      price: '£19.99',
+      image:
+        'https://www.vinyltap.co.uk/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/i/m/image_236192_3_1_3_5_8_6_6_10_1_266708_1_118752_1_9_1_230137.jpg',
+    },
+  ],
+}
+
 export const startApp = async () => {
   const icons = await prepareAppIcons()
 
   Navigation.startTabBasedApp({
     tabs: [
+      // {
+      //   screen: 'Compare',
+      //   title: 'Compare',
+      //   icon: icons.favouritesOutline,
+      //   selectedIcon: icons.favourites,
+      //   iconInsets: {
+      //     top: 6,
+      //     bottom: -6,
+      //   },
+      //   passProps: {
+      //     ...MOCK_DATA,
+      //     screen: 'Compare',
+      //     tabIndex: 0,
+      //   },
+      // },
       {
         screen: 'Favourites',
         title: 'Favourites',
@@ -80,7 +132,7 @@ export const startApp = async () => {
     ],
     tabsStyle: {
       tabBarButtonColor: colors.primary,
-      initialTabIndex: 2,
+      initialTabIndex: 0,
       tabBarTranslucent: true,
     },
     appStyle: {
