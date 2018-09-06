@@ -1,18 +1,18 @@
 // @flow
 import React from 'react'
 import get from 'lodash/get'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Dimensions } from 'react-native'
 import { ProfileContainer } from '../../container'
 import { Screen } from '../templates'
+import { Row } from '../molecules'
 import {
   TabBarPlaceholder,
   Heading,
-  Icon,
   MinipopsIcon,
   ScrollViewWrapper,
 } from '../atoms'
-import { colors, shadow } from '../../../theme'
+import { colors } from '../../../theme'
 
 const HeadingWrapper = styled.View`
   flex: 1;
@@ -31,28 +31,6 @@ const ImageHeader = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${colors.primary};
-`
-
-const Row = styled.TouchableOpacity`
-  height: 60;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0 8px 8px 8px;
-  background-color: white;
-  ${shadow.map(
-    ({ property, value }) =>
-      css`
-        ${property}: ${value};
-      `,
-  )};
-`
-
-const IconWrapper = styled.View`
-  width: 20%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
 `
 
 const SignOutButton = styled.TouchableOpacity`
@@ -90,39 +68,26 @@ export const Profile = ({ navigator }) => (
             </Heading>
           </HeadingWrapper>
           <Row
-            onPress={handlePushMyScreen.bind(null, {
+            handleOnPress={handlePushMyScreen.bind(null, {
               navigator,
               screen: 'MyDetails',
             })}
-          >
-            <IconWrapper>
-              <Icon name="ios-options" color={colors.primary} />
-            </IconWrapper>
-            <Heading size="l" color="black">
-              My Details
-            </Heading>
-          </Row>
+            heading={'My Details'}
+            icon={'ios-options'}
+          />
           <Row
-            onPress={handlePushMyScreen.bind(null, {
+            handleOnPress={handlePushMyScreen.bind(null, {
               navigator,
               screen: 'ChangePassword',
             })}
-          >
-            <IconWrapper>
-              <Icon name="ios-lock" color={colors.primary} />
-            </IconWrapper>
-            <Heading size="l" color="black">
-              Change Password
-            </Heading>
-          </Row>
-          <Row onPress={CheckNotificationPermissions}>
-            <IconWrapper>
-              <Icon name="ios-megaphone" color={colors.primary} />
-            </IconWrapper>
-            <Heading size="l" color="black">
-              Notifications
-            </Heading>
-          </Row>
+            heading={'Change Password'}
+            icon={'ios-lock'}
+          />
+          <Row
+            handleOnPress={CheckNotificationPermissions}
+            heading={'Notifications'}
+            icon={'ios-megaphone'}
+          />
           <SignOutWrapper>
             <SignOutButton
               onPress={() => {

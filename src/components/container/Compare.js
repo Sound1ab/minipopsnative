@@ -2,6 +2,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compareMachine, products } from '../../machines/Compare'
+import {
+  discoveryMachine,
+  favourites,
+  watchList,
+} from '../../machines/Discovery'
 
 type PropTypes = {
   loading: Boolean,
@@ -26,6 +31,8 @@ class Compare extends Component<PropTypes> {
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
+  watchListIds: watchList(state),
+  favourites: favourites(state),
   products: products(state),
 })
 
@@ -35,6 +42,18 @@ const mapDispatchToProps = () => ({
   },
   removeProducts: payload => {
     compareMachine.dispatchAction('REMOVE_PRODUCTS', payload)
+  },
+  addToFavourites: payload => {
+    discoveryMachine.dispatchAction('ADD_FAVOURITE', payload)
+  },
+  removeFromFavourites: payload => {
+    discoveryMachine.dispatchAction('REMOVE_FAVOURITE', payload)
+  },
+  addToWatchList: payload => {
+    discoveryMachine.dispatchAction('ADD_TO_WATCH_LIST', payload)
+  },
+  removeFromWatchList: payload => {
+    discoveryMachine.dispatchAction('REMOVE_FROM_WATCH_LIST', payload)
   },
 })
 

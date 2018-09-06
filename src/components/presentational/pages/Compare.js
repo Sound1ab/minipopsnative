@@ -1,10 +1,17 @@
 // @flow
 import React from 'react'
-
+import { Dimensions } from 'react-native'
 import { CompareContainer } from '../../container'
 import { Screen } from '../templates'
-import { TabBarPlaceholder, Heading, ScrollViewWrapper } from '../atoms'
-import { HorizontalSlider } from '../molecules'
+import { Fade } from '../zanimations'
+import { ArtistAlbumSkeleton } from '../zkeletons'
+import { TabBarPlaceholder, ScrollViewWrapper } from '../atoms'
+import {
+  HorizontalSlider,
+  ImageWithTitle,
+  ActionBar,
+  TrackList,
+} from '../molecules'
 
 type PropTypes = {
   navigator: {},
@@ -14,42 +21,77 @@ type PropTypes = {
   discogsProducts: [],
 }
 
-export const Compare = ({ navigator, artist, album }): PropTypes => (
-  <CompareContainer artist={artist} album={album}>
-    {({ loading, products }) => (
+export const Compare = ({ navigator, artistAlbum }): PropTypes => (
+  <CompareContainer artist={artistAlbum.artist} album={artistAlbum.album}>
+    {({
+      loading,
+      state,
+      favourites,
+      addToFavourites,
+      removeFromFavourites,
+      products,
+      watchListIds,
+    }) => (
       <Screen
         isModal
         noLoading
         navigator={navigator}
         loading={loading}
         heading={{
-          value: 'Compare',
+          value: artistAlbum.artist,
           color: 'black',
           size: 'l',
           marginBottom: false,
         }}
       >
-        <ScrollViewWrapper style={{ padding: 16 }}>
-          <Heading color="black" size="xl">
-            {artist}
-          </Heading>
-          <Heading color="black" size="l" marginBottom>
-            {album}
-          </Heading>
-          <Heading color="black" size="m" marginBottom>
-            Discogs
-          </Heading>
-          <HorizontalSlider products={products.discogs} loading={loading} />
-          <Heading color="black" size="m" marginBottom>
-            Juno
-          </Heading>
-          <HorizontalSlider products={products.juno} loading={loading} />
-          <Heading color="black" size="m" marginBottom>
-            Vinyl Tap
-          </Heading>
-          <HorizontalSlider products={products.vinylTap} loading={loading} />
-          <TabBarPlaceholder />
+        <ScrollViewWrapper>
+          <ImageWithTitle
+            height={Dimensions.get('window').width}
+            source={artistAlbum.imageMediumUrl}
+            title={artistAlbum.album}
+          />
+          <ActionBar
+            handleAddToFavourites={addToFavourites.bind(null, {
+              id: artistAlbum.spotifyId,
+              item: artistAlbum,
+            })}
+            handleRemoveFromFavourites={removeFromFavourites.bind(null, {
+              id: artistAlbum.spotifyId,
+              item: artistAlbum,
+            })}
+            isFavourite={
+              !!favourites.find(
+                favourite => favourite.spotifyId === artistAlbum.spotifyId,
+              )
+            }
+            isWatched={watchListIds.includes(artistAlbum.spotifyId)}
+          />
+          <TrackList tracks={artistAlbum.tracks} />
+          <HorizontalSlider
+            heading="eBay"
+            products={products.eBay}
+            loading={loading}
+          />
+          <HorizontalSlider
+            heading="Discogs"
+            products={products.discogs}
+            loading={loading}
+          />
+          <HorizontalSlider
+            heading="Juno"
+            products={products.juno}
+            loading={loading}
+          />
+          <HorizontalSlider
+            heading="Vinyl Tap"
+            products={products.vinylTap}
+            loading={loading}
+          />
         </ScrollViewWrapper>
+        <TabBarPlaceholder />
+        <Fade isVisible={loading} fadeOut>
+          <ArtistAlbumSkeleton />
+        </Fade>
       </Screen>
     )}
   </CompareContainer>

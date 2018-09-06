@@ -26,6 +26,9 @@ export const reactions = {
         Request.get(
           API(`${API_BASE}/vinyltap/${payload.artist}/${payload.album}`),
         ),
+        Request.get(API('current-items'), {
+          keywords: `${payload.artist} ${payload.album}`,
+        }),
       ])
     } catch (error) {
       dispatchMachineAction('FETCH_FAILURE', {
@@ -35,13 +38,14 @@ export const reactions = {
       })
     }
 
-    const [discogs, juno, vinylTap] = items
+    const [discogs, juno, vinylTap, eBay] = items
 
     dispatchReduxAction(
       saveProducts({
         discogs: discogs.data,
         juno: juno.data,
         vinylTap: vinylTap.data,
+        eBay: eBay.data,
       }),
     )
     dispatchMachineAction('FETCH_SUCCESS')

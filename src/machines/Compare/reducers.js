@@ -7,6 +7,7 @@ export const initialState = {
     discogs: [],
     juno: [],
     vinylTap: [],
+    eBay: [],
   },
 }
 

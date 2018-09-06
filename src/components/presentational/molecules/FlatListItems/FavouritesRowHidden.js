@@ -1,10 +1,8 @@
 // @flow
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { TouchableOpacity, View } from 'react-native'
-import { Heading, Icon } from '../../atoms/index'
+import { Icon } from '../../atoms/index'
 import { colors, shadow } from '../../../../theme/index'
-import { Functional } from '../../../../helpers/index'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -60,7 +58,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-remove-circle" color={colors.secondary} />
+        <Icon name="ios-megaphone-outline" color={colors.secondary} />
       </TextWrapperWatch>
     ) : (
       <TextWrapperWatch

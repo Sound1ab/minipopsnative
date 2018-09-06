@@ -28,6 +28,10 @@ const TrackWrapper = styled.View`
   margin: 0 0 8px 0;
 `
 
+const ProductWrapper = styled.View`
+  margin-left: 16px;
+`
+
 export const ArtistAlbumSkeleton = () => (
   <OuterWrapper>
     <Skeleton
@@ -53,13 +57,13 @@ export const ArtistAlbumSkeleton = () => (
             x: 0,
             y: 0,
             height: 30,
-            width: 30,
+            width: 80,
           },
         }}
       />
     </ContentWrapper>
     <Wrapper>
-      {Array(4)
+      {Array(1)
         .fill(1, 0)
         .map((v, i) => (
           <TrackWrapper key={`${v}-${i}`}>
@@ -79,5 +83,20 @@ export const ArtistAlbumSkeleton = () => (
           </TrackWrapper>
         ))}
     </Wrapper>
+    <ProductWrapper>
+      <Skeleton
+        height={'100%'}
+        width={'100%'}
+        layout={{
+          heading: {
+            type: 'rect',
+            x: 0,
+            y: 0,
+            width: Dimensions.get('window').width / 2.5,
+            height: Dimensions.get('window').width / 2.5,
+          },
+        }}
+      />
+    </ProductWrapper>
   </OuterWrapper>
 )

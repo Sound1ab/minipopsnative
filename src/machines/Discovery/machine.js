@@ -8,7 +8,6 @@ export const machine = Machine({
   parallel: true,
   strict: true,
   states: {
-    // TODO: Split these states out into seperate parallel machines
     artistReleases: {
       initial: 'idle',
       states: {

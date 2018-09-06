@@ -3,10 +3,31 @@ import { prepareAppIcons, prepareLoginIcons } from '../helpers'
 import { colors } from '../theme'
 
 const MOCK_DATA = {
-  artist: 'The cure',
-  album: 'Head on the door',
-  imageMediumUrl:
-    'https://images.pexels.com/photos/271955/pexels-photo-271955.jpeg?auto=compress&cs=tinysrgb&h=350',
+  artistAlbum: {
+    artist: 'Arcade Fire',
+    album: 'Neon Bible',
+    tracks: [
+      'Black Mirror',
+      'Keep The Car Running',
+      'Neon Bible',
+      'Intervention',
+      'Black Wave/Bad Vibrations',
+      'Ocean Of Noise',
+      'The Well And The Lighthouse',
+      '(Antichrist Television Blues)',
+      'Windowsill',
+      'No Cars Go',
+      'My Body Is A Cage',
+    ],
+    imageBigUrl:
+      'https://i.scdn.co/image/850d249657cdfda1ac0ed8bba010efa6e2bc15ec',
+    imageMediumUrl:
+      'https://i.scdn.co/image/e50c966a07d9314bd6dd208c050ae4245dac5a54',
+    imageSmallUrl:
+      'https://i.scdn.co/image/bcb299ebc62f42859cabd56bb5d85bbf3cfa2984',
+    spotifyId: '7rncXz7PjaXTxyUfIcLaMT',
+    popularity: 35,
+  },
   discogsProducts: [
     {
       title: 'Cure - Head On The Door with a really long title',
@@ -44,24 +65,9 @@ export const startApp = async () => {
 
   Navigation.startTabBasedApp({
     tabs: [
-      // {
-      //   screen: 'Compare',
-      //   title: 'Compare',
-      //   icon: icons.favouritesOutline,
-      //   selectedIcon: icons.favourites,
-      //   iconInsets: {
-      //     top: 6,
-      //     bottom: -6,
-      //   },
-      //   passProps: {
-      //     ...MOCK_DATA,
-      //     screen: 'Compare',
-      //     tabIndex: 0,
-      //   },
-      // },
       {
-        screen: 'Favourites',
-        title: 'Favourites',
+        screen: 'Compare',
+        title: 'Compare',
         icon: icons.favouritesOutline,
         selectedIcon: icons.favourites,
         iconInsets: {
@@ -69,10 +75,25 @@ export const startApp = async () => {
           bottom: -6,
         },
         passProps: {
-          screen: 'Favourites',
+          ...MOCK_DATA,
+          screen: 'Compare',
           tabIndex: 0,
         },
       },
+      // {
+      //   screen: 'Favourites',
+      //   title: 'Favourites',
+      //   icon: icons.favouritesOutline,
+      //   selectedIcon: icons.favourites,
+      //   iconInsets: {
+      //     top: 6,
+      //     bottom: -6,
+      //   },
+      //   passProps: {
+      //     screen: 'Favourites',
+      //     tabIndex: 0,
+      //   },
+      // },
       {
         screen: 'Discovery',
         title: 'Discovery',

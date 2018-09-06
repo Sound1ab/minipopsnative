@@ -2,6 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Skeleton } from '../molecules'
+import { Icon } from '../atoms'
 import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
 
@@ -14,20 +15,34 @@ const Wrapper = styled.View`
   background-color: ${colors.lightGray};
 `
 
-export const SliderSkeleton = () => (
+const BlankWrapper = styled.View`
+  width: 100%;
+  height: ${IMAGE_WIDTH};
+  background-color: ${colors.gray};
+  justify-content: center;
+  align-items: center;
+`
+
+export const SliderSkeleton = ({ loading }) => (
   <Wrapper>
-    <Skeleton
-      height={'100%'}
-      width={'100%'}
-      layout={{
-        heading: {
-          type: 'rect',
-          x: 0,
-          y: 0,
-          width: '100%',
-          height: IMAGE_WIDTH,
-        },
-      }}
-    />
+    {loading ? (
+      <Skeleton
+        height={'100%'}
+        width={'100%'}
+        layout={{
+          heading: {
+            type: 'rect',
+            x: 0,
+            y: 0,
+            width: '100%',
+            height: IMAGE_WIDTH,
+          },
+        }}
+      />
+    ) : (
+      <BlankWrapper>
+        <Icon name="ios-close-circle-outline" />
+      </BlankWrapper>
+    )}
   </Wrapper>
 )
