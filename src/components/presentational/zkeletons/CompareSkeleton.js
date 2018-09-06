@@ -35,7 +35,7 @@ const ProductWrapper = styled.View`
   margin-left: 8px;
 `
 
-export const ArtistAlbumSkeleton = () => (
+export const CompareSkeleton = () => (
   <OuterWrapper pointerEvents="none">
     <Skeleton
       height={Dimensions.get('window').width}

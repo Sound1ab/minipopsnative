@@ -42,7 +42,7 @@ export const Favourites = ({ navigator }) => (
           disableRightSwipe={!isOnline}
           renderItem={({ item, index }) => (
             <FavouritesRow
-              {...item}
+              artistAlbum={item}
               index={index}
               key={`${item.artist}-${item.album}`}
               watched={watchListIds.includes(item.spotifyId)}

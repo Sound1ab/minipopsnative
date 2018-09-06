@@ -1,6 +1,12 @@
 import { Navigation } from 'react-native-navigation'
 
-export const showModal = ({ screen, props }) => {
+let currentScreen = ''
+
+export const showModal = async ({ screen, props }) => {
+  if (currentScreen === screen) {
+    return
+  }
+  currentScreen = screen
   Navigation.showModal({
     screen,
     passProps: props,
@@ -8,7 +14,8 @@ export const showModal = ({ screen, props }) => {
   })
 }
 
-export const dismissModal = () => {
+export const dismissModal = async () => {
+  currentScreen = ''
   Navigation.dismissAllModals({
     animationType: 'slide-down',
   })

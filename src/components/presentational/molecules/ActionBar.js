@@ -9,7 +9,7 @@ const Wrapper = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: flex-start;
-  padding: 16px;
+  padding: 16px 8px;
   background-color: white;
   ${shadow.map(
     ({ property, value }) =>

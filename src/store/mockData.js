@@ -29,3 +29,61 @@ export const MOCK_ARTIST_RELEASES = [
   MOCK_DISCOVERY,
   MOCK_DISCOVERY,
 ]
+
+export const MOCK_COMPARE_DATA = {
+  artistAlbum: {
+    artist: 'Arcade Fire',
+    album: 'Neon Bible',
+    tracks: [
+      'Black Mirror',
+      'Keep The Car Running',
+      'Neon Bible',
+      'Intervention',
+      'Black Wave/Bad Vibrations',
+      'Ocean Of Noise',
+      'The Well And The Lighthouse',
+      '(Antichrist Television Blues)',
+      'Windowsill',
+      'No Cars Go',
+      'My Body Is A Cage',
+    ],
+    imageBigUrl:
+      'https://i.scdn.co/image/850d249657cdfda1ac0ed8bba010efa6e2bc15ec',
+    imageMediumUrl:
+      'https://i.scdn.co/image/e50c966a07d9314bd6dd208c050ae4245dac5a54',
+    imageSmallUrl:
+      'https://i.scdn.co/image/bcb299ebc62f42859cabd56bb5d85bbf3cfa2984',
+    spotifyId: '7rncXz7PjaXTxyUfIcLaMT',
+    popularity: 35,
+  },
+  discogsProducts: [
+    {
+      title: 'Cure - Head On The Door with a really long title',
+      link: 'https://www.vinyltap.co.uk/head-on-the-door',
+      price: '£19.99',
+      image:
+        'https://www.vinyltap.co.uk/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/i/m/image_236192_3_1_3_5_8_6_6_10_1_266708_1_118752_1_9_1_230137.jpg',
+    },
+    {
+      title: 'Cure - Head On The Door',
+      link: 'https://www.vinyltap.co.uk/head-on-the-door',
+      price: '£19.99',
+      image:
+        'https://www.vinyltap.co.uk/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/i/m/image_236192_3_1_3_5_8_6_6_10_1_266708_1_118752_1_9_1_230137.jpg',
+    },
+    {
+      title: 'Cure - Head On The Door',
+      link: 'https://www.vinyltap.co.uk/head-on-the-door',
+      price: '£19.99',
+      image:
+        'https://www.vinyltap.co.uk/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/i/m/image_236192_3_1_3_5_8_6_6_10_1_266708_1_118752_1_9_1_230137.jpg',
+    },
+    {
+      title: 'Cure - Head On The Door',
+      link: 'https://www.vinyltap.co.uk/head-on-the-door',
+      price: '£19.99',
+      image:
+        'https://www.vinyltap.co.uk/media/catalog/product/cache/1/small_image/295x295/9df78eab33525d08d6e5fb8d27136e95/i/m/image_236192_3_1_3_5_8_6_6_10_1_266708_1_118752_1_9_1_230137.jpg',
+    },
+  ],
+}

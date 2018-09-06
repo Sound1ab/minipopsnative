@@ -30,10 +30,11 @@ class Compare extends Component<PropTypes> {
 }
 
 const mapStateToProps = state => ({
-  loading: state.app.loading,
+  loading: state.app.loading && state.compare.state === 'fetchingProducts',
   watchListIds: watchList(state),
   favourites: favourites(state),
   products: products(state),
+  id: state.login.cognitoUser.id,
 })
 
 const mapDispatchToProps = () => ({

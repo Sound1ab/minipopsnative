@@ -39,9 +39,7 @@ type PropTypes = {
 }
 
 export const FavouritesRow = ({
-  imageMediumUrl,
-  artist,
-  album,
+  artistAlbum,
   index,
   watched,
   isOnline,
@@ -51,20 +49,23 @@ export const FavouritesRow = ({
     onPress={showModal.bind(null, {
       screen: 'Compare',
       props: {
-        artist,
-        album,
-        imageMediumUrl,
+        artistAlbum,
       },
     })}
     activeOpacity={10}
   >
-    <ImageWrapper height={100} width={100} source={imageMediumUrl} fixedWidth />
+    <ImageWrapper
+      height={100}
+      width={100}
+      source={artistAlbum.imageMediumUrl}
+      fixedWidth
+    />
     <TextWrapper>
       <Heading color="black" size="l">
-        {artist}
+        {artistAlbum.artist}
       </Heading>
       <Heading color="black" size="m">
-        {album}
+        {artistAlbum.album}
       </Heading>
     </TextWrapper>
     {watched && (

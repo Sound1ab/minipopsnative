@@ -58,7 +58,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-megaphone-outline" color={colors.secondary} />
+        <Icon name="ios-megaphone" color={colors.secondary} />
       </TextWrapperWatch>
     ) : (
       <TextWrapperWatch
@@ -70,7 +70,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-megaphone" color={colors.primary} />
+        <Icon name="ios-megaphone-outline" color={colors.primary} />
       </TextWrapperWatch>
     )}
     <TextWrapperRemove

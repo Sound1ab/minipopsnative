@@ -32,7 +32,7 @@ export class ScrollViewWrapper extends Component<PropTypes> {
       <ScrollView
         style={{
           ...this.props.style,
-          overflow: this.props.overflowHidden ? 'hidden' : '',
+          overflow: this.props.overflowHidden ? 'hidden' : 'visible',
         }}
         horizontal={this.props.horizontal}
         showsHorizontalScrollIndicator={

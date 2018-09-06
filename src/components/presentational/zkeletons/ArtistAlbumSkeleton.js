@@ -5,9 +5,12 @@ import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
 
 const OuterWrapper = styled.View`
+  z-index: 999;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  background-color: white;
 `
 
 const Wrapper = styled.View`
@@ -18,18 +21,14 @@ const Wrapper = styled.View`
 const ContentWrapper = styled.View`
   height: 60;
   width: ${Dimensions.get('window').width};
-  padding: 16px;
+  padding: 16px 8px;
 `
 
 const TrackWrapper = styled.View`
   height: 60;
-  padding: 16px;
+  padding: 8px;
   width: 100%;
   margin: 0 0 8px 0;
-`
-
-const ProductWrapper = styled.View`
-  margin-left: 16px;
 `
 
 export const ArtistAlbumSkeleton = () => (
@@ -63,7 +62,7 @@ export const ArtistAlbumSkeleton = () => (
       />
     </ContentWrapper>
     <Wrapper>
-      {Array(1)
+      {Array(4)
         .fill(1, 0)
         .map((v, i) => (
           <TrackWrapper key={`${v}-${i}`}>
@@ -83,20 +82,5 @@ export const ArtistAlbumSkeleton = () => (
           </TrackWrapper>
         ))}
     </Wrapper>
-    <ProductWrapper>
-      <Skeleton
-        height={'100%'}
-        width={'100%'}
-        layout={{
-          heading: {
-            type: 'rect',
-            x: 0,
-            y: 0,
-            width: Dimensions.get('window').width / 2.5,
-            height: Dimensions.get('window').width / 2.5,
-          },
-        }}
-      />
-    </ProductWrapper>
   </OuterWrapper>
 )

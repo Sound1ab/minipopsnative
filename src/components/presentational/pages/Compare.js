@@ -4,8 +4,8 @@ import { Dimensions } from 'react-native'
 import { CompareContainer } from '../../container'
 import { Screen } from '../templates'
 import { Fade } from '../zanimations'
-import { ArtistAlbumSkeleton } from '../zkeletons'
-import { TabBarPlaceholder, ScrollViewWrapper } from '../atoms'
+import { CompareSkeleton } from '../zkeletons'
+import { ScrollViewWrapper } from '../atoms'
 import {
   HorizontalSlider,
   ImageWithTitle,
@@ -25,12 +25,14 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
   <CompareContainer artist={artistAlbum.artist} album={artistAlbum.album}>
     {({
       loading,
-      state,
       favourites,
       addToFavourites,
       removeFromFavourites,
+      addToWatchList,
+      removeFromWatchList,
       products,
       watchListIds,
+      id,
     }) => (
       <Screen
         isModal
@@ -57,6 +59,14 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
             })}
             handleRemoveFromFavourites={removeFromFavourites.bind(null, {
               id: artistAlbum.spotifyId,
+              item: artistAlbum,
+            })}
+            handleAddToWatchList={addToWatchList.bind(null, {
+              id: id,
+              item: artistAlbum,
+            })}
+            handleRemoveFromWatchList={removeFromWatchList.bind(null, {
+              id: id,
               item: artistAlbum,
             })}
             isFavourite={
@@ -88,9 +98,8 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
             loading={loading}
           />
         </ScrollViewWrapper>
-        <TabBarPlaceholder />
         <Fade isVisible={loading} fadeOut>
-          <ArtistAlbumSkeleton />
+          <CompareSkeleton />
         </Fade>
       </Screen>
     )}

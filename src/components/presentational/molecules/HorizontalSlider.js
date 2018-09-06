@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { Dimensions, View } from 'react-native'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Heading, ScrollViewWrapper, ImageWrapper } from '../atoms'
 import { SliderSkeleton } from '../zkeletons'
 
@@ -23,10 +23,19 @@ const AlbumWrapper = styled.View`
   justify-content: flex-start;
   align-items: flex-start;
   margin-right: 8px;
+  ${({ isFirst }) =>
+    isFirst &&
+    css`
+      margin-left: 8px;
+    `} ${({ isLast }) =>
+    isLast &&
+    css`
+      margin-right: 8px;
+    `};
 `
 
 const ProductHeadingWrapper = styled.View`
-  margin: 0 16px;
+  margin: 0 8px;
 `
 
 const HeadingWrapper = styled.View`
@@ -50,13 +59,13 @@ export const HorizontalSlider = ({ heading, products, loading }: PropTypes) => (
       </Heading>
     </ProductHeadingWrapper>
     <Wrapper>
-      <ScrollViewWrapper
-        overflowHidden
-        horizontal
-        style={{ paddingLeft: 16, paddingRight: 16 }}
-      >
+      <ScrollViewWrapper overflowHidden horizontal>
         {products.map((product, index) => (
-          <AlbumWrapper key={`${product.title}-${index}`}>
+          <AlbumWrapper
+            key={`${product.title}-${index}`}
+            isFirst={index === 0}
+            isLast={index === products.length - 1}
+          >
             <ImageOuterWrapper>
               <ImageWrapper
                 fixedWidth
