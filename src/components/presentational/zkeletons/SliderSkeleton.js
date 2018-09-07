@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Skeleton } from '../molecules'
-import { Icon } from '../atoms'
+import { MinipopsIcon } from '../atoms'
 import { Dimensions } from 'react-native'
 import { colors } from '../../../theme'
 
@@ -42,7 +42,7 @@ export const SliderSkeleton = ({ loading }) => (
       />
     ) : (
       <BlankWrapper>
-        <Icon name="ios-close-circle-outline" />
+        <MinipopsIcon size={30} />
       </BlankWrapper>
     )}
   </Wrapper>

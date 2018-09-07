@@ -3,10 +3,19 @@ import React, { Component } from 'react'
 import FastImage from 'react-native-fast-image'
 import styled, { css } from 'styled-components'
 import { Animated, Easing } from 'react-native'
+import { colors } from '../../../theme'
+const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
 
 const ImageContainer = styled.View`
   flex: ${({ fixedWidth }) => (fixedWidth ? 0 : 1)};
   flex-direction: row;
+  ${({ isFallback }) =>
+    isFallback &&
+    css`
+      align-items: center;
+      justify-content: center;
+      background-color: ${colors.gray};
+    `};
   ${({ height }) =>
     height &&
     css`
@@ -39,7 +48,7 @@ type Props = {
 
 export class ImageWrapper extends Component<Props> {
   static defaultProps = {
-    source: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
+    source: null,
     width: null,
     height: null,
     borderRadius: 0,
@@ -68,6 +77,7 @@ export class ImageWrapper extends Component<Props> {
   render() {
     return (
       <ImageContainer
+        isFallback={!this.props.source}
         width={this.props.width}
         height={this.props.height}
         fixedWidth={this.props.fixedWidth}
@@ -75,11 +85,15 @@ export class ImageWrapper extends Component<Props> {
       >
         <FastImage
           style={{ flex: 1 }}
-          source={{
-            uri: this.props.source,
-            priority: FastImage.priority.normal,
-          }}
-          resizeMode={FastImage.resizeMode.cover}
+          source={
+            this.props.source
+              ? {
+                  uri: this.props.source,
+                  priority: FastImage.priority.normal,
+                }
+              : recordImage
+          }
+          resizeMode={this.props.source ? FastImage.resizeMode.cover : 'center'}
           onLoadEnd={this.startAnimation}
         />
       </ImageContainer>

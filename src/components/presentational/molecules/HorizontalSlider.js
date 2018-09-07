@@ -18,7 +18,7 @@ const Wrapper = styled.View`
 
 const ImageOuterWrapper = styled.View``
 
-const AlbumWrapper = styled.View`
+const AlbumWrapper = styled.TouchableOpacity`
   width: ${parseInt(IMAGE_WIDTH)};
   justify-content: flex-start;
   align-items: flex-start;
@@ -49,9 +49,15 @@ type PropTypes = {
   products: Array<{}>,
   IMAGE_WIDTH: number,
   loading: boolean,
+  openUrl: Function,
 }
 
-export const HorizontalSlider = ({ heading, products, loading }: PropTypes) => (
+export const HorizontalSlider = ({
+  heading,
+  products,
+  loading,
+  openUrl,
+}: PropTypes) => (
   <View>
     <ProductHeadingWrapper>
       <Heading color="black" size="m" marginBottom>
@@ -62,6 +68,7 @@ export const HorizontalSlider = ({ heading, products, loading }: PropTypes) => (
       <ScrollViewWrapper overflowHidden horizontal>
         {products.map((product, index) => (
           <AlbumWrapper
+            onPress={openUrl.bind(null, product.link)}
             key={`${product.title}-${index}`}
             isFirst={index === 0}
             isLast={index === products.length - 1}
@@ -95,4 +102,5 @@ HorizontalSlider.defaultProps = {
   products: [],
   IMAGE_WIDTH: 0,
   loading: false,
+  openUrl: () => {},
 }

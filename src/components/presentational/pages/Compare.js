@@ -35,7 +35,7 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
       id,
     }) => (
       <Screen navigator={navigator}>
-        {() => (
+        {({ openUrl }) => (
           <Fragment>
             <ScrollViewWrapper>
               <ImageWithTitle
@@ -69,30 +69,31 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
               />
               <TrackList tracks={artistAlbum.tracks} />
               <HorizontalSlider
+                openUrl={openUrl}
                 heading="eBay"
                 products={products.eBay}
                 loading={loading}
               />
               <HorizontalSlider
+                openUrl={openUrl}
                 heading="Discogs"
                 products={products.discogs}
                 loading={loading}
               />
               <HorizontalSlider
+                openUrl={openUrl}
                 heading="Juno"
                 products={products.juno}
                 loading={loading}
               />
               <HorizontalSlider
+                openUrl={openUrl}
                 heading="Vinyl Tap"
                 products={products.vinylTap}
                 loading={loading}
               />
               <TabBarPlaceholder />
             </ScrollViewWrapper>
-            <Fade isVisible={loading} fadeOut>
-              <CompareSkeleton />
-            </Fade>
           </Fragment>
         )}
       </Screen>

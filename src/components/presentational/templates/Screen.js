@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import { Linking } from 'react-native'
 
 type PropTypes = {
   children: Function,
@@ -44,8 +45,21 @@ export class Screen extends Component<PropTypes> {
     this.navigated = true
   }
 
+  openUrl = url => {
+    if (url) {
+      try {
+        Linking.openURL(url)
+      } catch (error) {
+        console.error(`error opening link: ${error}`)
+      }
+    }
+  }
+
   render() {
-    return this.props.children({ navigateTo: this.navigateTo })
+    return this.props.children({
+      navigateTo: this.navigateTo,
+      openUrl: this.openUrl,
+    })
   }
 }
 
