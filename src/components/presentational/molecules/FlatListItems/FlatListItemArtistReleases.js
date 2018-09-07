@@ -21,16 +21,16 @@ const TouchableOpacity = styled.TouchableOpacity`
   width: ${Dimensions.get('window').width / 2};
 `
 
-export const FlatListItemArtistReleases = ({ item, navigator }: PropTypes) => (
+export const FlatListItemArtistReleases = ({ item, navigateTo }: PropTypes) => (
   <RowWrapper>
     {item.map(album => {
       return (
         <TouchableOpacity
           activeOpacity={1}
           key={album.spotifyId}
-          onPress={pushScreen.bind(null, {
-            navigator: navigator,
+          onPress={navigateTo.bind(null, {
             screen: 'ArtistAlbum',
+            title: album.secondaryTitle,
             passProps: {
               spotifyId: album.spotifyId,
             },

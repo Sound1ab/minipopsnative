@@ -1,11 +1,12 @@
 // @flow
-import React from 'react'
+import React, { Fragment } from 'react'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import { Dimensions } from 'react-native'
 import { ProfileContainer } from '../../container'
 import { Screen } from '../templates'
 import { Row } from '../molecules'
+import { pushScreen } from '../../../navigation'
 import {
   TabBarPlaceholder,
   Heading,
@@ -48,59 +49,63 @@ export const Profile = ({ navigator }) => (
       CheckNotificationPermissions,
       isOnline,
     }) => (
-      <Screen
-        navigator={navigator}
-        loading={loading}
-        heading={{
-          value: 'Profile',
-          color: 'black',
-          size: 'xl',
-          marginBottom: false,
-        }}
-      >
-        <ScrollViewWrapper>
-          <ImageHeader>
-            <MinipopsIcon size={124} />
-          </ImageHeader>
-          <HeadingWrapper>
-            <Heading size="xl" color="black" marginBottom>
-              {get(user, ['username'])}
-            </Heading>
-          </HeadingWrapper>
-          <Row
-            handleOnPress={handlePushMyScreen.bind(null, {
-              navigator,
-              screen: 'MyDetails',
-            })}
-            heading={'My Details'}
-            icon={'ios-options'}
-          />
-          <Row
-            handleOnPress={handlePushMyScreen.bind(null, {
-              navigator,
-              screen: 'ChangePassword',
-            })}
-            heading={'Change Password'}
-            icon={'ios-lock'}
-          />
-          <Row
-            handleOnPress={CheckNotificationPermissions}
-            heading={'Notifications'}
-            icon={'ios-megaphone'}
-          />
-          <SignOutWrapper>
-            <SignOutButton
-              onPress={() => {
-                isOnline && signOut()
-              }}
-            >
-              <Heading size="l" color={isOnline ? colors.primary : colors.gray}>
-                Sign Out
-              </Heading>
-            </SignOutButton>
-          </SignOutWrapper>
-          <TabBarPlaceholder />
-        </ScrollViewWrapper>
+      <Screen navigator={navigator}>
+        {({ navigateTo }) => (
+          <Fragment>
+            <ScrollViewWrapper>
+              <ImageHeader>
+                <MinipopsIcon size={124} />
+              </ImageHeader>
+              <HeadingWrapper>
+                <Heading size="xl" color="black" marginBottom>
+                  {get(user, ['username'])}
+                </Heading>
+              </HeadingWrapper>
+              <Row
+                handleOnPress={navigateTo.bind(null, {
+                  screen: 'MyDetails',
+                  title: 'My Details',
+                  passProps: {
+                    user: user,
+                  },
+                })}
+                heading={'My Details'}
+                icon={'ios-options'}
+              />
+              <Row
+                handleOnPress={navigateTo.bind(null, {
+                  screen: 'ChangePassword',
+                  title: 'Change Password',
+                  passProps: {
+                    user: user,
+                  },
+                })}
+                heading={'Change Password'}
+                icon={'ios-lock'}
+              />
+              <Row
+                handleOnPress={CheckNotificationPermissions}
+                heading={'Notifications'}
+                icon={'ios-megaphone'}
+              />
+              <SignOutWrapper>
+                <SignOutButton
+                  onPress={() => {
+                    isOnline && signOut()
+                  }}
+                >
+                  <Heading
+                    size="l"
+                    color={isOnline ? colors.primary : colors.gray}
+                  >
+                    Sign Out
+                  </Heading>
+                </SignOutButton>
+              </SignOutWrapper>
+              <TabBarPlaceholder />
+            </ScrollViewWrapper>
+          </Fragment>
+        )}
       </Screen>
     )}
   </ProfileContainer>

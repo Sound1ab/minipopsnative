@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { DiscoveryContainer } from '../../container'
 import { Screen } from '../templates'
@@ -25,39 +25,34 @@ export const Discovery = ({ navigator }) => (
       searchInput,
       searchEmpty,
     }) => (
-      <Screen
-        navigator={navigator}
-        loading={loading}
-        heading={{
-          value: 'Discovery',
-          color: 'black',
-          size: 'xl',
-          marginBottom: false,
-        }}
-      >
-        <FlatListWrapper
-          data={searchResults}
-          keyExtractor={(item, index) => `${item.title}-${index}`}
-          ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
-          ListHeaderComponent={React.createElement(SearchField, {
-            searchInput,
-            searchEmpty,
-            searchValue,
-            loading,
-            api: 'related-artists',
-          })}
-          renderItem={({ item, index }) => (
-            <FlatListItemDiscovery
-              item={item}
-              index={index}
-              navigator={navigator}
+      <Screen navigator={navigator}>
+        {() => (
+          <Fragment>
+            <FlatListWrapper
+              data={searchResults}
+              keyExtractor={(item, index) => `${item.title}-${index}`}
+              ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
+              ListHeaderComponent={React.createElement(SearchField, {
+                searchInput,
+                searchEmpty,
+                searchValue,
+                loading,
+                api: 'related-artists',
+              })}
+              renderItem={({ item, index }) => (
+                <FlatListItemDiscovery
+                  item={item}
+                  index={index}
+                  navigator={navigator}
+                />
+              )}
+              isTabHidden
             />
-          )}
-          isTabHidden
-        />
-        <Fade isVisible={loading} fadeIn fadeOut>
-          <DiscoveryListSkeleton />
-        </Fade>
+            <Fade isVisible={loading} fadeIn fadeOut>
+              <DiscoveryListSkeleton />
+            </Fade>
+          </Fragment>
+        )}
       </Screen>
     )}
   </DiscoveryContainer>

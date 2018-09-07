@@ -11,7 +11,7 @@ const Wrapper = styled.View`
   flex: 1;
   justify-content: flex-start;
   margin: ${({ index }) =>
-    parseInt(index) === parseInt(0) ? '8px 8px 0 8px' : '0 8px 4px 8px'};
+    parseInt(index) === parseInt(0) ? '16px 16px 0 16px' : '0 16px 4px 16px'};
   padding: 16px 0;
   background-color: white;
 `

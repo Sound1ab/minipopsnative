@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { Screen } from '../templates'
 import { SearchContainer } from '../../container'
@@ -29,36 +29,33 @@ export const Search = ({ navigator }) => (
       searchEmpty,
       isOnline,
     }) => (
-      <Screen
-        navigator={navigator}
-        loading={loading}
-        heading={{
-          value: 'Search',
-          color: 'black',
-          size: 'xl',
-          marginBottom: false,
-        }}
-      >
-        <FlatListWrapper
-          data={searchResults}
-          ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
-          ListHeaderComponent={React.createElement(SearchField, {
-            searchInput,
-            searchEmpty,
-            searchValue,
-            loading: state === 'fetchingSearch',
-            api: 'current-items',
-          })}
-          keyExtractor={(item, index) => `${item.title}-${index}`}
-          renderItem={props => (
-            <FlatListItemSearch {...props} isOnline={isOnline} />
-          )}
-          onScroll={searchResults.length > 0 && hideTabs.bind(null, navigator)}
-          isTabHidden
-        />
-        <Fade isVisible={loading} fadeIn fadeOut>
-          <SearchListSkeleton />
-        </Fade>
+      <Screen navigator={navigator}>
+        {() => (
+          <Fragment>
+            <FlatListWrapper
+              data={searchResults}
+              ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
+              ListHeaderComponent={React.createElement(SearchField, {
+                searchInput,
+                searchEmpty,
+                searchValue,
+                loading: state === 'fetchingSearch',
+                api: 'current-items',
+              })}
+              keyExtractor={(item, index) => `${item.title}-${index}`}
+              renderItem={props => (
+                <FlatListItemSearch {...props} isOnline={isOnline} />
+              )}
+              onScroll={
+                searchResults.length > 0 && hideTabs.bind(null, navigator)
+              }
+              isTabHidden
+            />
+            <Fade isVisible={loading} fadeIn fadeOut>
+              <SearchListSkeleton />
+            </Fade>
+          </Fragment>
+        )}
       </Screen>
     )}
   </SearchContainer>

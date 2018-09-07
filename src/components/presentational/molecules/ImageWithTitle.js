@@ -13,7 +13,7 @@ const Wrapper = styled.TouchableOpacity`
 const TextWrapper = styled.View`
   position: absolute;
   left: 0;
-  margin: 8px;
+  margin: 16px;
   ${({ position }) =>
     css`
       ${position};

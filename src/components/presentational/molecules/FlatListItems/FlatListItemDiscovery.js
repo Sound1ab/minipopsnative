@@ -17,6 +17,7 @@ export const FlatListItemDiscovery = ({ item, index, navigator }: Props) => (
     handleOnPress={pushScreen.bind(null, {
       navigator: navigator,
       screen: 'ArtistReleases',
+      title: item.title,
       passProps: {
         spotifyId: item.spotifyId,
         title: item.title,

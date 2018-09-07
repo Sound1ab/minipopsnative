@@ -84,7 +84,10 @@ export const startApp = async () => {
       tabBarTranslucent: true,
     },
     appStyle: {
-      navBarHidden: true,
+      navBarTextColor: colors.primary,
+      navBarSubtitleColor: colors.primary,
+      keepStyleAcrossPush: false,
+      largeTitle: true,
       drawUnderTabBar: true,
     },
   })

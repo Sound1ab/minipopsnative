@@ -13,7 +13,7 @@ const Wrapper = styled.View`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 `
 
 const ImageOuterWrapper = styled.View``
@@ -22,24 +22,24 @@ const AlbumWrapper = styled.View`
   width: ${parseInt(IMAGE_WIDTH)};
   justify-content: flex-start;
   align-items: flex-start;
-  margin-right: 8px;
+  margin-right: 16px;
   ${({ isFirst }) =>
     isFirst &&
     css`
-      margin-left: 8px;
+      margin-left: 16px;
     `} ${({ isLast }) =>
     isLast &&
     css`
-      margin-right: 8px;
+      margin-right: 16px;
     `};
 `
 
 const ProductHeadingWrapper = styled.View`
-  margin: 0 8px;
+  margin: 0 16px;
 `
 
 const HeadingWrapper = styled.View`
-  padding: 8px;
+  padding: 16px;
   justify-content: center;
   align-items: center;
 `

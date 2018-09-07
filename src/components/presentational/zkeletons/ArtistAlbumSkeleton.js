@@ -21,12 +21,12 @@ const Wrapper = styled.View`
 const ContentWrapper = styled.View`
   height: 60;
   width: ${Dimensions.get('window').width};
-  padding: 16px 8px;
+  padding: 16px;
 `
 
 const TrackWrapper = styled.View`
   height: 60;
-  padding: 8px;
+  padding: 16px;
   width: 100%;
   margin: 0 0 8px 0;
 `

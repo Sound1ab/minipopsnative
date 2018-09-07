@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { showModal } from '../../../../navigation'
+import { pushScreen } from '../../../../navigation'
 import { Heading, ImageWrapper, Icon } from '../../atoms/index'
 import { colors } from '../../../../theme/index'
 
@@ -39,6 +39,7 @@ type PropTypes = {
 }
 
 export const FavouritesRow = ({
+  navigateTo,
   artistAlbum,
   index,
   watched,
@@ -46,9 +47,10 @@ export const FavouritesRow = ({
 }): PropTypes => (
   <Wrapper
     index={index}
-    onPress={showModal.bind(null, {
+    onPress={navigateTo.bind(null, {
+      title: artistAlbum.artist,
       screen: 'Compare',
-      props: {
+      passProps: {
         artistAlbum,
       },
     })}

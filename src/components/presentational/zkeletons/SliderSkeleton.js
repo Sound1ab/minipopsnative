@@ -13,7 +13,7 @@ const Wrapper = styled.View`
   width: ${IMAGE_WIDTH};
   height: ${IMAGE_WIDTH + 60};
   background-color: ${colors.lightGray};
-  margin-left: 8px;
+  margin-left: 16px;
 `
 
 const BlankWrapper = styled.View`
