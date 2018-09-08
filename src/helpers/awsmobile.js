@@ -2,7 +2,7 @@ import Amplify from 'aws-amplify'
 import { PushNotificationIOS, AsyncStorage, Linking } from 'react-native'
 import PushNotification from '@aws-amplify/pushnotification'
 import get from 'lodash/get'
-import { default as AWS_CONFIG } from '../../aws-exports'
+// import { default as AWS_CONFIG } from '../../aws-exports'
 
 // const AWS_CONFIG = {
 //   aws_cognito_identity_pool_id: Config.aws_cognito_identity_pool_id,
@@ -22,6 +22,26 @@ import { default as AWS_CONFIG } from '../../aws-exports'
 //   aws_user_pools_id: Config.aws_user_pools_id,
 //   aws_user_pools_web_client_id: Config.aws_user_pools_web_client_id,
 // }
+
+const AWS_CONFIG = {
+  aws_cognito_identity_pool_id:
+    'us-east-1:15304825-5060-4508-8523-f006490d18fa',
+  aws_cognito_region: 'us-east-1',
+  aws_content_delivery: 'enable',
+  aws_content_delivery_bucket: 'minipopsnative-hosting-mobilehub-48057481',
+  aws_content_delivery_bucket_region: 'us-east-1',
+  aws_content_delivery_cloudfront: 'enable',
+  aws_content_delivery_cloudfront_domain: 'd3a4jw51g5hgns.cloudfront.net',
+  aws_project_id: '3baf1c1b-a92d-48c5-a728-23cacb87bd58',
+  aws_project_name: 'minipopsnative-2018-07-21-08-18-16',
+  aws_project_region: 'us-east-1',
+  aws_resource_name_prefix: 'minipopsnative-mobilehub-48057481',
+  aws_sign_in_enabled: 'enable',
+  aws_user_pools: 'enable',
+  aws_user_pools_id: 'us-east-1_tGAbryLIa',
+  aws_user_pools_mfa_type: 'ON',
+  aws_user_pools_web_client_id: '5c633e6epbk5p794014651c6u1',
+}
 
 let aws = null
 
