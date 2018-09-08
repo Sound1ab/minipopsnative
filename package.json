@@ -51,9 +51,6 @@
   "dependencies": {
     "@aws-amplify/analytics": "^1.0.3",
     "@aws-amplify/pushnotification": "^1.0.3",
-    "appcenter": "^1.7.1",
-    "appcenter-analytics": "^1.7.1",
-    "appcenter-crashes": "^1.7.1",
     "aws-amplify": "^1.0.4",
     "aws-amplify-react-native": "^1.0.4",
     "axios": "^0.18.0",
@@ -97,11 +94,6 @@
     "styled-components": "^3.4.5"
   },
   "jest": {
-    "preset": "react-native",
-    "setupFiles": [
-      "<rootDir>/node_modules/appcenter/test/AppCenterMock.js",
-      "<rootDir>/node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js",
-      "<rootDir>/node_modules/appcenter-crashes/test/AppCenterCrashesMock.js"
-    ]
+    "preset": "react-native"
   }
 }

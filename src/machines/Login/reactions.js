@@ -35,6 +35,7 @@ export const reactions = {
       dispatchMachineAction('SIGN_IN_FAILURE', {
         notification: true,
         message: "Oh no, I can't sign in right now",
+        error,
       })
     }
   },
