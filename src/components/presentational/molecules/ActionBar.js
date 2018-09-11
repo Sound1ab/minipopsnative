@@ -46,6 +46,7 @@ export class ActionBar extends Component<PropTypes> {
 
   componentDidMount() {
     this.props.isFavourite && this.setState({ isHeartPressed: true })
+    this.props.isWatched && this.setState({ isWatchPressed: true })
   }
 
   componentDidUpdate = prevProps => {
