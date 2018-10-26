@@ -1,6 +1,5 @@
 import { Request } from '../../services'
-import { API } from '../../services'
-import { saveFavourites, saveWatchList } from '../Discovery/actions'
+import { UPDATE_USER } from '../../graphQL'
 import { updateLoading, saveToken, updateNetInfoStatus } from './actions'
 import {
   startApp,
@@ -40,44 +39,44 @@ export const reactions = {
       ? dispatchMachineAction('LOAD_APP')
       : dispatchMachineAction('LOAD_LOGIN')
   },
-  async FETCHING_FAVOURITES({
-    dispatchReduxAction,
-    dispatchMachineAction,
-    reduxState,
-  }) {
-    try {
-      const favourites = await Request.get(API('get-want-list'), {
-        id: reduxState.login.cognitoUser.id,
-      })
-      dispatchReduxAction(saveFavourites(favourites.data))
-      dispatchMachineAction('FETCH_FAVOURITES_SUCCESS')
-    } catch (error) {
-      dispatchMachineAction('FETCH_FAVOURITES_FAILURE', {
-        notification: true,
-        message: "Oh no, I can't get your favourites right now",
-      })
-    }
-  },
-  async FETCHING_WATCH_LIST({
-    dispatchReduxAction,
-    dispatchMachineAction,
-    payload,
-    reduxState,
-  }) {
-    try {
-      const watchList = await Request.get(API('get-watch-list'), {
-        id: reduxState.login.cognitoUser.id,
-      })
-      dispatchReduxAction(saveWatchList({ items: watchList.data }))
-      dispatchMachineAction('FETCH_WATCH_LIST_SUCCESS', payload)
-    } catch (error) {
-      dispatchMachineAction('FETCH_WATCH_LIST_FAILURE', {
-        notification: false,
-        title: 'Watch fetch failure',
-        message: JSON.stringify(error),
-      })
-    }
-  },
+  // async FETCHING_FAVOURITES({
+  //   dispatchReduxAction,
+  //   dispatchMachineAction,
+  //   reduxState,
+  // }) {
+  //   try {
+  //     const favourites = await Request.get(API('get-want-list'), {
+  //       id: reduxState.login.cognitoUser.id,
+  //     })
+  //     dispatchReduxAction(saveFavourites(favourites.data))
+  //     dispatchMachineAction('FETCH_FAVOURITES_SUCCESS')
+  //   } catch (error) {
+  //     dispatchMachineAction('FETCH_FAVOURITES_FAILURE', {
+  //       notification: true,
+  //       message: "Oh no, I can't get your favourites right now",
+  //     })
+  //   }
+  // },
+  // async FETCHING_WATCH_LIST({
+  //   dispatchReduxAction,
+  //   dispatchMachineAction,
+  //   payload,
+  //   reduxState,
+  // }) {
+  //   try {
+  //     const watchList = await Request.get(API('get-watch-list'), {
+  //       id: reduxState.login.cognitoUser.id,
+  //     })
+  //     dispatchReduxAction(saveWatchList({ items: watchList.data }))
+  //     dispatchMachineAction('FETCH_WATCH_LIST_SUCCESS', payload)
+  //   } catch (error) {
+  //     dispatchMachineAction('FETCH_WATCH_LIST_FAILURE', {
+  //       notification: false,
+  //       title: 'Watch fetch failure',
+  //       message: JSON.stringify(error),
+  //     })
+  //   }
+  // },
   async REDIRECT_TO_APP({ dispatchMachineAction, payload }) {
     await startApp()
     dispatchMachineAction('LOAD_SUCCESS', payload)
@@ -123,7 +122,7 @@ export const reactions = {
       return
     }
     try {
-      await Request.post(API('update-device-token'), {
+      await Request.mutate(UPDATE_USER.mutation, {
         id: reduxState.login.cognitoUser.id,
         deviceToken: reduxState.app.deviceToken,
       })
@@ -131,7 +130,7 @@ export const reactions = {
     } catch (error) {
       dispatchMachineAction('UPDATE_TOKEN_REMOTELY_FAILURE', {
         notification: false,
-        title: 'Watch fetch failure',
+        title: 'UPDATE_TOKEN_REMOTELY_FAILURE',
         message: error,
       })
     }

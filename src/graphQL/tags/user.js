@@ -22,6 +22,18 @@ export const CREATE_USER = {
   `,
 }
 
+export const UPDATE_USER = {
+  definition: 'updateUser',
+  mutation: gql`
+    mutation UpdateUser($id: ID!, $deviceToken: String!) {
+      updateUser(id: $id, deviceToken: $deviceToken) {
+        id
+        deviceToken
+      }
+    }
+  `,
+}
+
 export const CREATE_USER_LOCAL = {
   definition: 'createUserLocal',
   mutation: gql`
