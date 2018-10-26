@@ -52,8 +52,10 @@ export const FavouritesRowHidden = (props: PropTypes) => (
       <TextWrapperWatch
         onPress={() => {
           props.handleRemoveFromWatchList({
-            id: props.id,
-            item: props.artistAlbum,
+            variables: {
+              id: props.id,
+              watchingId: props.artistAlbum.spotifyId,
+            },
           })
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
@@ -64,8 +66,14 @@ export const FavouritesRowHidden = (props: PropTypes) => (
       <TextWrapperWatch
         onPress={() => {
           props.handleAddToWatchList({
-            id: props.id,
-            item: props.artistAlbum,
+            variables: {
+              id: props.id,
+              watching: {
+                artist: props.artistAlbum.artist,
+                album: props.artistAlbum.album,
+                spotifyId: props.artistAlbum.spotifyId,
+              },
+            },
           })
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
@@ -76,8 +84,10 @@ export const FavouritesRowHidden = (props: PropTypes) => (
     <TextWrapperRemove
       onPress={() => {
         props.handlePress({
-          id: props.id,
-          item: props.artistAlbum,
+          variables: {
+            id: props.id,
+            favouriteId: props.artistAlbum.spotifyId,
+          },
         })
         props.rowMap[props.artistAlbum.spotifyId].closeRow()
       }}

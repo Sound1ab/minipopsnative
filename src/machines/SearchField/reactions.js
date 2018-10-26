@@ -1,5 +1,5 @@
-import { Request } from '../../services/index'
-import { API } from '../../services/index'
+import { Request } from '../../services'
+import { READ_EBAY_BY_KEYWORDS } from '../../graphQL'
 import { updateSearchValue, updateSearchResults } from './actions'
 
 let timeout
@@ -16,10 +16,14 @@ export const reactions = {
   },
   async FETCH_SEARCH({ dispatchReduxAction, payload, dispatchMachineAction }) {
     try {
-      const items = await Request.get(API(payload.api), {
+      const variables = {
         keywords: payload.value,
+      }
+
+      const items = await Request.query(READ_EBAY_BY_KEYWORDS.query, variables)
+      dispatchMachineAction('FETCH_SUCCESS', {
+        items: items[READ_EBAY_BY_KEYWORDS.definition],
       })
-      dispatchMachineAction('FETCH_SUCCESS', { items: items.data })
     } catch (error) {
       dispatchMachineAction('FETCH_FAILURE', {
         notification: false,

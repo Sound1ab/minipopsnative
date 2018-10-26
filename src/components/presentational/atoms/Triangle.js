@@ -121,21 +121,22 @@ export const Triangle = createReactClass({
         borderLeftColor: 'transparent',
       }
     } else {
-      console.error(
-        'Triangle.js wrong direction. ' +
-          this.props.direction +
-          ' is invalid. Must be one of: ' +
-          [
-            'up',
-            'right',
-            'down',
-            'left',
-            'up-right',
-            'up-left',
-            'down-right',
-            'down-left',
-          ],
-      )
+      __DEV__ &&
+        console.error(
+          'Triangle.js wrong direction. ' +
+            this.props.direction +
+            ' is invalid. Must be one of: ' +
+            [
+              'up',
+              'right',
+              'down',
+              'left',
+              'up-right',
+              'up-left',
+              'down-right',
+              'down-left',
+            ],
+        )
       return {}
     }
   },

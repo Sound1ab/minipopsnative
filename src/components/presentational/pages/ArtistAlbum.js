@@ -5,20 +5,10 @@ import { ArtistAlbumContainer } from '../../container'
 import { Screen } from '../templates'
 import { ActionBar } from '../molecules'
 import { ImageWrapper, TrackRow, TabBarPlaceholder } from '../atoms'
-import { ArtistAlbumSkeleton } from '../zkeletons'
-import { Fade } from '../zanimations'
 
 export const ArtistAlbum = ({ navigator, spotifyId }) => (
   <ArtistAlbumContainer spotifyId={spotifyId}>
-    {({
-      loading,
-      state,
-      artistAlbum,
-      id,
-      favourites,
-      addToFavourites,
-      removeFromFavourites,
-    }) => (
+    {({ artistAlbum, id, favourites, updateFavourites, deleteFavourites }) => (
       <Screen navigator={navigator}>
         {() => (
           <Fragment>
@@ -28,17 +18,23 @@ export const ArtistAlbum = ({ navigator, spotifyId }) => (
                 height={Dimensions.get('window').width}
               />
               <ActionBar
-                handleAddToFavourites={addToFavourites.bind(null, {
-                  id: id,
-                  item: artistAlbum,
+                handleAddToFavourites={updateFavourites.bind(null, {
+                  variables: {
+                    id,
+                    favourite: artistAlbum,
+                  },
                 })}
-                handleRemoveFromFavourites={removeFromFavourites.bind(null, {
-                  id: id,
-                  item: artistAlbum,
+                handleRemoveFromFavourites={deleteFavourites.bind(null, {
+                  variables: {
+                    id: id,
+                    favouriteId: spotifyId,
+                  },
                 })}
-                isFavourite={favourites.find(
-                  favourite => favourite.spotifyId === spotifyId,
-                )}
+                isFavourite={
+                  !!favourites.find(
+                    favourite => favourite.spotifyId === spotifyId,
+                  )
+                }
               />
               {artistAlbum.tracks.map((track, index) => (
                 <TrackRow key={track} index={index}>
@@ -48,9 +44,6 @@ export const ArtistAlbum = ({ navigator, spotifyId }) => (
               ))}
               <TabBarPlaceholder />
             </ScrollView>
-            <Fade isVisible={loading} fadeOut>
-              <ArtistAlbumSkeleton />
-            </Fade>
           </Fragment>
         )}
       </Screen>

@@ -17,14 +17,7 @@ const emptyText = 'Get started finding your favourite albums 🤙'
 
 export const Discovery = ({ navigator }) => (
   <DiscoveryContainer navigator={navigator}>
-    {({
-      state,
-      loading,
-      searchValue,
-      searchResults,
-      searchInput,
-      searchEmpty,
-    }) => (
+    {({ state, loading, searchValue, searchResults, searchInput }) => (
       <Screen navigator={navigator}>
         {() => (
           <Fragment>
@@ -34,7 +27,6 @@ export const Discovery = ({ navigator }) => (
               ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
               ListHeaderComponent={React.createElement(SearchField, {
                 searchInput,
-                searchEmpty,
                 searchValue,
                 loading,
                 api: 'related-artists',

@@ -77,9 +77,9 @@ class AwsMobile {
     try {
       await AsyncStorage.setItem('@Minipops:deviceToken', token)
       onRegister(token)
-      console.warn('in app registration', token)
+      __DEV__ && console.warn('in app registration', token)
     } catch (error) {
-      console.log(`error saving data to AsyncStore: ${error}`)
+      __DEV__ && console.log(`error saving data to AsyncStore: ${error}`)
     }
   }
 
@@ -87,7 +87,8 @@ class AwsMobile {
     try {
       return AsyncStorage.getItem('@Minipops:deviceToken')
     } catch (error) {
-      console.warn(`could not retrieve data from AsyncStore: ${error}`)
+      __DEV__ &&
+        console.warn(`could not retrieve data from AsyncStore: ${error}`)
     }
   }
 
@@ -101,7 +102,7 @@ class AwsMobile {
         Linking.openURL(url)
       }
     } catch (error) {
-      console.error(`error opening link: ${error}`)
+      __DEV__ && console.error(`error opening link: ${error}`)
     }
   }
 }

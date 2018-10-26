@@ -44,8 +44,8 @@ export const SignUpConfirmation = (props: PropTypes) => (
       <Heading size="xl" color={colors.black}>
         Confirmation
       </Heading>
-      <Heading size="l" color={colors.gray}>
-        Confirm using the code sent via sms
+      <Heading size="l" color={colors.darkGrey}>
+        Confirm using the email code
       </Heading>
     </Section>
     <Section>

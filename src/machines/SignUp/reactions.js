@@ -23,6 +23,7 @@ export const reactions = {
       dispatchMachineAction('SIGN_UP_FAILURE', {
         notification: true,
         message: "Oh no, we couldn't sign you up, please try again",
+        error,
       })
     }
   },
@@ -40,6 +41,7 @@ export const reactions = {
       dispatchMachineAction('CONFIRMATION_FAILURE', {
         notification: true,
         message: 'Oh no, something went wrong, please try again',
+        error,
       })
     }
   },

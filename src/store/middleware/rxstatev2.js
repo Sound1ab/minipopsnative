@@ -14,11 +14,12 @@ export class RXState {
     if (this.actions[action]) {
       this.actions[action](payload)
     } else {
-      console.warn(
-        `action (${JSON.stringify(
-          action,
-        )}) does not exist in actions: ${JSON.stringify(this.actions)}`,
-      )
+      __DEV__ &&
+        console.warn(
+          `action (${JSON.stringify(
+            action,
+          )}) does not exist in actions: ${JSON.stringify(this.actions)}`,
+        )
     }
   }
 
@@ -26,19 +27,20 @@ export class RXState {
     const nextState = this.machine.transition(this.state, action.type)
 
     if (this.debug) {
-      console.log(`%c${this.machine.id}`, 'color: tomato')
-      console.group(
-        `%c${
-          typeof this.state.value === 'string'
-            ? this.state.value
-            : JSON.stringify(this.state.value)
-        }`,
-        'color: yellow',
-      )
-      console.log('action', action.type)
-      console.log('nextStateValue', nextState.value)
-      console.log('nextReactions', nextState.actions)
-      console.groupEnd()
+      __DEV__ && console.log(`%c${this.machine.id}`, 'color: tomato')
+      __DEV__ &&
+        console.group(
+          `%c${
+            typeof this.state.value === 'string'
+              ? this.state.value
+              : JSON.stringify(this.state.value)
+          }`,
+          'color: yellow',
+        )
+      __DEV__ && console.log('action', action.type)
+      __DEV__ && console.log('nextStateValue', nextState.value)
+      __DEV__ && console.log('nextReactions', nextState.actions)
+      __DEV__ && console.groupEnd()
     }
 
     this.state = nextState

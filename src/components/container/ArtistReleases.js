@@ -1,9 +1,9 @@
 // @flow
-import get from 'lodash/get'
+import { Query } from 'react-apollo'
+import { READ_ARTIST_RELEASES } from '../../graphQL'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { artistReleases } from '../../machines/Discovery/selectors'
-import { discoveryMachine } from '../../machines/Discovery'
+import { ImageGridSkeleton } from '../presentational/zkeletons'
+import { LayoutAnimation } from 'react-native'
 
 type PropTypes = {
   artistReleases: Object,
@@ -18,36 +18,59 @@ class ArtistReleases extends Component<PropTypes> {
     loading: false,
   }
 
-  componentDidMount = () => {
-    this.props.fetchArtistReleases({ spotifyId: this.props.spotifyId })
+  updateCache(done) {
+    return (prev, { fetchMoreResult }) => {
+      if (done) return prev
+      const { items } = fetchMoreResult[READ_ARTIST_RELEASES.definition]
+      const { items: prevItems } = prev[READ_ARTIST_RELEASES.definition]
+      return Object.assign({}, prev, {
+        [READ_ARTIST_RELEASES.definition]: {
+          ...fetchMoreResult[READ_ARTIST_RELEASES.definition],
+          items: [...prevItems, ...items],
+        },
+      })
+    }
+  }
+
+  fetchMoreWithVariables(fetchMore, nextOffset, limit, done) {
+    const args = {
+      variables: { offset: nextOffset, limit },
+      updateQuery: this.updateCache(done),
+    }
+    return () => {
+      fetchMore(args)
+    }
   }
 
   render() {
-    const { loading, state } = this.props
-    return this.props.children({
-      ...this.props,
-      loading:
-        loading && get(state, ['artistReleases'], '') === 'fetchingReleases',
-    })
+    return (
+      <Query
+        query={READ_ARTIST_RELEASES.query}
+        variables={{ id: this.props.spotifyId, limit: 30, offset: 0 }}
+        fetchPolicy="cache-and-network"
+      >
+        {({ loading, data, fetchMore, networkStatus }) => {
+          if (loading && networkStatus === 1) {
+            return <ImageGridSkeleton />
+          }
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+          const { items, limit, nextOffset, done } = data[
+            READ_ARTIST_RELEASES.definition
+          ]
+          return this.props.children({
+            ...this.props,
+            artistReleases: items,
+            fetchMoreArtistReleases: this.fetchMoreWithVariables(
+              fetchMore,
+              nextOffset,
+              limit,
+              done,
+            ),
+          })
+        }}
+      </Query>
+    )
   }
 }
 
-const mapStateToProps = state => ({
-  artistReleases: artistReleases(state),
-  state: state.discovery.state,
-  loading: state.app.loading,
-})
-
-const mapDispatchToProps = () => ({
-  fetchArtistReleases: payload => {
-    discoveryMachine.dispatchAction('FETCH_RELEASES', payload)
-  },
-  fetchMoreArtistReleases: payload => {
-    discoveryMachine.dispatchAction('FETCH_MORE_RELEASES', payload)
-  },
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ArtistReleases)
+export default ArtistReleases

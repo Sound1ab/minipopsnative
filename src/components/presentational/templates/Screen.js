@@ -34,7 +34,7 @@ export class Screen extends Component<PropTypes> {
   }
 
   shouldComponentUpdate = () => {
-    return this.isVisible
+    return true
   }
 
   navigateTo = screenOptions => {

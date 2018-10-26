@@ -1,9 +1,11 @@
 // @flow
 import Axios from 'axios'
+import { client } from '../services'
 
 export class Request {
-  constructor(url, limit = 20) {
+  constructor(url = '', gql = '', limit = 20) {
     this.url = url
+    this.gql = gql
     this.limit = limit
   }
 
@@ -35,7 +37,7 @@ export class Request {
     }
     if (this.state.id === null || this.state.done === false) {
       const response = await fn(
-        this.url,
+        this.url || this.gql,
         {
           ...params,
           offset: this.state.offset,
@@ -58,6 +60,7 @@ export class Request {
   }
 
   paginatedGet = this.paginationComposer(this.constructor.get)
+  paginatedQuery = this.paginationComposer(this.constructor.query)
 
   static async get(url, params: {} = {}, headers: {} = {}) {
     try {
@@ -86,5 +89,33 @@ export class Request {
     } catch (e) {
       throw e
     }
+  }
+
+  static async query(query, variables) {
+    let response
+    try {
+      const { data } = await client.query({
+        query,
+        variables,
+      })
+      response = data
+    } catch (error) {
+      throw error
+    }
+    return response
+  }
+
+  static async mutate(mutation, variables) {
+    let response
+    try {
+      const { data } = await client.mutate({
+        mutation,
+        variables,
+      })
+      response = data
+    } catch (error) {
+      throw error
+    }
+    return response
   }
 }

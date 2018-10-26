@@ -1,6 +1,8 @@
+import React from 'react'
 import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
 import store from '../store'
+import { withProvider } from '../services'
 import {
   ArtistReleases,
   ArtistAlbum,
@@ -34,6 +36,11 @@ export const registerComponents = () => {
     ['Compare', Compare],
   ])
   register.forEach((Component, key) => {
-    Navigation.registerComponent(key, () => Component, store, Provider)
+    Navigation.registerComponent(
+      key,
+      () => withProvider(Component),
+      store,
+      Provider,
+    )
   })
 }
