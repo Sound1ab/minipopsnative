@@ -1,3 +1,4 @@
+import { READ_RELATED_ARTISTS, READ_ARTIST_ALBUM } from '../../graphQL'
 import { Request } from '../../services'
 import { inAppNotification } from '../../navigation'
 import { API } from '../../services'
@@ -13,7 +14,7 @@ import { reactions as appReactions } from '../App'
 import { reactions as searchReactions } from '../SearchField'
 
 const { SHOW_LOADING, HIDE_LOADING, SHOW_ERROR_MESSAGE } = appReactions
-const { START_TIMER, CANCEL_TIMER, FETCH_SEARCH } = searchReactions
+const { START_TIMER, CANCEL_TIMER } = searchReactions
 
 export const reactions = {
   SHOW_LOADING,
@@ -21,7 +22,24 @@ export const reactions = {
   SHOW_ERROR_MESSAGE,
   START_TIMER,
   CANCEL_TIMER,
-  FETCH_SEARCH,
+  async FETCH_SEARCH({ dispatchReduxAction, payload, dispatchMachineAction }) {
+    try {
+      const variables = {
+        artist: payload.value,
+      }
+
+      const items = await Request.query(READ_RELATED_ARTISTS.query, variables)
+      dispatchMachineAction('FETCH_SUCCESS', {
+        items: items[READ_RELATED_ARTISTS.definition],
+      })
+    } catch (error) {
+      dispatchMachineAction('FETCH_FAILURE', {
+        notification: false,
+        title: 'Fetch search',
+        message: error,
+      })
+    }
+  },
   UPDATE_SEARCH({ dispatchReduxAction, payload }) {
     dispatchReduxAction(updateDiscoverySearchValue(payload.value))
   },
@@ -50,15 +68,19 @@ export const reactions = {
   })(),
   async FETCH_ALBUM({ dispatchReduxAction, payload, dispatchMachineAction }) {
     try {
-      const item = await Request.get(API('artist-release'), {
+      const item = await Request.query(READ_ARTIST_ALBUM.query, {
         id: payload.spotifyId,
       })
-      dispatchReduxAction(saveArtistAlbum({ item: item.data }))
+      console.warn(item)
+      dispatchReduxAction(
+        saveArtistAlbum({ item: item[READ_ARTIST_ALBUM.definition] }),
+      )
       dispatchMachineAction('FETCH_SUCCESS')
     } catch (error) {
       dispatchMachineAction('FETCH_FAILURE', {
         notification: true,
         message: "Oh no, I can't get the album right now",
+        error,
       })
     }
   },

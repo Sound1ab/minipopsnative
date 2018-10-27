@@ -6,7 +6,7 @@ export class FormValidation {
         /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
           email,
         ),
-      phone_number: phone_number => phone_number.length > 0,
+      // phone_number: phone_number => phone_number.length > 0,
       username: username => username.length > 0,
       code: confirmation => confirmation.length > 0,
     }

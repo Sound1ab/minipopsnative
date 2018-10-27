@@ -1,0 +1,27 @@
+{
+  "schema": {
+    "request": {
+      "url":
+        "https://6if7xu7voveppkkgfgkl6co2hi.appsync-api.eu-west-1.amazonaws.com/graphql",
+      "method": "POST",
+      "postIntrospectionQuery": true,
+      "options": {
+        "headers": {
+          "x-api-key": "da2-63j2r5f3cndmlc4lts5c7mlq3e"
+        }
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "Default (http://localhost:8080/graphql)",
+      "url":
+        "https://6if7xu7voveppkkgfgkl6co2hi.appsync-api.eu-west-1.amazonaws.com/graphql",
+      "options": {
+        "headers": {
+          "x-api-key": "da2-63j2r5f3cndmlc4lts5c7mlq3e"
+        }
+      }
+    }
+  ]
+}

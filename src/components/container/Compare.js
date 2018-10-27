@@ -1,12 +1,28 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { compareMachine, products } from '../../machines/Compare'
+import { adopt } from 'react-adopt'
+import { READ_FAVOURITES, READ_WATCHING } from '../../graphQL'
 import {
-  discoveryMachine,
-  favourites,
-  watchList,
-} from '../../machines/Discovery'
+  readFavourites,
+  updateFavourites,
+  deleteFavourites,
+  readWatching,
+  deleteWatching,
+  updateWatching,
+  readMarketPlace,
+} from '../apollo'
+import { LayoutAnimation } from 'react-native'
+
+const ComposedQueries = adopt({
+  readFavourites,
+  updateFavourites,
+  deleteFavourites,
+  readWatching,
+  updateWatching,
+  deleteWatching,
+  readMarketPlace,
+})
 
 type PropTypes = {
   loading: Boolean,
@@ -15,50 +31,75 @@ type PropTypes = {
 }
 
 class Compare extends Component<PropTypes> {
-  componentDidMount() {
-    const { fetchProducts, artist, album } = this.props
-    fetchProducts({ artist, album })
-  }
-
-  componentWillUnmount() {
-    this.props.removeProducts()
-  }
-
   render() {
-    return this.props.children(this.props)
+    const { artist, album } = this.props
+    return (
+      <ComposedQueries
+        userId={this.props.id}
+        artist={artist}
+        album={album}
+        keywords={`${artist} ${album}`}
+      >
+        {({
+          readFavourites: { data: favouritesData, loading: favouritesLoading },
+          readWatching: { data: watchingData, loading: watchingLoading },
+          readMarketPlace: {
+            data: marketPlaceData,
+            loading: marketPlaceLoading,
+          },
+          updateFavourites: { updateFavourites },
+          updateWatching: { updateWatching },
+          deleteWatching: { deleteWatching },
+          deleteFavourites: { deleteFavourites },
+        }) => {
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+
+          const favourites =
+            (favouritesData &&
+              favouritesData[READ_FAVOURITES.definition] &&
+              favouritesData[READ_FAVOURITES.definition].favourites) ||
+            []
+          const watching =
+            (watchingData &&
+              watchingData[READ_WATCHING.definition] &&
+              watchingData[READ_WATCHING.definition].watching) ||
+            []
+          const junoProducts = (marketPlaceData && marketPlaceData.juno) || []
+          const discogsMarketPlaceProducts =
+            (marketPlaceData && marketPlaceData.discogsMarket) || []
+          const vinylTapProducts =
+            (marketPlaceData && marketPlaceData.vinylTap) || []
+          const eBay = (marketPlaceData && marketPlaceData.eBay) || []
+
+          const eBayProducts = eBay.map(item => ({
+            price: item.price,
+            title: item.title,
+            image: item.imageUrl[0],
+            link: item.itemUrl,
+          }))
+
+          return this.props.children({
+            ...this.props,
+            favourites,
+            watching,
+            updateFavourites,
+            updateWatching,
+            deleteWatching,
+            deleteFavourites,
+            junoProducts,
+            discogsMarketPlaceProducts,
+            vinylTapProducts,
+            eBayProducts,
+            marketPlaceLoading,
+          })
+        }}
+      </ComposedQueries>
+    )
   }
 }
 
 const mapStateToProps = state => ({
-  loading: state.app.loading && state.compare.state === 'fetchingProducts',
-  watchListIds: watchList(state),
-  favourites: favourites(state),
-  products: products(state),
   id: state.login.cognitoUser.id,
 })
 
-const mapDispatchToProps = () => ({
-  fetchProducts: payload => {
-    compareMachine.dispatchAction('FETCH_PRODUCTS', payload)
-  },
-  removeProducts: payload => {
-    compareMachine.dispatchAction('REMOVE_PRODUCTS', payload)
-  },
-  addToFavourites: payload => {
-    discoveryMachine.dispatchAction('ADD_FAVOURITE', payload)
-  },
-  removeFromFavourites: payload => {
-    discoveryMachine.dispatchAction('REMOVE_FAVOURITE', payload)
-  },
-  addToWatchList: payload => {
-    discoveryMachine.dispatchAction('ADD_TO_WATCH_LIST', payload)
-  },
-  removeFromWatchList: payload => {
-    discoveryMachine.dispatchAction('REMOVE_FROM_WATCH_LIST', payload)
-  },
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Compare)
+export default connect(mapStateToProps)(Compare)

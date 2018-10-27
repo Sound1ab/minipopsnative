@@ -26,13 +26,17 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
     {({
       loading,
       favourites,
-      addToFavourites,
-      removeFromFavourites,
-      addToWatchList,
-      removeFromWatchList,
-      products,
-      watchListIds,
       id,
+      watching,
+      updateFavourites,
+      deleteFavourites,
+      updateWatching,
+      deleteWatching,
+      junoProducts,
+      discogsMarketPlaceProducts,
+      vinylTapProducts,
+      eBayProducts,
+      marketPlaceLoading,
     }) => (
       <Screen navigator={navigator}>
         {({ openUrl }) => (
@@ -44,53 +48,67 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
                 title={artistAlbum.album}
               />
               <ActionBar
-                handleAddToFavourites={addToFavourites.bind(null, {
-                  id: artistAlbum.spotifyId,
-                  item: artistAlbum,
+                handleAddToFavourites={updateFavourites.bind(null, {
+                  variables: {
+                    id,
+                    favourite: artistAlbum,
+                  },
                 })}
-                handleRemoveFromFavourites={removeFromFavourites.bind(null, {
-                  id: artistAlbum.spotifyId,
-                  item: artistAlbum,
+                handleRemoveFromFavourites={deleteFavourites.bind(null, {
+                  variables: {
+                    id: id,
+                    favouriteId: artistAlbum.spotifyId,
+                  },
                 })}
-                handleAddToWatchList={addToWatchList.bind(null, {
-                  id: id,
-                  item: artistAlbum,
+                handleAddToWatchList={updateWatching.bind(null, {
+                  variables: {
+                    id: id,
+                    watching: {
+                      artist: artistAlbum.artist,
+                      album: artistAlbum.album,
+                      spotifyId: artistAlbum.spotifyId,
+                    },
+                  },
                 })}
-                handleRemoveFromWatchList={removeFromWatchList.bind(null, {
-                  id: id,
-                  item: artistAlbum,
+                handleRemoveFromWatchList={deleteWatching.bind(null, {
+                  variables: {
+                    id: id,
+                    watchingId: artistAlbum.spotifyId,
+                  },
                 })}
                 isFavourite={
                   !!favourites.find(
                     favourite => favourite.spotifyId === artistAlbum.spotifyId,
                   )
                 }
-                isWatched={watchListIds.includes(artistAlbum.spotifyId)}
+                isWatched={watching
+                  .map(watching => watching.spotifyId)
+                  .includes(artistAlbum.spotifyId)}
               />
               <TrackList tracks={artistAlbum.tracks} />
               <HorizontalSlider
                 openUrl={openUrl}
                 heading="eBay"
-                products={products.eBay}
-                loading={loading}
+                products={eBayProducts}
+                loading={marketPlaceLoading}
               />
               <HorizontalSlider
                 openUrl={openUrl}
                 heading="Discogs"
-                products={products.discogs}
-                loading={loading}
+                products={discogsMarketPlaceProducts}
+                loading={marketPlaceLoading}
               />
               <HorizontalSlider
                 openUrl={openUrl}
                 heading="Juno"
-                products={products.juno}
-                loading={loading}
+                products={junoProducts}
+                loading={marketPlaceLoading}
               />
               <HorizontalSlider
                 openUrl={openUrl}
                 heading="Vinyl Tap"
-                products={products.vinylTap}
-                loading={loading}
+                products={vinylTapProducts}
+                loading={marketPlaceLoading}
               />
               <TabBarPlaceholder />
             </ScrollViewWrapper>

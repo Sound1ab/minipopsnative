@@ -49,11 +49,7 @@ export function SearchField(props: PropTypes) {
         <InputWrapper
           search
           value={props.searchValue}
-          handleChange={value =>
-            value
-              ? props.searchInput({ value, api: props.api })
-              : props.searchEmpty(value)
-          }
+          handleChange={value => props.searchInput({ value, api: props.api })}
           placeholder="The Cure"
           disabled={!props.isOnline}
         />

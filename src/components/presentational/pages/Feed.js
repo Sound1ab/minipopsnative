@@ -6,8 +6,6 @@ import { hideTabsOnScroll } from '../../../navigation'
 import { Screen } from '../templates'
 import { FlatListWrapper } from '../atoms'
 import { FlatListItemSearch } from '../molecules'
-import { FeedListSkeleton } from '../zkeletons'
-import { Fade } from '../zanimations'
 
 const hideTabs = hideTabsOnScroll()
 
@@ -23,23 +21,18 @@ export const Feed = ({ navigator }) => (
     {({ loading, id, feed, state, fetchFeed, refetchFeed, isOnline }) => (
       <Screen navigator={navigator}>
         {() => (
-          <Fragment>
-            <FlatListWrapper
-              data={feed}
-              refreshing={state === 'refetchingFeed'}
-              onRefresh={refetchFeed.bind(null, { id })}
-              keyExtractor={(item, index) => `${item.title}-${index}`}
-              ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
-              renderItem={props => (
-                <FlatListItemSearch {...props} isOnline={isOnline} />
-              )}
-              onScroll={feed.length > 0 && hideTabs.bind(null, navigator)}
-              isTabHidden
-            />
-            <Fade isVisible={loading} fadeIn fadeOut>
-              <FeedListSkeleton />
-            </Fade>
-          </Fragment>
+          <FlatListWrapper
+            data={feed}
+            // refreshing={loading}
+            // onRefresh={refetch}
+            keyExtractor={(item, index) => `${item.title}-${index}`}
+            ListEmptyComponent={() => <TextStyled>{emptyText}</TextStyled>}
+            renderItem={props => (
+              <FlatListItemSearch {...props} isOnline={isOnline} />
+            )}
+            onScroll={feed.length > 0 && hideTabs.bind(null, navigator)}
+            isTabHidden
+          />
         )}
       </Screen>
     )}

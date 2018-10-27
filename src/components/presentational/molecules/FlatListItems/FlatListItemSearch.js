@@ -68,7 +68,7 @@ export const FlatListItemSearch = (props: Props) => (
               try {
                 props.isOnline && Linking.openURL(props.item.itemUrl)
               } catch (error) {
-                console.warn(error)
+                __DEV__ && console.warn(error)
               }
             }}
           >

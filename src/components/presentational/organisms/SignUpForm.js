@@ -46,7 +46,7 @@ export const SignUpForm = (props: PropTypes) => (
       <Heading size="xl" color={colors.black}>
         Welcome
       </Heading>
-      <Heading size="l" color={colors.gray}>
+      <Heading size="l" color={colors.darkGrey}>
         Sign up to continue
       </Heading>
     </Section>
@@ -71,19 +71,18 @@ export const SignUpForm = (props: PropTypes) => (
         error={props.validationErrors.includes('password')}
         placeholder="password"
         returnKeyType="next"
-        handleSubmitEditing={() => this.phoneNumberInput.focus()}
-      />
-      <InputWrapper
-        ref={phoneNumberInput => (this.phoneNumberInput = phoneNumberInput)}
-        handleChange={props.handleChangeText.bind(null, 'phone_number')}
-        value={props.phone_number}
-        marginBottom
-        autoCapitalize="none"
-        error={props.validationErrors.includes('phone_number')}
-        placeholder="+4412345678987"
-        returnKeyType="next"
         handleSubmitEditing={() => this.emailInput.focus()}
       />
+      {/*<InputWrapper*/}
+      {/*ref={phoneNumberInput => (this.phoneNumberInput = phoneNumberInput)}*/}
+      {/*handleChange={props.handleChangeText.bind(null, 'phone_number')}*/}
+      {/*value={props.phone_number}*/}
+      {/*marginBottom*/}
+      {/*autoCapitalize="none"*/}
+      {/*placeholder="+4412345678987"*/}
+      {/*returnKeyType="next"*/}
+      {/*handleSubmitEditing={() => this.emailInput.focus()}*/}
+      {/*/>*/}
       <InputWrapper
         ref={emailInput => (this.emailInput = emailInput)}
         handleChange={props.handleChangeText.bind(null, 'email')}

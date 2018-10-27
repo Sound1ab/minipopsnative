@@ -1,4 +1,11 @@
 import axios from 'axios'
+import {
+  CREATE_FAVOURITES,
+  CREATE_USER,
+  CREATE_WATCHING,
+  READ_USER,
+} from '../../graphQL'
+import { Request } from '../../services'
 import { saveCognitoUserObject, removeUserData } from './actions'
 import { removeDiscoveryData } from '../Discovery'
 import { removeFeedData } from '../Feed'
@@ -18,7 +25,16 @@ export const reactions = {
     try {
       const cognitoUser = await Auth.currentAuthenticatedUser()
       const { id } = await Auth.currentUserInfo()
-      dispatchMachineAction('AUTHENTICATED_SUCCESS', { id, ...cognitoUser })
+      try {
+        await Request.query(READ_USER.query, { id })
+      } catch (error) {
+        Promise.all([
+          Request.mutate(CREATE_USER.mutation, { id }),
+          Request.mutate(CREATE_FAVOURITES.mutation, { id }),
+          Request.mutate(CREATE_WATCHING.mutation, { id }),
+        ])
+      }
+      dispatchMachineAction('AUTHENTICATED_SUCCESS', { id: id, ...cognitoUser })
     } catch (error) {
       dispatchMachineAction('AUTHENTICATED_FAILURE', {
         notification: false,
@@ -59,6 +75,19 @@ export const reactions = {
     axios.defaults.headers.common['Authorization'] =
       payload.signInUserSession.idToken.jwtToken
     dispatchReduxAction(saveCognitoUserObject(payload))
+
+    // const test = {
+    //   signInUserSession: {
+    //     ...payload.signInUserSession,
+    //     __typename: 'signInUserSession'
+    //   }}
+    //
+    // try {
+    //   client.mutate({mutation: CREATE_USER_LOCAL.mutation, variables: { user: test }})
+    // } catch(error) {
+    //   console.warn(error)
+    // }
+
     dispatchMachineAction('SAVE_COGNITO_USER_OBJECT_SUCCESS', payload)
   },
   REMOVE_USER_DATA({ dispatchReduxAction, dispatchMachineAction }) {

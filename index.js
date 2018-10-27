@@ -52,10 +52,10 @@ async function getDeviceToken() {
   try {
     const value = await AsyncStorage.getItem('@Minipops:deviceToken')
     if (value !== null) {
-      console.warn('DeviceToken', value)
+      __DEV__ && console.warn('DeviceToken', value)
     }
   } catch (error) {
-    console.warn(`could not retrieve data from AsyncStore: ${error}`)
+    __DEV__ && console.warn(`could not retrieve data from AsyncStore: ${error}`)
   }
 }
 

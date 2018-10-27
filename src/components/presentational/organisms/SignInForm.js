@@ -42,7 +42,7 @@ export function SignInForm(props: PropTypes) {
         <Heading size="xl" color={colors.black}>
           Welcome
         </Heading>
-        <Heading size="l" color={colors.gray}>
+        <Heading size="l" color={colors.darkGrey}>
           Sign in to continue
         </Heading>
       </Section>

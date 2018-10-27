@@ -1,9 +1,23 @@
 // @flow
-import get from 'lodash/get'
+import { adopt } from 'react-adopt'
+import { READ_ARTIST_ALBUM, READ_FAVOURITES } from '../../graphQL'
+import {
+  readArtistAlbum,
+  readFavourites,
+  updateFavourites,
+  deleteFavourites,
+} from '../apollo'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { discoveryMachine } from '../../machines/Discovery'
-import { artistAlbum, favourites } from '../../machines/Discovery/selectors'
+import { ArtistAlbumSkeleton } from '../presentational/zkeletons'
+import { LayoutAnimation } from 'react-native'
+
+const ComposedQueries = adopt({
+  readFavourites,
+  readArtistAlbum,
+  updateFavourites,
+  deleteFavourites,
+})
 
 type PropTypes = {
   artistAlbum: {
@@ -19,6 +33,7 @@ type PropTypes = {
   removeFromFavourites: Function,
   loading: Boolean,
   children: Function,
+  didAppear: boolean,
 }
 
 class ArtistAlbum extends Component<PropTypes> {
@@ -38,40 +53,44 @@ class ArtistAlbum extends Component<PropTypes> {
     children: () => {},
   }
 
-  componentDidMount = () => {
-    this.props.fetchArtistAlbum({ spotifyId: this.props.spotifyId })
-  }
-
   render() {
-    const { loading, state } = this.props
-    return this.props.children({
-      ...this.props,
-      loading: loading && get(state, ['artistAlbum'], '') === 'fetchingAlbum',
-    })
+    return (
+      <ComposedQueries spotifyId={this.props.spotifyId} userId={this.props.id}>
+        {({
+          readFavourites: {
+            data: favouritesData,
+            loading: readFavouritesLoading,
+          },
+          readArtistAlbum: {
+            loading: readArtistAlbumloading,
+            error,
+            data: readArtistAlbumData,
+          },
+          updateFavourites: { updateFavourites },
+          deleteFavourites: { deleteFavourites },
+        }) => {
+          if (readArtistAlbumloading) {
+            return <ArtistAlbumSkeleton />
+          }
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+          const artistAlbum = readArtistAlbumData[READ_ARTIST_ALBUM.definition]
+          const favourites =
+            favouritesData[READ_FAVOURITES.definition].favourites
+          return this.props.children({
+            ...this.props,
+            artistAlbum,
+            updateFavourites,
+            deleteFavourites,
+            favourites,
+          })
+        }}
+      </ComposedQueries>
+    )
   }
 }
 
 const mapStateToProps = state => ({
-  artistAlbum: artistAlbum(state),
-  favourites: favourites(state),
   id: state.login.cognitoUser.id,
-  state: state.discovery.state,
-  loading: state.app.loading,
 })
 
-const mapDispatchToProps = () => ({
-  fetchArtistAlbum: payload => {
-    discoveryMachine.dispatchAction('FETCH_ALBUM', payload)
-  },
-  addToFavourites: payload => {
-    discoveryMachine.dispatchAction('ADD_FAVOURITE', payload)
-  },
-  removeFromFavourites: payload => {
-    discoveryMachine.dispatchAction('REMOVE_FAVOURITE', payload)
-  },
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ArtistAlbum)
+export default connect(mapStateToProps)(ArtistAlbum)

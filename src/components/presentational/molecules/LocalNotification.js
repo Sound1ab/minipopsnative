@@ -113,7 +113,7 @@ export class LocalNotification extends Component<PropTypes, StateTypes> {
       try {
         Linking.openURL(url)
       } catch (error) {
-        console.error(`error opening link: ${error}`)
+        __DEV__ && console.error(`error opening link: ${error}`)
       }
     }
   }

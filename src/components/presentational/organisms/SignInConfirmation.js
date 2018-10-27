@@ -50,7 +50,7 @@ export const SignInConfirmation = ({
       <Heading size="xl" color={colors.black}>
         MFA
       </Heading>
-      <Heading size="l" color={colors.gray}>
+      <Heading size="l" color={colors.darkGrey}>
         Confirm using the code sent via sms
       </Heading>
     </Section>
