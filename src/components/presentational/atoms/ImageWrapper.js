@@ -1,8 +1,7 @@
 // @flow
 import React, { Component } from 'react'
-import FastImage from 'react-native-fast-image'
 import styled, { css } from 'styled-components'
-import { Animated, Easing } from 'react-native'
+import { Animated, Easing, Image } from 'react-native'
 import { colors } from '../../../theme'
 const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
 
@@ -83,17 +82,16 @@ export class ImageWrapper extends Component<Props> {
         fixedWidth={this.props.fixedWidth}
         marginLeft={this.props.marginLeft}
       >
-        <FastImage
+        <Image
           style={{ flex: 1 }}
           source={
             this.props.source
               ? {
                   uri: this.props.source,
-                  priority: FastImage.priority.normal,
                 }
               : recordImage
           }
-          resizeMode={this.props.source ? FastImage.resizeMode.cover : 'center'}
+          resizeMode={this.props.source ? 'cover' : 'center'}
           onLoadEnd={this.startAnimation}
         />
       </ImageContainer>
