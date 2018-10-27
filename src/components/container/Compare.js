@@ -41,11 +41,14 @@ class Compare extends Component<PropTypes> {
         keywords={`${artist} ${album}`}
       >
         {({
-          readFavourites: { data: favouritesData, loading: favouritesLoading },
-          readWatching: { data: watchingData, loading: watchingLoading },
+          readFavourites: { favourites },
+          readWatching: { watching },
           readMarketPlace: {
-            data: marketPlaceData,
-            loading: marketPlaceLoading,
+            junoProducts,
+            discogsMarketPlaceProducts,
+            vinylTapProducts,
+            eBayProducts,
+            loading,
           },
           updateFavourites: { updateFavourites },
           updateWatching: { updateWatching },
@@ -53,30 +56,6 @@ class Compare extends Component<PropTypes> {
           deleteFavourites: { deleteFavourites },
         }) => {
           LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-
-          const favourites =
-            (favouritesData &&
-              favouritesData[READ_FAVOURITES.definition] &&
-              favouritesData[READ_FAVOURITES.definition].favourites) ||
-            []
-          const watching =
-            (watchingData &&
-              watchingData[READ_WATCHING.definition] &&
-              watchingData[READ_WATCHING.definition].watching) ||
-            []
-          const junoProducts = (marketPlaceData && marketPlaceData.juno) || []
-          const discogsMarketPlaceProducts =
-            (marketPlaceData && marketPlaceData.discogsMarket) || []
-          const vinylTapProducts =
-            (marketPlaceData && marketPlaceData.vinylTap) || []
-          const eBay = (marketPlaceData && marketPlaceData.eBay) || []
-
-          const eBayProducts = eBay.map(item => ({
-            price: item.price,
-            title: item.title,
-            image: item.imageUrl[0],
-            link: item.itemUrl,
-          }))
 
           return this.props.children({
             ...this.props,
@@ -90,7 +69,7 @@ class Compare extends Component<PropTypes> {
             discogsMarketPlaceProducts,
             vinylTapProducts,
             eBayProducts,
-            marketPlaceLoading,
+            loading,
           })
         }}
       </ComposedQueries>

@@ -24,7 +24,6 @@ type PropTypes = {
 export const Compare = ({ navigator, artistAlbum }): PropTypes => (
   <CompareContainer artist={artistAlbum.artist} album={artistAlbum.album}>
     {({
-      loading,
       favourites,
       id,
       watching,
@@ -36,7 +35,7 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
       discogsMarketPlaceProducts,
       vinylTapProducts,
       eBayProducts,
-      marketPlaceLoading,
+      loading,
     }) => (
       <Screen navigator={navigator}>
         {({ openUrl }) => (
@@ -90,25 +89,25 @@ export const Compare = ({ navigator, artistAlbum }): PropTypes => (
                 openUrl={openUrl}
                 heading="eBay"
                 products={eBayProducts}
-                loading={marketPlaceLoading}
+                loading={loading}
               />
               <HorizontalSlider
                 openUrl={openUrl}
                 heading="Discogs"
                 products={discogsMarketPlaceProducts}
-                loading={marketPlaceLoading}
+                loading={loading}
               />
               <HorizontalSlider
                 openUrl={openUrl}
                 heading="Juno"
                 products={junoProducts}
-                loading={marketPlaceLoading}
+                loading={loading}
               />
               <HorizontalSlider
                 openUrl={openUrl}
                 heading="Vinyl Tap"
                 products={vinylTapProducts}
-                loading={marketPlaceLoading}
+                loading={loading}
               />
               <TabBarPlaceholder />
             </ScrollViewWrapper>

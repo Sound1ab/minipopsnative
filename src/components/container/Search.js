@@ -2,11 +2,6 @@
 import React, { Component } from 'react'
 import { Request } from '../../services'
 import { connect } from 'react-redux'
-import {
-  searchValue,
-  searchResults,
-} from '../../machines/SearchField/selectors'
-import { searchMachine } from '../../machines/SearchField'
 import { READ_EBAY_BY_KEYWORDS } from '../../graphQL'
 
 type PropTypes = {
@@ -61,7 +56,6 @@ class Search extends Component<PropTypes> {
   }
 
   render() {
-    // const { state } = this.props
     return this.props.children({
       ...this.props,
       loading: this.state.loading,
@@ -73,23 +67,8 @@ class Search extends Component<PropTypes> {
 }
 
 const mapStateToProps = state => ({
-  state: state.search.state,
   loading: state.app.loading,
-  searchValue: searchValue(state),
-  searchResults: searchResults(state),
   isOnline: state.app.isOnline,
 })
 
-const mapDispatchToProps = () => ({
-  searchInput: payload => {
-    searchMachine.dispatchAction('TEXT_INPUT', payload)
-  },
-  searchEmpty: () => {
-    searchMachine.dispatchAction('TEXT_INPUT_EMPTY', { value: null })
-  },
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Search)
+export default connect(mapStateToProps)(Search)

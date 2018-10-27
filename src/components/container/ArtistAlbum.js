@@ -47,8 +47,6 @@ class ArtistAlbum extends Component<PropTypes> {
     },
     favourites: [],
     id: '',
-    addToFavourites: () => {},
-    removeFromFavourites: () => {},
     loading: false,
     children: () => {},
   }
@@ -57,25 +55,17 @@ class ArtistAlbum extends Component<PropTypes> {
     return (
       <ComposedQueries spotifyId={this.props.spotifyId} userId={this.props.id}>
         {({
-          readFavourites: {
-            data: favouritesData,
-            loading: readFavouritesLoading,
-          },
-          readArtistAlbum: {
-            loading: readArtistAlbumloading,
-            error,
-            data: readArtistAlbumData,
-          },
+          readFavourites: { favourites },
+          readArtistAlbum: { artistAlbum, loading },
           updateFavourites: { updateFavourites },
           deleteFavourites: { deleteFavourites },
         }) => {
-          if (readArtistAlbumloading) {
+          if (loading) {
             return <ArtistAlbumSkeleton />
           }
+
           LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-          const artistAlbum = readArtistAlbumData[READ_ARTIST_ALBUM.definition]
-          const favourites =
-            favouritesData[READ_FAVOURITES.definition].favourites
+
           return this.props.children({
             ...this.props,
             artistAlbum,

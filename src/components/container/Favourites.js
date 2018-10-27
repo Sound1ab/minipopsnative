@@ -33,23 +33,18 @@ export class Favourites extends Component<PropTypes> {
     return (
       <ComposedQueries userId={this.props.id}>
         {({
-          readFavourites: { data: favouritesData, loading: favouritesLoading },
-          readWatching: { data: watchingData, loading: watchingLoading },
+          readFavourites: { favourites, loading },
+          readWatching: { watching },
           updateWatching: { updateWatching },
           deleteWatching: { deleteWatching },
           deleteFavourites: { deleteFavourites },
         }) => {
-          if (favouritesLoading || watchingLoading) {
+          if (loading) {
             return <FavouritesListSkeleton />
           }
+
           LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-          const favourites =
-            favouritesData[READ_FAVOURITES.definition].favourites
-          const watching =
-            (watchingData &&
-              watchingData[READ_WATCHING.definition] &&
-              watchingData[READ_WATCHING.definition].watching) ||
-            []
+
           return this.props.children({
             ...this.props,
             favourites,

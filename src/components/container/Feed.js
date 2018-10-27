@@ -11,12 +11,7 @@ const ComposedQueries = adopt({
 })
 
 type PropTypes = {
-  loading: Boolean,
   id: string,
-  feed: Array<{}>,
-  state: string | Object,
-  fetchFeed: Function,
-  refetchFeed: Function,
   isOnline: Boolean,
 }
 
@@ -26,8 +21,6 @@ export class Feed extends Component<PropTypes> {
     id: '',
     feed: [],
     state: '',
-    fetchFeed: () => {},
-    refetchFeed: () => {},
     isOnline: true,
   }
   // constructor(props) {
@@ -47,12 +40,13 @@ export class Feed extends Component<PropTypes> {
   render() {
     return (
       <ComposedQueries userId={this.props.id}>
-        {({ readEBayByFavourites: { loading, data } }) => {
+        {({ readEBayByFavourites: { loading, feed } }) => {
           if (loading) {
             return <FeedListSkeleton />
           }
+
           LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-          const { readEBayByFavourites: feed } = data
+
           return this.props.children({
             ...this.props,
             loading,

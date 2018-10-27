@@ -7,9 +7,6 @@ import {
 } from '../../graphQL'
 import { Request } from '../../services'
 import { saveCognitoUserObject, removeUserData } from './actions'
-import { removeDiscoveryData } from '../Discovery'
-import { removeFeedData } from '../Feed'
-import { removeSearchResults } from '../SearchField'
 import { Auth } from 'aws-amplify'
 import { appMachine } from '../App'
 import { inAppNotification } from '../../navigation'
@@ -23,23 +20,23 @@ export const reactions = {
   SHOW_ERROR_MESSAGE,
   async CHECK_AUTHENTICATED_USER({ dispatchMachineAction }) {
     try {
-      const cognitoUser = await Auth.currentAuthenticatedUser()
-      const { id } = await Auth.currentUserInfo()
+      const session = await Auth.currentSession()
+      const user = await Auth.currentUserInfo()
       try {
-        await Request.query(READ_USER.query, { id })
+        await Request.query(READ_USER.query, { id: user.id })
       } catch (error) {
         Promise.all([
-          Request.mutate(CREATE_USER.mutation, { id }),
-          Request.mutate(CREATE_FAVOURITES.mutation, { id }),
-          Request.mutate(CREATE_WATCHING.mutation, { id }),
+          Request.mutate(CREATE_USER.mutation, { id: user.id }),
+          Request.mutate(CREATE_FAVOURITES.mutation, { id: user.id }),
+          Request.mutate(CREATE_WATCHING.mutation, { id: user.id }),
         ])
       }
-      dispatchMachineAction('AUTHENTICATED_SUCCESS', { id: id, ...cognitoUser })
+      dispatchMachineAction('AUTHENTICATED_SUCCESS', { ...session, ...user })
     } catch (error) {
       dispatchMachineAction('AUTHENTICATED_FAILURE', {
         notification: false,
         title: 'Check authenticated user',
-        message: error,
+        error,
       })
     }
   },
@@ -72,29 +69,12 @@ export const reactions = {
     dispatchMachineAction,
     payload,
   }) {
-    axios.defaults.headers.common['Authorization'] =
-      payload.signInUserSession.idToken.jwtToken
+    axios.defaults.headers.common['Authorization'] = payload.idToken.jwtToken
     dispatchReduxAction(saveCognitoUserObject(payload))
-
-    // const test = {
-    //   signInUserSession: {
-    //     ...payload.signInUserSession,
-    //     __typename: 'signInUserSession'
-    //   }}
-    //
-    // try {
-    //   client.mutate({mutation: CREATE_USER_LOCAL.mutation, variables: { user: test }})
-    // } catch(error) {
-    //   console.warn(error)
-    // }
-
     dispatchMachineAction('SAVE_COGNITO_USER_OBJECT_SUCCESS', payload)
   },
   REMOVE_USER_DATA({ dispatchReduxAction, dispatchMachineAction }) {
     dispatchReduxAction(removeUserData())
-    dispatchReduxAction(removeDiscoveryData())
-    dispatchReduxAction(removeFeedData())
-    dispatchReduxAction(removeSearchResults())
     dispatchMachineAction('REMOVE_USER_DATA_SUCCESS')
   },
   REDIRECT_TO_APP({ dispatchMachineAction }) {
