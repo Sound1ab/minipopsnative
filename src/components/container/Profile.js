@@ -4,6 +4,7 @@ import { PushNotificationIOS, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { pushScreen } from '../../navigation'
 import { loginMachine } from '../../machines/Login'
+import { appMachine } from '../../machines/App'
 
 type PropTypes = {
   loading: Boolean,
@@ -64,11 +65,15 @@ const mapStateToProps = state => ({
   loading: state.app.loading,
   user: state.login.cognitoUser,
   isOnline: state.app.isOnline,
+  theme: state.app.theme,
 })
 
 const mapDispatchToProps = () => ({
   signOut: () => {
     loginMachine.dispatchAction('SIGN_OUT')
+  },
+  setTheme: payload => {
+    appMachine.dispatchAction('UPDATE_THEME', payload)
   },
 })
 

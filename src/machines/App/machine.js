@@ -12,7 +12,20 @@ export const machine = Machine({
       states: {
         startUpIdle: {
           on: {
-            REGISTER_COMPONENTS: 'registeringComponents',
+            SET_THEME: 'setTheme',
+            UPDATE_THEME: 'updateTheme',
+          },
+        },
+        updateTheme: {
+          onEntry: ['UPDATE_THEME'],
+          on: {
+            THEME_SET: 'startUpIdle',
+          },
+        },
+        setTheme: {
+          onEntry: ['SET_THEME'],
+          on: {
+            THEME_SET: 'registeringComponents',
           },
         },
         registeringComponents: {
@@ -25,36 +38,13 @@ export const machine = Machine({
         loadingApp: {
           onEntry: ['REDIRECT_TO_APP'],
           on: {
-            LOAD_SUCCESS: 'fetchingInitialData',
+            LOAD_SUCCESS: 'startUpIdle',
           },
         },
         loadingLogin: {
           onEntry: ['REDIRECT_TO_LOGIN'],
           on: {
-            LOAD_SUCCESS: 'startUpIdle',
-          },
-        },
-        fetchingInitialData: {
-          initial: 'fetchingFavourites',
-          states: {
-            fetchingFavourites: {
-              onEntry: ['FETCHING_FAVOURITES'],
-              on: {
-                FETCH_FAVOURITES_SUCCESS: 'fetchingWatchList',
-                FETCH_FAVOURITES_FAILURE: {
-                  fetchingWatchList: { actions: ['SHOW_ERROR_MESSAGE'] },
-                },
-              },
-            },
-            fetchingWatchList: {
-              onEntry: ['FETCHING_WATCH_LIST'],
-            },
-          },
-          on: {
-            FETCH_WATCH_LIST_SUCCESS: 'updateTokenRemotely',
-            FETCH_WATCH_LIST_FAILURE: {
-              updateTokenRemotely: { actions: ['SHOW_ERROR_MESSAGE'] },
-            },
+            LOAD_SUCCESS: 'updateTokenRemotely',
           },
         },
         updateTokenRemotely: {

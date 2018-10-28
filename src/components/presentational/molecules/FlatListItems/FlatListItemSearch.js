@@ -4,7 +4,6 @@ import { Linking } from 'react-native'
 import { Heading, Icon, ImageWrapper as Image } from '../../atoms'
 import { View, Dimensions } from 'react-native'
 import styled from 'styled-components'
-import { colors } from '../../../../theme'
 
 type Props = {
   index: number,
@@ -24,6 +23,7 @@ const ContentWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const RelativeWrapper = styled.View`
@@ -40,6 +40,10 @@ const Button = styled.TouchableOpacity`
   height: 28px;
 `
 
+const Text = styled.Text`
+  color: ${({ theme }) => theme.text};
+`
+
 export const FlatListItemSearch = (props: Props) => (
   <View>
     <ImageWrapper index={props.index} height={Dimensions.get('window').width}>
@@ -47,21 +51,21 @@ export const FlatListItemSearch = (props: Props) => (
     </ImageWrapper>
     <ContentWrapper>
       <RelativeWrapper>
-        <Heading size="m" color="black" marginBottom>
+        <Heading size="l" marginBottom>
           {props.item.title}
         </Heading>
-        <Heading size="xxs" color="black" marginBottom>
+        <Text size="s" color="black" marginBottom>
           Price: £{props.item.price}
-        </Heading>
-        <Heading size="xxs" color="black" marginBottom>
+        </Text>
+        <Text size="xxs" color="black" marginBottom>
           Ending: {props.item.endTime}
-        </Heading>
-        <Heading size="xxs" color="black" marginBottom>
+        </Text>
+        <Text size="xxs" color="black" marginBottom>
           Postage: £{props.item.postage}
-        </Heading>
-        <Heading size="xxs" color="black">
+        </Text>
+        <Text size="xxs" color="black">
           Bids: {props.item.bids}
-        </Heading>
+        </Text>
         <AbsoluteWrapper>
           <Button
             onPress={() => {
@@ -72,10 +76,7 @@ export const FlatListItemSearch = (props: Props) => (
               }
             }}
           >
-            <Icon
-              name="ios-arrow-dropright-circle"
-              color={props.isOnline ? colors.primary : colors.gray}
-            />
+            <Icon name="ios-arrow-dropright-circle" />
           </Button>
         </AbsoluteWrapper>
       </RelativeWrapper>

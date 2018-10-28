@@ -3,13 +3,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
-import { colors } from '../../../theme'
 import { GrowContainer } from '../atoms'
 
 const Wrapper = styled.View`
   width: ${Dimensions.get('window').width};
   height: ${Dimensions.get('window').width + 104};
-  background-color: ${colors.lightGray};
+  background-color: ${({ theme }) => theme.lightGray};
 `
 
 const ContentWrapper = styled.View`

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { popScreen } from '../../navigation'
 import { loginMachine } from '../../machines/Login'
-import { FormValidation } from '../../helpers/index'
+import { FormValidation } from '../../helpers'
 
 type PropTypes = {
   navigator: Object,

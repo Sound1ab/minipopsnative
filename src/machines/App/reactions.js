@@ -1,6 +1,12 @@
 import { Request } from '../../services'
+import { AsyncStorage } from 'react-native'
 import { UPDATE_USER } from '../../graphQL'
-import { updateLoading, saveToken, updateNetInfoStatus } from './actions'
+import {
+  updateLoading,
+  saveToken,
+  updateNetInfoStatus,
+  saveTheme,
+} from './actions'
 import {
   startApp,
   startLogin,
@@ -32,6 +38,27 @@ export const reactions = {
           payload.error ? payload.error : '',
         )
     }
+  },
+  async SET_THEME({ dispatchMachineAction, dispatchReduxAction, payload }) {
+    let theme = 'darkMode'
+
+    try {
+      const value = await AsyncStorage.getItem('@Minipops:theme')
+      if (value !== null) {
+        theme = value
+      }
+    } catch (error) {}
+
+    dispatchReduxAction(saveTheme({ theme }))
+    dispatchMachineAction('THEME_SET', payload)
+  },
+  async UPDATE_THEME({ dispatchMachineAction, dispatchReduxAction, payload }) {
+    try {
+      await AsyncStorage.setItem('@Minipops:theme', payload)
+    } catch (error) {}
+
+    dispatchReduxAction(saveTheme({ theme: payload }))
+    dispatchMachineAction('THEME_SET', payload)
   },
   REGISTER_COMPONENTS({ dispatchMachineAction, payload }) {
     registerComponents()

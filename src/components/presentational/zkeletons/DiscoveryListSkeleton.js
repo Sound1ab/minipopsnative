@@ -4,7 +4,6 @@ import { View } from 'react-native'
 import styled, { css } from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
-import { colors } from '../../../theme'
 
 const Wrapper = styled.View`
   ${({ index }) =>
@@ -15,7 +14,7 @@ const Wrapper = styled.View`
   width: ${Dimensions.get('window').width};
   height: 300;
   padding: 8px;
-  background-color: ${colors.lightGray};
+  background-color: ${({ theme }) => theme.background};
 `
 
 export const DiscoveryListSkeleton = () => (

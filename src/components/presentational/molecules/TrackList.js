@@ -2,7 +2,6 @@
 import React, { Component, Fragment } from 'react'
 import { TouchableOpacity, LayoutAnimation } from 'react-native'
 import { TrackRow, Icon } from '../atoms'
-import { colors } from '../../../theme'
 
 type PropTypes = {
   tracks: Array<Object>,
@@ -49,7 +48,7 @@ export class TrackList extends Component<PropTypes, StateTypes> {
           onPress={this.updateTracklist}
           style={{ paddingLeft: 16 }}
         >
-          <Icon color={colors.primary} name="ios-more" />
+          <Icon name="ios-more" />
         </TouchableOpacity>
       </Fragment>
     )

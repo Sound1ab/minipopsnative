@@ -9,7 +9,6 @@ import {
   Spinner,
   TabBarPlaceholder,
 } from '../../presentational/atoms'
-import { colors } from '../../../theme'
 
 type PropTypes = {
   code: string,
@@ -24,6 +23,7 @@ const Wrapper = styled.View`
   justify-content: center;
   align-items: flex-start;
   padding: 16px;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const Section = styled.View`
@@ -47,12 +47,8 @@ export const SignInConfirmation = ({
       />
     </Section>
     <Section>
-      <Heading size="xl" color={colors.black}>
-        MFA
-      </Heading>
-      <Heading size="l" color={colors.darkGrey}>
-        Confirm using the code sent via sms
-      </Heading>
+      <Heading size="xl">MFA</Heading>
+      <Heading size="l">Confirm using the code sent via sms</Heading>
     </Section>
     <Section>
       <InputWrapper
@@ -65,9 +61,7 @@ export const SignInConfirmation = ({
       />
     </Section>
     <TouchableOpacity onPress={handleSubmit}>
-      <Heading size="l" color={colors.primary}>
-        Confirm code
-      </Heading>
+      <Heading size="l">Confirm code</Heading>
     </TouchableOpacity>
     <TabBarPlaceholder />
   </Wrapper>

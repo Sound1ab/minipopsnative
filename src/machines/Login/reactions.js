@@ -78,11 +78,11 @@ export const reactions = {
     dispatchMachineAction('REMOVE_USER_DATA_SUCCESS')
   },
   REDIRECT_TO_APP({ dispatchMachineAction }) {
-    appMachine.dispatchAction('REGISTER_COMPONENTS', { isAuthenticated: true })
+    appMachine.dispatchAction('SET_THEME', { isAuthenticated: true })
     dispatchMachineAction('REDIRECT_TO_APP_SUCCESS')
   },
   REDIRECT_TO_LOGIN({ dispatchMachineAction }) {
-    appMachine.dispatchAction('REGISTER_COMPONENTS', { isAuthenticated: false })
+    appMachine.dispatchAction('SET_THEME', { isAuthenticated: false })
     dispatchMachineAction('REDIRECT_TO_LOGIN_SUCCESS')
   },
   async CONFIRM_USER({ payload, dispatchMachineAction }) {

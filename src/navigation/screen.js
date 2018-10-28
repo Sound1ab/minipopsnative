@@ -1,5 +1,3 @@
-import { colors } from '../theme'
-
 let currentScreen = ''
 
 export const pushScreen = ({ navigator, screen, passProps, title }) => {
@@ -13,9 +11,6 @@ export const pushScreen = ({ navigator, screen, passProps, title }) => {
     animationType: 'slide-horizontal',
     title,
     passProps,
-    navigatorStyle: {
-      navBarTextColor: colors.primary,
-    },
   })
 }
 

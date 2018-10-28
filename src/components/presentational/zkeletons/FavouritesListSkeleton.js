@@ -3,7 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
-import { colors } from '../../../theme'
 
 const OuterWrapper = styled.View`
   position: absolute;
@@ -19,7 +18,7 @@ const Wrapper = styled.View`
   flex-basis: 100;
   margin: ${({ index }) =>
     parseInt(index) === parseInt(0) ? '8px' : '0 8px 8px 8px'};
-  background-color: ${colors.lightGray};
+  background-color: ${({ theme }) => theme.lightGray};
 `
 
 export const FavouritesListSkeleton = () => (

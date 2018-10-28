@@ -8,7 +8,6 @@ import {
   Spinner,
   TabBarPlaceholder,
 } from '../../presentational/atoms'
-import { colors } from '../../../theme'
 
 type PropTypes = {
   username: string,
@@ -26,6 +25,7 @@ const Wrapper = styled.View`
   justify-content: center;
   align-items: flex-start;
   padding: 16px;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const Section = styled.View`
@@ -43,12 +43,8 @@ export const SignUpForm = (props: PropTypes) => (
       />
     </Section>
     <Section>
-      <Heading size="xl" color={colors.black}>
-        Welcome
-      </Heading>
-      <Heading size="l" color={colors.darkGrey}>
-        Sign up to continue
-      </Heading>
+      <Heading size="xl">Welcome</Heading>
+      <Heading size="l">Sign up to continue</Heading>
     </Section>
     <Section>
       <InputWrapper
@@ -96,9 +92,7 @@ export const SignUpForm = (props: PropTypes) => (
       />
     </Section>
     <TouchableOpacity onPress={props.handleSubmit}>
-      <Heading size="l" color={colors.primary}>
-        Sign Up
-      </Heading>
+      <Heading size="l">Sign Up</Heading>
     </TouchableOpacity>
     <TabBarPlaceholder />
   </Wrapper>

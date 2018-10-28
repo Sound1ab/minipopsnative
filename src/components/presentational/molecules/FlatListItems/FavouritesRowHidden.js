@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Icon } from '../../atoms/index'
-import { colors, shadow } from '../../../../theme/index'
+import { Icon } from '../../atoms'
+import { shadow } from '../../../../theme'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -17,7 +17,7 @@ const Wrapper = styled.View`
         ${property}: ${value};
       `,
   )};
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const TextWrapper = styled.TouchableOpacity`
@@ -27,13 +27,9 @@ const TextWrapper = styled.TouchableOpacity`
   justify-content: center;
 `
 
-const TextWrapperWatch = styled(TextWrapper)`
-  background-color: white;
-`
+const TextWrapperWatch = styled(TextWrapper)``
 
-const TextWrapperRemove = styled(TextWrapper)`
-  background-color: white;
-`
+const TextWrapperRemove = styled(TextWrapper)``
 
 type PropTypes = {
   artistAlbum: {},
@@ -60,7 +56,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-megaphone" color={colors.secondary} />
+        <Icon name="ios-megaphone" />
       </TextWrapperWatch>
     ) : (
       <TextWrapperWatch
@@ -78,7 +74,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
           props.rowMap[props.artistAlbum.spotifyId].closeRow()
         }}
       >
-        <Icon name="ios-megaphone-outline" color={colors.primary} />
+        <Icon name="ios-megaphone-outline" />
       </TextWrapperWatch>
     )}
     <TextWrapperRemove
@@ -92,7 +88,7 @@ export const FavouritesRowHidden = (props: PropTypes) => (
         props.rowMap[props.artistAlbum.spotifyId].closeRow()
       }}
     >
-      <Icon name="ios-trash" color={colors.secondary} />
+      <Icon name="ios-trash" />
     </TextWrapperRemove>
   </Wrapper>
 )

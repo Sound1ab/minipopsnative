@@ -4,16 +4,14 @@ import get from 'lodash/get'
 import styled from 'styled-components'
 import { Dimensions } from 'react-native'
 import { ProfileContainer } from '../../container'
-import { Screen } from '../templates'
+import { Screen, Theme } from '../templates'
 import { Row } from '../molecules'
-import { pushScreen } from '../../../navigation'
 import {
   TabBarPlaceholder,
   Heading,
   MinipopsIcon,
   ScrollViewWrapper,
 } from '../atoms'
-import { colors } from '../../../theme'
 
 const HeadingWrapper = styled.View`
   flex: 1;
@@ -31,7 +29,7 @@ const ImageHeader = styled.View`
   height: ${Dimensions.get('window').width};
   justify-content: center;
   align-items: center;
-  background-color: ${colors.primary};
+  background-color: ${({ theme }) => theme.primary};
 `
 
 const SignOutButton = styled.TouchableOpacity`
@@ -39,74 +37,81 @@ const SignOutButton = styled.TouchableOpacity`
 `
 
 export const Profile = ({ navigator }) => (
-  <ProfileContainer navigator={navigator}>
-    {({
-      loading,
-      signOut,
-      showNotification,
-      user,
-      handlePushMyScreen,
-      CheckNotificationPermissions,
-      isOnline,
-    }) => (
-      <Screen navigator={navigator}>
-        {({ navigateTo }) => (
-          <Fragment>
-            <ScrollViewWrapper>
-              <ImageHeader>
-                <MinipopsIcon size={124} />
-              </ImageHeader>
-              <HeadingWrapper>
-                <Heading size="xl" color="black" marginBottom>
-                  {get(user, ['username'])}
-                </Heading>
-              </HeadingWrapper>
-              <Row
-                handleOnPress={navigateTo.bind(null, {
-                  screen: 'MyDetails',
-                  title: 'My Details',
-                  passProps: {
-                    user: user,
-                  },
-                })}
-                heading={'My Details'}
-                icon={'ios-options'}
-              />
-              <Row
-                handleOnPress={navigateTo.bind(null, {
-                  screen: 'ChangePassword',
-                  title: 'Change Password',
-                  passProps: {
-                    user: user,
-                  },
-                })}
-                heading={'Change Password'}
-                icon={'ios-lock'}
-              />
-              <Row
-                handleOnPress={CheckNotificationPermissions}
-                heading={'Notifications'}
-                icon={'ios-megaphone'}
-              />
-              <SignOutWrapper>
-                <SignOutButton
-                  onPress={() => {
-                    isOnline && signOut()
-                  }}
-                >
-                  <Heading
-                    size="l"
-                    color={isOnline ? colors.primary : colors.gray}
-                  >
-                    Sign Out
+  <Theme navigator={navigator}>
+    <ProfileContainer navigator={navigator}>
+      {({
+        loading,
+        signOut,
+        showNotification,
+        user,
+        handlePushMyScreen,
+        CheckNotificationPermissions,
+        isOnline,
+        setTheme,
+        theme,
+      }) => (
+        <Screen navigator={navigator}>
+          {({ navigateTo }) => (
+            <Fragment>
+              <ScrollViewWrapper>
+                <ImageHeader>
+                  <MinipopsIcon size={124} />
+                </ImageHeader>
+                <HeadingWrapper>
+                  <Heading size="xl" marginBottom>
+                    {get(user, ['username'])}
                   </Heading>
-                </SignOutButton>
-              </SignOutWrapper>
-              <TabBarPlaceholder />
-            </ScrollViewWrapper>
-          </Fragment>
-        )}
-      </Screen>
-    )}
-  </ProfileContainer>
+                </HeadingWrapper>
+                <Row
+                  handleOnPress={navigateTo.bind(null, {
+                    screen: 'MyDetails',
+                    title: 'My Details',
+                    passProps: {
+                      user: user,
+                    },
+                  })}
+                  heading={'My Details'}
+                  icon={'ios-options'}
+                />
+                <Row
+                  handleOnPress={navigateTo.bind(null, {
+                    screen: 'ChangePassword',
+                    title: 'Change Password',
+                    passProps: {
+                      user: user,
+                    },
+                  })}
+                  heading={'Change Password'}
+                  icon={'ios-lock'}
+                />
+                <Row
+                  handleOnPress={CheckNotificationPermissions}
+                  heading={'Notifications'}
+                  icon={'ios-megaphone'}
+                />
+                <Row
+                  handleOnPress={setTheme.bind(
+                    null,
+                    theme === 'darkMode' ? 'lightMode' : 'darkMode',
+                  )}
+                  heading={theme === 'darkMode' ? 'Light Mode' : 'Dark Mode'}
+                  icon={'ios-color-fill'}
+                />
+                <SignOutWrapper>
+                  <SignOutButton
+                    onPress={() => {
+                      isOnline && signOut()
+                    }}
+                  >
+                    <Heading size="l">Sign Out</Heading>
+                  </SignOutButton>
+                </SignOutWrapper>
+                <TabBarPlaceholder />
+              </ScrollViewWrapper>
+            </Fragment>
+          )}
+        </Screen>
+      )}
+    </ProfileContainer>
+  </Theme>
 )

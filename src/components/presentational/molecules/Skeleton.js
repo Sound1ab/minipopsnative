@@ -2,7 +2,7 @@
 import React from 'react'
 import { SkeletonSvgGradient } from '../molecules'
 import { Circle, Rect } from 'react-native-svg'
-import { colors } from '../../../theme/colors'
+import { withTheme } from 'styled-components'
 
 type PropTypes = {
   primaryColor: String,
@@ -10,11 +10,13 @@ type PropTypes = {
   height: Number,
   width: Number,
   layout: Object,
+  theme: Object,
 }
 
-export const Skeleton = (props: PropTypes) => (
+const Skeleton = (props: PropTypes) => (
   <SkeletonSvgGradient
-    primaryColor={props.primaryColor}
+    primaryColor={props.theme.gray}
+    secondaryColor={props.theme.lightGray}
     height={props.height}
     width={props.width}
   >
@@ -34,9 +36,9 @@ export const Skeleton = (props: PropTypes) => (
 )
 
 Skeleton.defaultProps = {
-  primaryColor: colors.gray,
-  secondaryColor: colors.secondary,
   height: 50,
   width: 50,
   layout: {},
 }
+
+export default withTheme(Skeleton)

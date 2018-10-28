@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { Heading } from './index'
+import { Heading } from './Heading'
 
 type PropTypes = {
   index: number,
@@ -13,7 +13,7 @@ const Wrapper = styled.View`
   margin: ${({ index }) =>
     parseInt(index) === parseInt(0) ? '16px 16px 0 16px' : '0 16px 4px 16px'};
   padding: 16px 0;
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
 `
 
 export const TrackRow = (props: PropTypes) => (

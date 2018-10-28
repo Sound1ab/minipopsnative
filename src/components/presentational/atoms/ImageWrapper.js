@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import { Animated, Easing, Image } from 'react-native'
-import { colors } from '../../../theme'
 const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
 
 const ImageContainer = styled.View`
@@ -13,7 +12,7 @@ const ImageContainer = styled.View`
     css`
       align-items: center;
       justify-content: center;
-      background-color: ${colors.gray};
+      background-color: ${({ theme }) => theme.gray};
     `};
   ${({ height }) =>
     height &&

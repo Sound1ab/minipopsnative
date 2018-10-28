@@ -1,4 +1,4 @@
-export * from './Icon'
+export { default as Icon } from './Icon'
 export * from './InputWrapper'
 export * from './FlatListWrapper'
 export * from './GrowContainer'

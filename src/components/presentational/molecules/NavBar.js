@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Icon, Heading } from '../atoms'
 import { HeadingSkeleton } from '../zkeletons'
-import { colors, shadow } from '../../../theme'
+import { shadow } from '../../../theme'
 import { Fade } from '../zanimations'
 import { dismissModal } from '../../../navigation'
 
@@ -56,9 +56,9 @@ export const NavBar = ({
         <React.Fragment>
           <IconWrapper>
             {isModal ? (
-              <Icon name="ios-arrow-down" color={colors.primary} />
+              <Icon name="ios-arrow-down" />
             ) : (
-              <Icon name="ios-arrow-back" color={colors.primary} />
+              <Icon name="ios-arrow-back" />
             )}
           </IconWrapper>
           <Heading

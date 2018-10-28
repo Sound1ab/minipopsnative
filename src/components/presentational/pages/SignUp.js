@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react'
 import { Keyboard } from 'react-native'
-import { SignUpContainer } from '../../container/index'
-import { SignUpForm, SignUpConfirmation } from '../organisms/index'
+import { SignUpContainer } from '../../container'
+import { SignUpForm, SignUpConfirmation } from '../organisms'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export class SignUp extends Component<{ navigator: * }> {
@@ -40,49 +40,51 @@ export class SignUp extends Component<{ navigator: * }> {
   render() {
     let { navigator } = this.props
     return (
-      <SignUpContainer navigator={navigator}>
-        {({
-          state,
-          confirmation,
-          form,
-          loading,
-          validationErrors,
-          handleCodeText,
-          handleConfirmation,
-          handleChangeText,
-          handleSignUp,
-          code,
-        }) => (
-          <KeyboardAwareScrollView
-            keyboardShouldPersistTaps={'never'}
-            scrollEnabled={this.state.isKeyboardShowing}
-            style={{ flex: 1 }}
-            viewIsInsideTabBar
-          >
-            {state === 'confirmingUser' ||
-            (state.idle && state.idle === 'waitingForConfirmation') ? (
-              <SignUpConfirmation
-                loading={loading}
-                code={code}
-                validationErrors={validationErrors}
-                handleChangeText={handleCodeText}
-                handleSubmit={handleConfirmation}
-              />
-            ) : (
-              <SignUpForm
-                loading={loading}
-                username={form.username}
-                password={form.password}
-                phone_number={form.phone_number}
-                email={form.email}
-                validationErrors={validationErrors}
-                handleChangeText={handleChangeText}
-                handleSubmit={handleSignUp}
-              />
-            )}
-          </KeyboardAwareScrollView>
-        )}
-      </SignUpContainer>
+      <Theme navigator={navigator}>
+        <SignUpContainer navigator={navigator}>
+          {({
+            state,
+            confirmation,
+            form,
+            loading,
+            validationErrors,
+            handleCodeText,
+            handleConfirmation,
+            handleChangeText,
+            handleSignUp,
+            code,
+          }) => (
+            <KeyboardAwareScrollView
+              keyboardShouldPersistTaps={'never'}
+              scrollEnabled={this.state.isKeyboardShowing}
+              style={{ flex: 1 }}
+              viewIsInsideTabBar
+            >
+              {state === 'confirmingUser' ||
+              (state.idle && state.idle === 'waitingForConfirmation') ? (
+                <SignUpConfirmation
+                  loading={loading}
+                  code={code}
+                  validationErrors={validationErrors}
+                  handleChangeText={handleCodeText}
+                  handleSubmit={handleConfirmation}
+                />
+              ) : (
+                <SignUpForm
+                  loading={loading}
+                  username={form.username}
+                  password={form.password}
+                  phone_number={form.phone_number}
+                  email={form.email}
+                  validationErrors={validationErrors}
+                  handleChangeText={handleChangeText}
+                  handleSubmit={handleSignUp}
+                />
+              )}
+            </KeyboardAwareScrollView>
+          )}
+        </SignUpContainer>
+      </Theme>
     )
   }
 }

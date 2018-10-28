@@ -10,12 +10,12 @@ const OuterWrapper = styled.View`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const Wrapper = styled.View`
   width: ${Dimensions.get('window').width};
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const ContentWrapper = styled.View`

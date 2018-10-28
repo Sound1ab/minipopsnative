@@ -3,7 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Skeleton } from '../molecules'
 import { Dimensions } from 'react-native'
-import { colors } from '../../../theme'
 
 const OuterWrapper = styled.View`
   position: absolute;
@@ -18,7 +17,7 @@ const Wrapper = styled.View`
   width: ${Dimensions.get('window').width};
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: ${colors.lightGray};
+  background-color: ${({ theme }) => theme.lightGray};
 `
 
 const Album = styled.View`

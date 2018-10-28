@@ -3,14 +3,14 @@ import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from '../atoms'
-import { colors, shadow } from '../../../theme'
+import { shadow } from '../../../theme'
 
 const Wrapper = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: flex-start;
   padding: 16px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
   ${shadow.map(
     ({ property, value }) =>
       css`
@@ -74,9 +74,9 @@ export class ActionBar extends Component<PropTypes> {
       <Wrapper>
         <TouchableOpacity onPress={this.handlePress}>
           {this.state.isHeartPressed ? (
-            <Icon name="ios-heart" color={colors.primary} />
+            <Icon name="ios-heart" />
           ) : (
-            <Icon name="ios-heart-outline" color={colors.primary} />
+            <Icon name="ios-heart-outline" />
           )}
         </TouchableOpacity>
 
@@ -84,9 +84,9 @@ export class ActionBar extends Component<PropTypes> {
           <TouchableOpacity onPress={this.handleWatchPress}>
             <IconWrapper>
               {this.state.isWatchPressed ? (
-                <Icon name="ios-megaphone" color={colors.primary} />
+                <Icon name="ios-megaphone" />
               ) : (
-                <Icon name="ios-megaphone-outline" color={colors.primary} />
+                <Icon name="ios-megaphone-outline" />
               )}
             </IconWrapper>
           </TouchableOpacity>

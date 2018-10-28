@@ -24,6 +24,7 @@ type Props = {
 
 const FlatListStyled = styled.FlatList`
   flex: 1;
+  background-color: ${({ theme }) => theme.background};
 `
 
 export const FlatListWrapper = (props: Props) => (

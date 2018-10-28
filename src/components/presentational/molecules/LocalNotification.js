@@ -139,17 +139,15 @@ export class LocalNotification extends Component<PropTypes, StateTypes> {
               <IconWrapper>
                 <Image source={recordImage} />
               </IconWrapper>
-              <Heading size="xs" weight="regular" color="#434348">
+              <Heading size="xs" weight="regular">
                 {NOTIFICATION_HEADER}
               </Heading>
             </HorizontalWrapper>
             {this.props.title && (
-              <Heading color="black" weight="semibold">
-                {this.props.title}
-              </Heading>
+              <Heading weight="semibold">{this.props.title}</Heading>
             )}
             {this.props.message && (
-              <Heading color="black" numberOfLines={null} weight="regular">
+              <Heading numberOfLines={null} weight="regular">
                 {this.props.message}
               </Heading>
             )}

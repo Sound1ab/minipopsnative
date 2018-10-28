@@ -2,13 +2,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import * as Animatable from 'react-native-animatable'
-import { colors } from '../../../theme'
 import { MinipopsIcon } from './MinipopsIcon'
 
 type PropTypes = {
   isVisible: Boolean,
   size: Number,
-  color: String,
   stickRight: Boolean,
   iterationCount: string | number,
   style: Object,
@@ -44,7 +42,6 @@ export const Spinner = (props: PropTypes) => (
 Spinner.defaultProps = {
   isVisible: true,
   size: 40,
-  color: colors.primary,
   stickRight: false,
   interationCount: 'infinite',
   style: {},

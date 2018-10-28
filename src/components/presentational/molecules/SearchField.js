@@ -2,7 +2,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Icon, InputWrapper, Spinner } from '../atoms'
-import { colors } from '../../../theme'
 
 const Wrapper = styled.View`
   width: 100%;
@@ -43,7 +42,6 @@ export function SearchField(props: PropTypes) {
             top="5px"
             left="16px"
             size={20}
-            color={props.isOnline ? colors.primary : colors.gray}
           />
         )}
         <InputWrapper

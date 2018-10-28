@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { ImageWrapper, Heading } from '../atoms/index'
+import { ImageWrapper, Heading } from '../atoms'
 import styled, { css } from 'styled-components'
 import LinearGradient from 'react-native-linear-gradient'
 import { StyleSheet } from 'react-native'

@@ -2,14 +2,14 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Heading, Icon } from '../atoms'
-import { colors, shadow } from '../../../theme'
+import { shadow } from '../../../theme'
 
 const Wrapper = styled.TouchableOpacity`
   height: 60;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
   ${shadow.map(
     ({ property, value }) =>
       css`
@@ -39,7 +39,7 @@ type PropTypes = {
 export const Row = ({ handleOnPress, heading, icon, margin }: PropTypes) => (
   <Wrapper onPress={handleOnPress} marginStyle={margin}>
     <IconWrapper>
-      <Icon name={icon} color={colors.primary} />
+      <Icon name={icon} />
     </IconWrapper>
     <Heading size="l" color="black">
       {heading}

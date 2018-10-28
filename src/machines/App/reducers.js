@@ -1,4 +1,9 @@
-import { UPDATE_LOADING, SAVE_TOKEN, UPDATE_NETINFO_STATUS } from './actions'
+import {
+  UPDATE_LOADING,
+  SAVE_TOKEN,
+  UPDATE_NETINFO_STATUS,
+  SAVE_THEME,
+} from './actions'
 import { machine } from './machine'
 
 export const initialState = {
@@ -6,6 +11,7 @@ export const initialState = {
   loading: false,
   deviceToken: '',
   isOnline: true,
+  theme: '',
 }
 
 export function app(state = initialState, action) {
@@ -29,6 +35,11 @@ export function app(state = initialState, action) {
       return {
         ...state,
         isOnline: action.payload.isOnline,
+      }
+    case SAVE_THEME:
+      return {
+        ...state,
+        theme: action.payload.theme,
       }
     default:
       return state

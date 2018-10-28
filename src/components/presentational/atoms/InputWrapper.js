@@ -1,8 +1,6 @@
 // @flow
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
-import { iOSColors } from 'react-native-typography'
-import { colors } from '../../../theme'
 
 type Props = {
   placeholder: string,
@@ -24,10 +22,10 @@ type Props = {
 
 const Input = styled.TextInput`
   width: 100%;
-  color: ${({ error }) => (error ? colors.error : colors.black)};
+  color: ${({ error, theme }) => (error ? theme.error : theme.text)};
   height: 32px;
   padding: ${({ search }) => (search ? '0 16px 0 40px' : '0 16px')};
-  border: 1px solid ${colors.secondary};
+  border: 1px solid ${({ theme }) => theme.secondary};
   ${({ disabled }) =>
     disabled &&
     css`
@@ -40,7 +38,7 @@ const Input = styled.TextInput`
     `};
   border-radius: 25px;
   border-radius: ${({ search }) => (search ? '8px' : '25px')};
-  background-color: ${({ search }) => (search ? colors.lightGray : 'white')};
+  background-color: ${({ theme }) => theme.lightGray};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? '16px' : '0')};
 `
 
@@ -50,14 +48,12 @@ export class InputWrapper extends Component<Props> {
     value: '',
     handleChange: () => {},
     search: false,
-    placeholderTextColor: iOSColors.gray,
     marginBottom: false,
     autoFocus: false,
     password: false,
     error: false,
     autoCapitalize: 'sentences',
     keyboardType: 'default',
-    selectionColor: colors.primary,
     returnKeyType: 'search',
     handleSubmitEditing: null,
     blurOnSubmit: true,

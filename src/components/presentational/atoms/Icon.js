@@ -2,6 +2,7 @@
 import React from 'react'
 import VectorIcon from 'react-native-vector-icons/Ionicons'
 import styled, { css } from 'styled-components'
+import { withTheme } from 'styled-components'
 
 type Props = {
   name: string,
@@ -13,6 +14,7 @@ type Props = {
   left: number,
   right: number,
   margin: string,
+  theme: {},
 }
 
 const Wrapper = styled.View`
@@ -29,7 +31,7 @@ const Wrapper = styled.View`
   z-index: 2;
 `
 
-export const Icon = (props: Props) => (
+const Icon = (props: Props) => (
   <Wrapper
     styledPosition={props.position}
     styledTop={props.top}
@@ -38,7 +40,11 @@ export const Icon = (props: Props) => (
     styledRight={props.right}
     styledMargin={props.margin}
   >
-    <VectorIcon name={props.name} size={props.size} color={props.color} />
+    <VectorIcon
+      name={props.name}
+      size={props.size}
+      color={props.theme.primary}
+    />
   </Wrapper>
 )
 
@@ -53,3 +59,5 @@ Icon.defaultProps = {
   right: 'auto',
   margin: null,
 }
+
+export default withTheme(Icon)

@@ -1,15 +1,13 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { pushScreen } from '../../../../navigation'
-import { Heading, ImageWrapper, Icon } from '../../atoms/index'
-import { colors } from '../../../../theme/index'
+import { Heading, ImageWrapper, Icon } from '../../atoms'
 
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
   margin: ${({ index }) =>
     parseInt(index) === parseInt(0) ? '8px' : '0 8px 8px 8px'};
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const TextWrapper = styled.View`
@@ -26,7 +24,6 @@ const Watched = styled.View`
   height: 30;
   justify-content: center;
   align-items: center;
-  background-color: white;
 `
 
 type PropTypes = {
@@ -72,11 +69,7 @@ export const FavouritesRow = ({
     </TextWrapper>
     {watched && (
       <Watched>
-        <Icon
-          name="ios-megaphone"
-          size={20}
-          color={isOnline ? colors.primary : colors.gray}
-        />
+        <Icon name="ios-megaphone" size={20} />
       </Watched>
     )}
   </Wrapper>
