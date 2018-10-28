@@ -1,9 +1,23 @@
 import { Navigation } from 'react-native-navigation'
+import { AsyncStorage } from 'react-native'
 import { prepareAppIcons, prepareLoginIcons } from '../helpers'
-// import { colors } from '../theme'
+import { lightMode, darkMode } from '../theme'
+
+const getTheme = async () => {
+  let value = 'lightMode'
+  try {
+    const response = await AsyncStorage.getItem('@Minipops:theme')
+    if (response !== null) {
+      value = response
+    }
+  } catch (error) {}
+  return value
+}
 
 export const startApp = async () => {
   const icons = await prepareAppIcons()
+  const theme = await getTheme()
+  const colors = theme === 'darkMode' ? darkMode : lightMode
 
   Navigation.startTabBasedApp({
     tabs: [
@@ -80,15 +94,15 @@ export const startApp = async () => {
     ],
     tabsStyle: {
       initialTabIndex: 2,
-      // tabBarTranslucent: true,
-      // tabBarButtonColor: colors.primary,
-      // tabBarBackgroundColor: colors.background,
+      tabBarTranslucent: true,
+      tabBarButtonColor: colors.primary,
+      tabBarBackgroundColor: colors.background,
     },
     appStyle: {
-      // navBarTextColor: colors.text,
-      // navBarSubtitleColor: colors.text,
-      // navBarBackgroundColor: colors.background,
-      // screenBackgroundColor: colors.background,
+      navBarTextColor: colors.text,
+      navBarSubtitleColor: colors.text,
+      navBarBackgroundColor: colors.background,
+      screenBackgroundColor: colors.background,
       keepStyleAcrossPush: true,
       largeTitle: true,
       drawUnderTabBar: true,
@@ -98,6 +112,8 @@ export const startApp = async () => {
 
 export const startLogin = async () => {
   const icons = await prepareLoginIcons()
+  const theme = await getTheme()
+  const colors = theme === 'darkMode' ? darkMode : lightMode
 
   Navigation.startTabBasedApp({
     tabs: [

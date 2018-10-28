@@ -56,8 +56,11 @@ export const reactions = {
     try {
       await AsyncStorage.setItem('@Minipops:theme', payload)
     } catch (error) {}
-
-    dispatchReduxAction(saveTheme({ theme: payload }))
+    inAppNotification({
+      title: '🎉',
+      message: 'Please reset the app to see the changes!',
+      timeout: 500,
+    })
     dispatchMachineAction('THEME_SET', payload)
   },
   REGISTER_COMPONENTS({ dispatchMachineAction, payload }) {

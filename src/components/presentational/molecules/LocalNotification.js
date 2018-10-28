@@ -9,6 +9,7 @@ import { Linking, Vibration } from 'react-native'
 import { Heading } from '../atoms'
 import { ifIphoneX } from '../../../helpers/iphoneXHelper'
 import { BlurView } from 'react-native-blur'
+import { Theme } from '../templates'
 const recordImage = require('../../../assets/2000px-Disque_Vinyl-1-60.png')
 
 type PropTypes = {
@@ -120,40 +121,45 @@ export class LocalNotification extends Component<PropTypes, StateTypes> {
 
   render() {
     return (
-      <Wrapper
-        transition={['scaleX', 'scaleY']}
-        style={{
-          transform: [{ scaleX: this.state.size }, { scaleY: this.state.size }],
-        }}
-      >
-        <GestureRecognizer onSwipeUp={state => this.onSwipeUp(state)}>
-          <Notification
-            activeOpacity={1}
-            onPress={
-              this.props.url ? this.openUrl.bind(null, this.props.url) : null
-            }
-            onLongPress={this.clearTimeout}
-          >
-            <Blurred blurType="light" blurAmount={10} />
-            <HorizontalWrapper>
-              <IconWrapper>
-                <Image source={recordImage} />
-              </IconWrapper>
-              <Heading size="xs" weight="regular">
-                {NOTIFICATION_HEADER}
-              </Heading>
-            </HorizontalWrapper>
-            {this.props.title && (
-              <Heading weight="semibold">{this.props.title}</Heading>
-            )}
-            {this.props.message && (
-              <Heading numberOfLines={null} weight="regular">
-                {this.props.message}
-              </Heading>
-            )}
-          </Notification>
-        </GestureRecognizer>
-      </Wrapper>
+      <Theme>
+        <Wrapper
+          transition={['scaleX', 'scaleY']}
+          style={{
+            transform: [
+              { scaleX: this.state.size },
+              { scaleY: this.state.size },
+            ],
+          }}
+        >
+          <GestureRecognizer onSwipeUp={state => this.onSwipeUp(state)}>
+            <Notification
+              activeOpacity={1}
+              onPress={
+                this.props.url ? this.openUrl.bind(null, this.props.url) : null
+              }
+              onLongPress={this.clearTimeout}
+            >
+              <Blurred blurType="light" blurAmount={10} />
+              <HorizontalWrapper>
+                <IconWrapper>
+                  <Image source={recordImage} />
+                </IconWrapper>
+                <Heading size="xs" weight="regular">
+                  {NOTIFICATION_HEADER}
+                </Heading>
+              </HorizontalWrapper>
+              {this.props.title && (
+                <Heading weight="semibold">{this.props.title}</Heading>
+              )}
+              {this.props.message && (
+                <Heading numberOfLines={null} weight="regular">
+                  {this.props.message}
+                </Heading>
+              )}
+            </Notification>
+          </GestureRecognizer>
+        </Wrapper>
+      </Theme>
     )
   }
 }
