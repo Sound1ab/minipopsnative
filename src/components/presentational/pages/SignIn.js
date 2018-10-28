@@ -41,7 +41,7 @@ export class SignIn extends Component {
 
   render() {
     return (
-      <Theme navigator={navigator}>
+      <Theme navigator={this.props.navigator}>
         <Screen navigator={this.props.navigator}>
           {() => (
             <SignInContainer>

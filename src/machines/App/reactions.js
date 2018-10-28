@@ -40,7 +40,7 @@ export const reactions = {
     }
   },
   async SET_THEME({ dispatchMachineAction, dispatchReduxAction, payload }) {
-    let theme = 'darkMode'
+    let theme = 'lightMode'
 
     try {
       const value = await AsyncStorage.getItem('@Minipops:theme')
