@@ -62,7 +62,9 @@ export const ImageWithTitle = ({
         style={styles.linearGradient}
       />
       <TextWrapper position={{ top: 0 }}>
-        <Heading size="m">{title}</Heading>
+        <Heading size="m" color="#fff">
+          {title}
+        </Heading>
       </TextWrapper>
     </RelativeWrapper>
   </Wrapper>

@@ -41,9 +41,7 @@ export const Row = ({ handleOnPress, heading, icon, margin }: PropTypes) => (
     <IconWrapper>
       <Icon name={icon} />
     </IconWrapper>
-    <Heading size="l" color="black">
-      {heading}
-    </Heading>
+    <Heading size="l">{heading}</Heading>
   </Wrapper>
 )
 
@@ -51,5 +49,5 @@ Row.defaultProps = {
   handleOnPress: () => {},
   heading: '',
   icon: '',
-  margin: '0 8px 8px 8px',
+  margin: '0 8px 8px 0',
 }

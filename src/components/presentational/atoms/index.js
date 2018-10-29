@@ -1,5 +1,5 @@
 export { default as Icon } from './Icon'
-export * from './InputWrapper'
+export { default as InputWrapper } from './InputWrapper'
 export * from './FlatListWrapper'
 export * from './GrowContainer'
 export * from './ImageWrapper'

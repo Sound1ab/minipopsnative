@@ -18,9 +18,7 @@ const Wrapper = styled.View`
 
 export const TrackRow = (props: PropTypes) => (
   <Wrapper index={props.index}>
-    <Heading size="s" color="black">
-      {props.children}
-    </Heading>
+    <Heading size="s">{props.children}</Heading>
   </Wrapper>
 )
 

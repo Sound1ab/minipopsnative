@@ -60,7 +60,7 @@ export const HorizontalSlider = ({
 }: PropTypes) => (
   <View>
     <ProductHeadingWrapper>
-      <Heading color="black" size="m" marginBottom>
+      <Heading size="m" marginBottom>
         {heading}
       </Heading>
     </ProductHeadingWrapper>
@@ -68,6 +68,7 @@ export const HorizontalSlider = ({
       <ScrollViewWrapper overflowHidden horizontal>
         {products.map((product, index) => (
           <AlbumWrapper
+            activeOpacity={1}
             onPress={openUrl.bind(null, product.link)}
             key={`${product.title}-${index}`}
             isFirst={index === 0}
@@ -82,10 +83,10 @@ export const HorizontalSlider = ({
               />
             </ImageOuterWrapper>
             <HeadingWrapper>
-              <Heading color="black" size="xxs" numberOfLines={10} marginBottom>
+              <Heading size="xxs" numberOfLines={10} marginBottom>
                 {product.title}
               </Heading>
-              <Heading color="black" size="xxs" weight="bold">
+              <Heading size="xxs" weight="bold">
                 {product.price}
               </Heading>
             </HeadingWrapper>

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, withTheme } from 'styled-components'
 
 type Props = {
   placeholder: string,
@@ -38,11 +38,11 @@ const Input = styled.TextInput`
     `};
   border-radius: 25px;
   border-radius: ${({ search }) => (search ? '8px' : '25px')};
-  background-color: ${({ theme }) => theme.lightGray};
+  background-color: ${({ theme }) => theme.gray};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? '16px' : '0')};
 `
 
-export class InputWrapper extends Component<Props> {
+class InputWrapper extends Component<Props> {
   static defaultProps = {
     placeholder: 'test',
     value: '',
@@ -75,7 +75,6 @@ export class InputWrapper extends Component<Props> {
         placeholder={this.props.placeholder}
         onChangeText={this.props.handleChange}
         search={this.props.search}
-        placeholderTextColor={this.props.placeholderTextColor}
         marginBottom={this.props.marginBottom}
         value={this.props.value}
         secureTextEntry={this.props.password}
@@ -89,7 +88,10 @@ export class InputWrapper extends Component<Props> {
         editable={!this.props.disabled}
         selectTextOnFocus={!this.props.disabled}
         disabled={this.props.disabled}
+        placeholderTextColor={this.props.theme.lightGray}
       />
     )
   }
 }
+
+export default withTheme(InputWrapper)

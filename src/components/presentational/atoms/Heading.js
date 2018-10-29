@@ -13,40 +13,40 @@ const xl = styled.Text`
   ${iOSUIKit.largeTitleEmphasizedObject};
   ${({ weight }) => sanFranciscoWeights[weight]};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? 8 : 0)};
-  color: ${({ theme, size }) => (size === 'xl' ? theme.primary : theme.text)};
+  color: ${({ theme }) => theme.primary};
 `
 
 const l = styled.Text`
   ${iOSUIKit.title3Object};
   ${({ weight }) => sanFranciscoWeights[weight]};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? 8 : 0)};
-  color: ${({ theme, size }) => (size === 'xl' ? theme.primary : theme.text)};
+  color: ${({ theme, color }) => (color ? color : theme.text)};
 `
 
 const m = styled.Text`
   ${iOSUIKit.bodyObject};
   ${({ weight }) => sanFranciscoWeights[weight]};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? 8 : 0)};
-  color: ${({ theme, size }) => (size === 'xl' ? theme.primary : theme.text)};
+  color: ${({ theme, color }) => (color ? color : theme.text)};
 `
 
 const s = styled.Text`
   ${iOSUIKit.subheadObject};
   ${({ weight }) => sanFranciscoWeights[weight]};
-  color: ${({ theme, size }) => (size === 'xl' ? theme.primary : theme.text)};
+  color: ${({ theme, color }) => (color ? color : theme.text)};
 `
 
 const xs = styled.Text`
   ${iOSUIKit.footnoteObject};
   ${({ weight }) => sanFranciscoWeights[weight]};
-  color: ${({ theme, size }) => (size === 'xl' ? theme.primary : theme.text)};
+  color: ${({ theme, color }) => (color ? color : theme.text)};
 `
 
 const xxs = styled.Text`
   ${iOSUIKit.caption2Object};
   ${({ weight }) => sanFranciscoWeights[weight]};
   margin-bottom: ${({ marginBottom }) => (marginBottom ? 4 : 0)};
-  color: ${({ theme, size }) => (size === 'xl' ? theme.primary : theme.text)};
+  color: ${({ theme, color }) => (color ? color : theme.text)};
 `
 
 const headings = {
@@ -65,17 +65,19 @@ export const Heading = ({
   children,
   marginBottom,
   theme,
+  color,
 }: Props) =>
   React.createElement(
     withTheme(headings[size]),
-    { weight, size, numberOfLines, marginBottom, theme },
+    { weight, size, numberOfLines, marginBottom, theme, color },
     children,
   )
 
 Heading.defaultProps = {
   numberOfLines: 2,
   size: 's',
-  color: 'white',
+  color: '',
   marginBottom: false,
   weight: 'thin',
+  negative: false,
 }

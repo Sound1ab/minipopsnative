@@ -60,12 +60,8 @@ export const FavouritesRow = ({
       fixedWidth
     />
     <TextWrapper>
-      <Heading color="black" size="l">
-        {artistAlbum.artist}
-      </Heading>
-      <Heading color="black" size="m">
-        {artistAlbum.album}
-      </Heading>
+      <Heading size="l">{artistAlbum.artist}</Heading>
+      <Heading size="m">{artistAlbum.album}</Heading>
     </TextWrapper>
     {watched && (
       <Watched>
